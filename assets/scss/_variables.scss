@@ -1,11 +1,5 @@
 @import '../../node_modules/modern-normalize/modern-normalize.css';
 
-$mobile-max: 767px;
-$tablet-min: 768px;
-$tablet-max: 1365px;
-$desktop-min: 1366px;
-$desktop-lg-min: 1600px;
-
 $color-black: #000;
 $color-white: #fff;
 $color-green-vue: #42b983;
@@ -13,6 +7,27 @@ $color-gray-vue: #2c3e50;
 $color-silver: #ccc;
 $color-silver-lite: #eee;
 $color-red: #c10000;
-
 $color-satan: #666;
 $color-gray: #999;
+
+$breakpoint_laptop_large: 1620px;
+$breakpoint_laptop_medium: 1440px;
+$breakpoint_laptop_small: 1366px;
+$breakpoint_tablet: 1200px;
+$breakpoint_tablet_middle: 1080px;
+$breakpoint_tablet_small: 992px;
+$breakpoint_mobile: 768px;
+$breakpoint_mobile-middle: 670px;
+$breakpoint_mobile_small: 480px;
+
+$breakpoints: (
+  l: $breakpoint_laptop_large,
+  l-m: $breakpoint_laptop_medium,
+  l-s: $breakpoint_laptop_small,
+  t: $breakpoint_tablet,
+  t-m: $breakpoint_tablet_middle,
+  t-s: $breakpoint_tablet_small,
+  m: $breakpoint_mobile,
+  m-m: $breakpoint_mobile-middle,
+  m-s: $breakpoint_mobile_small,
+);

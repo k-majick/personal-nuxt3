@@ -7,8 +7,12 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@intlify/nuxt3": "^0.1.10",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "include-media": "^1.4.10",
     "modern-normalize": "^1.1.0",
     "nuxt": "3.0.0-rc.1",
-    "sass-loader": "^12.6.0"
+    "prettier": "^2.6.2"
   }
 }

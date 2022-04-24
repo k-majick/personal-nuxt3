@@ -1,63 +1,75 @@
-import { defineNuxtConfig } from 'nuxt'
+import { defineNuxtConfig } from 'nuxt';
+import { IntlifyModuleOptions } from '@intlify/nuxt3';
 
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  head: {
-    title: process.env.APP_TITLE,
-    meta: [{
-      charset: 'utf-8',
+  app: {
+    head: {
+      title: process.env.APP_TITLE,
+      meta: [{
+        charset: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      {
+        name: 'msapplication-TileColor',
+        content: '#ffffff',
+      },
+      {
+        name: 'theme-color',
+        content: '#ffffff',
+      },
+      {
+        property: 'og:image',
+        content: '/clf-og-min.png',
+      }
+      ],
+      link: [{
+        rel: 'icon',
+        sizes: '16x16',
+        type: 'image/png',
+        href: '/favicon-16x16.png',
+      },
+      {
+        rel: 'icon',
+        sizes: '16x16',
+        type: 'image/png',
+        href: '/favicon-32x32.png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png',
+      },
+      {
+        rel: 'manifest',
+        href: '/site.webmanifest',
+      },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab.svg',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Exo+2:wght@200;500&display=swap',
+      }
+      ]
     },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1',
-    },
-    {
-      name: 'msapplication-TileColor',
-      content: '#ffffff',
-    },
-    {
-      name: 'theme-color',
-      content: '#ffffff',
-    },
-    {
-      property: 'og:image',
-      content: '/clf-og-min.png',
+  },
+  buildModules: ['@intlify/nuxt3'],
+  intlify: {
+    localeDir: "assets/i18n",
+    vueI18n: {
+      legacy: false,
+      locale: "en",
+      fallbackLocale: "en",
+      globalInjection: true
     }
-    ],
-    link: [{
-      rel: 'icon',
-      sizes: '16x16',
-      type: 'image/png',
-      href: '/favicon-16x16.png',
-    },
-    {
-      rel: 'icon',
-      sizes: '16x16',
-      type: 'image/png',
-      href: '/favicon-32x32.png',
-    },
-    {
-      rel: 'apple-touch-icon',
-      sizes: '180x180',
-      href: '/apple-touch-icon.png',
-    },
-    {
-      rel: 'manifest',
-      href: '/site.webmanifest',
-    },
-    {
-      rel: 'mask-icon',
-      href: '/safari-pinned-tab.svg',
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Exo+2:wght@200;500&display=swap',
-    }
-    ]
   },
   vite: {
     css: {
@@ -68,4 +80,10 @@ export default defineNuxtConfig({
       },
     },
   },
-})
+});
+
+declare module '@nuxt/schema' {
+  interface NuxtConfig {
+    intlify?: IntlifyModuleOptions
+  }
+};

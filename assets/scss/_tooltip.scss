@@ -1,0 +1,25 @@
+.tooltip {
+  @include trans(0.5, opacity);
+  position: absolute;
+  background-color: $color-black;
+  z-index: 99;
+  color: $color-white;
+  // font-weight: bold;
+  font-size: 1rem;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0;
+  opacity: 0;
+  text-align: center;
+
+  &.show {
+    opacity: 1;
+    padding: 5px 7.5px;
+  }
+  @include media("<=t") {
+    display: none;
+  }
+  @include media("<=m") {
+    display: none;
+  }
+}

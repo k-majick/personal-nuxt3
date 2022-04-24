@@ -1,0 +1,20 @@
+/* elements */
+@mixin img {
+  width: 100%;
+  height: auto;
+}
+@mixin btn {
+  cursor: pointer;
+  border: 0;
+}
+/* effects */
+@mixin trans($time, $prop:"") {
+  @if $prop != "" {
+    transition: $prop #{$time}s;
+  } @else {
+    transition: all #{$time}s;
+  }
+}
+@mixin shadow() {
+  box-shadow: 0 5px 5px -5px transparentize($color-black, 0.75);
+}

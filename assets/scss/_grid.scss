@@ -1,0 +1,32 @@
+.grid {
+  $self: &;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+
+  &--center {
+    justify-content: center;
+  }
+}
+@for $i from 1 through 12 {
+  .grid__item--#{$i} {
+    width: calc(100% / 12 * $i);
+  }
+}
+@each $name, $value in $breakpoints {
+  @include media("<=#{$name}") {
+    @for $i from 1 through 12 {
+      .grid__item--#{$i}\@#{$name} {
+        width: calc(100% / 12 * $i);
+      }
+    }
+  }
+}
+
+.grid__item--auto\@l-s {
+  @include media('<=l-s') {
+    width: auto;
+  }
+}
