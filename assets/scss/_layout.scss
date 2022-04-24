@@ -1,0 +1,14 @@
+.layout {
+  $self: &;
+  min-height: 100%;
+
+  &--dark {
+    background-color: $color-black;
+    color: $color-white;
+  }
+
+  &--lite {
+    background-color: $color-white;
+    color: $color-black;
+  }
+}

@@ -1,0 +1,30 @@
+@import "@/assets/scss/_variables.scss";
+@import "@/assets/scss/_fonts.scss";
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  font-size: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+:root {
+  --scroll: -100%;
+}
