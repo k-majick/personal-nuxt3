@@ -1,0 +1,76 @@
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-25px);
+  }
+}
+@keyframes scan {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(900%);
+  }
+}
+@keyframes scanVert {
+  0% {
+    transform: translateY(900%);
+  }
+
+  100% {
+    transform: translateY(-100%);
+  }
+}
+@keyframes expBar {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: calc(100% - 40px);
+  }
+}
+@keyframes modalMask {
+  from {
+    background-color: transparentize($color-black, 1);
+  }
+
+  to {
+    background-color: transparentize($color-black, 0.5);
+  }
+}
+@keyframes modalContainer {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

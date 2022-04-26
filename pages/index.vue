@@ -1,6 +1,6 @@
 <template>
 <Header />
-<main class="main">
+<main class="main" ref="mainEl">
   <button @click="toggleLayout">Toggle layout</button>
   <div class="main__jungle"></div>
 </main>
@@ -12,9 +12,13 @@ export default {
   setup() {
     const route = useRoute();
     const toggleLayout = () => !route.meta.layout || route.meta.layout === "dark" ? route.meta.layout = "lite" : route.meta.layout = "dark";
+    const mainEl = ref(null);
+
+    provide('mainEl', mainEl);
 
     return {
       toggleLayout,
+      mainEl,
     };
   },
 }
@@ -25,6 +29,6 @@ definePageMeta({
 </script>
 
 <style lang="scss">
-@import "./assets/scss/_layout";
-@import "./assets/scss/_main";
+@import "./assets/scss/components/_layout";
+@import "./assets/scss/components/_main";
 </style>
