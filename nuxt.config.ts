@@ -2,6 +2,7 @@ import { defineNuxtConfig } from 'nuxt';
 import { IntlifyModuleOptions } from '@intlify/nuxt3';
 
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     head: {
       title: process.env.APP_TITLE,

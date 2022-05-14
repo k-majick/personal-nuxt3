@@ -1,13 +1,13 @@
 <template>
-<header class="header" :class="`header--${layout}`">
+<header class="header" :class="`header--${layout}`" ref="headerEl">
   <section class="header__container">
     <a class="main__anchor"></a>
     <a class="header__logo">
       <h1 class="header__title" v-html="$t('messages.name')"></h1>
     </a>
     <Avatar />
-    <div class="header__arrow" @click="scrollTo($event, scrollTarget); setRoute()"></div>
-    <a class="chevron__container" @click="scrollTo($event, scrollTarget); setRoute()">
+    <div class="header__arrow" @click="scrollTo($event, mainEl)"></div>
+    <a class="chevron__container" @click="scrollTo($event, mainEl)">
       <div class="chevron"></div>
     </a>
   </section>
@@ -15,26 +15,19 @@
 </template>
 
 <script lang="ts">
-import Avatar from "@/components/Avatar";
 import scrollTo from "@/composables/scrollTo";
 
 export default {
-  components: {
-    Avatar,
-  },
-  setup() {
+  emits: ['getHeaderEl'],
+  setup(props, { emit }) {
     const route = useRoute();
     const router = useRouter();
-    const layout = ref(route.meta.layout);
-    const scrollTarget = inject('mainEl');
 
-    const setRoute = () => {
-      if (route.path === '/') {
-        router.push({
-          path: "/skills",
-        });
-      }
-    }
+    const mainEl = inject('mainEl');
+    const layout = ref(route.meta.layout);
+    const headerEl = ref(null);
+
+    emit('getHeaderEl', headerEl);
 
     watch(
       () => route.meta.layout,
@@ -43,9 +36,9 @@ export default {
 
     return {
       layout,
-      setRoute,
       scrollTo,
-      scrollTarget,
+      headerEl,
+      mainEl,
     };
   },
 }

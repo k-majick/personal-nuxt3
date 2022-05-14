@@ -8,8 +8,11 @@
   },
   "devDependencies": {
     "@intlify/nuxt3": "^0.1.10",
+    "@nuxtjs/svg": "^0.0.0",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-nuxt": "^3.2.0",
     "include-media": "^1.4.10",
     "modern-normalize": "^1.1.0",
     "nuxt": "3.0.0-rc.1",

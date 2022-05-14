@@ -1,5 +1,9 @@
 .main {
   $self: &;
+  display: flex;
+  position: relative;
+  height: 100vh;
+
   &__anchor {
     padding-top: 90px;
     position: absolute;
@@ -12,8 +16,8 @@
       bottom: 0;
     }
   }
-  
-  &__jungle {
+
+  &__background {
     background-color: $color-red;
     background-image: url("@/assets/gfx/jungle-red-hd.jpg");
     background-size: cover;
@@ -25,6 +29,7 @@
     min-height: 640px;
     height: 100vh;
     width: 100%;
+    z-index: 0;
 
     @include media("<=m") {
       background-image: url("@/assets/gfx/jungle-red-s.jpg");
@@ -39,6 +44,52 @@
       left: 0;
       background: repeating-linear-gradient(to bottom, transparentize($color-black, 0.75), transparentize($color-black, 0.75) 1px, transparentize($color-black, 0.9) 2px, transparentize($color-black, 0.9) 3px);
       position: absolute;
+    }
+  }
+
+  &__container {
+    @include mk-container();
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    justify-content: center;
+    height: 100vh;
+    @include media("<l-s") {
+      padding-top: 90px;
+    }
+    @include media("<=m") {
+      padding-top: 60px;
+      height: auto;
+      min-height: 100%;
+    }
+  }
+
+  &__card {
+    background-color: $color-white;
+    border: 1px solid $color-silver;
+    box-shadow: 0 0 15px $color-black;
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 2;
+    min-height: 300px;
+    position: relative;
+
+    &--projects {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      @include media("<=m") {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      p {
+        color: $color-white;
+        text-align: center;
+        text-shadow: 0 0 5px black;
+        margin-bottom: 30px;
+      }
     }
   }
 }
