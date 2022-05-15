@@ -4,8 +4,10 @@
     <li class="nav__item" @click.stop.prevent="scrollTo($event, headerEl); gotoIntro()">
       <a href="" class="nav__link">Intro</a>
     </li>
+    <li class="nav__item" v-if="pages.length" v-for="page in pages" :key="page.id" @click.stop.prevent="scrollTo($event, mainEl)">
+      <nuxt-link :to="page.attributes.slug" class="nav__link">{{ page.attributes.title }}</nuxt-link>
+    </li>
   </ul>
-
   <ul class="nav__social">
     <li class="nav__socialItem">
       <a class="nav__socialLink" href="https://github.com/k-majick" target="_blank" v-hoverMessage="$t('messages.git')">
@@ -28,6 +30,7 @@ import scrollTo from "@/composables/scrollTo";
 import { hoverMessage } from '@/composables/hoverMessage.ts';
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw';
 import iconGit from '@/assets/gfx/icon-git-min.svg?raw';
+import { usePagesStore } from '@/store/pages';
 
 export default {
   layout: 'dark',
@@ -37,11 +40,13 @@ export default {
   setup() {
     const route = useRoute();
     const router = useRouter();
+    const pagesStore = usePagesStore();
     const scrollTarget = inject('mainEl');
     const isActive = ref(false);
     const headerRef = inject('headerRef');
     const headerEl = toRaw(headerRef.value);
     const mainEl = inject('mainEl');
+    const pages = ref(pagesStore.allPages);
 
     const gotoSkills = () => {
       router.push({
@@ -66,7 +71,16 @@ export default {
       }
     }
 
+    watch(
+      () => pagesStore.allPages,
+      () => {
+        pages.value = pagesStore.allPages;
+        // console.dir(pages.value);
+      },
+    );
+
     window.addEventListener('scroll', handleScroll);
+    pagesStore.getPages();
 
     return {
       isActive,
@@ -76,6 +90,7 @@ export default {
       gotoIntro,
       headerEl,
       mainEl,
+      pages,
     }
   }
 }

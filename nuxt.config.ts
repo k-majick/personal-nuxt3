@@ -62,7 +62,25 @@ export default defineNuxtConfig({
       ]
     },
   },
-  buildModules: ['@intlify/nuxt3'],
+  publicRuntimeConfig: {
+    apiUrl: process.env.API_URL || 'http://localhost:3000',
+  },
+  build: {
+    transpile: [
+      '@apollo/client',
+      'ts-invariant/process',
+    ],
+  },
+  buildModules: [
+    '@intlify/nuxt3',
+    '@pinia/nuxt',
+  ],
+  router: {
+    options: {
+      linkActiveClass: 'active',
+      linkExactActiveClass: 'active',
+    }
+  },
   intlify: {
     localeDir: "assets/i18n",
     vueI18n: {
