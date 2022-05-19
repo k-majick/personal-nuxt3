@@ -17,5 +17,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     uri: config.public.apiUrl,
   })
 
-  nuxtApp.vueApp.provide(DefaultApolloClient, apolloClient)
-})
+  nuxtApp.vueApp.provide(DefaultApolloClient, apolloClient);
+
+  return {
+    provide: {
+      apolloClient,
+    }
+  }
+});

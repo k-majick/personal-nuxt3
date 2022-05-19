@@ -4,7 +4,7 @@
     <li class="nav__item" @click.stop.prevent="scrollTo($event, headerEl); gotoIntro()">
       <a href="" class="nav__link">Intro</a>
     </li>
-    <li class="nav__item" v-if="pages.length" v-for="page in pages" :key="page.id" @click.stop.prevent="scrollTo($event, mainEl)">
+    <li class="nav__item" v-if="pages && pages.length" v-for="page in pages" :key="page.id" @click.stop.prevent="scrollTo($event, mainEl)">
       <nuxt-link :to="page.attributes.slug" class="nav__link">{{ page.attributes.title }}</nuxt-link>
     </li>
   </ul>
@@ -37,16 +37,16 @@ export default {
   directives: {
     hoverMessage,
   },
-  setup() {
+  async setup() {
     const route = useRoute();
     const router = useRouter();
     const pagesStore = usePagesStore();
-    const scrollTarget = inject('mainEl');
     const isActive = ref(false);
+    const mainEl = inject('mainEl');
     const headerRef = inject('headerRef');
     const headerEl = toRaw(headerRef.value);
-    const mainEl = inject('mainEl');
-    const pages = ref(pagesStore.allPages);
+    const sortItems = (pagesArr) => pagesArr.sort((a,b) => a.attributes.order < b.attributes.order ? -1 : 1);
+    const pages = sortItems([...await pagesStore.getPages()]);
 
     const gotoSkills = () => {
       router.push({
@@ -61,26 +61,17 @@ export default {
     }
 
     const handleScroll = () => {
-      if (scrollTarget.value.getBoundingClientRect().top < 100 && route.path === '/') {
+      if (mainEl.value.getBoundingClientRect().top < 100 && route.path === '/') {
         gotoSkills();
         isActive.value = true;
-      } else if (scrollTarget.value.getBoundingClientRect().top < 100) {
+      } else if (mainEl.value.getBoundingClientRect().top < 100) {
         isActive.value = true;
       } else {
         isActive.value = false;
       }
     }
 
-    watch(
-      () => pagesStore.allPages,
-      () => {
-        pages.value = pagesStore.allPages;
-        // console.dir(pages.value);
-      },
-    );
-
     window.addEventListener('scroll', handleScroll);
-    pagesStore.getPages();
 
     return {
       isActive,

@@ -11,9 +11,7 @@
   <Nav />
   <div class="main__container">
 
-    <Transition name="fade">
       <router-view />
-    </Transition>
 
   </div>
 </main>

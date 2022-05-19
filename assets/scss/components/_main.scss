@@ -92,4 +92,17 @@
       }
     }
   }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      text-align: center;
+      font-size: 1em;
+      font-weight: lighter;
+    }
+  }
 }

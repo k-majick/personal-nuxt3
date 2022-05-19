@@ -1,0 +1,216 @@
+.modal {
+  $self: &;
+  width: fit-content;
+  height: auto;
+  margin: 0 auto;
+  padding: 30px 15px;
+  background-color: $color-white;
+  border-radius: 5px;
+  box-shadow: 0 0 15px transparentize($color-black, 0.5);
+  transition: all 0.5s ease;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+
+  &__mask {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparentize($color-black, 0.5);
+    display: table;
+    display: block;
+    transition: all 0.5s ease;
+    overflow-y: scroll;
+
+    &--full {
+      overflow-y: scroll;
+
+      #{$self} {
+        border-radius: 0;
+        min-height: 100%;
+        width: 100%;
+        background-image: url("~@/assets/gfx/bg-modal-min.svg");
+        background-repeat: repeat-y;
+        background-size: 320px;
+        background-position: left;
+        @include mobile {
+          background-size: 240px;
+        }
+      }
+
+      #{$self}__content {
+        @include mk-container;
+        max-width: 640px!important;
+
+        p {
+          text-align: left;
+          @include mobile {
+            text-align: center;
+          }
+        }
+      }
+
+      #{$self}__details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        @include mobile {
+          flex-direction: column;
+
+          &--text {
+            text-align: center;
+
+            #{$self}__title {
+              margin-top: 15px;
+            }
+          }
+        }
+      }
+
+      #{$self}__logo {
+        max-width: 150px;
+        box-shadow: 0 0 15px $color-gray;
+        border-radius: 10px;
+        margin-right: 15px;
+      }
+
+      #{$self}__date {
+        @include label;
+      }
+
+      #{$self}__image {
+        @include img;
+        max-width: 400px;
+        margin: 30px 0;
+        border: 1px solid $color-gray;
+      }
+    }
+
+    &--image {
+      #{$self} {
+        background: none;
+        padding: 0;
+      }
+
+      #{$self}__cell {
+        padding: 15px;
+      }
+
+      #{$self}__content {
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      #{$self}__container {
+        padding: 0;
+        max-width: none !important;
+      }
+
+      #{$self}__image {
+        position: relative;
+        max-width: none;
+        border: 0;
+        margin: 0;
+      }
+
+      #{$self}__close {
+        filter: drop-shadow(0 0 1px white);
+      }
+    }
+
+    &--message {
+      #{$self} {
+        background: $color-white;
+      }
+
+      #{$self}__cell {
+        padding: 15px;
+      }
+    }
+  }
+
+  &__table {
+    display: table;
+    text-align: center;
+    vertical-align: middle;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    color: $color-red;
+    font-weight: bolder;
+    font-size: 2.75rem;
+    cursor: pointer;
+    text-shadow: 0 0 1px $color-red;
+    z-index: 1;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      text-shadow: none;
+      font-weight: lighter;
+      color: $color-black;
+      margin: 15px 0;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+  }
+
+  &__action {
+    @include btn;
+  }
+
+  &-leave-active {
+    opacity: 0;
+  }
+
+  &-enter-active {
+    animation: modalMask 0.25s ease 0s;
+  }
+
+  &-enter-active &__container {
+    animation: modalContainer 0.25s ease 0s;
+  }
+
+  &-leave-active & {
+    // transform: scale(1.1);
+  }
+}

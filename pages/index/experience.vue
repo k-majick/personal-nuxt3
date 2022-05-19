@@ -1,7 +1,7 @@
 <template>
 <section class="main__card">
-  <Skills />
-  <Technologies />
+  <Workplaces />
+  <Counter />
 </section>
 </template>
 
@@ -9,19 +9,19 @@
 import {
   usePagesStore,
 } from '@/store/pages';
-import Skills from '@/components/Skills';
-import Technologies from '@/components/Technologies';
+import Workplaces from '@/components/Workplaces';
+import Counter from '@/components/Counter';
 
 export default {
   layout: 'dark',
   components: {
-    Skills,
-    Technologies,
+    Workplaces,
+    Counter,
   },
   async setup() {
     const config = useRuntimeConfig();
     const pagesStore = usePagesStore();
-    const pageData = await pagesStore.getPage(1);
+    const pageData = await pagesStore.getPage(3);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.attributes.title}`,

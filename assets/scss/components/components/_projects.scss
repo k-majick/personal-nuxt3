@@ -1,0 +1,80 @@
+.project {
+  $self: &;
+
+  &s {
+    background: none;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px $color-black;
+    padding: 0;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    overflow: hidden;
+    @include mobile {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &--inspiration {
+      #{$self} {
+        &:first-of-type {
+          grid-column: 1 / span 2;
+          grid-row: 1 / span 2;
+        }
+      }
+      @include mobile {
+        #{$self} {
+          padding-bottom: 0;
+        }
+
+        #{$self}__image {
+          position: relative;
+          transform: none;
+        }
+      }
+    }
+  }
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  padding-bottom: 100%;
+
+  &__title {
+    @include trans(0.33);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: $color-red;
+    background: repeating-linear-gradient(to bottom, transparentize($color-red, 0.05), transparentize($color-red, 0.05) 1px, transparentize($color-red, 0.2) 2px, transparentize($color-red, 0.2) 3px);
+    box-shadow: inset 0 0 15px $color-black;
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    padding: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1;
+
+    &:active,
+    &:focus,
+    &:hover {
+      opacity: 0.95;
+    }
+  }
+
+  &__image {
+    @include img;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    @include mobile {
+      top: 0;
+      transform: translateY(0);
+    }
+  }
+}

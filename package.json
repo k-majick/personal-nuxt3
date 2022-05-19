@@ -7,7 +7,7 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "@apollo/client": "^3.6.2",
+    "@apollo/client": "^3.6.4",
     "@intlify/nuxt3": "^0.1.10",
     "@nuxtjs/svg": "^0.0.0",
     "@pinia/nuxt": "^0.1.9",

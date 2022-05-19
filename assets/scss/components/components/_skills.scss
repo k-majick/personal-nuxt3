@@ -1,0 +1,84 @@
+.skill {
+  @include trans(0.5);
+  $self: &;
+  cursor: pointer;
+  overflow: hidden;
+  margin: 0 auto 5px;
+  position: relative;
+  display: block;
+  margin-bottom: 15px;
+  width: 100%;
+  background: $color-silver-lite;
+  height: 40px;
+  border-radius: 3px;
+  transition: 0.4s linear;
+  transition-property: width, background-color;
+  background: lighten($color-silver, 10%);
+  max-width: 720px;
+  font-weight: bolder;
+  font-size: 0.85em;
+  @include mobile {
+    margin-bottom: 7.5px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -90px;
+    background: linear-gradient(to left, transparentize($color-white, 0.66), transparentize($color-white, 1));
+    animation: scan 5s ease infinite;
+  }
+
+  &:hover {
+    background: lighten($color-red, 50%);
+    box-shadow: inset 0 0 10px $color-silver;
+
+    #{$self}__bar {
+      background: $color-red;
+    }
+
+    #{$self}__percent {
+      color: $color-red;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 15px;
+    height: inherit;
+    color: $color-white;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+
+  &__bar {
+    @include trans(0.5);
+    height: 40px;
+    width: 0;
+    border-radius: 3px;
+    position: relative;
+    background-color: $color-gray;
+    box-shadow: inset 0 0 10px $color-satan;
+    animation: skillBar 3s ease-in-out;
+  }
+
+  &__percent {
+    @include trans(0.5);
+    position: absolute;
+    right: 10px;
+    top: 0;
+    height: 40px;
+    line-height: 40px;
+    color: $color-satan;
+  }
+}

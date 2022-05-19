@@ -1,0 +1,259 @@
+.nav {
+  $self: &;
+  @include trans(1);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 33%;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 180px;
+  width: 12.5vw;
+  height: 100%;
+  background-image: url("~@/assets/gfx/bg-modal-min.svg"), linear-gradient(to right, transparentize($color-white, 0.15) 0%, $color-white 100%);
+  background-repeat: repeat-y;
+  background-size: contain;
+  background-position: left;
+  z-index: 2;
+
+  &.activated,
+  &.active {
+    #{$self}__link.active {
+      &:after {
+        width: 40vw;
+        transition: width 2s linear 1s;
+        max-width: 60vh;
+      }
+    }
+  }
+  @include desktop {
+    transform: translateX(calc(-100% - 15px + var(--scroll)));
+
+    &.activated,
+    &.active {
+      transform: translateX(0%);
+    }
+  }
+  @include tablet {
+    width: 100%;
+    height: 100px;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: contain;
+    background-image: url("~@/assets/gfx/bg-modal-min.svg"), linear-gradient(to right, $color-white 240px, transparentize($color-white, 0.15) 100%);
+
+    &:before {
+      width: 100% !important;
+      height: 5px !important;
+      top: 100% !important;
+      right: 0 !important;
+    }
+  }
+  @include mobile {
+    transform: translateX(calc(-100% - 15px));
+    z-index: 3;
+    background-image: url("~@/assets/gfx/bg-modal-min.svg"), linear-gradient(to right, transparentize($color-white, 0.15) 0%, $color-white 100%);
+
+    &.active {
+      transform: translateX(0%);
+    }
+  }
+
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    z-index: 1;
+  }
+
+  &:before {
+    width: 5px;
+    right: -5px;
+    background-color: $color-red;
+    z-index: 2;
+  }
+
+  &__container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    @include tablet {
+      flex-flow: row;
+      height: 100%;
+      align-items: flex-end;
+    }
+  }
+
+  &__item {
+    position: relative;
+    list-style-type: none;
+    z-index: 2;
+    @include tablet {
+      &:after {
+        left: 23px !important;
+        top: 100% !important;
+        transform: translate(-60%, -5%) !important;
+      }
+
+      &:before {
+        left: initial !important;
+        top: 100% !important;
+        transform: translate(100%, -33%) !important;
+      }
+    }
+
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 15px;
+    }
+
+    &:after {
+      left: 100%;
+      background-color: $color-white;
+      width: 5px;
+      height: 5px;
+      z-index: 2;
+    }
+
+    &:before {
+      left: calc(100% - 5px);
+      background-color: $color-red;
+      width: 15px;
+      height: 15px;
+    }
+    @include tablet {
+      width: 90px;
+    }
+  }
+
+  &__link {
+    @include trans(0.33);
+    display: block;
+    white-space: nowrap;
+    text-align: right;
+    padding: 15px;
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: $color-black;
+    @include tablet {
+      transform-origin: bottom;
+      transform: rotate(-45deg) translateX(30%);
+      padding-left: 20px;
+      width: 100%;
+      text-align: left;
+    }
+    // &:not([href="/projects"]):after {
+    &:after {
+      @include trans(2, max-width);
+      display: block;
+      content: '';
+      position: absolute;
+      height: 5px;
+      background-color: $color-red;
+      left: 100%;
+      z-index: -1;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      max-width: 0;
+      @include tablet {
+        left: 0;
+        top: 85%;
+        transform: translateY(-50%) rotate(135deg);
+        transform-origin: top left;
+      }
+      @include mobile {
+        display: none;
+      }
+    }
+
+    &.active,
+    &:active,
+    &:hover {
+      color: $color-red !important;
+    }
+
+    &:visited {
+      color: $color-black;
+    }
+  }
+
+  &__social {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 7.5px 15px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    @include tablet {
+      flex-flow: column;
+      left: auto;
+      right: 0;
+      top: 0;
+      width: 90px;
+      height: 100%;
+      justify-content: space-around;
+    }
+    @include mobile {
+      top: 60px;
+    }
+
+    &Item {
+      padding: 5px;
+    }
+
+    &Link {
+      display: flex;
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      cursor: pointer;
+      position: relative;
+
+      svg {
+        @include img;
+        position: absolute;
+        left: 0;
+        top: 0;
+        filter: drop-shadow(0 0 5px $color-gray);
+
+        path {
+          @include trans(0.33);
+          max-width: 100%;
+          max-height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          fill: $color-white;
+        }
+
+        &:hover {
+          path {
+            fill: $color-red;
+          }
+        }
+      }
+    }
+  }
+}

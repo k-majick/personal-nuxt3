@@ -1,0 +1,25 @@
+.technology {
+  $self: &;
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    max-width: 720px;
+    margin: 0 auto 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-weight: bolder;
+
+    /deep/ #{$self} {
+      @include trans(0.5);
+      @include label;
+      cursor: pointer;
+
+      &:hover {
+        background: $color-red;
+        box-shadow: inset 0 0 10px $color-satan;
+      }
+    }
+  }
+}

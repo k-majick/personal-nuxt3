@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     head: {
-      title: process.env.APP_TITLE,
+      title: `${process.env.APP_NAME} | ${process.env.APP_TITLE}`,
       meta: [{
         charset: 'utf-8',
       },
@@ -64,6 +64,7 @@ export default defineNuxtConfig({
   },
   publicRuntimeConfig: {
     apiUrl: process.env.API_URL || 'http://localhost:3000',
+    appName: process.env.APP_NAME,
   },
   build: {
     transpile: [
