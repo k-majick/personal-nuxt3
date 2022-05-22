@@ -8,7 +8,7 @@
   padding-right: 15px;
   width: 100%;
   max-width: 970px;
-  @include media("<=m") {
+  @include media('<=m') {
     max-width: 768px;
   }
 }
@@ -18,8 +18,39 @@
   height: auto;
 }
 @mixin btn {
-  cursor: pointer;
+  @include trans(0.33);
+  width: fit-content;
   border: 0;
+  color: $color-white;
+  font-family: $font-stack;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 15px 30px;
+  cursor: pointer;
+  background-color: $color-gray;
+  box-shadow: inset 0 0 10px $color-satan;
+  border-radius: 5px;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: $color-red;
+    color: $color-white;
+    outline: 0;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $color-gray;
+      color: $color-white;
+      outline: 0;
+    }
+  }
 }
 @mixin label {
   display: inline-block;
@@ -37,8 +68,8 @@
   font-weight: bold;
 }
 /* effects */
-@mixin trans($time, $prop:"") {
-  @if $prop != "" {
+@mixin trans($time, $prop: '') {
+  @if $prop != '' {
     transition: $prop #{$time}s;
   } @else {
     transition: all #{$time}s;

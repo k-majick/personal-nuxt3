@@ -11,7 +11,7 @@
     grid-gap: 0;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     overflow: hidden;
-    @include mobile {
+    @include media('<=m') {
       grid-template-columns: 1fr 1fr;
     }
 
@@ -22,7 +22,7 @@
           grid-row: 1 / span 2;
         }
       }
-      @include mobile {
+      @include media('<=m') {
         #{$self} {
           padding-bottom: 0;
         }
@@ -46,7 +46,13 @@
     height: 100%;
     display: block;
     background-color: $color-red;
-    background: repeating-linear-gradient(to bottom, transparentize($color-red, 0.05), transparentize($color-red, 0.05) 1px, transparentize($color-red, 0.2) 2px, transparentize($color-red, 0.2) 3px);
+    background: repeating-linear-gradient(
+      to bottom,
+      transparentize($color-red, 0.05),
+      transparentize($color-red, 0.05) 1px,
+      transparentize($color-red, 0.2) 2px,
+      transparentize($color-red, 0.2) 3px
+    );
     box-shadow: inset 0 0 15px $color-black;
     color: $color-white;
     display: flex;
@@ -72,7 +78,7 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    @include mobile {
+    @include media('<=m') {
       top: 0;
       transform: translateY(0);
     }

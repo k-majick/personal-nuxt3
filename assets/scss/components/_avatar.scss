@@ -34,7 +34,7 @@
     height: 60vw;
     max-width: 300px;
     max-height: 300px;
-    @include media("<=m") {
+    @include media('<=m') {
       width: 45vw;
       height: 45vw;
       max-width: 240px;
@@ -54,14 +54,14 @@
   }
 
   &__front {
-    background-image: url("@/assets/gfx/clf-avatar-min.svg");
+    background-image: url('@/assets/gfx/clf-avatar-min.svg');
     z-index: 2;
     transform: rotateY(0deg);
   }
 
   &__back {
     border-radius: 8vh;
-    background-image: url("@/assets/gfx/mjk-350-min.jpg");
+    background-image: url('@/assets/gfx/mjk-350-min.jpg');
     border-radius: 300px;
     transform: rotateY(180deg);
   }
@@ -70,19 +70,19 @@
     font-size: 3em;
     font-weight: 300;
     margin: 0 0 15px;
-    @include media("<=m") {
+    @include media('<=m') {
       display: none;
     }
   }
 
   &__shadow {
-    background-image: url("@/assets/gfx/clf-avatar-shadow-min.svg");
+    background-image: url('@/assets/gfx/clf-avatar-shadow-min.svg');
     background-size: contain;
     background-position: 50%;
     background-repeat: no-repeat;
     width: 100%;
     height: 90px;
-    @include media("<=m") {
+    @include media('<=m') {
       height: 60px;
     }
   }
@@ -92,10 +92,10 @@
     text-align: center;
     font-weight: lighter;
     font-size: 1.15em;
-    @include media("<=t") {
+    @include media('<=t') {
       display: block;
     }
-    @include media("<=m") {
+    @include media('<=m') {
       display: block;
     }
   }

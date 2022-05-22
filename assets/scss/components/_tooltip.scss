@@ -16,10 +16,10 @@
     opacity: 1;
     padding: 5px 7.5px;
   }
-  @include media("<=t") {
+  @include media('<=t') {
     display: none;
   }
-  @include media("<=m") {
+  @include media('<=m') {
     display: none;
   }
 }

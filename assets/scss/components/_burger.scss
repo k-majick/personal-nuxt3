@@ -1,0 +1,70 @@
+.burger {
+  $self: &;
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  top: 7.5px;
+  left: 7.5px;
+  width: 45px;
+  height: 45px;
+  z-index: 3;
+  filter: drop-shadow(0 0 1px $color-red);
+  @include media('<=m') {
+    display: block;
+    z-index: 4;
+  }
+
+  &__bar {
+    @include trans(0.5);
+    display: block;
+    position: absolute;
+    height: 5px;
+    width: 25px;
+    background: $color-white;
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+    flex: 1;
+
+    &:nth-child(1) {
+      top: 25%;
+    }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      top: calc(25% + 10px);
+    }
+
+    &:nth-child(4) {
+      top: calc(25% + 20px);
+    }
+  }
+
+  &.active {
+    filter: drop-shadow(0 0 1px $color-white);
+
+    #{$self}__bar {
+      background: $color-red;
+
+      &:nth-child(1) {
+        top: calc(25% + 10px);
+        width: 0;
+        left: 50%;
+      }
+
+      &:nth-child(2) {
+        transform: translateX(-50%) rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        transform: translateX(-50%) rotate(-45deg);
+      }
+
+      &:nth-child(4) {
+        top: calc(25% + 10px);
+        width: 0;
+        left: 50%;
+      }
+    }
+  }
+}

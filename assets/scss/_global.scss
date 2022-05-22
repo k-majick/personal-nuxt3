@@ -1,9 +1,9 @@
-@import "@/node_modules/include-media/dist/_include-media.scss";
-@import "@/assets/scss/_variables.scss";
-@import "@/assets/scss/_mixins.scss";
-@import "@/assets/scss/_fonts.scss";
-@import "@/assets/scss/_grid.scss";
-@import "@/assets/scss/_animations.scss";
+@import '@/node_modules/include-media/dist/_include-media.scss';
+@import '@/assets/scss/_variables.scss';
+@import '@/assets/scss/_mixins.scss';
+@import '@/assets/scss/_fonts.scss';
+@import '@/assets/scss/_grid.scss';
+@import '@/assets/scss/_animations.scss';
 
 body,
 html {
@@ -26,6 +26,16 @@ body {
 
   * {
     box-sizing: border-box;
+  }
+
+  &.locked {
+    .header {
+      display: none;
+    }
+  }
+
+  @include media('<=m') {
+    font-size: 90%;
   }
 }
 

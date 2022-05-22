@@ -17,7 +17,7 @@
   max-width: 720px;
   font-weight: bolder;
   font-size: 0.85em;
-  @include media("<=m") {
+  @include media('<=m') {
     margin-bottom: 7.5px;
   }
 
@@ -29,7 +29,11 @@
     position: absolute;
     top: 0;
     left: -90px;
-    background: linear-gradient(to left, transparentize($color-white, 0.66), transparentize($color-white, 1));
+    background: linear-gradient(
+      to left,
+      transparentize($color-white, 0.66),
+      transparentize($color-white, 1)
+    );
     animation: scan 5s ease infinite;
   }
 

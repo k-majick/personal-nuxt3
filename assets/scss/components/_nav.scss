@@ -15,7 +15,12 @@
   min-width: 180px;
   width: 12.5vw;
   height: 100%;
-  background-image: url("@/assets/gfx/bg-modal-min.svg"), linear-gradient(to right, transparentize($color-white, 0.15) 0%, $color-white 100%);
+  background-image: url('@/assets/gfx/bg-modal-min.svg'),
+    linear-gradient(
+      to right,
+      transparentize($color-white, 0.15) 0%,
+      $color-white 100%
+    );
   background-repeat: repeat-y;
   background-size: contain;
   background-position: left;
@@ -25,13 +30,13 @@
   &.active {
     #{$self}__link.active {
       &:after {
-        width: 40vw;
+        width: 50vw;
         transition: width 2s linear 1s;
         max-width: 60vh;
       }
     }
   }
-  @include media(">t") {
+  @include media('>=l-s') {
     transform: translateX(calc(-100% - 15px + var(--scroll)));
 
     &.activated,
@@ -39,13 +44,18 @@
       transform: translateX(0%);
     }
   }
-  @include media(">m", "<l-s") {
+  @include media('>m', '<l-s') {
     width: 100%;
     height: 100px;
     align-items: flex-end;
     justify-content: center;
     background-size: contain;
-    background-image: url("@/assets/gfx/bg-modal-min.svg"), linear-gradient(to right, $color-white 240px, transparentize($color-white, 0.15) 100%);
+    background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(
+        to right,
+        $color-white 240px,
+        transparentize($color-white, 0.15) 100%
+      );
 
     &:before {
       width: 100% !important;
@@ -54,12 +64,17 @@
       right: 0 !important;
     }
   }
-  @include media("<=m") {
+  @include media('<=m') {
     transform: translateX(calc(-100% - 15px));
     z-index: 3;
-    background-image: url("@/assets/gfx/bg-modal-min.svg"), linear-gradient(to right, transparentize($color-white, 0.15) 0%, $color-white 100%);
+    background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(
+        to right,
+        transparentize($color-white, 0.15) 0%,
+        $color-white 100%
+      );
 
-    &.active {
+    &.activated {
       transform: translateX(0%);
     }
   }
@@ -86,7 +101,7 @@
     padding: 0;
     display: flex;
     flex-flow: column;
-    @include media(">m", "<l-s") {
+    @include media('>m', '<l-s') {
       flex-flow: row;
       height: 100%;
       align-items: flex-end;
@@ -97,7 +112,7 @@
     position: relative;
     list-style-type: none;
     z-index: 2;
-    @include media(">m", "<l-s") {
+    @include media('>m', '<l-s') {
       &:after {
         left: 23px !important;
         top: 100% !important;
@@ -135,7 +150,7 @@
       width: 15px;
       height: 15px;
     }
-    @include media(">m", "<l-s") {
+    @include media('>m', '<l-s') {
       width: 90px;
     }
   }
@@ -150,7 +165,7 @@
     font-size: 1.1rem;
     font-weight: bold;
     color: $color-black;
-    @include media(">m", "<l-s") {
+    @include media('>m', '<l-s') {
       transform-origin: bottom;
       transform: rotate(-45deg) translateX(30%);
       padding-left: 20px;
@@ -171,13 +186,13 @@
       transform: translateY(-50%);
       width: 0;
       max-width: 0;
-      @include media(">m", "<l-s") {
+      @include media('>m', '<l-s') {
         left: 0;
         top: 85%;
         transform: translateY(-50%) rotate(135deg);
         transform-origin: top left;
       }
-      @include media("<=m") {
+      @include media('<=m') {
         display: none;
       }
     }
@@ -206,16 +221,14 @@
     align-items: center;
     justify-content: center;
     z-index: 2;
-    @include media(">m", "<l-s") {
+    @include media('>m', '<l-s') {
       flex-flow: column;
-      left: auto;
-      right: 0;
       top: 0;
       width: 90px;
       height: 100%;
       justify-content: space-around;
     }
-    @include media("<=m") {
+    @include media('<=m') {
       top: 60px;
     }
 

@@ -9,7 +9,14 @@
   @include media('<=m') {
     margin: -95px auto 0;
     width: 15%;
-    clip-path: polygon(100% 77.5%, 100% 90%, 50% 100%, 0 90%, 0 77.5%, 50% 87.5%);
+    clip-path: polygon(
+      100% 77.5%,
+      100% 90%,
+      50% 100%,
+      0 90%,
+      0 77.5%,
+      50% 87.5%
+    );
   }
 
   &__container {

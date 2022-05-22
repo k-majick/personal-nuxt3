@@ -34,22 +34,22 @@
         border-radius: 0;
         min-height: 100%;
         width: 100%;
-        background-image: url("~@/assets/gfx/bg-modal-min.svg");
+        background-image: url('@/assets/gfx/bg-modal-min.svg');
         background-repeat: repeat-y;
         background-size: 320px;
         background-position: left;
-        @include mobile {
+        @include media('<=m') {
           background-size: 240px;
         }
       }
 
       #{$self}__content {
         @include mk-container;
-        max-width: 640px!important;
+        max-width: 640px !important;
 
         p {
           text-align: left;
-          @include mobile {
+          @include media('<=m') {
             text-align: center;
           }
         }
@@ -60,7 +60,7 @@
         justify-content: center;
         align-items: center;
         text-align: left;
-        @include mobile {
+        @include media('<=m') {
           flex-direction: column;
 
           &--text {
@@ -151,17 +151,20 @@
   }
 
   &__close {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
     background: none;
     border: none;
     position: absolute;
     top: 0;
     right: 0;
     padding: 0;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     color: $color-red;
     font-weight: bolder;
-    font-size: 2.75rem;
+    font-size: 3rem;
     cursor: pointer;
     text-shadow: 0 0 1px $color-red;
     z-index: 1;
