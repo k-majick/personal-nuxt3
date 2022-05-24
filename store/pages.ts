@@ -6,6 +6,7 @@ import {
   GET_TECHNOLOGY,
   GET_EXPERIENCE,
   GET_PORTFOLIO,
+  GET_CONTACT,
 } from '@/api/queries'
 
 export const usePagesStore = defineStore({
@@ -17,6 +18,7 @@ export const usePagesStore = defineStore({
     technology: null,
     experience: null,
     portfolio: null,
+    contact: null,
   }),
   actions: {
     async getPage(id: number) {
@@ -114,6 +116,22 @@ export const usePagesStore = defineStore({
         console.error(error)
       }
     },
+
+    async getContact() {
+      const { $apolloClient } = useNuxtApp()
+
+      try {
+        const res = await $apolloClient.query({
+          query: GET_CONTACT(),
+        })
+
+        this.contact = res.data.contact.data.attributes
+
+        return this.contact
+      } catch (error) {
+        console.error(error)
+      }
+    },
   },
   getters: {
     currentPage: state => state.page,
@@ -122,5 +140,6 @@ export const usePagesStore = defineStore({
     myTechnology: state => state.technology,
     myExperience: state => state.experience,
     myPortfolio: state => state.portfolio,
+    myContact: state => state.contact,
   },
 })

@@ -23,7 +23,6 @@ export const GET_PAGE = (id: number) => gql`
         attributes {
           slug
           title
-          content
         }
       }
     }
@@ -98,6 +97,19 @@ export const GET_PORTFOLIO = () => gql`
             imageUrl
             url
           }
+        }
+      }
+    }
+  }
+`
+
+export const GET_CONTACT = () => gql`
+  query Contact {
+    contact {
+      data {
+        id
+        attributes {
+          content
         }
       }
     }

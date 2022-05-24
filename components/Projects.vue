@@ -63,7 +63,6 @@ import { marked } from 'marked'
 
 export default {
   async setup() {
-    const route = useRoute()
     const pagesStore = usePagesStore()
     const projects = await pagesStore.getPortfolio()
 

@@ -21,7 +21,6 @@ export default {
   emits: ['getHeaderEl'],
   setup(props, { emit }) {
     const route = useRoute()
-    const router = useRouter()
 
     const mainEl = inject('mainEl')
     const layout = ref(route.meta.layout)

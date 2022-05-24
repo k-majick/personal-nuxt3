@@ -17,6 +17,9 @@
     "@typescript-eslint/parser": "^5.20.0",
     "@vue/apollo-composable": "^4.0.0-alpha.17",
     "@vue/eslint-config-standard": "^7.0.0",
+    "@vuelidate/core": "^2.0.0-alpha.41",
+    "@vuelidate/validators": "^2.0.0-alpha.29",
+    "dotenv": "^16.0.1",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^3.2.0",
@@ -32,5 +35,13 @@
     "prettier": "^2.6.2",
     "sass": "^1.52.1",
     "vue-apollo": "^3.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "express-formidable": "^1.2.0",
+    "googleapis": "^100.0.0",
+    "nodemailer": "^6.7.5",
+    "serverless-http": "^3.0.1"
   }
 }

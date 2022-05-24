@@ -31,6 +31,14 @@
   box-shadow: inset 0 0 10px $color-satan;
   border-radius: 5px;
 
+  p {
+    margin: 0;
+
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
   &:active,
   &:focus,
   &:hover {

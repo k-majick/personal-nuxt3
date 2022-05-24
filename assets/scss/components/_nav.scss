@@ -224,7 +224,7 @@
     @include media('>m', '<l-s') {
       flex-flow: column;
       top: 0;
-      width: 90px;
+      width: 60px;
       height: 100%;
       justify-content: space-around;
     }

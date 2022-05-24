@@ -22,8 +22,6 @@
 </template>
 
 <script lang="ts">
-import { marked } from 'marked'
-
 export default {
   setup() {
     const counter = (what: string) => {
@@ -51,7 +49,6 @@ export default {
     }
 
     return {
-      marked,
       counter,
     }
   },
