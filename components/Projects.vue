@@ -1,19 +1,19 @@
 <template>
   <div
     class="main__content"
-    v-if="projects && projects.content"
-    v-html="marked.parse(projects.content)"
+    v-if="portfolio && portfolio.content"
+    v-html="marked.parse(portfolio.content)"
   ></div>
-  <div v-if="projects.projects.length" class="projects">
+  <div v-if="portfolio.projects.length" class="gallery">
     <div
-      class="project"
-      v-for="(project, index) in projects.projects"
+      class="gallery__item"
+      v-for="(project, index) in portfolio.projects"
       :key="index"
     >
-      <div class="project__title" @click.self="toggleModal(index + 1, true)">
+      <div class="gallery__title" @click.self="toggleModal(index + 1, true)">
         {{ project.name }}
       </div>
-      <img class="project__image" :src="project.logoUrl" :alt="project.name" />
+      <img class="gallery__image" :src="project.logoUrl" :alt="project.name" />
 
       <Modal
         v-show="openModal(index + 1)"
@@ -64,11 +64,11 @@ import { marked } from 'marked'
 export default {
   async setup() {
     const pagesStore = usePagesStore()
-    const projects = await pagesStore.getPortfolio()
+    const portfolio = await pagesStore.getPortfolio()
 
     return {
       marked,
-      projects,
+      portfolio,
       toggleModal,
       openModal,
     }
@@ -77,6 +77,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/components/_projects';
+@import '@/assets/scss/components/_gallery';
 @import '@/assets/scss/components/_modal';
 </style>

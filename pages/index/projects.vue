@@ -1,5 +1,5 @@
 <template>
-  <section class="main__card main__card--projects">
+  <section class="main__card main__card--gallery">
     <Projects />
   </section>
 </template>

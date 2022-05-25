@@ -43,6 +43,7 @@
         </a>
       </li>
     </ul>
+    <nuxt-link :to="'inspiration'" class="cat" v-html="rawCat" />
   </nav>
 </template>
 
@@ -51,6 +52,7 @@ import scrollTo from '@/composables/scrollTo'
 import { hoverMessage } from '@/composables/hoverMessage.ts'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
 import iconGit from '@/assets/gfx/icon-git-min.svg?raw'
+import rawCat from '@/assets/gfx/cat_1.svg?raw'
 import { usePagesStore } from '@/store/pages'
 
 export default {
@@ -73,7 +75,7 @@ export default {
     const sortItems = pagesArr =>
       pagesArr.sort((a, b) =>
         a.attributes.order < b.attributes.order ? -1 : 1,
-      )
+      ).filter((item) => item.attributes.slug !== 'inspiration');
     const pages = sortItems([...(await pagesStore.getPages())])
 
     const gotoSkills = () => {
@@ -119,6 +121,7 @@ export default {
       mainEl,
       pages,
       isActivated,
+      rawCat,
     }
   },
 }
@@ -126,4 +129,5 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/components/_nav';
+@import './assets/scss/components/_cat';
 </style>

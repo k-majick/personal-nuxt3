@@ -115,3 +115,20 @@ export const GET_CONTACT = () => gql`
     }
   }
 `
+
+export const GET_INSPIRATION = () => gql`
+  query Inspiration {
+    inspiration {
+      data {
+        id
+        attributes {
+          content
+          pictures {
+            title
+            imageUrl
+          }
+        }
+      }
+    }
+  }
+`

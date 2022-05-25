@@ -7,6 +7,7 @@ import {
   GET_EXPERIENCE,
   GET_PORTFOLIO,
   GET_CONTACT,
+  GET_INSPIRATION,
 } from '@/api/queries'
 
 export const usePagesStore = defineStore({
@@ -19,6 +20,7 @@ export const usePagesStore = defineStore({
     experience: null,
     portfolio: null,
     contact: null,
+    inspiration: null,
   }),
   actions: {
     async getPage(id: number) {
@@ -132,6 +134,22 @@ export const usePagesStore = defineStore({
         console.error(error)
       }
     },
+
+    async getInspiration() {
+      const { $apolloClient } = useNuxtApp()
+
+      try {
+        const res = await $apolloClient.query({
+          query: GET_INSPIRATION(),
+        })
+
+        this.inspiration = res.data.inspiration.data.attributes
+
+        return this.inspiration
+      } catch (error) {
+        console.error(error)
+      }
+    },
   },
   getters: {
     currentPage: state => state.page,
@@ -141,5 +159,6 @@ export const usePagesStore = defineStore({
     myExperience: state => state.experience,
     myPortfolio: state => state.portfolio,
     myContact: state => state.contact,
+    myInspiration: state => state.inspiration,
   },
 })
