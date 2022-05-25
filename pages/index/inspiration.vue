@@ -35,8 +35,6 @@ export default {
     const pageData = await pagesStore.getPage(5)
     const inspiration = await pagesStore.getInspiration()
 
-    console.dir(inspiration)
-
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.attributes.title}`,
     })

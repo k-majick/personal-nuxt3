@@ -1,18 +1,22 @@
 <template>
-  <Header @getHeaderEl="provideHeaderRef" />
-  <main class="main" ref="mainEl">
-    <div class="main__background"></div>
-    <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
-      <span class="burger__bar"></span>
-      <span class="burger__bar"></span>
-      <span class="burger__bar"></span>
-      <span class="burger__bar"></span>
-    </div>
-    <Nav :isActivated="isNavActivated" />
-    <div class="main__container">
-      <router-view />
-    </div>
-  </main>
+<Header @getHeaderEl="provideHeaderRef" />
+<main class="main" ref="mainEl">
+  <div class="main__background"></div>
+  <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
+    <span class="burger__bar"></span>
+    <span class="burger__bar"></span>
+    <span class="burger__bar"></span>
+    <span class="burger__bar"></span>
+  </div>
+  <Nav :isActivated="isNavActivated" />
+  <div class="main__container">
+    <router-view v-slot="{ Component, props }">
+      <Transition name="fade">
+        <component :is="Component" v-bind="props" />
+      </Transition>
+    </router-view>
+  </div>
+</main>
 </template>
 
 <script lang="ts">
@@ -21,9 +25,9 @@ export default {
   setup() {
     const route = useRoute()
     const toggleLayout = () =>
-      !route.meta.layout || route.meta.layout === 'dark'
-        ? (route.meta.layout = 'lite')
-        : (route.meta.layout = 'dark')
+      !route.meta.layout || route.meta.layout === 'dark' ?
+      (route.meta.layout = 'lite') :
+      (route.meta.layout = 'dark')
     const mainEl = ref(null)
     const headerRef = ref(null)
     const provideHeaderRef = (e: Event) => {
@@ -48,9 +52,9 @@ export default {
     provide('headerRef', headerRef)
 
     const toggleNav = () =>
-      isNavActivated.value === false
-        ? (isNavActivated.value = true)
-        : (isNavActivated.value = false)
+      isNavActivated.value === false ?
+      (isNavActivated.value = true) :
+      (isNavActivated.value = false)
 
     return {
       toggleLayout,
@@ -71,4 +75,11 @@ definePageMeta({
 @import './assets/scss/components/_layout';
 @import './assets/scss/components/_main';
 @import './assets/scss/components/_burger';
+
+.fade-enter-from {
+    opacity: 0;
+}
+.fade-enter-active {
+    transition: opacity 0.5s ease-out;
+}
 </style>
