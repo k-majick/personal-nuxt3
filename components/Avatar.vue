@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import { hoverMessage } from '@/composables/hoverMessage.ts'
+import { hoverMessage } from '@/composables/hoverMessage'
 
-export default {
+export default defineComponent({
   directives: {
     hoverMessage,
   },
-}
+})
 </script>
 
 <style lang="scss">

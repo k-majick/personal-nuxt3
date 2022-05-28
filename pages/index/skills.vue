@@ -6,11 +6,12 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import Skills from '@/components/Skills'
-import Technologies from '@/components/Technologies'
+import Skills from '@/components/Skills.vue'
+import Technologies from '@/components/Technologies.vue'
 
-export default {
+export default defineComponent({
   components: {
     Skills,
     Technologies,
@@ -18,11 +19,11 @@ export default {
   async setup() {
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
-    const pageData = await pagesStore.getPage(1)
+    const pageData: Ref<any> = ref(await pagesStore.getPage(1))
 
     useHead({
-      titleTemplate: `${config.public.appName} | ${pageData.attributes.title}`,
+      titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     })
   },
-}
+})
 </script>

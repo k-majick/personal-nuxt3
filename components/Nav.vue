@@ -48,20 +48,22 @@
 </template>
 
 <script lang="ts">
+import type { Ref, InjectionKey } from 'vue'
 import scrollTo from '@/composables/scrollTo'
-import { hoverMessage } from '@/composables/hoverMessage.ts'
+import { hoverMessage } from '@/composables/hoverMessage'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
 import iconGit from '@/assets/gfx/icon-git-min.svg?raw'
 import rawCat from '@/assets/gfx/cat_1.svg?raw'
 import { usePagesStore } from '@/store/pages'
+import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 
-export default {
+export default defineComponent({
   layout: 'dark',
   directives: {
     hoverMessage,
   },
   props: {
-    isActivated: String,
+    isActivated: Boolean,
   },
   async setup(props) {
     const route = useRoute()
@@ -69,14 +71,18 @@ export default {
     const pagesStore = usePagesStore()
     const isActive = ref(false)
     const isActivated = ref(props.isActivated)
-    const mainEl = inject('mainEl')
-    const headerRef = inject('headerRef')
-    const headerEl = toRaw(headerRef.value)
-    const sortItems = pagesArr =>
-      pagesArr.sort((a, b) =>
-        a.attributes.order < b.attributes.order ? -1 : 1,
-      ).filter((item) => item.attributes.slug !== 'inspiration');
-    const pages = sortItems([...(await pagesStore.getPages())])
+
+    const headerEl = inject(HeaderElKey)
+    const mainEl = inject(MainElKey)
+
+    const pagesData: Ref<any> = ref(await pagesStore.getPages())
+
+    const sortItems = (pagesArr: Record<string, any>[]) =>
+      pagesArr
+        .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
+        .filter(item => item.attributes.slug !== 'inspiration')
+    
+    const pages = sortItems([...pagesData.value])
 
     const gotoSkills = () => {
       router.push({
@@ -97,12 +103,12 @@ export default {
 
     const handleScroll = () => {
       if (
-        mainEl.value.getBoundingClientRect().top < 100 &&
+        mainEl && mainEl.value.getBoundingClientRect().top < 100 &&
         route.path === '/'
       ) {
         gotoSkills()
         isActive.value = true
-      } else if (mainEl.value.getBoundingClientRect().top < 100) {
+      } else if (mainEl && mainEl.value.getBoundingClientRect().top < 100) {
         isActive.value = true
       } else {
         isActive.value = false
@@ -124,7 +130,7 @@ export default {
       rawCat,
     }
   },
-}
+})
 </script>
 
 <style lang="scss">

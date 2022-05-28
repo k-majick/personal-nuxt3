@@ -1,38 +1,39 @@
 <template>
-<Header @getHeaderEl="provideHeaderRef" />
-<main class="main" ref="mainEl">
-  <div class="main__background"></div>
-  <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
-    <span class="burger__bar"></span>
-    <span class="burger__bar"></span>
-    <span class="burger__bar"></span>
-    <span class="burger__bar"></span>
-  </div>
-  <Nav :isActivated="isNavActivated" />
-  <div class="main__container">
-    <router-view v-slot="{ Component, props }">
-      <Transition name="fade">
-        <component :is="Component" v-bind="props" />
-      </Transition>
-    </router-view>
-  </div>
-</main>
+  <Header ref="headerComponent" />
+  <main class="main" ref="mainEl">
+    <div class="main__background"></div>
+    <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+    </div>
+    <Nav :isActivated="isNavActivated" />
+    <div class="main__container">
+      <router-view v-slot="{ Component, props }">
+        <Transition name="fade">
+          <component :is="Component" v-bind="props" />
+        </Transition>
+      </router-view>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
-export default {
+import type { Ref } from 'vue'
+import { MainElKey, HeaderElKey} from '@/symbols/symbols'
+
+export default defineComponent({
   layout: 'dark',
   setup() {
     const route = useRoute()
     const toggleLayout = () =>
-      !route.meta.layout || route.meta.layout === 'dark' ?
-      (route.meta.layout = 'lite') :
-      (route.meta.layout = 'dark')
-    const mainEl = ref(null)
-    const headerRef = ref(null)
-    const provideHeaderRef = (e: Event) => {
-      headerRef.value = e
-    }
+      !route.meta.layout || route.meta.layout === 'dark'
+        ? (route.meta.layout = 'lite')
+        : (route.meta.layout = 'dark')
+    const headerComponent: Ref<any> = ref()
+    const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
+    const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()    
     const isNavActivated = ref(false)
 
     const scrollListen = () => {
@@ -48,23 +49,30 @@ export default {
       scrollListen()
     })
 
-    provide('mainEl', mainEl)
-    provide('headerRef', headerRef)
+    watch(
+      () => headerComponent.value,
+      () => {
+        headerEl.value = headerComponent.value.headerEl
+      },
+    )
+
+    provide(MainElKey, mainEl)
+    provide(HeaderElKey, headerEl)
 
     const toggleNav = () =>
-      isNavActivated.value === false ?
-      (isNavActivated.value = true) :
-      (isNavActivated.value = false)
+      isNavActivated.value === false
+        ? (isNavActivated.value = true)
+        : (isNavActivated.value = false)
 
     return {
       toggleLayout,
       mainEl,
-      provideHeaderRef,
+      headerComponent,
       toggleNav,
       isNavActivated,
     }
   },
-}
+})
 
 definePageMeta({
   layout: 'lite',
@@ -77,9 +85,9 @@ definePageMeta({
 @import './assets/scss/components/_burger';
 
 .fade-enter-from {
-    opacity: 0;
+  opacity: 0;
 }
 .fade-enter-active {
-    transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
 }
 </style>

@@ -1,7 +1,6 @@
 .skill {
   @include trans(0.5);
   $self: &;
-  cursor: pointer;
   overflow: hidden;
   margin: 0 auto 5px;
   position: relative;

@@ -15,18 +15,15 @@
 </template>
 
 <script lang="ts">
+import { MainElKey } from '@/symbols/symbols'
 import scrollTo from '@/composables/scrollTo'
 
-export default {
-  emits: ['getHeaderEl'],
-  setup(props, { emit }) {
+export default defineComponent({
+  setup() {
     const route = useRoute()
-
-    const mainEl = inject('mainEl')
+    const mainEl = inject(MainElKey)
     const layout = ref(route.meta.layout)
-    const headerEl = ref(null)
-
-    emit('getHeaderEl', headerEl)
+    const headerEl = ref<HTMLElement>()
 
     watch(
       () => route.meta.layout,
@@ -40,7 +37,7 @@ export default {
       mainEl,
     }
   },
-}
+})
 </script>
 
 <style lang="scss">

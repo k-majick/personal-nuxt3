@@ -6,11 +6,12 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import Workplaces from '@/components/Workplaces'
-import Counter from '@/components/Counter'
+import Workplaces from '@/components/Workplaces.vue'
+import Counter from '@/components/Counter.vue'
 
-export default {
+export default defineComponent({
   components: {
     Workplaces,
     Counter,
@@ -18,11 +19,11 @@ export default {
   async setup() {
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
-    const pageData = await pagesStore.getPage(3)
+    const pageData: Ref<any> = ref(await pagesStore.getPage(2))
 
     useHead({
-      titleTemplate: `${config.public.appName} | ${pageData.attributes.title}`,
+      titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     })
   },
-}
+})
 </script>

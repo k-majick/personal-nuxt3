@@ -15,7 +15,12 @@
   min-width: 180px;
   width: 12.5vw;
   height: 100%;
-  background-image: url('@/assets/gfx/bg-modal-min.svg'), linear-gradient(to right, transparentize($color-white, 0.15) 0%, $color-white 100%);
+  background-image: url('@/assets/gfx/bg-modal-min.svg'),
+    linear-gradient(
+      to right,
+      transparentize($color-white, 0.15) 0%,
+      $color-white 100%
+    );
   background-repeat: repeat-y;
   background-size: contain;
   background-position: left;
@@ -45,7 +50,12 @@
     align-items: flex-end;
     justify-content: center;
     background-size: contain;
-    background-image: url('@/assets/gfx/bg-modal-min.svg'), linear-gradient(to right, $color-white 240px, transparentize($color-white, 0.15) 100%);
+    background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(
+        to right,
+        $color-white 240px,
+        transparentize($color-white, 0.15) 100%
+      );
 
     &:before {
       width: 100% !important;
@@ -57,7 +67,12 @@
   @include media('<=m') {
     transform: translateX(calc(-100% - 15px));
     z-index: 3;
-    background-image: url('@/assets/gfx/bg-modal-min.svg'), linear-gradient(to right, transparentize($color-white, 0.15) 0%, $color-white 100%);
+    background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(
+        to right,
+        transparentize($color-white, 0.15) 0%,
+        $color-white 100%
+      );
 
     &.activated {
       transform: translateX(0%);

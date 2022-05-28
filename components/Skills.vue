@@ -19,13 +19,14 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
 
 export default {
   async setup() {
     const pagesStore = usePagesStore()
-    const skills = await pagesStore.getSkills()
+    const skills: Ref<any> = ref(await pagesStore.getSkills())
 
     const skillBarWidth = (v: number) => ({
       width: v + '%',

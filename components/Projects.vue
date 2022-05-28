@@ -57,7 +57,6 @@
 
 <script lang="ts">
 import { usePagesStore } from '@/store/pages'
-import { Modal } from '@/components/Modal'
 import { toggleModal, openModal } from '@/composables/handleModal'
 import { marked } from 'marked'
 

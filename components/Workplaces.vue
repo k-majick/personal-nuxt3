@@ -33,15 +33,16 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
 
-export default {
+export default defineComponent({
   async setup() {
     const route = useRoute()
     const pagesStore = usePagesStore()
-    const experience = ref(await pagesStore.getExperience())
-    const sortItems = pagesArr =>
+    const experience: Ref<any> = ref(await pagesStore.getExperience())
+    const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1))
     const workplaces = ref(
       experience.value ? sortItems([...experience.value.workplaces]) : [],
@@ -53,7 +54,7 @@ export default {
       workplaces,
     }
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

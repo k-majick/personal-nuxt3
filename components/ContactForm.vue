@@ -88,11 +88,11 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
 import useVuelidate from '@vuelidate/core'
 import {
-  alpha,
   email,
   minLength,
   maxLength,
@@ -101,12 +101,12 @@ import {
 } from '@vuelidate/validators'
 import { useI18n } from 'vue-i18n'
 
-export default {
-  async setup(props, context) {
+export default defineComponent({
+  async setup() {
     const { t } = useI18n()
     const pagesStore = usePagesStore()
-    const contact = await pagesStore.getContact()
-    const submitBtn = ref(null)
+    const contact: Ref<any> = ref(await pagesStore.getContact())
+    const submitBtn: Ref<any> = ref<HTMLElement>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
 
     const state = reactive({
@@ -187,12 +187,16 @@ export default {
         console.log(pair[0] + ', ' + pair[1])
       }
 
-      const res = await $fetch('/.netlify/functions/send-email', {
-        method: 'POST',
-        body: fd,
-      })
+      try {
+        const res = await $fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          body: fd,
+        })
 
-      console.dir(res)
+        console.dir(res)
+      } catch (e) {
+        console.dir(e)
+      }
     }
 
     return {
@@ -205,7 +209,7 @@ export default {
       submitBtn,
     }
   },
-}
+})
 </script>
 
 <style lang="scss">

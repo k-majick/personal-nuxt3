@@ -10,6 +10,10 @@ export const hoverMessage = {
       child => child.classList.contains('tooltip'),
     )
 
+    if (!bar) {
+      return;
+    }
+
     el.addEventListener('mouseenter', () => {
       bar.innerHTML = msg as string
       bar.classList.add('show')

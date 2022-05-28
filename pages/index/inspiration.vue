@@ -1,12 +1,14 @@
 <template>
   <section class="main__card main__card--gallery">
-
     <div
       class="main__content"
-      v-if="inspiration && inspiration.content"
+      v-if="inspiration"
       v-html="marked.parse(inspiration.content)"
     ></div>
-    <div v-if="inspiration.pictures.length" class="gallery gallery--inspiration">
+    <div
+      v-if="inspiration.pictures.length"
+      class="gallery gallery--inspiration"
+    >
       <div
         class="gallery__item"
         v-for="(picture, index) in inspiration.pictures"
@@ -15,28 +17,31 @@
         <div class="gallery__title">
           {{ picture.title }}
         </div>
-        <img class="gallery__image" :src="picture.imageUrl" :alt="picture.title" />
+        <img
+          class="gallery__image"
+          :src="picture.imageUrl"
+          :alt="picture.title"
+        />
       </div>
     </div>
-
   </section>
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
 
-export default {
-  components: {
-  },
+export default defineComponent({
+  components: {},
   async setup() {
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
-    const pageData = await pagesStore.getPage(5)
-    const inspiration = await pagesStore.getInspiration()
+    const pageData: Ref<any> = ref(await pagesStore.getPage(5))
+    const inspiration: Ref<any> = ref(await pagesStore.getInspiration())
 
     useHead({
-      titleTemplate: `${config.public.appName} | ${pageData.attributes.title}`,
+      titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     })
 
     return {
@@ -44,7 +49,7 @@ export default {
       inspiration,
     }
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

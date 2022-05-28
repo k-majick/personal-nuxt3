@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-export default {
+export default defineComponent({
   setup() {
     const counter = (what: string) => {
       const now = new Date().valueOf()
@@ -45,6 +45,8 @@ export default {
           return true
         case what == 'm':
           return diffMonths
+        default: 
+          return 0
       }
     }
 
@@ -52,7 +54,7 @@ export default {
       counter,
     }
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

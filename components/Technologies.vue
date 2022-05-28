@@ -15,20 +15,21 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
 
-export default {
+export default defineComponent({
   async setup() {
     const pagesStore = usePagesStore()
-    const technology = await pagesStore.getTechnology()
+    const technology: Ref<any> = ref(await pagesStore.getTechnology())
 
     return {
       marked,
       technology,
     }
   },
-}
+})
 </script>
 
 <style scoped lang="scss">

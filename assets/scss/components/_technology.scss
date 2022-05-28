@@ -15,7 +15,6 @@
   &__item {
     @include trans(0.5);
     @include label;
-    cursor: pointer;
 
     &:hover {
       background: $color-red;
