@@ -81,7 +81,7 @@ export default defineComponent({
       pagesArr
         .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
         .filter(item => item.attributes.slug !== 'inspiration')
-    
+
     const pages = sortItems([...pagesData.value])
 
     const gotoSkills = () => {
@@ -103,7 +103,8 @@ export default defineComponent({
 
     const handleScroll = () => {
       if (
-        mainEl && mainEl.value.getBoundingClientRect().top < 100 &&
+        mainEl &&
+        mainEl.value.getBoundingClientRect().top < 100 &&
         route.path === '/'
       ) {
         gotoSkills()

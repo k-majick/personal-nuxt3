@@ -3,7 +3,9 @@
     "name": "K-Majick",
     "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;professional <strong>JavaScript Developer</strong>.",
     "git": "Check out my <strong>GitHub repos</strong>",
-    "linked": "Check out my <strong>LinkedIn profile</strong>"
+    "linked": "Check out my <strong>LinkedIn profile</strong>",
+    "sentTitle": "Thank you for your message!",
+    "sentMessage": "I'll respond as soon as I can."
   },
   "content": {
     "and": "and",

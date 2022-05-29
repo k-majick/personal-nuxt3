@@ -2,8 +2,8 @@
 const express = require('express')
 const serverless = require('serverless-http')
 const nodemailer = require('nodemailer')
-const app = express()
 const formidable = require('express-formidable')
+const app = express()
 const router = express.Router()
 
 require('dotenv').config()
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   await sendEmail(req.fields).then(r => {
     if (r === 200) {
       res.status(201).json({
-        status: 'success!',
+        status: 'ok',
       })
     } else {
       res.status(400).json({
@@ -65,16 +65,13 @@ const sendEmail = async data => {
     html: data.message,
   }
 
-  let info = await transporter.sendMail(mailOptions)
+  const info = await transporter.sendMail(mailOptions)
 
   if (info.messageId) {
     return 200
   } else {
     return 400
   }
-
-  smtpTransport.close()
 }
 
-module.exports = app
 module.exports.handler = serverless(app)

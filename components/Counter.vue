@@ -45,7 +45,7 @@ export default defineComponent({
           return true
         case what == 'm':
           return diffMonths
-        default: 
+        default:
           return 0
       }
     }

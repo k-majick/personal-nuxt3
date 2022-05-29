@@ -1,5 +1,6 @@
 <template>
   <Header ref="headerComponent" />
+
   <main class="main" ref="mainEl">
     <div class="main__background"></div>
     <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
@@ -8,7 +9,9 @@
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
     </div>
+
     <Nav :isActivated="isNavActivated" />
+
     <div class="main__container">
       <router-view v-slot="{ Component, props }">
         <Transition name="fade">
@@ -21,7 +24,7 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
-import { MainElKey, HeaderElKey} from '@/symbols/symbols'
+import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 
 export default defineComponent({
   layout: 'dark',
@@ -33,7 +36,7 @@ export default defineComponent({
         : (route.meta.layout = 'dark')
     const headerComponent: Ref<any> = ref()
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
-    const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()    
+    const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
     const isNavActivated = ref(false)
 
     const scrollListen = () => {

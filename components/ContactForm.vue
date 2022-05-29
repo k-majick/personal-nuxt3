@@ -84,6 +84,25 @@
         </button>
       </div>
     </form>
+
+    <Transition name="fade">
+      <Modal
+        v-show="openModal(1)"
+        @close="toggleModal(1, false), resetForm()"
+        :modalType="'message'"
+      >
+        <template v-slot:header>
+          <h3 class="modal__title">
+            {{ $t('messages.sentTitle') }}
+          </h3>
+        </template>
+        <template v-slot:content>
+          <div slot="content" class="modal__content">
+            <p>{{ $t('messages.sentMessage') }}</p>
+          </div>
+        </template>
+      </Modal>
+    </Transition>
   </div>
 </template>
 
@@ -109,7 +128,7 @@ export default defineComponent({
     const submitBtn: Ref<any> = ref<HTMLElement>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
 
-    const state = reactive({
+    const state = ref({
       name: '',
       email: '',
       message: '',
@@ -120,7 +139,7 @@ export default defineComponent({
         required: helpers.withMessage('Enter your name', required),
         minLength: helpers.withMessage(
           () => `Name should contain at least 3 letters`,
-          minLength(4),
+          minLength(3),
         ),
         maxLength: helpers.withMessage(
           () => `Name can't exceed 30 letters`,
@@ -143,7 +162,7 @@ export default defineComponent({
         required: helpers.withMessage('Enter your message', required),
         minLength: helpers.withMessage(
           () => `Message is too short`,
-          minLength(10),
+          minLength(1),
         ),
         maxLength: helpers.withMessage(
           () => `Message can't exceed 1000 characters`,
@@ -183,19 +202,34 @@ export default defineComponent({
       fd.append('email', v$.value.email.$model)
       fd.append('message', v$.value.message.$model)
 
-      for (let pair of fd.entries()) {
-        console.log(pair[0] + ', ' + pair[1])
-      }
+      // for (let pair of fd.entries()) {
+      //   console.log(pair[0] + ', ' + pair[1])
+      // }
 
       try {
-        const res = await $fetch('/.netlify/functions/send-email', {
-          method: 'POST',
-          body: fd,
-        })
+        const res: Record<string, unknown> = await $fetch(
+          '/.netlify/functions/send-email',
+          {
+            method: 'POST',
+            body: fd,
+          },
+        )
 
-        console.dir(res)
+        if (res?.status === 'ok') {
+          toggleModal(1, false)
+        }
       } catch (e) {
-        console.dir(e)
+        console.error(e)
+      }
+    }
+
+    const resetForm = () => {
+      v$.value.$reset()
+      submitBtn.value.innerHTML = `<p>${t('content.sendIt')}</p>`
+      state.value = {
+        name: '',
+        email: '',
+        message: '',
       }
     }
 
@@ -207,6 +241,9 @@ export default defineComponent({
       processForm,
       sendForm,
       submitBtn,
+      toggleModal,
+      openModal,
+      resetForm,
     }
   },
 })

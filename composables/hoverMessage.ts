@@ -11,7 +11,7 @@ export const hoverMessage = {
     )
 
     if (!bar) {
-      return;
+      return
     }
 
     el.addEventListener('mouseenter', () => {

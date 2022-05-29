@@ -127,6 +127,11 @@
     &--message {
       #{$self} {
         background: $color-white;
+        padding: 45px;
+      }
+
+      #{$self}__close {
+        transform: translate(25%, -25%) scale(0.75);
       }
 
       #{$self}__cell {
@@ -192,9 +197,8 @@
   }
 
   &__title {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.5em;
+    margin: 0;
+    font-size: 1.1em;
   }
 
   &__action {
