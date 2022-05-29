@@ -78,6 +78,14 @@
         box-shadow: 0 0 15px $color-gray;
         border-radius: 10px;
         margin-right: 15px;
+        @include media('<=m') {
+          margin-right: 0;
+        }
+      }
+
+      #{$self}__title {
+        font-size: 1.5em;
+        margin-bottom: 15px;
       }
 
       #{$self}__date {
@@ -136,6 +144,11 @@
 
       #{$self}__cell {
         padding: 15px;
+      }
+
+      #{$self}__title {
+        font-size: 1.1rem;
+        margin: 0;
       }
     }
   }
@@ -196,11 +209,6 @@
     }
   }
 
-  &__title {
-    margin: 0;
-    font-size: 1.1em;
-  }
-
   &__action {
     @include btn;
   }
@@ -215,9 +223,5 @@
 
   &-enter-active &__container {
     animation: modalContainer 0.25s ease 0s;
-  }
-
-  &-leave-active & {
-    // transform: scale(1.1);
   }
 }
