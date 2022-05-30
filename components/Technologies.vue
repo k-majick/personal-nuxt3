@@ -24,6 +24,8 @@ export default defineComponent({
     const pagesStore = usePagesStore()
     const technology: Ref<any> = ref(await pagesStore.getTechnology())
 
+    console.dir(technology)
+
     return {
       marked,
       technology,

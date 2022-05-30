@@ -16,6 +16,8 @@
     @include trans(0.5);
     @include label;
 
+    white-space: nowrap;
+
     &:hover {
       background: $color-red;
       box-shadow: inset 0 0 10px $color-satan;
