@@ -1,8 +1,8 @@
 <template>
   <div
-    class="main__content"
     v-if="experience && experience.content"
-    v-html="marked.parse(experience.content)"
+    class="main__content"
+    v-html="DOMPurify.sanitize(marked.parse(experience.content))"
   ></div>
   <div class="main__content">
     <table class="experience__table">
@@ -11,12 +11,11 @@
           <span class="experience__tip"></span>
         </span>
       </tbody>
-      <tbody>
+      <tbody v-if="workplaces.length">
         <tr
-          v-if="workplaces.length"
           v-for="workplace in workplaces"
           :key="workplace.name"
-          v-bind:class="{ hilite: !workplace.lessVisible }"
+          :class="{ hilite: !workplace.lessVisible }"
         >
           <th scope="col">
             <span>{{ workplace.dateTo }}</span>
@@ -36,10 +35,10 @@
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
   async setup() {
-    const route = useRoute()
     const pagesStore = usePagesStore()
     const experience: Ref<any> = ref(await pagesStore.getExperience())
     const sortItems = (pagesArr: Record<string, any>[]) =>
@@ -52,6 +51,7 @@ export default defineComponent({
       marked,
       experience,
       workplaces,
+      DOMPurify,
     }
   },
 })

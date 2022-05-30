@@ -2,18 +2,20 @@
   <div class="main__content">
     <div class="counter">
       <span class="counter__text">
-        <span class="counter__value" v-html="counter('y')"></span>&nbsp;
+        <span class="counter__value">{{ counter('y') }}</span
+        >&nbsp;
         <span>{{
           counter('y') > 1 ? $t('content.years') : $t('content.year')
         }}</span
         >&nbsp;
         <span v-if="counter('c')"
           >{{ $t('content.and') }}&nbsp;
-          <span class="counter__value" v-html="counter('m')"></span>&nbsp;month
+          <span class="counter__value">{{ counter('m') }}</span
+          >&nbsp;month
         </span>
         <span v-if="counter('d')"
-          >and&nbsp;
-          <span class="counter__value" v-html="counter('m')"></span>&nbsp;months
+          >and&nbsp; <span class="counter__value">{{ counter('m') }}</span
+          >&nbsp;months
         </span>
       </span>
     </div>

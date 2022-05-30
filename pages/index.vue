@@ -1,7 +1,7 @@
 <template>
   <Header ref="headerComponent" />
 
-  <main class="main" ref="mainEl">
+  <main ref="mainEl" class="main">
     <div class="main__background"></div>
     <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
       <span class="burger__bar"></span>
@@ -10,7 +10,7 @@
       <span class="burger__bar"></span>
     </div>
 
-    <Nav :isActivated="isNavActivated" />
+    <Nav :is-activated="isNavActivated" />
 
     <div class="main__container">
       <router-view v-slot="{ Component, props }">

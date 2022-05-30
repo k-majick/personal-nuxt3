@@ -1,16 +1,11 @@
 <template>
   <div
-    class="main__content"
     v-if="skills && skills.content"
-    v-html="marked.parse(skills.content)"
+    class="main__content"
+    v-html="DOMPurify.sanitize(marked.parse(skills.content))"
   ></div>
-  <div class="main__content">
-    <div
-      class="skill"
-      v-if="skills && skills.sets"
-      v-for="set in skills.sets"
-      :key="set.name"
-    >
+  <div v-if="skills && skills.sets" class="main__content">
+    <div v-for="set in skills.sets" :key="set.name" class="skill">
       <div class="skill__title">{{ set.name }}</div>
       <div class="skill__bar" :style="skillBarWidth(set.value)"></div>
       <div class="skill__percent">{{ set.value }}%</div>
@@ -22,11 +17,12 @@
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 export default {
   async setup() {
     const pagesStore = usePagesStore()
-    const skills: Ref<any> = ref(await pagesStore.getSkills())
+    const skills: Ref<unknown> = ref(await pagesStore.getSkills())
 
     const skillBarWidth = (v: number) => ({
       width: v + '%',
@@ -36,6 +32,7 @@ export default {
       marked,
       skills,
       skillBarWidth,
+      DOMPurify,
     }
   },
 }

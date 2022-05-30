@@ -7,9 +7,9 @@ module.exports = {
     'vue/setup-compiler-macros': true,
   },
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
+    ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
+    sourceType: 'module',
   },
   extends: [
     'plugin:@typescript-eslint/recommended',
@@ -17,7 +17,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:prettier/recommended',
   ],
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'risxss'],
   rules: {
     'arrow-body-style': ['error', 'as-needed'],
     'prefer-const': 2,
@@ -29,8 +29,10 @@ module.exports = {
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': 2,
-    'vue/script-setup-no-uses-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'vue/multi-word-component-names': 'off',
+    'vue/no-v-html': 'off',
+    'vue/script-setup-no-uses-vars': 'off',
     'prettier/prettier': 'off',
     curly: ['error'],
     'comma-dangle': [
@@ -43,6 +45,7 @@ module.exports = {
         functions: 'always-multiline',
       },
     ],
+    'risxss/catch-potential-xss-vue': 'error',
   },
   overrides: [
     {

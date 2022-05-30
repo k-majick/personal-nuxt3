@@ -18,7 +18,11 @@
 <script lang="ts">
 export default defineComponent({
   props: {
-    modalType: String,
+    modalType: {
+      type: String,
+      default: '',
+    },
   },
+  emits: ['close'],
 })
 </script>

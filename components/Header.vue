@@ -1,9 +1,12 @@
 <template>
-  <header class="header" :class="`header--${layout}`" ref="headerEl">
+  <header ref="headerEl" class="header" :class="`header--${layout}`">
     <section class="header__container">
       <a class="main__anchor"></a>
       <a class="header__logo">
-        <h1 class="header__title" v-html="$t('messages.name')"></h1>
+        <h1
+          class="header__title"
+          v-html="DOMPurify.sanitize($t('messages.name'))"
+        ></h1>
       </a>
       <Avatar />
       <div class="header__arrow" @click="scrollTo($event, mainEl)"></div>
@@ -17,6 +20,7 @@
 <script lang="ts">
 import { MainElKey } from '@/symbols/symbols'
 import scrollTo from '@/composables/scrollTo'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
   setup() {
@@ -35,6 +39,7 @@ export default defineComponent({
       scrollTo,
       headerEl,
       mainEl,
+      DOMPurify,
     }
   },
 })

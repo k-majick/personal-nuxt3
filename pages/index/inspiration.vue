@@ -1,18 +1,18 @@
 <template>
   <section class="main__card main__card--gallery">
     <div
-      class="main__content"
       v-if="inspiration"
-      v-html="marked.parse(inspiration.content)"
+      class="main__content"
+      v-html="DOMPurify.sanitize(marked.parse(inspiration.content))"
     ></div>
     <div
       v-if="inspiration.pictures.length"
       class="gallery gallery--inspiration"
     >
       <div
-        class="gallery__item"
         v-for="(picture, index) in inspiration.pictures"
         :key="index"
+        class="gallery__item"
       >
         <div class="gallery__title">
           {{ picture.title }}
@@ -31,6 +31,7 @@
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
   components: {},
@@ -47,6 +48,7 @@ export default defineComponent({
     return {
       marked,
       inspiration,
+      DOMPurify,
     }
   },
 })

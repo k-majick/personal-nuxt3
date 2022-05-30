@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from 'nuxt'
 import { IntlifyModuleOptions } from '@intlify/nuxt3'
+import eslint from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
   typescript: {
@@ -91,6 +92,7 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    plugins: [eslint()],
     css: {
       preprocessorOptions: {
         scss: {

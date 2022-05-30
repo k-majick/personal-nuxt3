@@ -1,14 +1,14 @@
 <template>
   <div
-    class="main__content"
     v-if="portfolio && portfolio.content"
-    v-html="marked.parse(portfolio.content)"
+    class="main__content"
+    v-html="DOMPurify.sanitize(marked.parse(portfolio.content))"
   ></div>
   <div v-if="portfolio.projects.length" class="gallery">
     <div
-      class="gallery__item"
       v-for="(project, index) in portfolio.projects"
       :key="index"
+      class="gallery__item"
     >
       <div class="gallery__title" @click.self="toggleModal(index + 1, true)">
         {{ project.name }}
@@ -17,10 +17,10 @@
 
       <Modal
         v-show="openModal(index + 1)"
+        :modal-type="'full'"
         @close="toggleModal(index + 1, true)"
-        :modalType="'full'"
       >
-        <template v-slot:content>
+        <template #content>
           <div class="modal__content">
             <div class="modal__details">
               <img
@@ -42,11 +42,9 @@
               :alt="project.name"
             />
           </div>
-          <a
-            slot="action"
-            class="modal__action"
-            :href="project.url"
-            target="_blank"
+        </template>
+        <template #action>
+          <a class="modal__action" :href="project.url" target="_blank"
             >Go to site</a
           >
         </template>
@@ -58,6 +56,7 @@
 <script lang="ts">
 import { usePagesStore } from '@/store/pages'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 
 export default {
   async setup() {
@@ -69,6 +68,7 @@ export default {
       portfolio,
       toggleModal,
       openModal,
+      DOMPurify,
     }
   },
 }

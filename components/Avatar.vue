@@ -1,8 +1,11 @@
 <template>
   <div class="avatar">
     <h2 class="avatar__title">{{ $t('messages.name') }}</h2>
-    <h2 class="avatar__message" v-html="$t('messages.hello')"></h2>
-    <div class="avatar__container" v-hoverMessage="$t('messages.hello')">
+    <h3
+      class="avatar__message"
+      v-html="DOMPurify.sanitize($t('messages.hello'))"
+    ></h3>
+    <div v-hoverMessage="$t('messages.hello')" class="avatar__container">
       <span class="tooltip"></span>
       <div class="avatar__flipper">
         <div class="avatar__front"></div>
@@ -15,10 +18,16 @@
 
 <script lang="ts">
 import { hoverMessage } from '@/composables/hoverMessage'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
   directives: {
     hoverMessage,
+  },
+  setup() {
+    return {
+      DOMPurify,
+    }
   },
 })
 </script>

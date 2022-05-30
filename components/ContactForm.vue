@@ -1,32 +1,32 @@
 <template>
   <div
-    class="main__content"
     v-if="contact && contact.content"
-    v-html="marked.parse(contact.content)"
+    class="main__content"
+    v-html="DOMPurify.sanitize(marked.parse(contact.content))"
   ></div>
   <div class="main__content">
     <form
+      ref="form"
+      novalidate
       class="form"
       @submit.prevent="processForm"
-      ref="form"
       @change="processForm"
-      novalidate
     >
       <div
         class="form__group"
         :class="{ 'form__group--error': v$.name.$errors.length }"
       >
         <span
-          class="form__alert"
           v-for="error of v$.name.$errors"
           :key="error.$uid"
+          class="form__alert"
           >{{ error.$message }}</span
         >
         <input
-          class="form__input"
+          v-model="v$.name.$model"
           type="text"
           name="name"
-          v-model="v$.name.$model"
+          class="form__input"
           @blur="v$.name.$touch()"
         />
         <label class="form__label">Name</label>
@@ -38,16 +38,16 @@
         }"
       >
         <span
-          class="form__alert"
           v-for="error of v$.email.$errors"
           :key="error.$uid"
+          class="form__alert"
           >{{ error.$message }}</span
         >
         <input
-          class="form__input"
+          v-model.trim="v$.email.$model"
           type="email"
           name="email"
-          v-model.trim="v$.email.$model"
+          class="form__input"
           @blur="v$.email.$touch()"
         />
         <label class="form__label">E-mail</label>
@@ -59,25 +59,25 @@
         }"
       >
         <span
-          class="form__alert"
           v-for="error of v$.message.$errors"
           :key="error.$uid"
+          class="form__alert"
           >{{ error.$message }}</span
         >
         <textarea
-          class="form__input"
+          v-model="v$.message.$model"
           name="message"
           rows="5"
-          v-model="v$.message.$model"
+          class="form__input"
           @blur="v$.message.$touch()"
         ></textarea>
         <label class="form__label">Message</label>
       </div>
       <div class="form__group form__group--submit">
         <button
+          ref="submitBtn"
           class="form__btn"
           type="submit"
-          ref="submitBtn"
           @click="sendForm"
         >
           <p>{{ $t('content.sendIt') }}</p>
@@ -88,16 +88,16 @@
     <Transition name="fade">
       <Modal
         v-show="openModal(1)"
+        :modal-type="'message'"
         @close="toggleModal(1, false), resetForm()"
-        :modalType="'message'"
       >
-        <template v-slot:header>
+        <template #header>
           <h3 class="modal__title">
             {{ $t('messages.sentTitle') }}
           </h3>
         </template>
-        <template v-slot:content>
-          <div slot="content" class="modal__content">
+        <template #content>
+          <div class="modal__content">
             <p>{{ $t('messages.sentMessage') }}</p>
           </div>
         </template>
@@ -119,6 +119,7 @@ import {
   helpers,
 } from '@vuelidate/validators'
 import { useI18n } from 'vue-i18n'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
   async setup() {
@@ -244,6 +245,7 @@ export default defineComponent({
       toggleModal,
       openModal,
       resetForm,
+      DOMPurify,
     }
   },
 })

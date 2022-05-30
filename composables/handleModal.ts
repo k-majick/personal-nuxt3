@@ -18,9 +18,7 @@ export const toggleModal = (id: number, lock: boolean) => {
   }
 }
 
-export const openModal = (id: number) => {
-  return activeModal.value === id
-}
+export const openModal = (id: number) => activeModal.value === id
 
 export const scrollLock = () => {
   const scrollY = document.documentElement.style.getPropertyValue('--scroll-y')

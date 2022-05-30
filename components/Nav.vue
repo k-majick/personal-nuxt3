@@ -8,10 +8,9 @@
         <a href="" class="nav__link">Intro</a>
       </li>
       <li
-        class="nav__item"
-        v-if="pages && pages.length"
         v-for="page in pages"
         :key="page.id"
+        class="nav__item"
         @click.stop.prevent="scrollTo($event, mainEl)"
       >
         <nuxt-link :to="page.attributes.slug" class="nav__link">{{
@@ -22,33 +21,38 @@
     <ul class="nav__social">
       <li class="nav__socialItem">
         <a
-          class="nav__socialLink"
+          v-hoverMessage="$t('messages.git')"
           href="https://github.com/k-majick"
           target="_blank"
-          v-hoverMessage="$t('messages.git')"
+          class="nav__socialLink"
         >
-          <span v-html="iconGit"></span>
+          <span v-html="DOMPurify.sanitize(iconGit)"></span>
           <span class="tooltip"></span>
         </a>
       </li>
       <li class="nav__socialItem">
         <a
-          class="nav__socialLink"
+          v-hoverMessage="$t('messages.linked')"
           href="https://www.linkedin.com/in/maciej-klimowicz"
           target="_blank"
-          v-hoverMessage="$t('messages.linked')"
+          class="nav__socialLink"
         >
-          <span v-html="iconLinkedin"></span>
+          <span v-html="DOMPurify.sanitize(iconLinkedin)"></span>
           <span class="tooltip"></span>
         </a>
       </li>
     </ul>
-    <nuxt-link :to="'inspiration'" class="cat" v-html="rawCat" />
+    <nuxt-link
+      :to="'inspiration'"
+      class="cat"
+      v-html="DOMPurify.sanitize(rawCat)"
+    >
+    </nuxt-link>
   </nav>
 </template>
 
 <script lang="ts">
-import type { Ref, InjectionKey } from 'vue'
+import type { Ref } from 'vue'
 import scrollTo from '@/composables/scrollTo'
 import { hoverMessage } from '@/composables/hoverMessage'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
@@ -56,21 +60,22 @@ import iconGit from '@/assets/gfx/icon-git-min.svg?raw'
 import rawCat from '@/assets/gfx/cat_1.svg?raw'
 import { usePagesStore } from '@/store/pages'
 import { MainElKey, HeaderElKey } from '@/symbols/symbols'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
-  layout: 'dark',
   directives: {
     hoverMessage,
   },
+  layout: 'dark',
   props: {
     isActivated: Boolean,
   },
-  async setup(props) {
+  async setup() {
     const route = useRoute()
     const router = useRouter()
     const pagesStore = usePagesStore()
     const isActive = ref(false)
-    const isActivated = ref(props.isActivated)
+    // const isActivated = ref(props.isActivated)
 
     const headerEl = inject(HeaderElKey)
     const mainEl = inject(MainElKey)
@@ -96,10 +101,10 @@ export default defineComponent({
       })
     }
 
-    watch(
-      () => props.isActivated,
-      () => (isActivated.value = props.isActivated),
-    )
+    // watch(
+    //   () => props.isActivated,
+    //   () => (isActivated.value = props.isActivated),
+    // )
 
     const handleScroll = () => {
       if (
@@ -127,8 +132,9 @@ export default defineComponent({
       headerEl,
       mainEl,
       pages,
-      isActivated,
+      // isActivated,
       rawCat,
+      DOMPurify,
     }
   },
 })
