@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav" :class="{ active: isActive, activated: isActivated }">
+  <nav class="nav" :class="[`nav--${theme}`, { active: isActive, activated: isActivated }]">
     <ul class="nav__items">
       <li
         class="nav__item"
@@ -27,7 +27,7 @@
           class="nav__socialLink"
         >
           <span v-html="DOMPurify.sanitize(iconGit)"></span>
-          <span class="tooltip"></span>
+          <span class="tooltip" :class="`tooltip--${theme}`"></span>
         </a>
       </li>
       <li class="nav__socialItem">
@@ -38,35 +38,31 @@
           class="nav__socialLink"
         >
           <span v-html="DOMPurify.sanitize(iconLinkedin)"></span>
-          <span class="tooltip"></span>
+          <span class="tooltip" :class="`tooltip--${theme}`"></span>
         </a>
       </li>
     </ul>
-    <nuxt-link
-      :to="'inspiration'"
-      class="cat"
-      v-html="DOMPurify.sanitize(rawCat)"
-    >
-    </nuxt-link>
+    <!-- eslint-disable-next-line risxss/catch-potential-xss-vue -->
+    <nuxt-link :to="'inspiration'" class="cat" :class="`cat--${theme}`" v-html="rawCat" />
   </nav>
 </template>
 
 <script lang="ts">
 import type { Ref } from 'vue'
-import scrollTo from '@/composables/scrollTo'
+import { usePagesStore } from '@/store/pages'
+import { useThemeStore } from '@/store/theme'
 import { hoverMessage } from '@/composables/hoverMessage'
+import scrollTo from '@/composables/scrollTo'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
+import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 import iconGit from '@/assets/gfx/icon-git-min.svg?raw'
 import rawCat from '@/assets/gfx/cat_1.svg?raw'
-import { usePagesStore } from '@/store/pages'
-import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 import DOMPurify from 'dompurify'
 
 export default defineComponent({
   directives: {
     hoverMessage,
   },
-  layout: 'dark',
   props: {
     isActivated: Boolean,
   },
@@ -75,7 +71,9 @@ export default defineComponent({
     const router = useRouter()
     const pagesStore = usePagesStore()
     const isActive = ref(false)
-    // const isActivated = ref(props.isActivated)
+
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
 
     const headerEl = inject(HeaderElKey)
     const mainEl = inject(MainElKey)
@@ -101,20 +99,18 @@ export default defineComponent({
       })
     }
 
-    // watch(
-    //   () => props.isActivated,
-    //   () => (isActivated.value = props.isActivated),
-    // )
-
     const handleScroll = () => {
+      if (!mainEl || !mainEl.value) {
+        return
+      }
+      
       if (
-        mainEl &&
         mainEl.value.getBoundingClientRect().top < 100 &&
         route.path === '/'
       ) {
         gotoSkills()
         isActive.value = true
-      } else if (mainEl && mainEl.value.getBoundingClientRect().top < 100) {
+      } else if (mainEl.value.getBoundingClientRect().top < 100) {
         isActive.value = true
       } else {
         isActive.value = false
@@ -122,6 +118,11 @@ export default defineComponent({
     }
 
     window.addEventListener('scroll', handleScroll)
+
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
+    )
 
     return {
       isActive,
@@ -132,9 +133,9 @@ export default defineComponent({
       headerEl,
       mainEl,
       pages,
-      // isActivated,
       rawCat,
       DOMPurify,
+      theme,
     }
   },
 })

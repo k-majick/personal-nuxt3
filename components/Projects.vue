@@ -4,7 +4,7 @@
     class="main__content"
     v-html="DOMPurify.sanitize(marked.parse(portfolio.content))"
   ></div>
-  <div v-if="portfolio.projects.length" class="gallery">
+  <div v-if="portfolio.projects.length" class="gallery" :class="`gallery--${theme}`">
     <div
       v-for="(project, index) in portfolio.projects"
       :key="index"
@@ -55,13 +55,21 @@
 
 <script lang="ts">
 import { usePagesStore } from '@/store/pages'
+import { useThemeStore } from '@/store/theme'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default {
   async setup() {
     const pagesStore = usePagesStore()
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
     const portfolio = await pagesStore.getPortfolio()
+
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
+    )
 
     return {
       marked,
@@ -69,6 +77,7 @@ export default {
       toggleModal,
       openModal,
       DOMPurify,
+      theme,
     }
   },
 }

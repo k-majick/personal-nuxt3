@@ -61,4 +61,32 @@
   &__btn {
     @include btn;
   }
+
+  &--lite {
+    #{$self}__btn {
+      color: $color-white;
+      background-color: $color-gray;
+      box-shadow: inset 0 0 10px $color-satan;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $color-red;
+      }
+    }
+  }
+
+  &--dark {
+    #{$self}__btn {
+      color: $color-black;
+      background-color: $color-silver-lite;
+      box-shadow: inset 0 0 10px $color-black;
+  
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $color-green;
+      }
+    }
+  }
 }

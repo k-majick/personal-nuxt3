@@ -9,6 +9,7 @@
       ref="form"
       novalidate
       class="form"
+      :class="`form--${theme}`"
       @submit.prevent="processForm"
       @change="processForm"
     >
@@ -109,6 +110,7 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
+import { useThemeStore } from '@/store/theme'
 import { marked } from 'marked'
 import useVuelidate from '@vuelidate/core'
 import {
@@ -125,6 +127,8 @@ export default defineComponent({
   async setup() {
     const { t } = useI18n()
     const pagesStore = usePagesStore()
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
     const contact: Ref<any> = ref(await pagesStore.getContact())
     const submitBtn: Ref<any> = ref<HTMLElement>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
@@ -234,7 +238,13 @@ export default defineComponent({
       }
     }
 
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
+    )
+
     return {
+      theme,
       marked,
       contact,
       state,

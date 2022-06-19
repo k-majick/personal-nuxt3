@@ -1,18 +1,20 @@
 .modal {
   $self: &;
+  @include trans(0.5);
   width: fit-content;
   height: auto;
   margin: 0 auto;
   padding: 30px 15px;
-  background-color: $color-white;
   border-radius: 5px;
-  box-shadow: 0 0 15px transparentize($color-black, 0.5);
-  transition: all 0.5s ease;
   display: flex;
   flex-flow: column;
   justify-content: center;
   position: relative;
   align-items: center;
+
+  * {
+    z-index: 2;
+  }
 
   &__mask {
     position: fixed;
@@ -24,7 +26,7 @@
     background-color: transparentize($color-black, 0.5);
     display: table;
     display: block;
-    transition: all 0.5s ease;
+    @include trans(0.5);
     overflow-y: scroll;
 
     &--full {
@@ -34,10 +36,20 @@
         border-radius: 0;
         min-height: 100%;
         width: 100%;
-        background-image: url('@/assets/gfx/bg-modal-min.svg');
-        background-repeat: repeat-y;
-        background-size: 320px;
-        background-position: left;
+        position: relative;
+
+        &:before {
+          content: '';
+          position: absolute;
+          background-image: url('@/assets/gfx/bg-modal-min.svg');
+          background-repeat: repeat-y;
+          background-size: 320px;
+          background-position: left;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+        }
+
         @include media('<=m') {
           background-size: 240px;
         }
@@ -49,6 +61,7 @@
 
         p {
           text-align: left;
+
           @include media('<=m') {
             text-align: center;
           }
@@ -60,6 +73,7 @@
         justify-content: center;
         align-items: center;
         text-align: left;
+
         @include media('<=m') {
           flex-direction: column;
 
@@ -75,9 +89,9 @@
 
       #{$self}__logo {
         max-width: 150px;
-        box-shadow: 0 0 15px $color-gray;
         border-radius: 10px;
         margin-right: 15px;
+
         @include media('<=m') {
           margin-right: 0;
         }
@@ -180,11 +194,9 @@
     padding: 0;
     width: 60px;
     height: 60px;
-    color: $color-red;
     font-weight: bolder;
     font-size: 3rem;
     cursor: pointer;
-    text-shadow: 0 0 1px $color-red;
     z-index: 1;
 
     &:focus {
@@ -200,7 +212,6 @@
     p {
       text-shadow: none;
       font-weight: lighter;
-      color: $color-black;
       margin: 15px 0;
 
       &:last-of-type {
@@ -223,5 +234,69 @@
 
   &-enter-active &__container {
     animation: modalContainer 0.25s ease 0s;
+  }
+
+  &--lite {
+    background-color: $color-white;
+
+    #{$self}__close {
+      color: $color-red;
+    }
+
+    #{$self}__logo {
+      box-shadow: 0 0 15px $color-gray;
+    }
+
+    #{$self}__date {
+      background-color: $color-gray;
+      box-shadow: inset 0 0 10px $color-satan;
+      color: $color-white;
+    }
+
+    #{$self}__action {
+      color: $color-white;
+      background-color: $color-gray;
+      box-shadow: inset 0 0 10px $color-satan;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $color-red;
+      }
+    }
+  }
+
+  &--dark {
+    background-color: $color-black;
+
+    &:before {
+      filter: brightness(.25);
+    }
+
+    #{$self}__close {
+      color: $color-green;
+    }
+
+    #{$self}__logo {
+      box-shadow: 0 0 15px $color-green;
+    }
+
+    #{$self}__date {
+      background-color: $color-silver-lite;
+      box-shadow: inset 0 0 10px $color-black;
+      color: $color-black;
+    }
+
+    #{$self}__action {
+      color: $color-black;
+      background-color: $color-silver-lite;
+      box-shadow: inset 0 0 10px $color-black;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $color-green;
+      }
+    }
   }
 }

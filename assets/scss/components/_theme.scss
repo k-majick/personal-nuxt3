@@ -1,0 +1,86 @@
+.theme {
+  $self: &;
+  min-height: 100%;
+
+  &__background {
+    background-color: $color-red;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__loader {
+    color: $color-white;
+    animation: pulse 1s infinite;
+  }
+
+  &__switch {
+    display: flex;
+    border: 0;
+    height: 45px;
+    width: 45px;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: relative;
+    background: none;
+
+    @include media('<=m') {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    svg {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &--dark {
+    background-color: $color-black;
+    color: $color-white;
+
+    #{$self}__background {
+      background-color: $color-black;
+    }
+
+    #{$self}__switch {
+      background-image: url('@/assets/gfx/icon-sun.svg');
+
+      svg {
+        filter: drop-shadow(0 0 5px $color-white);
+        fill: $color-silver-lite;
+      }
+    }
+  }
+
+  &--lite {
+    background-color: $color-white;
+    color: $color-black;
+
+    #{$self}__background {
+      background-color: $color-red;
+    }
+
+    #{$self}__switch {
+      background-image: url('@/assets/gfx/icon-moon.svg');
+
+      svg {
+        filter: drop-shadow(0 0 5px $color-gray);
+        fill: $color-white;
+      }
+    }
+  }
+}

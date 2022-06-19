@@ -2,7 +2,7 @@
   <div class="modal__mask" :class="`modal__mask--${modalType}`">
     <div class="modal__table">
       <div class="modal__cell">
-        <div class="modal">
+        <div class="modal" :class="`modal--${theme}`">
           <button class="modal__close" type="button" @click="$emit('close')">
             &times;
           </button>
@@ -16,6 +16,8 @@
 </template>
 
 <script lang="ts">
+import { useThemeStore } from '@/store/theme'
+
 export default defineComponent({
   props: {
     modalType: {
@@ -24,5 +26,13 @@ export default defineComponent({
     },
   },
   emits: ['close'],
+  setup() {
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
+
+    return {
+      theme,
+    }
+  },
 })
 </script>

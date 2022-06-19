@@ -99,4 +99,10 @@
       display: block;
     }
   }
+
+  &--dark {
+    #{$self}__front {
+      filter: brightness(0.75);
+    }
+  }
 }

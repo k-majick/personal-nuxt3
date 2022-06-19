@@ -5,7 +5,7 @@
     v-html="DOMPurify.sanitize(marked.parse(skills.content))"
   ></div>
   <div v-if="skills && skills.sets" class="main__content">
-    <div v-for="set in skills.sets" :key="set.name" class="skill">
+    <div v-for="set in skills.sets" :key="set.name" class="skill" :class="`skill--${theme}`">
       <div class="skill__title">{{ set.name }}</div>
       <div class="skill__bar" :style="skillBarWidth(set.value)"></div>
       <div class="skill__percent">{{ set.value }}%</div>
@@ -16,23 +16,32 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
+import { useThemeStore } from '@/store/theme'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default {
   async setup() {
     const pagesStore = usePagesStore()
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
     const skills: Ref<unknown> = ref(await pagesStore.getSkills())
 
     const skillBarWidth = (v: number) => ({
       width: v + '%',
     })
 
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
+    )
+
     return {
       marked,
       skills,
       skillBarWidth,
       DOMPurify,
+      theme,
     }
   },
 }

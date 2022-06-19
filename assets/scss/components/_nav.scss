@@ -15,15 +15,6 @@
   min-width: 180px;
   width: 12.5vw;
   height: 100%;
-  background-image: url('@/assets/gfx/bg-modal-min.svg'),
-    linear-gradient(
-      to right,
-      transparentize($color-white, 0.15) 0%,
-      $color-white 100%
-    );
-  background-repeat: repeat-y;
-  background-size: contain;
-  background-position: left;
   z-index: 2;
 
   &.activated,
@@ -36,6 +27,7 @@
       }
     }
   }
+
   @include media('>=l-s') {
     transform: translateX(calc(-100% - 15px + var(--scroll)));
 
@@ -44,38 +36,43 @@
       transform: translateX(0%);
     }
   }
+
   @include media('>m', '<l-s') {
     width: 100%;
     height: 100px;
     align-items: flex-end;
     justify-content: center;
-    background-size: contain;
-    background-image: url('@/assets/gfx/bg-modal-min.svg'),
-      linear-gradient(
-        to right,
-        $color-white 240px,
-        transparentize($color-white, 0.15) 100%
-      );
 
-    &:before {
+
+    &:after {
       width: 100% !important;
       height: 5px !important;
       top: 100% !important;
       right: 0 !important;
     }
+
+    &:before {
+      background-size: contain;
+      background-image: url('@/assets/gfx/bg-modal-min.svg'),
+        linear-gradient(to right,
+          $color-white 240px,
+          transparentize($color-white, 0.15) 100%);
+    }
   }
+
   @include media('<=m') {
     transform: translateX(calc(-100% - 15px));
     z-index: 3;
-    background-image: url('@/assets/gfx/bg-modal-min.svg'),
-      linear-gradient(
-        to right,
-        transparentize($color-white, 0.15) 0%,
-        $color-white 100%
-      );
 
     &.activated {
       transform: translateX(0%);
+    }
+
+    &:before {
+      background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(to right,
+        transparentize($color-white, 0.15) 0%,
+        $color-white 100%);
     }
   }
 
@@ -89,11 +86,18 @@
     z-index: 1;
   }
 
-  &:before {
+  &:after {
     width: 5px;
     right: -5px;
-    background-color: $color-red;
-    z-index: 2;
+    z-index: 1;
+  }
+
+  &:before {
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-position: left;
+    left: 0;
+    width: 100%;
   }
 
   &__items {
@@ -101,6 +105,7 @@
     padding: 0;
     display: flex;
     flex-flow: column;
+
     @include media('>m', '<l-s') {
       flex-flow: row;
       height: 100%;
@@ -112,6 +117,7 @@
     position: relative;
     list-style-type: none;
     z-index: 2;
+
     @include media('>m', '<l-s') {
       &:after {
         left: 23px !important;
@@ -138,7 +144,6 @@
 
     &:after {
       left: 100%;
-      background-color: $color-white;
       width: 5px;
       height: 5px;
       z-index: 2;
@@ -146,10 +151,10 @@
 
     &:before {
       left: calc(100% - 5px);
-      background-color: $color-red;
       width: 15px;
       height: 15px;
     }
+
     @include media('>m', '<l-s') {
       width: 90px;
     }
@@ -164,7 +169,7 @@
     position: relative;
     font-size: 1.1rem;
     font-weight: bold;
-    color: $color-black;
+
     @include media('>m', '<l-s') {
       transform-origin: bottom;
       transform: rotate(-45deg) translateX(30%);
@@ -172,6 +177,7 @@
       width: 100%;
       text-align: left;
     }
+
     // &:not([href="/projects"]):after {
     &:after {
       @include trans(2, max-width);
@@ -179,32 +185,23 @@
       content: '';
       position: absolute;
       height: 5px;
-      background-color: $color-red;
       left: 100%;
       z-index: -1;
       top: 50%;
       transform: translateY(-50%);
       width: 0;
       max-width: 0;
+
       @include media('>m', '<l-s') {
         left: 0;
         top: 85%;
         transform: translateY(-50%) rotate(135deg);
         transform-origin: top left;
       }
+
       @include media('<=m') {
         display: none;
       }
-    }
-
-    &.active,
-    &:active,
-    &:hover {
-      color: $color-red !important;
-    }
-
-    &:visited {
-      color: $color-black;
     }
   }
 
@@ -221,6 +218,7 @@
     align-items: center;
     justify-content: center;
     z-index: 2;
+
     @include media('>m', '<l-s') {
       flex-flow: column;
       top: 0;
@@ -228,6 +226,7 @@
       height: 100%;
       justify-content: space-around;
     }
+
     @include media('<=m') {
       top: 60px;
     }
@@ -264,6 +263,121 @@
         &:hover {
           path {
             fill: $color-red;
+          }
+        }
+      }
+    }
+  }
+
+  &--dark {
+    &:after {
+      background-color: $color-green;
+    }
+
+    &:before {
+      background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(to right,
+        transparentize($color-black, 0.15) 0%,
+        $color-black 100%);
+      filter: brightness(0.25);
+    }
+
+    #{$self}__item {
+      &:before {
+        background-color: $color-green;
+      }
+
+      &:after {
+        background-color: $color-black;
+      }
+    }
+
+    #{$self}__link {
+      color: $color-silver-lite;
+
+      &:after {
+        background-color: $color-green;
+      }
+
+      &.active,
+      &:active,
+      &:hover {
+        color: $color-green !important;
+      }
+  
+      &:visited {
+        color: $color-silver-lite;
+      }
+    }
+
+    #{$self}__social {
+      &Link {
+        svg {
+          path {
+            fill: $color-silver-lite;
+          }
+  
+          &:hover {
+            path {
+              fill: $color-green;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--lite {
+    &:after {
+      background-color: $color-red;
+    }
+
+    &:before {
+      background-image: url('@/assets/gfx/bg-modal-min.svg'),
+      linear-gradient(to right,
+        transparentize($color-white, 0.15) 0%,
+        $color-white 100%);
+    }
+
+    #{$self}__item {
+      &:before {
+        background-color: $color-red;
+      }
+
+      &:after {
+        background-color: $color-white;
+      }
+    }
+
+    #{$self}__link {
+      color: $color-black;
+
+      &:after {
+        background-color: $color-red;
+      }
+
+      &.active,
+      &:active,
+      &:hover {
+        color: $color-red !important;
+      }
+  
+      &:visited {
+        color: $color-black;
+      }
+    }
+
+    #{$self}__social {
+      &Link {
+        svg {
+          path {
+            fill: $color-white;
+          }
+  
+          &:hover {
+            path {
+              fill: $color-red;
+            }
           }
         }
       }

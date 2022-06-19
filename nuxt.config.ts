@@ -71,6 +71,7 @@ export default defineNuxtConfig({
   publicRuntimeConfig: {
     apiUrl: process.env.API_URL || 'http://localhost:3000',
     appName: process.env.APP_NAME,
+    appTitle: process.env.APP_TITLE,
   },
   build: {
     transpile: ['@apollo/client', 'ts-invariant/process'],

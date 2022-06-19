@@ -1,7 +1,7 @@
 <template>
   <Header ref="headerComponent" />
 
-  <main ref="mainEl" class="main">
+  <main ref="mainEl" :class="`main main--${theme}`">
     <div class="main__background"></div>
     <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
       <span class="burger__bar"></span>
@@ -24,16 +24,14 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
+import { useThemeStore } from '@/store/theme'
 import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 
 export default defineComponent({
-  layout: 'dark',
+  layout: 'default',
   setup() {
-    const route = useRoute()
-    const toggleLayout = () =>
-      !route.meta.layout || route.meta.layout === 'dark'
-        ? (route.meta.layout = 'lite')
-        : (route.meta.layout = 'dark')
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
     const headerComponent: Ref<any> = ref()
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
@@ -41,9 +39,14 @@ export default defineComponent({
 
     const scrollListen = () => {
       window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        // const docHeight = document.body.offsetHeight;
+        // const scrollPercent = Math.round(scrollTop / docHeight * 100);
+        // const invertedScrollPercent = 1 - scrollPercent;
+        
         document.documentElement.style.setProperty(
           '--scroll-y',
-          `${window.scrollY}px`,
+          `${scrollTop}px`,
         )
       })
     }
@@ -51,6 +54,11 @@ export default defineComponent({
     onMounted(() => {
       scrollListen()
     })
+
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
+    )
 
     watch(
       () => headerComponent.value,
@@ -68,22 +76,22 @@ export default defineComponent({
         : (isNavActivated.value = false)
 
     return {
-      toggleLayout,
+      theme,
+      toggleNav,
       mainEl,
       headerComponent,
-      toggleNav,
       isNavActivated,
     }
   },
 })
 
 definePageMeta({
-  layout: 'lite',
+  layout: 'default',
 })
 </script>
 
 <style lang="scss">
-@import './assets/scss/components/_layout';
+@import './assets/scss/components/_theme';
 @import './assets/scss/components/_main';
 @import './assets/scss/components/_burger';
 

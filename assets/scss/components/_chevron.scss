@@ -1,22 +1,20 @@
 .chevron {
-  background-color: $color-silver-lite;
   clip-path: polygon(100% 75%, 100% 87.5%, 50% 100%, 0 87.5%, 0 75%, 50% 87.5%);
   margin: -50px auto 0;
   height: 75px;
   width: 10%;
   display: block;
   animation: bounce 1s infinite alternate;
+
   @include media('<=m') {
     margin: -95px auto 0;
     width: 15%;
-    clip-path: polygon(
-      100% 77.5%,
-      100% 90%,
-      50% 100%,
-      0 90%,
-      0 77.5%,
-      50% 87.5%
-    );
+    clip-path: polygon(100% 77.5%,
+        100% 90%,
+        50% 100%,
+        0 90%,
+        0 77.5%,
+        50% 87.5%);
   }
 
   &__container {
@@ -26,7 +24,14 @@
     left: 0;
     height: 45px;
     width: 100%;
-    filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
     cursor: pointer;
+  }
+
+  &--lite {
+    background-color: $color-silver-lite;
+  }
+
+  &--dark {
+    background-color: $color-black;
   }
 }

@@ -5,11 +5,13 @@
     v-html="DOMPurify.sanitize(marked.parse(experience.content))"
   ></div>
   <div class="main__content">
-    <table class="experience__table">
+    <table class="experience__table" :class="`experience__table--${theme}`">
       <tbody>
-        <span class="experience__bar">
-          <span class="experience__tip"></span>
-        </span>
+        <div class="experience__arrow">
+          <div class="experience__bar">
+            <div class="experience__tip"></div>
+          </div>
+        </div>
       </tbody>
       <tbody v-if="workplaces.length">
         <tr
@@ -34,17 +36,27 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
+import { useThemeStore } from '@/store/theme'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default defineComponent({
   async setup() {
     const pagesStore = usePagesStore()
+    const themeStore = useThemeStore()
+    const theme = ref(themeStore.currentTheme)
     const experience: Ref<any> = ref(await pagesStore.getExperience())
+
     const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1))
+
     const workplaces = ref(
       experience.value ? sortItems([...experience.value.workplaces]) : [],
+    )
+
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
     )
 
     return {
@@ -52,6 +64,7 @@ export default defineComponent({
       experience,
       workplaces,
       DOMPurify,
+      theme,
     }
   },
 })

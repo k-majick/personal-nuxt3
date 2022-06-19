@@ -1,26 +1,42 @@
 .counter {
+  $self: &;
   margin-top: 30px;
   display: flex;
   justify-content: center;
-
-  &__text {
-    font-size: 1rem;
-  }
+  align-items: center;
 
   &__value {
     @include trans(0.5);
-    background: $color-gray;
-    box-shadow: inset 0 0 10px $color-satan;
-    color: $color-white;
+    box-shadow: inset 0 0 10px $color-black;
     border-radius: 100%;
     width: 40px;
     height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+  }
 
-    &:hover {
-      background: $color-red;
+  &--lite {
+    #{$self}__value {
+      color: $color-white;
+      background-color: $color-gray;
+      box-shadow: inset 0 0 10px $color-satan;
+
+      &:hover {
+        background-color: $color-red;
+      }
+    }
+  }
+
+  &--dark {
+    #{$self}__value {
+      color: $color-black;
+      background-color: $color-silver-lite;
+      box-shadow: inset 0 0 10px $color-black;
+
+      &:hover {
+        background-color: $color-green;
+      }
     }
   }
 }

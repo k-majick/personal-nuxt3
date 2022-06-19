@@ -44,17 +44,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    display: block;
-    background-color: $color-red;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparentize($color-red, 0.05),
-      transparentize($color-red, 0.05) 1px,
-      transparentize($color-red, 0.2) 2px,
-      transparentize($color-red, 0.2) 3px
-    );
+    display: block;    
     box-shadow: inset 0 0 15px $color-black;
-    color: $color-white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,5 +73,39 @@
       top: 0;
       transform: translateY(0);
     }
+  }
+
+  &--lite {
+    background: $color-silver-lite;
+
+    #{$self}__title {
+      color: $color-white;
+      background-color: $color-red;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparentize($color-red, 0.05),
+        transparentize($color-red, 0.05) 1px,
+        transparentize($color-red, 0.2) 2px,
+        transparentize($color-red, 0.2) 3px
+      );
+    }
+
+  }
+
+  &--dark {
+    background: $color-silver-lite;
+
+    #{$self}__title {
+      color: $color-black;
+      background-color: $color-red;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparentize($color-green, 0.05),
+        transparentize($color-green, 0.05) 1px,
+        transparentize($color-green, 0.2) 2px,
+        transparentize($color-green, 0.2) 3px
+      );
+    }
+
   }
 }

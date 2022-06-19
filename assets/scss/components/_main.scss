@@ -2,7 +2,7 @@
   $self: &;
   display: flex;
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
 
   &__anchor {
     padding-top: 90px;
@@ -18,8 +18,8 @@
   }
 
   &__background {
-    background-color: $color-red;
-    background-image: url('@/assets/gfx/jungle-red-hd.jpg');
+
+    background-image: url('@/assets/gfx/gfx-jungle-bw-1920.jpg');
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
@@ -31,8 +31,12 @@
     width: 100%;
     z-index: 0;
 
+    @include media('>m', '<l-s') {
+      background-image: url('@/assets/gfx/gfx-jungle-bw-1366.jpg');
+    }
+
     @include media('<=m') {
-      background-image: url('@/assets/gfx/jungle-red-s.jpg');
+      background-image: url('@/assets/gfx/gfx-jungle-bw-768.jpg');
     }
 
     &:after {
@@ -71,9 +75,6 @@
   }
 
   &__card {
-    background-color: $color-white;
-    border: 1px solid $color-silver;
-    box-shadow: 0 0 15px $color-black;
     border-radius: 10px;
     padding: 15px;
     z-index: 2;
@@ -81,8 +82,9 @@
     position: relative;
 
     &--gallery {
-      background: none;
-      border: none;
+      background: none !important;
+      box-shadow: none !important;
+      border: none !important;
       box-shadow: none;
       padding: 0;
       @include media('<=m') {
@@ -112,6 +114,32 @@
       text-align: center;
       font-size: 1em;
       font-weight: lighter;
+    }
+  }
+
+  &--lite {
+    #{$self}__background {
+      background-color: $color-red;
+      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2) contrast(1);
+    }
+
+    #{$self}__card {
+      background-color: $color-white;
+      border: 1px solid $color-silver;
+      box-shadow: 0 0 15px $color-black;
+    }
+  }
+
+  &--dark {
+    #{$self}__background {
+      background-color: $color-black;
+      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2) contrast(1);
+    }
+
+    #{$self}__card {
+      background-color: $color-black;
+      border: 1px solid $color-blackish;
+      box-shadow: 0 0 15px $color-black;
     }
   }
 }

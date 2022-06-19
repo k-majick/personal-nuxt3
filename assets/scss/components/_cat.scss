@@ -3,11 +3,11 @@
   bottom: -7.5px;
   left: 4vw;
   cursor: pointer;
-  filter: drop-shadow(0 0 15px transparentize($color_white, 0.5));
   z-index: 10;
   width: 90px;
   height: 90px;
   overflow: hidden;
+
   @include media('>m', '<l-s') {
     bottom: 0;
     left: auto;
@@ -16,6 +16,7 @@
     height: 90px;
     transform: scaleX(-1);
   }
+
   @include media('<=m') {
     bottom: 0;
     width: 90px;
@@ -29,11 +30,54 @@
     top: 0;
     width: 100%;
     height: 100%;
+
     @include media('>m', '<l-s') {
       top: 7.5px;
     }
+
     @include media('<=m') {
       top: 7.5px;
+    }
+  }
+
+
+  &--lite {
+    svg {
+      filter: drop-shadow(0 0 5px $color-white);
+
+      path {
+        fill: $color-black;
+      }
+
+      #tail {
+        stroke: $color-black;
+      }
+
+      #nose,
+      #eye-right,
+      #eye-left {
+        fill: $color-red;
+      }
+    }
+  }
+
+  &--dark {
+    svg {
+      filter: drop-shadow(0 0 5px $color-green);
+
+      path {
+        fill: $color-blackish;
+      }
+
+      #tail {
+        stroke: $color-blackish;
+      }
+
+      #nose,
+      #eye-right,
+      #eye-left {
+        fill: $color-green;
+      }
     }
   }
 }

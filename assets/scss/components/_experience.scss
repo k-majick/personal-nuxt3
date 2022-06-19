@@ -1,15 +1,83 @@
 .experience {
   $self: &;
 
+  &__arrow {
+    height: 100%;
+    width: 40px;
+    position: relative;
+
+    &:hover {
+
+      #{$self}__bar,
+      #{$self}__tip {
+
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__bar {
+    position: relative;
+    animation: expBar 3s forwards ease-in-out;
+    content: '';
+    display: block;
+    width: 40px;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+
+    &:after {
+      @include trans(0.33, all);
+      opacity: 0;
+    }
+  }
+
+  &__tip {
+    position: relative;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid;
+    }
+
+    &:after {
+      @include trans(0.33, all);
+      opacity: 0;
+    }
+  }
+
   &__table {
     position: relative;
     display: flex;
-    max-width: 720px;
+    justify-content: center;
     width: 100%;
+    max-width: 720px;
     margin: 0 auto;
 
     tbody {
-      width: 100%;
+      min-width: 40px;
       display: flex;
       flex-direction: column;
       font-size: 0.85em;
@@ -18,6 +86,7 @@
         width: 40px;
         overflow: hidden;
         position: relative;
+
         @include media('<=m') {
           width: 30px;
         }
@@ -30,24 +99,18 @@
           position: absolute;
           top: 0;
           left: 0;
-          background: linear-gradient(
-            to bottom,
-            transparentize($color-white, 0.66),
-            transparentize($color-white, 1)
-          );
+          background: linear-gradient(to bottom,
+              transparentize($color-white, 0.66),
+              transparentize($color-white, 1));
           animation: scanVert 2.5s ease infinite;
           z-index: 2;
         }
       }
     }
 
-    * {
-      border: 0;
-    }
-
     tr.hilite {
       th {
-        color: $color-black;
+        opacity: 1;
       }
     }
 
@@ -55,8 +118,8 @@
       width: 100%;
 
       th {
-        color: lighten($color-satan, 20%);
         padding-top: 15px;
+        opacity: 0.5;
 
         &:first-of-type {
           padding-left: 30px;
@@ -67,7 +130,9 @@
           font-weight: 300;
           text-align: left;
         }
+
         @include media('<=m') {
+
           &:first-of-type,
           &:nth-of-type(2) {
             padding-left: 15px;
@@ -75,88 +140,81 @@
         }
       }
     }
-  }
 
-  &__bar {
-    display: block;
-    width: 40px;
-    height: 0;
-    background: linear-gradient(
-      to bottom,
-      $color-gray 0%,
-      transparentize($color-gray, 1) 100%
-    );
-    bottom: 0;
-    position: absolute;
-    animation: expBar 3s forwards ease-in-out;
-    @include media('<=m') {
-      width: 30px;
-    }
 
-    &:hover {
-      &:after {
-        opacity: 1;
+    &--lite {
+      #{$self}__bar {
+        &:before {
+          background: linear-gradient(to bottom,
+              $color-gray 0%,
+              transparentize($color-gray, 1) 100%);
+        }
+
+        &:after {
+          background: linear-gradient(to bottom,
+              $color-red 0%,
+              transparentize($color-red, 1) 100%);
+        }
+
       }
 
       #{$self}__tip {
+        &:before {
+          border-bottom-color: $color-gray;
+
+        }
+
         &:after {
-          opacity: 1;
+          border-bottom-color: $color-red;
+        }
+      }
+
+      tbody {
+        &:first-of-type {
+          &:after {
+            background: linear-gradient(to bottom,
+                transparentize($color-white, 0.66),
+                transparentize($color-white, 1));
+          }
         }
       }
     }
 
-    &:after {
-      @include trans(0.5);
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      z-index: 1;
-      opacity: 0;
-    }
+    &--dark {
+      #{$self}__bar {
+        &:before {
+          background: linear-gradient(to bottom,
+              $color-silver-lite 0%,
+              transparentize($color-silver-lite, 1) 100%);
+        }
 
-    &:after {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        to bottom,
-        $color-red 0%,
-        transparentize($color-red, 1) 100%
-      );
-    }
-  }
+        &:after {
+          background: linear-gradient(to bottom,
+              $color-green 0%,
+              transparentize($color-green, 1) 100%);
+        }
+      }
 
-  &__tip {
-    position: absolute;
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid $color-gray;
-    top: -20px;
-    left: 0;
-    @include media('<=m') {
-      top: -15px;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-bottom: 15px solid $color-gray;
-    }
+      #{$self}__tip {
+        &:before {
+          border-bottom-color: $color-silver-lite;
 
-    &:after {
-      @include trans(0.5);
-      position: absolute;
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 20px solid $color-red;
-      top: 0;
-      left: -20px;
-      opacity: 0;
+        }
+
+        &:after {
+          border-bottom-color: $color-green;
+        }
+      }
+
+      tbody {
+        &:first-of-type {
+          &:after {
+            background: linear-gradient(to bottom,
+                transparentize($color-black, 0.66),
+                transparentize($color-black, 1));
+          }
+        }
+      }
     }
   }
 }
