@@ -6,8 +6,8 @@
       v-html="DOMPurify.sanitize(marked.parse(inspiration.content))"
     ></div>
     <div
-      v-if="inspiration.pictures.length"
-      class="gallery gallery--inspiration"
+      v-if="inspiration.pictures.length" 
+      :class="`gallery gallery--inspiration gallery--${theme}`"
     >
       <div
         v-for="(picture, index) in inspiration.pictures"
@@ -30,6 +30,7 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
+import { useThemeStore } from '@/store/theme'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
@@ -38,17 +39,25 @@ export default defineComponent({
   async setup() {
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
+    const themeStore = useThemeStore()
     const pageData: Ref<any> = ref(await pagesStore.getPage(5))
     const inspiration: Ref<any> = ref(await pagesStore.getInspiration())
+    const theme = ref(themeStore.currentTheme)
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     })
 
+    watch(
+      () => themeStore.currentTheme,
+      () => theme.value = themeStore.currentTheme,
+    )
+
     return {
       marked,
       inspiration,
       DOMPurify,
+      theme,
     }
   },
 })

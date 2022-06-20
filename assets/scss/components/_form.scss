@@ -11,17 +11,6 @@
       margin-top: 15px;
     }
 
-    &--error {
-      #{$self}__input {
-        background-color: transparentize($color-red, 0.9);
-        box-shadow: inset 0 0 10px $color-red;
-      }
-
-      #{$self}__label {
-        color: $color-red;
-      }
-    }
-
     &--textarea {
       #{$self}__input {
         min-height: 120px;
@@ -36,10 +25,8 @@
   }
 
   &__input {
-    background-color: $color-silver-lite;
     border: 0;
     border-radius: 3px;
-    box-shadow: inset 0 0 10px $color-silver;
     padding: 15px;
     height: 40px;
 
@@ -55,7 +42,6 @@
 
   &__alert {
     font-size: 0.8em;
-    color: $color-red;
   }
 
   &__btn {
@@ -74,6 +60,28 @@
         background-color: $color-red;
       }
     }
+
+    #{$self}__group {
+      &--error {
+        #{$self}__input {
+          background-color: transparentize($color-red, 0.9);
+          box-shadow: inset 0 0 10px $color-red;
+        }
+
+        #{$self}__label {
+          color: $color-red;
+        }
+      }
+    }
+
+    #{$self}__input {
+      background-color: $color-silver-lite;
+      box-shadow: inset 0 0 10px $color-silver;
+    }
+
+    #{$self}__alert {
+      color: $color-red;
+    }
   }
 
   &--dark {
@@ -87,6 +95,29 @@
       &:hover {
         background-color: $color-green;
       }
+    }
+
+    #{$self}__group {
+      &--error {
+        #{$self}__input {
+          background-color: transparentize($color-green, 0.9);
+          box-shadow: inset 0 0 10px $color-green;
+        }
+
+        #{$self}__label {
+          color: $color-green;
+        }
+      }
+    }
+
+    #{$self}__input {
+      background-color: $color-blackish;
+      box-shadow: inset 0 0 10px $color-gray;
+      color: $color-silver-lite;
+    }
+
+    #{$self}__alert {
+      color: $color-green;
     }
   }
 }
