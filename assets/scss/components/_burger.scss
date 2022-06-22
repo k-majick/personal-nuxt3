@@ -8,7 +8,7 @@
   width: 45px;
   height: 45px;
   z-index: 3;
-  filter: drop-shadow(0 0 1px $color-red);
+
   @include media('<=m') {
     display: block;
     z-index: 4;
@@ -20,7 +20,6 @@
     position: absolute;
     height: 5px;
     width: 25px;
-    background: $color-white;
     opacity: 1;
     left: 50%;
     transform: translateX(-50%) rotate(0deg);
@@ -41,11 +40,7 @@
   }
 
   &.active {
-    filter: drop-shadow(0 0 1px $color-white);
-
     #{$self}__bar {
-      background: $color-red;
-
       &:nth-child(1) {
         top: calc(25% + 10px);
         width: 0;
@@ -64,6 +59,38 @@
         top: calc(25% + 10px);
         width: 0;
         left: 50%;
+      }
+    }
+  }
+
+  &--dark {
+    filter: drop-shadow(0 0 1px $color-green);
+
+    #{$self}__bar {
+      background: $color-white;
+    }
+
+    &.active {
+      filter: drop-shadow(0 0 1px $color-white);
+
+      #{$self}__bar {
+        background: $color-green;
+      }
+    }
+  }
+
+  &--lite {
+    filter: drop-shadow(0 0 1px $color-red);
+
+    #{$self}__bar {
+      background: $color-white;
+    }
+
+    &.active {
+      filter: drop-shadow(0 0 1px $color-white);
+
+      #{$self}__bar {
+        background: $color-red;
       }
     }
   }

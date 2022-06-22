@@ -4,7 +4,7 @@
     class="main__content"
     v-html="DOMPurify.sanitize(marked.parse(portfolio.content))"
   ></div>
-  <div v-if="portfolio.projects.length" class="gallery" :class="`gallery--${theme}`">
+  <div v-if="portfolio.projects.length" :class="`gallery gallery--${theme}`">
     <div
       v-for="(project, index) in portfolio.projects"
       :key="index"

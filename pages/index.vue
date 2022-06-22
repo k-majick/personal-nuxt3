@@ -3,7 +3,7 @@
 
   <main ref="mainEl" :class="`main main--${theme}`">
     <div class="main__background"></div>
-    <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
+    <div class="burger" :class="[`burger--${theme}`, { active: isNavActivated }]" @click="toggleNav">
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>

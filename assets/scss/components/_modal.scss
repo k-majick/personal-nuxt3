@@ -43,15 +43,15 @@
           position: absolute;
           background-image: url('@/assets/gfx/bg-modal-min.svg');
           background-repeat: repeat-y;
-          background-size: 320px;
+          background-size: 270px;
           background-position: left;
           width: 100%;
           height: 100%;
           z-index: 1;
-        }
 
-        @include media('<=m') {
-          background-size: 240px;
+          @include media('<=m') {
+            background-size: 240px;
+          }
         }
       }
 

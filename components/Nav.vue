@@ -1,5 +1,7 @@
 <template>
-  <nav class="nav" :class="[`nav--${theme}`, { active: isActive, activated: isActivated }]">
+  <nav 
+    :class="[`nav nav--${theme}`, { active: isActive, activated: isActivated }]"
+  >
     <ul class="nav__items">
       <li
         class="nav__item"
