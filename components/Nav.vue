@@ -3,21 +3,21 @@
     :class="[`nav nav--${theme}`, { active: isActive, activated: isActivated }]"
   >
     <ul class="nav__items">
-      <li
-        class="nav__item"
-        @click.stop.prevent="scrollTo($event, headerEl), gotoIntro()"
-      >
-        <a href="" class="nav__link">Intro</a>
+      <li class="nav__item">
+        <a href="" class="nav__link" @click.stop.prevent="killModal(), scrollTo($event, headerEl)">Intro</a>
       </li>
       <li
         v-for="page in pages"
         :key="page.id"
         class="nav__item"
-        @click.stop.prevent="scrollTo($event, mainEl)"
       >
-        <nuxt-link :to="page.attributes.slug" class="nav__link">{{
-          page.attributes.title
-        }}</nuxt-link>
+        <nuxt-link 
+          :to="page.attributes.slug" 
+          class="nav__link"
+          @click.stop="killModal(), scrollTo($event, mainEl)"
+        >
+          {{ page.attributes.title }}
+        </nuxt-link>
       </li>
     </ul>
     <ul class="nav__social">
@@ -44,8 +44,14 @@
         </a>
       </li>
     </ul>
-    <!-- eslint-disable-next-line risxss/catch-potential-xss-vue -->
-    <nuxt-link :to="'inspiration'" class="cat" :class="`cat--${theme}`" v-html="rawCat" />
+    <!-- eslint-disable risxss/catch-potential-xss-vue -->
+    <nuxt-link 
+      :to="'inspiration'" 
+      :class="`cat cat--${theme}`" 
+      @click.stop="killModal()"
+      v-html="rawCat" 
+    />
+    <!-- eslint-enable risxss/catch-potential-xss-vue -->
   </nav>
 </template>
 
@@ -53,6 +59,7 @@
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { useThemeStore } from '@/store/theme'
+import { useNavStore } from '@/store/nav'
 import { hoverMessage } from '@/composables/hoverMessage'
 import scrollTo from '@/composables/scrollTo'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
@@ -70,9 +77,11 @@ export default defineComponent({
   },
   async setup() {
     const route = useRoute()
-    const router = useRouter()
+    // const router = useRouter()
     const pagesStore = usePagesStore()
     const isActive = ref(false)
+
+    const navStore = useNavStore()
 
     const themeStore = useThemeStore()
     const theme = ref(themeStore.currentTheme)
@@ -89,34 +98,20 @@ export default defineComponent({
 
     const pages = sortItems([...pagesData.value])
 
-    const gotoSkills = () => {
-      router.push({
-        path: '/skills',
-      })
-    }
+    const killModal = () => {
+      const body = document.body
 
-    const gotoIntro = () => {
-      router.push({
-        path: '/',
-      })
+      if (body.classList.contains("locked")) {
+        toggleModal(0, true)
+      }
     }
 
     const handleScroll = () => {
       if (!mainEl || !mainEl.value) {
         return
       }
-      
-      if (
-        mainEl.value.getBoundingClientRect().top < 100 &&
-        route.path === '/'
-      ) {
-        gotoSkills()
-        isActive.value = true
-      } else if (mainEl.value.getBoundingClientRect().top < 100) {
-        isActive.value = true
-      } else {
-        isActive.value = false
-      }
+
+      mainEl.value.getBoundingClientRect().top < 100 ? isActive.value = true : isActive.value = false
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -126,18 +121,29 @@ export default defineComponent({
       () => theme.value = themeStore.currentTheme,
     )
 
+    watch(
+      () => route.name,
+      () => {
+        if (navStore.currentScroll) {
+          window.scrollTo({top: navStore.currentScroll, behavior: 'auto'})
+        } else {
+          return
+        }
+      },      
+    )
+
     return {
       isActive,
       iconGit,
       iconLinkedin,
       scrollTo,
-      gotoIntro,
       headerEl,
       mainEl,
       pages,
       rawCat,
       DOMPurify,
       theme,
+      killModal,
     }
   },
 })

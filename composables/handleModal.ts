@@ -1,10 +1,12 @@
+import { useNavStore } from '@/store/nav'
+
 const activeModal = ref(0)
 
-export const toggleModal = (id: number, lock: boolean) => {
+export const toggleModal = (id: number, useLock: boolean) => {
   if (activeModal.value !== 0) {
     activeModal.value = 0
 
-    if (lock === true) {
+    if (useLock === true) {
       scrollUnlock()
     }
 
@@ -13,7 +15,7 @@ export const toggleModal = (id: number, lock: boolean) => {
 
   activeModal.value = id
 
-  if (lock === true) {
+  if (useLock === true) {
     scrollLock()
   }
 }
@@ -23,11 +25,14 @@ export const openModal = (id: number) => activeModal.value === id
 export const scrollLock = () => {
   const scrollY = document.documentElement.style.getPropertyValue('--scroll-y')
   const body = document.body
+  const navStore = useNavStore()
 
   body.classList.add('locked')
   body.style.width = '100%'
   body.style.position = 'fixed'
   body.style.top = `-${scrollY}`
+
+  navStore.setScroll(parseInt(scrollY))
 }
 
 export const scrollUnlock = () => {
