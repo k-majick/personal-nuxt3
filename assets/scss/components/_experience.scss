@@ -7,10 +7,8 @@
     position: relative;
 
     &:hover {
-
       #{$self}__bar,
       #{$self}__tip {
-
         &:after {
           opacity: 1;
         }
@@ -99,9 +97,11 @@
           position: absolute;
           top: 0;
           left: 0;
-          background: linear-gradient(to bottom,
-              transparentize($color-white, 0.66),
-              transparentize($color-white, 1));
+          background: linear-gradient(
+            to bottom,
+            transparentize($color-white, 0.66),
+            transparentize($color-white, 1)
+          );
           animation: scanVert 2.5s ease infinite;
           z-index: 2;
         }
@@ -132,7 +132,6 @@
         }
 
         @include media('<=m') {
-
           &:first-of-type,
           &:nth-of-type(2) {
             padding-left: 15px;
@@ -141,27 +140,28 @@
       }
     }
 
-
     &--lite {
       #{$self}__bar {
         &:before {
-          background: linear-gradient(to bottom,
-              $color-gray 0%,
-              transparentize($color-gray, 1) 100%);
+          background: linear-gradient(
+            to bottom,
+            $color-gray 0%,
+            transparentize($color-gray, 1) 100%
+          );
         }
 
         &:after {
-          background: linear-gradient(to bottom,
-              $color-red 0%,
-              transparentize($color-red, 1) 100%);
+          background: linear-gradient(
+            to bottom,
+            $color-red 0%,
+            transparentize($color-red, 1) 100%
+          );
         }
-
       }
 
       #{$self}__tip {
         &:before {
           border-bottom-color: $color-gray;
-
         }
 
         &:after {
@@ -172,9 +172,11 @@
       tbody {
         &:first-of-type {
           &:after {
-            background: linear-gradient(to bottom,
-                transparentize($color-white, 0.66),
-                transparentize($color-white, 1));
+            background: linear-gradient(
+              to bottom,
+              transparentize($color-white, 0.66),
+              transparentize($color-white, 1)
+            );
           }
         }
       }
@@ -183,22 +185,25 @@
     &--dark {
       #{$self}__bar {
         &:before {
-          background: linear-gradient(to bottom,
-              $color-silver-lite 0%,
-              transparentize($color-silver-lite, 1) 100%);
+          background: linear-gradient(
+            to bottom,
+            $color-silver-lite 0%,
+            transparentize($color-silver-lite, 1) 100%
+          );
         }
 
         &:after {
-          background: linear-gradient(to bottom,
-              $color-green 0%,
-              transparentize($color-green, 1) 100%);
+          background: linear-gradient(
+            to bottom,
+            $color-green 0%,
+            transparentize($color-green, 1) 100%
+          );
         }
       }
 
       #{$self}__tip {
         &:before {
           border-bottom-color: $color-silver-lite;
-
         }
 
         &:after {
@@ -209,9 +214,11 @@
       tbody {
         &:first-of-type {
           &:after {
-            background: linear-gradient(to bottom,
-                transparentize($color-black, 0.66),
-                transparentize($color-black, 1));
+            background: linear-gradient(
+              to bottom,
+              transparentize($color-black, 0.66),
+              transparentize($color-black, 1)
+            );
           }
         }
       }

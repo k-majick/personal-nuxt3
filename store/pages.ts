@@ -11,14 +11,14 @@ import {
 } from '@/api/queries'
 
 interface IPagesState {
-  page: null | Record<string, unknown>,
-  pages: null | Record<string, unknown>,
-  skills: null | Record<string, unknown>,
-  technology: null | Record<string, unknown>,
-  experience: null | Record<string, unknown>,
-  portfolio: null | Record<string, unknown>,
-  contact: null | Record<string, unknown>,
-  inspiration: null | Record<string, unknown>,
+  page: null | Record<string, unknown>
+  pages: null | Record<string, unknown>
+  skills: null | Record<string, unknown>
+  technology: null | Record<string, unknown>
+  experience: null | Record<string, unknown>
+  portfolio: null | Record<string, unknown>
+  contact: null | Record<string, unknown>
+  inspiration: null | Record<string, unknown>
 }
 
 export const usePagesStore = defineStore({

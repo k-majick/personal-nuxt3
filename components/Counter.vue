@@ -38,7 +38,7 @@ export default defineComponent({
       const months = Math.floor(days / 31)
       const years = Math.floor(months / 12)
       const diffMonths = Math.floor(months % 12) + 1
-      
+
       switch (true) {
         case what == 'y':
           return years

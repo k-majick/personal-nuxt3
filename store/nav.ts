@@ -11,7 +11,7 @@ export const useNavStore = defineStore({
   }),
   actions: {
     setScroll(scroll: number) {
-      this.scroll = scroll;
+      this.scroll = scroll
     },
   },
   getters: {

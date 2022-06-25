@@ -6,7 +6,7 @@
       v-html="DOMPurify.sanitize(marked.parse(inspiration.content))"
     ></div>
     <div
-      v-if="inspiration.pictures.length" 
+      v-if="inspiration.pictures.length"
       :class="`gallery gallery--inspiration gallery--${theme}`"
     >
       <div
@@ -50,7 +50,7 @@ export default defineComponent({
 
     watch(
       () => themeStore.currentTheme,
-      () => theme.value = themeStore.currentTheme,
+      () => (theme.value = themeStore.currentTheme),
     )
 
     return {

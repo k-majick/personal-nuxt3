@@ -3,14 +3,18 @@
 
   <main ref="mainEl" :class="`main main--${theme}`">
     <div class="main__background"></div>
-    <div class="burger" :class="[`burger--${theme}`, { active: isNavActivated }]" @click="toggleNav">
+    <div
+      class="burger"
+      :class="[`burger--${theme}`, { active: isNavActivated }]"
+      @click="toggleNav"
+    >
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
     </div>
 
-    <Nav :is-activated="isNavActivated" />
+    <Nav :is-activated="isNavActivated" @close-nav="toggleNav" />
 
     <div class="main__container">
       <router-view v-slot="{ Component, props }">
@@ -39,11 +43,11 @@ export default defineComponent({
 
     const scrollListen = () => {
       window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
+        const scrollTop = window.scrollY
         // const docHeight = document.body.offsetHeight;
         // const scrollPercent = Math.round(scrollTop / docHeight * 100);
         // const invertedScrollPercent = 1 - scrollPercent;
-        
+
         document.documentElement.style.setProperty(
           '--scroll-y',
           `${scrollTop}px`,
@@ -57,7 +61,7 @@ export default defineComponent({
 
     watch(
       () => themeStore.currentTheme,
-      () => theme.value = themeStore.currentTheme,
+      () => (theme.value = themeStore.currentTheme),
     )
 
     watch(

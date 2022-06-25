@@ -4,7 +4,11 @@
     class="main__content"
     v-html="DOMPurify.sanitize(marked.parse(technology.content))"
   ></div>
-  <div v-if="technology && technology.items" class="technology" :class="`technology--${theme}`">
+  <div
+    v-if="technology && technology.items"
+    class="technology"
+    :class="`technology--${theme}`"
+  >
     <span
       v-for="item in technology.items"
       :key="item.name"
@@ -30,9 +34,9 @@ export default defineComponent({
 
     watch(
       () => themeStore.currentTheme,
-      () => theme.value = themeStore.currentTheme,
+      () => (theme.value = themeStore.currentTheme),
     )
-    
+
     return {
       marked,
       technology,

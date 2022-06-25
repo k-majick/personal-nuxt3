@@ -5,7 +5,12 @@
     v-html="DOMPurify.sanitize(marked.parse(skills.content))"
   ></div>
   <div v-if="skills && skills.sets" class="main__content">
-    <div v-for="set in skills.sets" :key="set.name" class="skill" :class="`skill--${theme}`">
+    <div
+      v-for="set in skills.sets"
+      :key="set.name"
+      class="skill"
+      :class="`skill--${theme}`"
+    >
       <div class="skill__title">{{ set.name }}</div>
       <div class="skill__bar" :style="skillBarWidth(set.value)"></div>
       <div class="skill__percent">{{ set.value }}%</div>
@@ -33,7 +38,7 @@ export default {
 
     watch(
       () => themeStore.currentTheme,
-      () => theme.value = themeStore.currentTheme,
+      () => (theme.value = themeStore.currentTheme),
     )
 
     return {

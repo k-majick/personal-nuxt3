@@ -11,7 +11,7 @@ export const useThemeStore = defineStore({
   }),
   actions: {
     setTheme(theme: string) {
-      this.theme = theme;
+      this.theme = theme
     },
   },
   getters: {

@@ -1,18 +1,20 @@
 <template>
-  <nav 
+  <nav
     :class="[`nav nav--${theme}`, { active: isActive, activated: isActivated }]"
   >
+    <div class="nav__mask" @click="$emit('closeNav')"></div>
     <ul class="nav__items">
       <li class="nav__item">
-        <a href="" class="nav__link" @click.stop.prevent="killModal(), scrollTo($event, headerEl)">Intro</a>
+        <a
+          href=""
+          class="nav__link"
+          @click.stop.prevent="killModal(), scrollTo($event, headerEl)"
+          >Intro</a
+        >
       </li>
-      <li
-        v-for="page in pages"
-        :key="page.id"
-        class="nav__item"
-      >
-        <nuxt-link 
-          :to="page.attributes.slug" 
+      <li v-for="page in pages" :key="page.id" class="nav__item">
+        <nuxt-link
+          :to="page.attributes.slug"
           class="nav__link"
           @click.stop="killModal(), scrollTo($event, mainEl)"
         >
@@ -45,11 +47,11 @@
       </li>
     </ul>
     <!-- eslint-disable risxss/catch-potential-xss-vue -->
-    <nuxt-link 
-      :to="'inspiration'" 
-      :class="`cat cat--${theme}`" 
+    <nuxt-link
+      :to="'inspiration'"
+      :class="`cat cat--${theme}`"
       @click.stop="killModal()"
-      v-html="rawCat" 
+      v-html="rawCat"
     />
     <!-- eslint-enable risxss/catch-potential-xss-vue -->
   </nav>
@@ -75,9 +77,9 @@ export default defineComponent({
   props: {
     isActivated: Boolean,
   },
+  emits: ['closeNav'],
   async setup() {
     const route = useRoute()
-    // const router = useRouter()
     const pagesStore = usePagesStore()
     const isActive = ref(false)
 
@@ -101,7 +103,7 @@ export default defineComponent({
     const killModal = () => {
       const body = document.body
 
-      if (body.classList.contains("locked")) {
+      if (body.classList.contains('locked')) {
         toggleModal(0, true)
       }
     }
@@ -111,25 +113,27 @@ export default defineComponent({
         return
       }
 
-      mainEl.value.getBoundingClientRect().top < 100 ? isActive.value = true : isActive.value = false
+      mainEl.value.getBoundingClientRect().top < 100
+        ? (isActive.value = true)
+        : (isActive.value = false)
     }
 
     window.addEventListener('scroll', handleScroll)
 
     watch(
       () => themeStore.currentTheme,
-      () => theme.value = themeStore.currentTheme,
+      () => (theme.value = themeStore.currentTheme),
     )
 
     watch(
       () => route.name,
       () => {
         if (navStore.currentScroll) {
-          window.scrollTo({top: navStore.currentScroll, behavior: 'auto'})
+          window.scrollTo({ top: navStore.currentScroll, behavior: 'auto' })
         } else {
           return
         }
-      },      
+      },
     )
 
     return {

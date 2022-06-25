@@ -197,7 +197,7 @@
     font-weight: bolder;
     font-size: 3rem;
     cursor: pointer;
-    z-index: 1;
+    z-index: 10;
 
     &:focus {
       outline: 0;
@@ -270,7 +270,7 @@
     background-color: $color-black;
 
     &:before {
-      filter: brightness(.25);
+      filter: brightness(0.25);
     }
 
     #{$self}__close {

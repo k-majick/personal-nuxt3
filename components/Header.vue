@@ -3,12 +3,16 @@
     <section class="header__container header__container--logo">
       <a class="main__anchor"></a>
       <a class="header__logo">
-        <h1
-          class="header__title"
-        >{{ config.public.appTitle }}</h1>
+        <h1 class="header__title">{{ config.public.appTitle }}</h1>
       </a>
-      <!-- eslint-disable-next-line risxss/catch-potential-xss-vue -->
-      <button class="theme__switch" :class="`theme__switch--${theme}`" @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')" v-html="theme === 'dark' ? iconSun : iconMoon"></button>
+      <!-- eslint-disable risxss/catch-potential-xss-vue -->
+      <button
+        class="theme__switch"
+        :class="`theme__switch--${theme}`"
+        @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
+        v-html="theme === 'dark' ? iconSun : iconMoon"
+      ></button>
+      <!-- eslint-enable risxss/catch-potential-xss-vue -->
     </section>
     <section class="header__container header__container--avatar">
       <Avatar />
@@ -39,16 +43,16 @@ export default defineComponent({
 
     watch(
       () => themeStore.currentTheme,
-      () => theme.value = themeStore.currentTheme,
+      () => (theme.value = themeStore.currentTheme),
     )
 
     const toggleTheme = (theme: string) => {
       themeStore.setTheme(theme)
-      localStorage.setItem("user-theme", theme);
+      localStorage.setItem('user-theme', theme)
     }
 
-    if (localStorage.getItem("user-theme")) {
-      toggleTheme(localStorage.getItem("user-theme") as string)
+    if (localStorage.getItem('user-theme')) {
+      toggleTheme(localStorage.getItem('user-theme') as string)
     } else {
       toggleTheme('lite')
     }

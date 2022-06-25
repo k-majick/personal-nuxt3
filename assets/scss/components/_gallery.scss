@@ -44,7 +44,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    display: block;    
+    display: block;
     box-shadow: inset 0 0 15px $color-black;
     display: flex;
     align-items: center;
@@ -89,7 +89,6 @@
         transparentize($color-red, 0.2) 3px
       );
     }
-
   }
 
   &--dark {
@@ -106,6 +105,5 @@
         transparentize($color-green, 0.2) 3px
       );
     }
-
   }
 }

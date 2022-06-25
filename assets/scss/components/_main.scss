@@ -18,7 +18,6 @@
   }
 
   &__background {
-
     background-image: url('@/assets/gfx/gfx-jungle-bw-1920.jpg');
     background-size: cover;
     background-position: 50%;
@@ -120,7 +119,8 @@
   &--lite {
     #{$self}__background {
       background-color: $color-red;
-      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2) contrast(1);
+      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2)
+        contrast(1);
     }
 
     #{$self}__card {
@@ -133,7 +133,8 @@
   &--dark {
     #{$self}__background {
       background-color: $color-black;
-      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2) contrast(1);
+      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2)
+        contrast(1);
     }
 
     #{$self}__card {
