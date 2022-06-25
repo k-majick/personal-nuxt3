@@ -81,11 +81,10 @@ export default defineComponent({
   async setup() {
     const route = useRoute()
     const pagesStore = usePagesStore()
-    const isActive = ref(false)
-
     const navStore = useNavStore()
-
     const themeStore = useThemeStore()
+
+    const isActive = ref(false)
     const theme = ref(themeStore.currentTheme)
 
     const headerEl = inject(HeaderElKey)
@@ -130,6 +129,7 @@ export default defineComponent({
       () => {
         if (navStore.currentScroll) {
           window.scrollTo({ top: navStore.currentScroll, behavior: 'auto' })
+          navStore.setScroll(0)          
         } else {
           return
         }
