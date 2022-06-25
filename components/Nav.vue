@@ -61,7 +61,7 @@
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
 import { useThemeStore } from '@/store/theme'
-import { useNavStore } from '@/store/nav'
+// import { useNavStore } from '@/store/nav'
 import { hoverMessage } from '@/composables/hoverMessage'
 import scrollTo from '@/composables/scrollTo'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
@@ -79,9 +79,7 @@ export default defineComponent({
   },
   emits: ['closeNav'],
   async setup() {
-    const route = useRoute()
     const pagesStore = usePagesStore()
-    const navStore = useNavStore()
     const themeStore = useThemeStore()
 
     const isActive = ref(false)
@@ -122,18 +120,6 @@ export default defineComponent({
     watch(
       () => themeStore.currentTheme,
       () => (theme.value = themeStore.currentTheme),
-    )
-
-    watch(
-      () => route.name,
-      () => {
-        if (navStore.currentScroll) {
-          window.scrollTo({ top: navStore.currentScroll, behavior: 'auto' })
-          navStore.setScroll(0)          
-        } else {
-          return
-        }
-      },
     )
 
     return {
