@@ -1,11 +1,6 @@
 .cat {
-  position: absolute;
-  bottom: -7.5px;
-  left: 4vw;
+
   cursor: pointer;
-  z-index: 10;
-  width: 90px;
-  height: 90px;
   overflow: hidden;
 
   @include media('>m', '<l-s') {
@@ -22,6 +17,15 @@
     width: 90px;
     height: 90px;
     left: 45px;
+  }
+
+  &__wrapper {
+    position: absolute;
+    bottom: -7.5px;
+    left: 4vw;
+    width: 90px;
+    height: 90px;
+    z-index: 10;
   }
 
   svg {

@@ -19,13 +19,19 @@
             </li>
           </ul>
         </div>
-        <!-- eslint-disable risxss/catch-potential-xss-vue -->
-        <button
+        <div 
+          v-hoverMessage="theme === 'dark' ? $t('messages.switch2lite') : $t('messages.switch2dark')"
           class="header__switch header__switch--theme"
-          @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
-          v-html="theme === 'dark' ? iconSun : iconMoon"
-        ></button>
-        <!-- eslint-enable risxss/catch-potential-xss-vue -->
+        >
+          <!-- eslint-disable risxss/catch-potential-xss-vue -->
+          <button            
+            class="header__button"
+            @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
+            v-html="theme === 'dark' ? iconSun : iconMoon"
+          />
+          <!-- eslint-enable risxss/catch-potential-xss-vue -->
+          <span class="tooltip" :class="`tooltip--${theme}`"></span>
+        </div>
       </div>
     </section>
     <section class="header__container header__container--avatar">
@@ -47,8 +53,12 @@ import iconMoon from '@/assets/gfx/icon-moon.svg?raw'
 import DOMPurify from 'dompurify'
 import { ILocale, locales } from '@/composables/i18n'
 import { useI18n } from 'vue-i18n'
+import { hoverMessage } from '@/composables/hoverMessage'
 
 export default defineComponent({
+  directives: {
+    hoverMessage,
+  },
   setup() {
     const config = useRuntimeConfig()
     const route = useRoute()
@@ -103,6 +113,7 @@ export default defineComponent({
       locale,
       availableLocales,
       switchLocale,
+      hoverMessage,
     }
   },
 })

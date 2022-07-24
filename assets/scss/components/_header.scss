@@ -147,20 +147,23 @@
     }
 
     &--theme {
-      display: flex;
-      border: 0;
-      height: 45px;
-      width: 45px;
-      background-size: contain;
-      background-position: 50%;
-      background-repeat: no-repeat;
-      cursor: pointer;
       position: relative;
-      background: none;
 
       @include media('<=m') {
         height: 30px;
         width: 30px;
+      }
+
+      #{$self}__button {
+        display: flex;
+        border: 0;
+        height: 45px;
+        width: 45px;
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        cursor: pointer;        
+        background: none;
       }
 
       svg {

@@ -21,8 +21,8 @@ export const hoverMessage = {
     })
 
     el.addEventListener('mousemove', (e: MouseEvent) => {
-      bar.style.top = `calc(${e.offsetY}px + 20px)`
-      bar.style.left = `calc(${e.offsetX}px + 20px)`
+      bar.style.top = `calc(${e.offsetY}px + 15px)`
+      bar.style.left = `calc(${e.offsetX}px + 15px)`
     })
 
     el.addEventListener('mouseleave', () => {
