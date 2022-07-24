@@ -16,10 +16,15 @@
     "and": "und",
     "year": "Jahr",
     "years": "Jahre",
+    "years2": "Jahre",
     "month": "Monat",
     "months": "Monate",
+    "months2": "Monate",
     "sendIt": "Senden",
     "sending": "Warten",
-    "ofExperience": "Erfahrung als Webentwickler"
+    "ofExperience": "Erfahrung als Webentwickler",
+    "name": "name",
+    "email": "e-mail",
+    "message": "nachricht"
   }
 }

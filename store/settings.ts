@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 
 interface ISettingsState {
-  theme: null | string,
-  locale: null | string,
+  theme: null | string
+  locale: null | string
 }
 
 export const useSettingsStore = defineStore({
@@ -16,7 +16,7 @@ export const useSettingsStore = defineStore({
       this.theme = theme
     },
     setLocale(locale: string) {
-      this.locale = locale;
+      this.locale = locale
     },
   },
   getters: {

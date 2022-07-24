@@ -40,8 +40,12 @@ export default defineComponent({
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
-    const pageData: Ref<any> = ref(await pagesStore.getPage(settingsStore.currentLocale as string, 5))
-    const inspiration: Ref<any> = ref(await pagesStore.getInspiration(settingsStore.currentLocale as string))
+    const pageData: Ref<any> = ref(
+      await pagesStore.getPage(settingsStore.currentLocale as string, 5),
+    )
+    const inspiration: Ref<any> = ref(
+      await pagesStore.getInspiration(settingsStore.currentLocale as string),
+    )
     const theme = ref(settingsStore.currentTheme)
 
     useHead({

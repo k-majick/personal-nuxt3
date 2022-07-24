@@ -15,11 +15,16 @@
   "content": {
     "and": "i",
     "year": "rok",
-    "years": "lat(a)",
+    "years": "lat",
+    "years2": "lata",
     "month": "miesiąc",
     "months": "miesięcy",
+    "months2": "miesiące",
     "sendIt": "wyślij",
     "sending": "wysyłam",
-    "ofExperience": "doświadczenia jako web developer"
+    "ofExperience": "doświadczenia jako web developer",
+    "name": "imię",
+    "email": "e-mail",
+    "message": "wiadomość"
   }
 }

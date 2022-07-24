@@ -16,10 +16,15 @@
     "and": "and",
     "year": "year",
     "years": "years",
+    "years2": "years",
     "month": "month",
     "months": "months",
+    "months2": "months",
     "sendIt": "send it",
     "sending": "sending",
-    "ofExperience": "of experience as web developer"
+    "ofExperience": "of experience as web developer",
+    "name": "name",
+    "email": "e-mail",
+    "message": "message"
   }
 }

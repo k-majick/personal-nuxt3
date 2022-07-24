@@ -92,7 +92,13 @@ export default defineComponent({
         .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
         .filter(item => item.attributes.slug !== 'inspiration')
 
-    const pages: Ref<any> = ref(sortItems([... await pagesStore.getPages(settingsStore.currentLocale as string) as unknown as []]))
+    const pages: Ref<any> = ref(
+      sortItems([
+        ...((await pagesStore.getPages(
+          settingsStore.currentLocale as string,
+        )) as unknown as []),
+      ]),
+    )
 
     const killModal = () => {
       const body = document.body
@@ -121,7 +127,12 @@ export default defineComponent({
 
     watch(
       () => settingsStore.currentLocale,
-      async () => pages.value = await sortItems([... await pagesStore.getPages(settingsStore.currentLocale as string) as unknown as []]),
+      async () =>
+        (pages.value = await sortItems([
+          ...((await pagesStore.getPages(
+            settingsStore.currentLocale as string,
+          )) as unknown as []),
+        ])),
     )
 
     return {

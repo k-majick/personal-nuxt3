@@ -45,7 +45,9 @@ export default defineComponent({
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
-    const experience: Ref<any> = ref(await pagesStore.getExperience(settingsStore.currentLocale as string))
+    const experience: Ref<any> = ref(
+      await pagesStore.getExperience(settingsStore.currentLocale as string),
+    )
 
     const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1))
@@ -57,6 +59,14 @@ export default defineComponent({
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
+    )
+
+    watch(
+      () => settingsStore.currentLocale,
+      async () =>
+        (experience.value = await pagesStore.getExperience(
+          settingsStore.currentLocale as string,
+        )),
     )
 
     return {

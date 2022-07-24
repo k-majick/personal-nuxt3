@@ -18,7 +18,9 @@ export default defineComponent({
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
-    const pageData: Ref<any> = ref(await pagesStore.getPage(settingsStore.currentLocale as string, 4))
+    const pageData: Ref<any> = ref(
+      await pagesStore.getPage(settingsStore.currentLocale as string, 4),
+    )
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,

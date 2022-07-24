@@ -30,7 +30,7 @@
           class="form__input"
           @blur="v$.name.$touch()"
         />
-        <label class="form__label">Name</label>
+        <label class="form__label">{{ $t('content.name') }}</label>
       </div>
       <div
         class="form__group"
@@ -51,7 +51,7 @@
           class="form__input"
           @blur="v$.email.$touch()"
         />
-        <label class="form__label">E-mail</label>
+        <label class="form__label">{{ $t('content.email') }}</label>
       </div>
       <div
         class="form__group form__group--textarea"
@@ -72,7 +72,7 @@
           class="form__input"
           @blur="v$.message.$touch()"
         ></textarea>
-        <label class="form__label">Message</label>
+        <label class="form__label">{{ $t('content.message') }}</label>
       </div>
       <div class="form__group form__group--submit">
         <button
@@ -129,7 +129,9 @@ export default defineComponent({
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
-    const contact: Ref<any> = ref(await pagesStore.getContact(settingsStore.currentLocale as string))
+    const contact: Ref<any> = ref(
+      await pagesStore.getContact(settingsStore.currentLocale as string),
+    )
     const submitBtn: Ref<any> = ref<HTMLElement>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
 
@@ -245,7 +247,10 @@ export default defineComponent({
 
     watch(
       () => settingsStore.currentLocale,
-      async () => contact.value = await pagesStore.getContact(settingsStore.currentLocale as string),
+      async () =>
+        (contact.value = await pagesStore.getContact(
+          settingsStore.currentLocale as string,
+        )),
     )
 
     return {

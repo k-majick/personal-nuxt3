@@ -65,7 +65,9 @@ export default {
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
-    const portfolio: Ref<any> = ref(await pagesStore.getPortfolio(settingsStore.currentLocale as string))
+    const portfolio: Ref<any> = ref(
+      await pagesStore.getPortfolio(settingsStore.currentLocale as string),
+    )
 
     watch(
       () => settingsStore.currentTheme,
@@ -74,7 +76,10 @@ export default {
 
     watch(
       () => settingsStore.currentLocale,
-      async () => portfolio.value = await pagesStore.getPortfolio(settingsStore.currentLocale as string),
+      async () =>
+        (portfolio.value = await pagesStore.getPortfolio(
+          settingsStore.currentLocale as string,
+        )),
     )
 
     return {

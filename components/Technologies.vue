@@ -30,7 +30,9 @@ export default defineComponent({
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
-    const technology: Ref<any> = ref(await pagesStore.getTechnology(settingsStore.currentLocale as string))
+    const technology: Ref<any> = ref(
+      await pagesStore.getTechnology(settingsStore.currentLocale as string),
+    )
 
     watch(
       () => settingsStore.currentTheme,
@@ -39,7 +41,10 @@ export default defineComponent({
 
     watch(
       () => settingsStore.currentLocale,
-      async () => technology.value = await pagesStore.getTechnology(settingsStore.currentLocale as string),
+      async () =>
+        (technology.value = await pagesStore.getTechnology(
+          settingsStore.currentLocale as string,
+        )),
     )
 
     return {

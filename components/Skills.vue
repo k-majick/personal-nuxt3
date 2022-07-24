@@ -30,7 +30,9 @@ export default {
     const pagesStore = usePagesStore()
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
-    const skills: Ref<unknown> = ref(await pagesStore.getSkills(settingsStore.currentLocale as string))
+    const skills: Ref<unknown> = ref(
+      await pagesStore.getSkills(settingsStore.currentLocale as string),
+    )
 
     const skillBarWidth = (v: number) => ({
       width: v + '%',
@@ -43,7 +45,10 @@ export default {
 
     watch(
       () => settingsStore.currentLocale,
-      async () => skills.value = await pagesStore.getSkills(settingsStore.currentLocale as string),
+      async () =>
+        (skills.value = await pagesStore.getSkills(
+          settingsStore.currentLocale as string,
+        )),
     )
 
     return {
