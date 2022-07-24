@@ -5,7 +5,7 @@ interface Binding extends Object {
 
 export const hoverMessage = {
   created(el: HTMLElement, binding: Binding) {
-    const msg = binding.value
+    const message = binding.value
     const bar = Array.from(el.children as HTMLCollectionOf<HTMLElement>).find(
       child => child.classList.contains('tooltip'),
     )
@@ -14,8 +14,9 @@ export const hoverMessage = {
       return
     }
 
+    bar.innerHTML = message as string
+
     el.addEventListener('mouseenter', () => {
-      bar.innerHTML = msg as string
       bar.classList.add('show')
     })
 
@@ -25,8 +26,19 @@ export const hoverMessage = {
     })
 
     el.addEventListener('mouseleave', () => {
-      bar.innerHTML = ''
       bar.classList.remove('show')
     })
+  },
+  updated(el: HTMLElement, binding: Binding) {
+    const message = binding.value
+    const bar = Array.from(el.children as HTMLCollectionOf<HTMLElement>).find(
+      child => child.classList.contains('tooltip'),
+    )
+
+    if (!bar) {
+      return
+    }
+
+    bar.innerHTML = message as string
   },
 }

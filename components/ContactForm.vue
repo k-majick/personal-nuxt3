@@ -109,8 +109,8 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
+import { useSettingsStore } from '@/store/settings'
 import { usePagesStore } from '@/store/pages'
-import { useThemeStore } from '@/store/theme'
 import { marked } from 'marked'
 import useVuelidate from '@vuelidate/core'
 import {
@@ -127,9 +127,9 @@ export default defineComponent({
   async setup() {
     const { t } = useI18n()
     const pagesStore = usePagesStore()
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
-    const contact: Ref<any> = ref(await pagesStore.getContact())
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
+    const contact: Ref<any> = ref(await pagesStore.getContact(settingsStore.currentLocale as string))
     const submitBtn: Ref<any> = ref<HTMLElement>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
 
@@ -239,8 +239,13 @@ export default defineComponent({
     }
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
+    )
+
+    watch(
+      () => settingsStore.currentLocale,
+      async () => contact.value = await pagesStore.getContact(settingsStore.currentLocale as string),
     )
 
     return {

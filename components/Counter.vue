@@ -13,21 +13,23 @@
         >&nbsp;month
       </span>
       <span v-if="counter('d')"
-        >and&nbsp; <span class="counter__value">{{ counter('m') }}</span
-        >&nbsp;months
+        >{{ $t('content.and') }}&nbsp; <span class="counter__value">{{ counter('m') }}</span
+        >&nbsp;{{
+          counter('m') > 1 ? $t('content.months') : $t('content.month')
+        }}
       </span>
     </div>
-    <p>of experience as web developer</p>
+    <p>{{ $t('content.ofExperience') }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 
 export default defineComponent({
   setup() {
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
 
     const counter = (what: string) => {
       const now = new Date().valueOf()

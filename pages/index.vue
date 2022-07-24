@@ -28,14 +28,14 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 
 export default defineComponent({
   layout: 'default',
   setup() {
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
     const headerComponent: Ref<any> = ref()
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
@@ -60,15 +60,13 @@ export default defineComponent({
     })
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     watch(
       () => headerComponent.value,
-      () => {
-        headerEl.value = headerComponent.value.headerEl
-      },
+      () => (headerEl.value = headerComponent.value.headerEl),
     )
 
     provide(MainElKey, mainEl)

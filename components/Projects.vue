@@ -54,21 +54,27 @@
 </template>
 
 <script lang="ts">
+import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default {
   async setup() {
     const pagesStore = usePagesStore()
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
-    const portfolio = await pagesStore.getPortfolio()
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
+    const portfolio: Ref<any> = ref(await pagesStore.getPortfolio(settingsStore.currentLocale as string))
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
+    )
+
+    watch(
+      () => settingsStore.currentLocale,
+      async () => portfolio.value = await pagesStore.getPortfolio(settingsStore.currentLocale as string),
     )
 
     return {

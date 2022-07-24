@@ -5,14 +5,28 @@
       <a class="header__logo">
         <h1 class="header__title">{{ config.public.appTitle }}</h1>
       </a>
-      <!-- eslint-disable risxss/catch-potential-xss-vue -->
-      <button
-        class="theme__switch"
-        :class="`theme__switch--${theme}`"
-        @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
-        v-html="theme === 'dark' ? iconSun : iconMoon"
-      ></button>
-      <!-- eslint-enable risxss/catch-potential-xss-vue -->
+      <div class="header__control">
+        <div class="header__switch header__switch--locale">
+          <button class="header__button">{{ locale }}</button>
+          <ul class="header__options">
+            <li
+              v-for="(l, index) in availableLocales"
+              :key="index"
+              class="header__option"
+              @click="switchLocale(l.code as string)"
+            >
+              {{ l.code }}
+            </li>
+          </ul>
+        </div>
+        <!-- eslint-disable risxss/catch-potential-xss-vue -->
+        <button
+          class="header__switch header__switch--theme"
+          @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
+          v-html="theme === 'dark' ? iconSun : iconMoon"
+        ></button>
+        <!-- eslint-enable risxss/catch-potential-xss-vue -->
+      </div>
     </section>
     <section class="header__container header__container--avatar">
       <Avatar />
@@ -25,37 +39,55 @@
 </template>
 
 <script lang="ts">
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { MainElKey } from '@/symbols/symbols'
 import scrollTo from '@/composables/scrollTo'
 import iconSun from '@/assets/gfx/icon-sun.svg?raw'
 import iconMoon from '@/assets/gfx/icon-moon.svg?raw'
 import DOMPurify from 'dompurify'
+import { ILocale, locales } from '@/composables/i18n'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   setup() {
-    const themeStore = useThemeStore()
+    const config = useRuntimeConfig()
     const route = useRoute()
+
     const mainEl = inject(MainElKey)
     const headerEl = ref<HTMLElement>()
-    const config = useRuntimeConfig()
-    const theme = ref(themeStore.currentTheme)
+
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
+
+    const { locale } = useI18n({ useScope: 'global' })
+    const setAvailableLocales = () =>
+      locales.filter(l => l.code !== locale.value)
+    const availableLocales = ref<ILocale[]>(setAvailableLocales())
+
+    const switchLocale = (l: string) => {
+      locale.value = l
+      settingsStore.setLocale(l)
+      localStorage.setItem('user-locale', l)
+      availableLocales.value = setAvailableLocales()
+    }
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     const toggleTheme = (theme: string) => {
-      themeStore.setTheme(theme)
+      settingsStore.setTheme(theme)
       localStorage.setItem('user-theme', theme)
     }
 
-    if (localStorage.getItem('user-theme')) {
-      toggleTheme(localStorage.getItem('user-theme') as string)
-    } else {
-      toggleTheme('lite')
-    }
+    localStorage.getItem('user-locale')
+      ? switchLocale(localStorage.getItem('user-locale') as string)
+      : switchLocale('en')
+
+    localStorage.getItem('user-theme')
+      ? toggleTheme(localStorage.getItem('user-theme') as string)
+      : toggleTheme('lite')
 
     return {
       scrollTo,
@@ -68,6 +100,9 @@ export default defineComponent({
       mainEl,
       iconSun,
       iconMoon,
+      locale,
+      availableLocales,
+      switchLocale,
     }
   },
 })

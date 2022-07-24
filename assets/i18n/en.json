@@ -1,4 +1,9 @@
 {
+  "pages": {
+    "skills": {
+      "title": "Skills"
+    }
+  },
   "messages": {
     "name": "K-Majick",
     "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;professional <strong>JavaScript Developer</strong>.",
@@ -14,6 +19,7 @@
     "month": "month",
     "months": "months",
     "sendIt": "send it",
-    "sending": "sending"
+    "sending": "sending",
+    "ofExperience": "of experience as web developer"
   }
 }

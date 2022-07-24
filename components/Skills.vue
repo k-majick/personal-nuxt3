@@ -21,24 +21,29 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default {
   async setup() {
     const pagesStore = usePagesStore()
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
-    const skills: Ref<unknown> = ref(await pagesStore.getSkills())
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
+    const skills: Ref<unknown> = ref(await pagesStore.getSkills(settingsStore.currentLocale as string))
 
     const skillBarWidth = (v: number) => ({
       width: v + '%',
     })
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
+    )
+
+    watch(
+      () => settingsStore.currentLocale,
+      async () => skills.value = await pagesStore.getSkills(settingsStore.currentLocale as string),
     )
 
     return {

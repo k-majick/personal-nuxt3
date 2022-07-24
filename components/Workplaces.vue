@@ -36,16 +36,16 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
 export default defineComponent({
   async setup() {
     const pagesStore = usePagesStore()
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
-    const experience: Ref<any> = ref(await pagesStore.getExperience())
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
+    const experience: Ref<any> = ref(await pagesStore.getExperience(settingsStore.currentLocale as string))
 
     const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1))
@@ -55,8 +55,8 @@ export default defineComponent({
     )
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     return {

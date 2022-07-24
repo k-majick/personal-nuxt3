@@ -8,16 +8,16 @@
 </template>
 
 <script lang="ts">
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 
 export default defineComponent({
   setup() {
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     return {
