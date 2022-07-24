@@ -45,7 +45,7 @@
         </template>
         <template #action>
           <a class="modal__action" :href="project.url" target="_blank"
-            >Go to site</a
+            >{{ $t('content.gotoSite') }}</a
           >
         </template>
       </Modal>

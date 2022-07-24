@@ -25,6 +25,7 @@
     "ofExperience": "Erfahrung als Webentwickler",
     "name": "name",
     "email": "e-mail",
-    "message": "nachricht"
+    "message": "nachricht",
+    "gotoSite": "go to site"
   }
 }

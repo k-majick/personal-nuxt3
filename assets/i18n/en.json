@@ -25,6 +25,7 @@
     "ofExperience": "of experience as web developer",
     "name": "name",
     "email": "e-mail",
-    "message": "message"
+    "message": "message",
+    "gotoSite": "go to site"
   }
 }

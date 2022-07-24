@@ -25,6 +25,7 @@
     "ofExperience": "doświadczenia jako web developer",
     "name": "imię",
     "email": "e-mail",
-    "message": "wiadomość"
+    "message": "wiadomość",
+    "gotoSite": "Przejdź do strony"
   }
 }
