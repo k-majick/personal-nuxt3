@@ -101,8 +101,6 @@ export const usePagesStore = defineStore({
     async getExperience(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
-      console.dir(locale) //eslint-disable-line
-
       try {
         const res = await $apolloClient.query({
           query: GET_EXPERIENCE(locale),

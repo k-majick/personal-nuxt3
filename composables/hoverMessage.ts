@@ -21,8 +21,15 @@ export const hoverMessage = {
     })
 
     el.addEventListener('mousemove', (e: MouseEvent) => {
-      bar.style.top = `calc(${e.offsetY}px + 15px)`
-      bar.style.left = `calc(${e.offsetX}px + 15px)`
+      const barRect = bar.getBoundingClientRect()
+
+      if (e.screenX + barRect.width + 20 > window.innerWidth) {
+        bar.style.top = `calc(${e.offsetY}px + 15px)`
+        bar.style.left = `calc(${e.offsetX}px - ${barRect.width}px - 15px)`
+      } else {
+        bar.style.top = `calc(${e.offsetY}px + 15px)`
+        bar.style.left = `calc(${e.offsetX}px + 15px)`
+      }
     })
 
     el.addEventListener('mouseleave', () => {

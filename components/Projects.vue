@@ -44,9 +44,9 @@
           </div>
         </template>
         <template #action>
-          <a class="modal__action" :href="project.url" target="_blank"
-            >{{ $t('content.gotoSite') }}</a
-          >
+          <a class="modal__action" :href="project.url" target="_blank">{{
+            $t('content.gotoSite')
+          }}</a>
         </template>
       </Modal>
     </div>

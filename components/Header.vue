@@ -19,14 +19,20 @@
             </li>
           </ul>
         </div>
-        <div 
-          v-hoverMessage="theme === 'dark' ? $t('messages.switch2lite') : $t('messages.switch2dark')"
+        <div
+          v-hoverMessage="
+            theme === 'dark'
+              ? $t('messages.switch2lite')
+              : $t('messages.switch2dark')
+          "
           class="header__switch header__switch--theme"
         >
           <!-- eslint-disable risxss/catch-potential-xss-vue -->
-          <button            
+          <button
             class="header__button"
-            @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
+            @click="
+              theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')
+            "
             v-html="theme === 'dark' ? iconSun : iconMoon"
           />
           <!-- eslint-enable risxss/catch-potential-xss-vue -->
