@@ -21,7 +21,6 @@
       align-items: center;
       justify-content: space-between;
       min-height: 20vh;
-      z-index: 4;
 
       @include media('<=m') {
         min-height: 150px;
@@ -83,7 +82,7 @@
       font-size: 0.85em;
 
       @include media('<=m') {
-        height: 22.5px;
+        height: 30px;
       }
 
       &:hover {
