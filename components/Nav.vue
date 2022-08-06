@@ -53,7 +53,7 @@
         @click.stop="killModal()"
       >
         <!-- eslint-disable risxss/catch-potential-xss-vue -->
-          <div v-html="rawCat"></div>
+        <div v-html="rawCat"></div>
         <!-- eslint-enable risxss/catch-potential-xss-vue -->
       </nuxt-link>
       <span class="tooltip" :class="`tooltip--${theme}`"></span>

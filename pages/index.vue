@@ -17,9 +17,11 @@
     <Nav :is-activated="isNavActivated" @close-nav="toggleNav" />
 
     <div class="main__container">
-      <router-view v-slot="{ Component, props }">
-        <Transition name="fade">
-          <component :is="Component" v-bind="props" />
+      <router-view v-slot="{ Component, route }">
+        <Transition name="fade" mode="out-in">
+          <div :key="(route.name as string)">
+            <component :is="Component" />
+          </div>
         </Transition>
       </router-view>
     </div>
@@ -44,9 +46,6 @@ export default defineComponent({
     const scrollListen = () => {
       window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY
-        // const docHeight = document.body.offsetHeight;
-        // const scrollPercent = Math.round(scrollTop / docHeight * 100);
-        // const invertedScrollPercent = 1 - scrollPercent;
 
         document.documentElement.style.setProperty(
           '--scroll-y',
