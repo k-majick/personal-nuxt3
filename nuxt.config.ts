@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@apollo/client', 'ts-invariant/process'],
   },
-  buildModules: ['@pinia/nuxt', '@intlify/nuxt3'],
+  buildModules: ['@pinia/nuxt'],
   router: {
     options: {
       linkActiveClass: 'active',
