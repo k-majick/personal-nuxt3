@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { hoverMessage } from '@/composables/hoverMessage'
 import DOMPurify from 'dompurify'
 
@@ -26,12 +26,12 @@ export default defineComponent({
     hoverMessage,
   },
   setup() {
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     return {

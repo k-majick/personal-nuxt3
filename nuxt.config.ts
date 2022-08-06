@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import { IntlifyModuleOptions } from '@intlify/nuxt3'
 import eslint from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
@@ -76,20 +75,11 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@apollo/client', 'ts-invariant/process'],
   },
-  buildModules: ['@intlify/nuxt3', '@pinia/nuxt'],
+  buildModules: ['@pinia/nuxt'],
   router: {
     options: {
       linkActiveClass: 'active',
       linkExactActiveClass: 'active',
-    },
-  },
-  intlify: {
-    localeDir: 'assets/i18n',
-    vueI18n: {
-      legacy: false,
-      locale: 'en',
-      fallbackLocale: 'en',
-      globalInjection: true,
     },
   },
   vite: {
@@ -103,9 +93,3 @@ export default defineNuxtConfig({
     },
   },
 })
-
-declare module '@nuxt/schema' {
-  interface NuxtConfig {
-    intlify?: IntlifyModuleOptions
-  }
-}

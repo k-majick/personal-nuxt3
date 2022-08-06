@@ -1,33 +1,45 @@
 <template>
   <div class="main__content">
     <div class="counter" :class="`counter--${theme}`">
-      <span class="counter__value">{{ counter('y') }}</span
-      >&nbsp;
-      <span>{{
-        counter('y') > 1 ? $t('content.years') : $t('content.year')
-      }}</span
-      >&nbsp;
-      <span v-if="counter('c')"
-        >{{ $t('content.and') }}&nbsp;
-        <span class="counter__value">{{ counter('m') }}</span
-        >&nbsp;month
+      <span v-if="counter('y')">
+        <span class="counter__value">{{ counter('y') }}</span
+        >&nbsp;<span v-if="counter('y') === 1">{{ $t('content.year') }}</span
+        ><span v-else>
+          {{
+            counter('y') > 1 && counter('y') < 5
+              ? $t('content.years2')
+              : $t('content.years')
+          }}
+        </span>
       </span>
-      <span v-if="counter('d')"
-        >and&nbsp; <span class="counter__value">{{ counter('m') }}</span
-        >&nbsp;months
+      <span v-if="counter('y') && counter('m')">
+        &nbsp;{{ $t('content.and') }}&nbsp;
+      </span>
+      <span v-if="counter('m')">
+        <span class="counter__value">{{ counter('m') }}</span
+        >&nbsp;<span v-if="counter('m') && counter('m') === 1">{{
+          $t('content.month')
+        }}</span>
+        <span v-else>
+          {{
+            counter('m') > 1 && counter('m') < 5
+              ? $t('content.months2')
+              : $t('content.months')
+          }}
+        </span>
       </span>
     </div>
-    <p>of experience as web developer</p>
+    <p>{{ $t('content.ofExperience') }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 
 export default defineComponent({
   setup() {
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
 
     const counter = (what: string) => {
       const now = new Date().valueOf()
@@ -42,12 +54,6 @@ export default defineComponent({
       switch (true) {
         case what == 'y':
           return years
-        case diffMonths === 0:
-          return false
-        case diffMonths === 1 && what == 'c':
-          return true
-        case diffMonths > 1 && what == 'd':
-          return true
         case what == 'm':
           return diffMonths
         default:

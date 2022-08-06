@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core'
 
-export const GET_PAGES = () => gql`
+export const GET_PAGES = (locale: string) => gql`
   query Pages {
-    pages {
+    pages(locale: "${locale}") {
       data {
         id
         attributes {
@@ -15,9 +15,9 @@ export const GET_PAGES = () => gql`
   }
 `
 
-export const GET_PAGE = (id: number) => gql`
+export const GET_PAGE = (locale: string, id: number) => gql`
   query PageBySlug {
-    page(id: ${id}) {
+    page(locale: "${locale}", id: ${id}) {
       data {
         id
         attributes {
@@ -26,11 +26,12 @@ export const GET_PAGE = (id: number) => gql`
         }
       }
     }
-  }`
+  }
+`
 
-export const GET_SKILLS = () => gql`
+export const GET_SKILLS = (locale: string) => gql`
   query Skills {
-    skills {
+    skills(locale: "${locale}") {
       data {
         id
         attributes {
@@ -45,9 +46,9 @@ export const GET_SKILLS = () => gql`
   }
 `
 
-export const GET_TECHNOLOGY = () => gql`
+export const GET_TECHNOLOGY = (locale: string) => gql`
   query Technologies {
-    technology {
+    technology(locale: "${locale}") {
       data {
         id
         attributes {
@@ -61,9 +62,9 @@ export const GET_TECHNOLOGY = () => gql`
   }
 `
 
-export const GET_EXPERIENCE = () => gql`
+export const GET_EXPERIENCE = (locale: string) => gql`
   query Experience {
-    experience {
+    experience(locale: "${locale}") {
       data {
         id
         attributes {
@@ -82,9 +83,9 @@ export const GET_EXPERIENCE = () => gql`
   }
 `
 
-export const GET_PORTFOLIO = () => gql`
+export const GET_PORTFOLIO = (locale: string) => gql`
   query Portfolio {
-    portfolio {
+    portfolio(locale: "${locale}") {
       data {
         id
         attributes {
@@ -103,9 +104,9 @@ export const GET_PORTFOLIO = () => gql`
   }
 `
 
-export const GET_CONTACT = () => gql`
+export const GET_CONTACT = (locale: string) => gql`
   query Contact {
-    contact {
+    contact(locale: "${locale}") {
       data {
         id
         attributes {
@@ -116,9 +117,9 @@ export const GET_CONTACT = () => gql`
   }
 `
 
-export const GET_INSPIRATION = () => gql`
+export const GET_INSPIRATION = (locale: string) => gql`
   query Inspiration {
-    inspiration {
+    inspiration(locale: "${locale}") {
       data {
         id
         attributes {

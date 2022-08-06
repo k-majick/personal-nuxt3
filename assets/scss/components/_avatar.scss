@@ -92,7 +92,7 @@
     text-align: center;
     font-weight: lighter;
     font-size: 1.15em;
-    @include media('<=t') {
+    @include media('>m', '<l-s') {
       display: block;
     }
     @include media('<=m') {

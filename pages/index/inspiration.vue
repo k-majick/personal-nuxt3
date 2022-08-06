@@ -30,7 +30,7 @@
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 
@@ -39,18 +39,22 @@ export default defineComponent({
   async setup() {
     const config = useRuntimeConfig()
     const pagesStore = usePagesStore()
-    const themeStore = useThemeStore()
-    const pageData: Ref<any> = ref(await pagesStore.getPage(5))
-    const inspiration: Ref<any> = ref(await pagesStore.getInspiration())
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const pageData: Ref<any> = ref(
+      await pagesStore.getPage(settingsStore.currentLocale as string, 5),
+    )
+    const inspiration: Ref<any> = ref(
+      await pagesStore.getInspiration(settingsStore.currentLocale as string),
+    )
+    const theme = ref(settingsStore.currentTheme)
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     })
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     return {

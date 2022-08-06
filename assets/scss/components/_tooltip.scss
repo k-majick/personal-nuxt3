@@ -1,5 +1,5 @@
 .tooltip {
-  @include trans(0.5, opacity);
+  @include trans(0, opacity);
   position: absolute;
   z-index: 99;
   font-size: 1em;
@@ -10,6 +10,7 @@
   text-align: center;
 
   &.show {
+    @include trans(0.5, opacity);
     opacity: 1;
     padding: 5px 7.5px;
   }

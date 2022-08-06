@@ -1,27 +1,30 @@
 .cat {
-  position: absolute;
-  bottom: -7.5px;
-  left: 4vw;
   cursor: pointer;
-  z-index: 10;
-  width: 90px;
-  height: 90px;
-  overflow: hidden;
 
-  @include media('>m', '<l-s') {
-    bottom: 0;
-    left: auto;
-    right: 1vw;
+  &__wrapper {
+    position: absolute;
+    bottom: -7.5px;
+    left: 4vw;
     width: 90px;
     height: 90px;
-    transform: scaleX(-1);
-  }
+    z-index: 10;
 
-  @include media('<=m') {
-    bottom: 0;
-    width: 90px;
-    height: 90px;
-    left: 45px;
+    @include media('>m', '<l-s') {
+      bottom: 0;
+      left: auto;
+      right: 1vw;
+      width: 90px;
+      height: 90px;
+      transform: scaleX(-1);
+      overflow: hidden;
+    }
+
+    @include media('<=m') {
+      bottom: 0;
+      width: 90px;
+      height: 90px;
+      left: 45px;
+    }
   }
 
   svg {

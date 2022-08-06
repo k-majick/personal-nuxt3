@@ -1,19 +1,34 @@
 {
+  "pages": {
+    "skills": {
+      "title": "Skills"
+    }
+  },
   "messages": {
     "name": "K-Majick",
-    "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;professional <strong>JavaScript Developer</strong>.",
-    "git": "Check out my <strong>GitHub repos</strong>",
-    "linked": "Check out my <strong>LinkedIn profile</strong>",
-    "sentTitle": "Thank you for your message!",
-    "sentMessage": "I'll respond as soon as I can."
+    "hello": "Hallo! Ich heiße <strong>K-Majick</strong>. Ich arbeite als professioneller <strong>JavaScript-Entwickler</strong>.",
+    "git": "Werfen Sie einen Blick auf meine <strong>GitHub-Repos</strong>",
+    "linked": "Sehen Sie sich mein <strong>LinkedIn-Profil</strong> an",
+    "meow": "Miau 🐾",
+    "switch2lite": "In den Lichtmodus Wechseln",
+    "switch2dark": "In den dunklen Modus Wechseln",
+    "sentTitle": "Danke für deine Nachricht!",
+    "sentMessage": "Ich werde so schnell wie möglich antworten."
   },
   "content": {
-    "and": "and",
-    "year": "year",
-    "years": "years",
-    "month": "month",
-    "months": "months",
-    "sendIt": "send it",
-    "sending": "sending"
+    "and": "und",
+    "year": "Jahr",
+    "years": "Jahre",
+    "years2": "Jahre",
+    "month": "Monat",
+    "months": "Monate",
+    "months2": "Monate",
+    "sendIt": "Senden",
+    "sending": "Warten",
+    "ofExperience": "Erfahrung als Webentwickler",
+    "name": "name",
+    "email": "e-mail",
+    "message": "nachricht",
+    "gotoSite": "go to site"
   }
 }

@@ -34,12 +34,12 @@ export const usePagesStore = defineStore({
     inspiration: null,
   }),
   actions: {
-    async getPage(id: number) {
+    async getPage(locale: string, id: number) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_PAGE(id),
+          query: GET_PAGE(locale, id),
         })
 
         this.page = res.data.page.data
@@ -50,12 +50,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getPages() {
+    async getPages(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_PAGES(),
+          query: GET_PAGES(locale),
         })
 
         this.pages = res.data.pages.data
@@ -66,12 +66,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getSkills() {
+    async getSkills(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_SKILLS(),
+          query: GET_SKILLS(locale),
         })
 
         this.skills = res.data.skills.data.attributes
@@ -82,12 +82,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getTechnology() {
+    async getTechnology(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_TECHNOLOGY(),
+          query: GET_TECHNOLOGY(locale),
         })
 
         this.technology = res.data.technology.data.attributes
@@ -98,12 +98,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getExperience() {
+    async getExperience(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_EXPERIENCE(),
+          query: GET_EXPERIENCE(locale),
         })
 
         this.experience = res.data.experience.data.attributes
@@ -114,12 +114,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getPortfolio() {
+    async getPortfolio(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_PORTFOLIO(),
+          query: GET_PORTFOLIO(locale),
         })
 
         this.portfolio = res.data.portfolio.data.attributes
@@ -130,12 +130,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getContact() {
+    async getContact(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_CONTACT(),
+          query: GET_CONTACT(locale),
         })
 
         this.contact = res.data.contact.data.attributes
@@ -146,12 +146,12 @@ export const usePagesStore = defineStore({
       }
     },
 
-    async getInspiration() {
+    async getInspiration(locale: string) {
       const { $apolloClient } = useNuxtApp()
 
       try {
         const res = await $apolloClient.query({
-          query: GET_INSPIRATION(),
+          query: GET_INSPIRATION(locale),
         })
 
         this.inspiration = res.data.inspiration.data.attributes

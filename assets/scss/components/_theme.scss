@@ -21,50 +21,12 @@
     animation: pulse 1s infinite;
   }
 
-  &__switch {
-    display: flex;
-    border: 0;
-    height: 45px;
-    width: 45px;
-    background-size: contain;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    position: relative;
-    background: none;
-
-    @include media('<=m') {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      height: 30px;
-      width: 30px;
-    }
-
-    svg {
-      height: 100%;
-      left: 0;
-      position: absolute;
-      top: 0;
-      width: 100%;
-    }
-  }
-
   &--dark {
     background-color: $color-black;
     color: $color-white;
 
     #{$self}__background {
       background-color: $color-black;
-    }
-
-    #{$self}__switch {
-      background-image: url('@/assets/gfx/icon-sun.svg');
-
-      svg {
-        filter: drop-shadow(0 0 5px $color-white);
-        fill: $color-silver-lite;
-      }
     }
   }
 
@@ -74,15 +36,6 @@
 
     #{$self}__background {
       background-color: $color-red;
-    }
-
-    #{$self}__switch {
-      background-image: url('@/assets/gfx/icon-moon.svg');
-
-      svg {
-        filter: drop-shadow(0 0 5px $color-gray);
-        fill: $color-white;
-      }
     }
   }
 }

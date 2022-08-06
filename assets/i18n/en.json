@@ -1,9 +1,17 @@
 {
+  "pages": {
+    "skills": {
+      "title": "Skills"
+    }
+  },
   "messages": {
     "name": "K-Majick",
     "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;professional <strong>JavaScript Developer</strong>.",
     "git": "Check out my <strong>GitHub repos</strong>",
     "linked": "Check out my <strong>LinkedIn profile</strong>",
+    "meow": "Meow 🐾",
+    "switch2lite": "Switch to lite mode",
+    "switch2dark": "Switch to dark mode",
     "sentTitle": "Thank you for your message!",
     "sentMessage": "I'll respond as soon as I can."
   },
@@ -11,9 +19,16 @@
     "and": "and",
     "year": "year",
     "years": "years",
+    "years2": "years",
     "month": "month",
     "months": "months",
+    "months2": "months",
     "sendIt": "send it",
-    "sending": "sending"
+    "sending": "sending",
+    "ofExperience": "of experience as web developer",
+    "name": "name",
+    "email": "e-mail",
+    "message": "message",
+    "gotoSite": "go to site"
   }
 }

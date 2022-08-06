@@ -9,7 +9,7 @@
           href=""
           class="nav__link"
           @click.stop.prevent="killModal(), scrollTo($event, headerEl)"
-          >Intro</a
+          >Start</a
         >
       </li>
       <li v-for="page in pages" :key="page.id" class="nav__item">
@@ -46,22 +46,25 @@
         </a>
       </li>
     </ul>
-    <!-- eslint-disable risxss/catch-potential-xss-vue -->
-    <nuxt-link
-      :to="'inspiration'"
-      :class="`cat cat--${theme}`"
-      @click.stop="killModal()"
-      v-html="rawCat"
-    />
-    <!-- eslint-enable risxss/catch-potential-xss-vue -->
+    <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
+      <nuxt-link
+        :to="'inspiration'"
+        :class="`cat cat--${theme}`"
+        @click.stop="killModal()"
+      >
+        <!-- eslint-disable risxss/catch-potential-xss-vue -->
+        <div v-html="rawCat"></div>
+        <!-- eslint-enable risxss/catch-potential-xss-vue -->
+      </nuxt-link>
+      <span class="tooltip" :class="`tooltip--${theme}`"></span>
+    </div>
   </nav>
 </template>
 
 <script lang="ts">
 import type { Ref } from 'vue'
 import { usePagesStore } from '@/store/pages'
-import { useThemeStore } from '@/store/theme'
-// import { useNavStore } from '@/store/nav'
+import { useSettingsStore } from '@/store/settings'
 import { hoverMessage } from '@/composables/hoverMessage'
 import scrollTo from '@/composables/scrollTo'
 import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
@@ -80,22 +83,26 @@ export default defineComponent({
   emits: ['closeNav'],
   async setup() {
     const pagesStore = usePagesStore()
-    const themeStore = useThemeStore()
+    const settingsStore = useSettingsStore()
 
     const isActive = ref(false)
-    const theme = ref(themeStore.currentTheme)
+    const theme = ref(settingsStore.currentTheme)
 
     const headerEl = inject(HeaderElKey)
     const mainEl = inject(MainElKey)
-
-    const pagesData: Ref<any> = ref(await pagesStore.getPages())
 
     const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr
         .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
         .filter(item => item.attributes.slug !== 'inspiration')
 
-    const pages = sortItems([...pagesData.value])
+    const pages: Ref<any> = ref(
+      sortItems([
+        ...((await pagesStore.getPages(
+          settingsStore.currentLocale as string,
+        )) as unknown as []),
+      ]),
+    )
 
     const killModal = () => {
       const body = document.body
@@ -118,8 +125,18 @@ export default defineComponent({
     window.addEventListener('scroll', handleScroll)
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
+    )
+
+    watch(
+      () => settingsStore.currentLocale,
+      async () =>
+        (pages.value = await sortItems([
+          ...((await pagesStore.getPages(
+            settingsStore.currentLocale as string,
+          )) as unknown as []),
+        ])),
     )
 
     return {

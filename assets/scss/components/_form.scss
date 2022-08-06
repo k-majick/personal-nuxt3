@@ -38,6 +38,10 @@
   &__label {
     font-size: 0.9em;
     font-weight: bold;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 
   &__alert {

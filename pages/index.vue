@@ -17,9 +17,11 @@
     <Nav :is-activated="isNavActivated" @close-nav="toggleNav" />
 
     <div class="main__container">
-      <router-view v-slot="{ Component, props }">
-        <Transition name="fade">
-          <component :is="Component" v-bind="props" />
+      <router-view v-slot="{ Component, route }">
+        <Transition name="fade" mode="out-in">
+          <div :key="(route.name as string)">
+            <component :is="Component" />
+          </div>
         </Transition>
       </router-view>
     </div>
@@ -28,14 +30,14 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
-import { useThemeStore } from '@/store/theme'
+import { useSettingsStore } from '@/store/settings'
 import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 
 export default defineComponent({
   layout: 'default',
   setup() {
-    const themeStore = useThemeStore()
-    const theme = ref(themeStore.currentTheme)
+    const settingsStore = useSettingsStore()
+    const theme = ref(settingsStore.currentTheme)
     const headerComponent: Ref<any> = ref()
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
@@ -44,9 +46,6 @@ export default defineComponent({
     const scrollListen = () => {
       window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY
-        // const docHeight = document.body.offsetHeight;
-        // const scrollPercent = Math.round(scrollTop / docHeight * 100);
-        // const invertedScrollPercent = 1 - scrollPercent;
 
         document.documentElement.style.setProperty(
           '--scroll-y',
@@ -60,15 +59,13 @@ export default defineComponent({
     })
 
     watch(
-      () => themeStore.currentTheme,
-      () => (theme.value = themeStore.currentTheme),
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
     )
 
     watch(
       () => headerComponent.value,
-      () => {
-        headerEl.value = headerComponent.value.headerEl
-      },
+      () => (headerEl.value = headerComponent.value.headerEl),
     )
 
     provide(MainElKey, mainEl)

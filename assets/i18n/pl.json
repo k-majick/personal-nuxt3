@@ -1,19 +1,34 @@
 {
+  "pages": {
+    "skills": {
+      "title": "Skills"
+    }
+  },
   "messages": {
     "name": "K-Majick",
-    "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;professional <strong>JavaScript Developer</strong>.",
-    "git": "Check out my <strong>GitHub repos</strong>",
-    "linked": "Check out my <strong>LinkedIn profile</strong>",
-    "sentTitle": "Thank you for your message!",
-    "sentMessage": "I'll respond as soon as I can."
+    "hello": "Cześć! Mam na imię <strong>K-Majick</strong>. Pracuję jako profesjonalny <strong>JavaScript Developer</strong>.",
+    "git": "Sprawdź moje <strong>repozytoria GitHub</strong>",
+    "linked": "Sprawdź mój <strong>profil LinkedIn</strong>",
+    "meow": "Miau 🐾",
+    "switch2lite": "Tryb jasny",
+    "switch2dark": "Tryb ciemny",
+    "sentTitle": "Dziękuję za wiadomość!",
+    "sentMessage": "Odpowiem tak szybko, jak mogę."
   },
   "content": {
-    "and": "and",
-    "year": "year",
-    "years": "years",
-    "month": "month",
-    "months": "months",
-    "sendIt": "send it",
-    "sending": "sending"
+    "and": "i",
+    "year": "rok",
+    "years": "lat",
+    "years2": "lata",
+    "month": "miesiąc",
+    "months": "miesięcy",
+    "months2": "miesiące",
+    "sendIt": "wyślij",
+    "sending": "wysyłam",
+    "ofExperience": "doświadczenia jako web developer",
+    "name": "imię",
+    "email": "e-mail",
+    "message": "wiadomość",
+    "gotoSite": "Przejdź do strony"
   }
 }
