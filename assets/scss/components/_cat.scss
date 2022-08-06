@@ -8,7 +8,6 @@
     width: 90px;
     height: 90px;
     z-index: 10;
-    overflow: hidden;
 
     @include media('>m', '<l-s') {
       bottom: 0;
@@ -17,6 +16,7 @@
       width: 90px;
       height: 90px;
       transform: scaleX(-1);
+      overflow: hidden;
     }
 
     @include media('<=m') {

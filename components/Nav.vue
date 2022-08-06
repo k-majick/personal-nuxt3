@@ -46,17 +46,18 @@
         </a>
       </li>
     </ul>
-    <!-- eslint-disable risxss/catch-potential-xss-vue -->
     <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
         :to="'inspiration'"
         :class="`cat cat--${theme}`"
         @click.stop="killModal()"
-        v-html="rawCat"
-      />
+      >
+        <!-- eslint-disable risxss/catch-potential-xss-vue -->
+          <div v-html="rawCat"></div>
+        <!-- eslint-enable risxss/catch-potential-xss-vue -->
+      </nuxt-link>
       <span class="tooltip" :class="`tooltip--${theme}`"></span>
     </div>
-    <!-- eslint-enable risxss/catch-potential-xss-vue -->
   </nav>
 </template>
 
