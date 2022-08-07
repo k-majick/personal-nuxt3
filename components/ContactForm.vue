@@ -143,36 +143,36 @@ export default defineComponent({
 
     const rules = {
       name: {
-        required: helpers.withMessage('Enter your name', required),
+        required: helpers.withMessage(t('validation.nameRequired'), required),
         minLength: helpers.withMessage(
-          () => `Name should contain at least 3 letters`,
+          () => t('validation.nameMin'),
           minLength(3),
         ),
         maxLength: helpers.withMessage(
-          () => `Name can't exceed 30 letters`,
+          () => t('validation.nameMax'),
           maxLength(30),
         ),
         alphaDiacritic: helpers.withMessage(
-          () => `Name may contain letters only`,
+          () => t('validation.nameFormat'),
           alphaDiacritic,
         ),
       },
       email: {
-        required: helpers.withMessage('Enter your e-mail address', required),
+        required: helpers.withMessage(t('validation.emailRequired'), required),
         maxLength: helpers.withMessage(
-          () => `E-mail can't exceed 50 letters`,
+          () => t('validation.emailMax'),
           maxLength(50),
         ),
-        email: helpers.withMessage('Invalid e-mail address', email),
+        email: helpers.withMessage(t('validation.emailInvalid'), email),
       },
       message: {
-        required: helpers.withMessage('Enter your message', required),
+        required: helpers.withMessage(t('validation.messageRequired'), required),
         minLength: helpers.withMessage(
-          () => `Message is too short`,
-          minLength(1),
+          () => t('validation.messageMin'),
+          minLength(10),
         ),
         maxLength: helpers.withMessage(
-          () => `Message can't exceed 1000 characters`,
+          () => t('validation.messageMax'),
           maxLength(1000),
         ),
       },
