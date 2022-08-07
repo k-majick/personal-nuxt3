@@ -42,6 +42,8 @@ export default defineComponent({
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>()
     const isNavActivated = ref(false)
+    const router = useRouter()
+    const route = useRoute()
 
     const scrollListen = () => {
       window.addEventListener('scroll', () => {
@@ -54,8 +56,17 @@ export default defineComponent({
       })
     }
 
+    const setRoute = () => {
+      if (route.path === '/') {
+        router.push({
+          path: '/skills',
+        })
+      }
+    }
+
     onMounted(() => {
-      scrollListen()
+      setRoute();
+      scrollListen();
     })
 
     watch(
