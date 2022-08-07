@@ -12,8 +12,8 @@
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
-[[redirects]]
-  from = "/"
-  to = "/skills"
-  status = 301
-  force = true
+# [[redirects]]
+#   from = "/"
+#   to = "/skills"
+#   status = 301
+#   force = true

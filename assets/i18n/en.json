@@ -30,5 +30,17 @@
     "email": "e-mail",
     "message": "message",
     "gotoSite": "go to site"
+  },
+  "validation": {
+    "nameRequired": "Plsease enter your name",
+    "nameMin": "Name should contain at least 3 letters",
+    "nameMax": "Name can't exceed 30 letters",
+    "nameFormat": "Name may contain letters only",
+    "emailRequired": "Plsease enter your e-mail address",
+    "emailMax": "E-mail can't exceed 50 characters",
+    "emailInvalid": "Invalid e-mail address",
+    "messageRequired": "Plsease enter your message",
+    "messageMin": "Message is too short",
+    "messageMax": "Message can't exceed 1000 characters"
   }
 }

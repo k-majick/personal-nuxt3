@@ -30,5 +30,17 @@
     "email": "e-mail",
     "message": "wiadomość",
     "gotoSite": "Przejdź do strony"
+  },
+  "validation": {
+    "nameRequired": "Podaj swoje imię",
+    "nameMin": "Imię powinno zawierać co najmniej 3 litery",
+    "nameMax": "Imię nie może przekraczać 30 liter",
+    "nameFormat": "Imię może zawierać tylko litery",
+    "emailRequired": "Podaj swój adres e-mail",
+    "emailMax": "E-mail nie może przekraczać 50 znaków",
+    "emailInvalid": "Niepoprawny adres email",
+    "messageRequired": "Wpisz swoją wiadomość",
+    "messageMin": "Wiadomość jest za krótka",
+    "messageMax": "Wiadomość nie może przekraczać 1000 znaków"
   }
 }

@@ -30,5 +30,17 @@
     "email": "e-mail",
     "message": "nachricht",
     "gotoSite": "go to site"
+  },
+  "validation": {
+    "nameRequired": "Bitte geben Sie Ihren Namen ein",
+    "nameMin": "Der Name sollte mindestens 3 Buchstaben enthalten",
+    "nameMax": "Der Name darf 30 Buchstaben nicht überschreiten",
+    "nameFormat": "Name darf nur Buchstaben enthalten",
+    "emailRequired": "Bitte geben Sie Ihre E-Mailadresse ein",
+    "emailMax": "E-Mail darf 50 Zeichen nicht überschreiten",
+    "emailInvalid": "Ungültige E-Mail-Adresse",
+    "messageRequired": "Bitte geben Sie Ihre Nachricht ein",
+    "messageMin": "Nachricht ist zu kurz",
+    "messageMax": "Die Nachricht darf 1000 Zeichen nicht überschreiten"
   }
 }
