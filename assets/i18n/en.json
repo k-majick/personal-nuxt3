@@ -13,7 +13,8 @@
     "switch2lite": "Switch to lite mode",
     "switch2dark": "Switch to dark mode",
     "sentTitle": "Thank you for your message!",
-    "sentMessage": "I'll respond as soon as I can."
+    "sentMessage": "I'll respond as soon as I can.",
+    "sendError": "Sorry, something went wrong... Please reload and try again"
   },
   "content": {
     "and": "and",
@@ -32,14 +33,14 @@
     "gotoSite": "go to site"
   },
   "validation": {
-    "nameRequired": "Plsease enter your name",
+    "nameRequired": "Please enter your name",
     "nameMin": "Name should contain at least 3 letters",
     "nameMax": "Name can't exceed 30 letters",
     "nameFormat": "Name may contain letters only",
-    "emailRequired": "Plsease enter your e-mail address",
+    "emailRequired": "Please enter your e-mail address",
     "emailMax": "E-mail can't exceed 50 characters",
     "emailInvalid": "Invalid e-mail address",
-    "messageRequired": "Plsease enter your message",
+    "messageRequired": "Please enter your message",
     "messageMin": "Message is too short",
     "messageMax": "Message can't exceed 1000 characters"
   }

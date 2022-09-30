@@ -13,7 +13,8 @@
     "switch2lite": "In den Lichtmodus Wechseln",
     "switch2dark": "In den dunklen Modus Wechseln",
     "sentTitle": "Danke für deine Nachricht!",
-    "sentMessage": "Ich werde so schnell wie möglich antworten."
+    "sentMessage": "Ich werde so schnell wie möglich antworten.",
+    "sendError": "Entschuldigung, etwas ist schief gelaufen... Bitte neu laden und erneut versuchen"
   },
   "content": {
     "and": "und",

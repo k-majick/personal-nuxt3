@@ -84,6 +84,9 @@
           <p>{{ $t('content.sendIt') }}</p>
         </button>
       </div>
+      <div v-if="sendError.length" class="form__group form__group--errors">
+        <span class="form__alert">{{ sendError }}</span>
+      </div>
     </form>
 
     <Transition name="fade">
@@ -132,8 +135,9 @@ export default defineComponent({
     const contact: Ref<any> = ref(
       await pagesStore.getContact(settingsStore.currentLocale as string),
     )
-    const submitBtn: Ref<any> = ref<HTMLElement>()
+    const submitBtn: Ref<any> = ref<HTMLElement | undefined>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
+    const sendError = ref<string>("");
 
     const state = ref({
       name: '',
@@ -227,6 +231,7 @@ export default defineComponent({
         }
       } catch (e) {
         console.error(e)
+        sendError.value = t('content.sendError');
       }
     }
 
@@ -261,6 +266,7 @@ export default defineComponent({
       v$,
       processForm,
       sendForm,
+      sendError,
       submitBtn,
       toggleModal,
       openModal,
