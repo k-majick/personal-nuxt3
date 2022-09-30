@@ -13,7 +13,8 @@
     "switch2lite": "Tryb jasny",
     "switch2dark": "Tryb ciemny",
     "sentTitle": "Dziękuję za wiadomość!",
-    "sentMessage": "Odpowiem tak szybko, jak mogę."
+    "sentMessage": "Odpowiem tak szybko, jak mogę.",
+    "sendError": "Niestety coś poszło nie tak... Proszę przeładować stronę i spróbować ponownie"
   },
   "content": {
     "and": "i",

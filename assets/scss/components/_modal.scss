@@ -148,8 +148,15 @@
 
     &--message {
       #{$self} {
-        background: $color-white;
         padding: 45px;
+
+        &--dark {
+          box-shadow: 0 0 15px $color-green;
+        }
+
+        &--lite {
+          box-shadow: 0 0 15px $color-black;
+        }
       }
 
       #{$self}__close {

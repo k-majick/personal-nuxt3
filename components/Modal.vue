@@ -30,6 +30,11 @@ export default defineComponent({
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
 
+    watch(
+      () => settingsStore.currentTheme,
+      () => (theme.value = settingsStore.currentTheme),
+    )
+    
     return {
       theme,
     }
