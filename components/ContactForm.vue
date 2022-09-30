@@ -258,8 +258,6 @@ export default defineComponent({
         )),
     )
 
-    toggleModal(1, false)
-
     return {
       theme,
       marked,
