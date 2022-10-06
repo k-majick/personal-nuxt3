@@ -63,10 +63,12 @@ export default defineComponent({
 
     watch(
       () => settingsStore.currentLocale,
-      async () =>
-        (experience.value = await pagesStore.getExperience(
+      async () => {
+        experience.value = await pagesStore.getExperience(
           settingsStore.currentLocale as string,
-        )),
+        )
+        workplaces.value = experience.value ? sortItems([...experience.value.workplaces]) : []
+      },
     )
 
     return {
