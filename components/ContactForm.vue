@@ -137,7 +137,7 @@ export default defineComponent({
     )
     const submitBtn: Ref<any> = ref<HTMLElement | undefined>()
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
-    const sendError = ref<string>("");
+    const sendError = ref<string>('')
 
     const state = ref({
       name: '',
@@ -170,7 +170,10 @@ export default defineComponent({
         email: helpers.withMessage(t('validation.emailInvalid'), email),
       },
       message: {
-        required: helpers.withMessage(t('validation.messageRequired'), required),
+        required: helpers.withMessage(
+          t('validation.messageRequired'),
+          required,
+        ),
         minLength: helpers.withMessage(
           () => t('validation.messageMin'),
           minLength(10),
@@ -231,7 +234,7 @@ export default defineComponent({
         }
       } catch (e) {
         console.error(e)
-        sendError.value = t('content.sendError');
+        sendError.value = t('content.sendError')
       }
     }
 

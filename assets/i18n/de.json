@@ -1,7 +1,8 @@
 {
   "pages": {
     "skills": {
-      "title": "Skills"
+      "title": "Fähigkeiten",
+      "slug": "faehigkeiten"
     }
   },
   "messages": {

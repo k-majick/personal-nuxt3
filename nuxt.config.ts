@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import eslint from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({

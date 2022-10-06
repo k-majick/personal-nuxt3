@@ -68,6 +68,7 @@ export default defineComponent({
   setup() {
     const config = useRuntimeConfig()
     const route = useRoute()
+    const router = useRouter()
 
     const mainEl = inject(MainElKey)
     const headerEl = ref<HTMLElement>()
@@ -85,6 +86,15 @@ export default defineComponent({
       settingsStore.setLocale(l)
       localStorage.setItem('user-locale', l)
       availableLocales.value = setAvailableLocales()
+      setRouteParam(l)
+    }
+
+    const setRouteParam = (locale: string) => {
+      const pageSlug = route.path.split('/').pop()
+
+      router.replace({
+        path: `/${locale}/${pageSlug}`,
+      })
     }
 
     watch(
@@ -97,9 +107,7 @@ export default defineComponent({
       localStorage.setItem('user-theme', theme)
     }
 
-    localStorage.getItem('user-locale')
-      ? switchLocale(localStorage.getItem('user-locale') as string)
-      : switchLocale('en')
+    switchLocale(route.params.locale as string)
 
     localStorage.getItem('user-theme')
       ? toggleTheme(localStorage.getItem('user-theme') as string)
