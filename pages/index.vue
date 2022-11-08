@@ -93,6 +93,7 @@ definePageMeta({
 
 <style lang="scss">
 @import './assets/scss/components/_theme';
+@import './assets/scss/components/_loader';
 @import './assets/scss/components/_main';
 @import './assets/scss/components/_burger';
 

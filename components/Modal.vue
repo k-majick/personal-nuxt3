@@ -34,7 +34,7 @@ export default defineComponent({
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
     )
-    
+
     return {
       theme,
     }

@@ -67,7 +67,9 @@ export default defineComponent({
         experience.value = await pagesStore.getExperience(
           settingsStore.currentLocale as string,
         )
-        workplaces.value = experience.value ? sortItems([...experience.value.workplaces]) : []
+        workplaces.value = experience.value
+          ? sortItems([...experience.value.workplaces])
+          : []
       },
     )
 
