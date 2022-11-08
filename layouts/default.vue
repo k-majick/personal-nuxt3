@@ -1,7 +1,23 @@
 <template>
   <div :class="`theme theme--${theme}`">
     <div class="theme__background">
-      <p class="theme__loader">loading...</p>
+      <div class="loader__container">
+        <div class="loader">
+          <div class="loader__ray loader__ray--1"></div>
+          <div class="loader__ray loader__ray--2"></div>
+          <div class="loader__ray loader__ray--3"></div>
+          <div class="loader__ray loader__ray--4"></div>
+          <div class="loader__ray loader__ray--5"></div>
+          <div class="loader__ray loader__ray--6"></div>
+          <div class="loader__ray loader__ray--7"></div>
+          <div class="loader__ray loader__ray--8"></div>
+          <div class="loader__ray loader__ray--9"></div>
+          <div class="loader__ray loader__ray--10"></div>
+        </div>
+      </div>
+      <div v-hoverMessage="$t('messages.loading')" class="theme__loader">
+        <span class="tooltip" :class="`tooltip--${theme}`"></span>
+      </div>
     </div>
     <slot />
   </div>
@@ -9,8 +25,12 @@
 
 <script lang="ts">
 import { useSettingsStore } from '@/store/settings'
+import { hoverMessage } from '@/composables/hoverMessage'
 
 export default defineComponent({
+  directives: {
+    hoverMessage,
+  },
   setup() {
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)

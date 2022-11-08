@@ -1,0 +1,115 @@
+.loader {
+  position: absolute;
+  margin: auto;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 70px;
+  animation: rays 10s linear infinite;
+
+  &__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    opacity: 0.9;
+  }
+
+  &__ray {
+    background-image: linear-gradient(
+      to top,
+      transparent,
+      $color-white 50%,
+      transparent
+    );
+    border-radius: 80% 80% 0 0;
+    position: absolute;
+    opacity: 0.1;
+
+    &--1 {
+      height: 170px;
+      width: 30px;
+      transform: rotate(180deg);
+      top: -170px;
+      left: 20px;
+    }
+
+    &--2 {
+      height: 100px;
+      width: 10px;
+      transform: rotate(220deg);
+      top: -90px;
+      left: 90px;
+    }
+
+    &--3 {
+      height: 170px;
+      width: 50px;
+      transform: rotate(250deg);
+      top: -90px;
+      left: 120px;
+    }
+
+    &--4 {
+      height: 120px;
+      width: 14px;
+      transform: rotate(305deg);
+      top: 30px;
+      left: 100px;
+    }
+
+    &--5 {
+      height: 140px;
+      width: 30px;
+      transform: rotate(-15deg);
+      top: 60px;
+      left: 40px;
+    }
+
+    &--6 {
+      height: 90px;
+      width: 50px;
+      transform: rotate(30deg);
+      top: 60px;
+      left: -40px;
+    }
+
+    &--7 {
+      height: 180px;
+      width: 10px;
+      transform: rotate(70deg);
+      top: -20px;
+      left: -80px;
+    }
+
+    &--8 {
+      height: 120px;
+      width: 30px;
+      transform: rotate(100deg);
+      top: -45px;
+      left: -90px;
+    }
+
+    &--9 {
+      height: 80px;
+      width: 10px;
+      transform: rotate(120deg);
+      top: -60px;
+      left: -60px;
+    }
+
+    &--10 {
+      height: 190px;
+      width: 23px;
+      transform: rotate(150deg);
+      top: -185px;
+      left: -60px;
+    }
+  }
+}
