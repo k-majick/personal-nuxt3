@@ -16,14 +16,12 @@ export const hoverMessage = {
 
     bar.innerHTML = message as string
 
-    el.addEventListener('mouseenter', () => {
-      bar.classList.add('show')
-    })
+    el.addEventListener('mouseenter', () => bar.classList.add('show'))
 
     el.addEventListener('mousemove', (e: MouseEvent) => {
       const barRect = bar.getBoundingClientRect()
 
-      if (e.screenX + barRect.width + 20 > window.innerWidth) {
+      if (e.pageX + barRect.width + 20 > window.innerWidth) {
         bar.style.top = `calc(${e.offsetY}px + 15px)`
         bar.style.left = `calc(${e.offsetX}px - ${barRect.width}px - 15px)`
       } else {
@@ -32,9 +30,7 @@ export const hoverMessage = {
       }
     })
 
-    el.addEventListener('mouseleave', () => {
-      bar.classList.remove('show')
-    })
+    el.addEventListener('mouseleave', () => bar.classList.remove('show'))
   },
   updated(el: HTMLElement, binding: Binding) {
     const message = binding.value
