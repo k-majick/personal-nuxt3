@@ -2,7 +2,7 @@
   <div :class="`theme theme--${theme}`">
     <div class="theme__background">
       <div class="loader__container">
-        <div class="loader">
+        <div :class="`loader loader--${theme}`">
           <div class="loader__ray loader__ray--1"></div>
           <div class="loader__ray loader__ray--2"></div>
           <div class="loader__ray loader__ray--3"></div>
@@ -14,6 +14,7 @@
           <div class="loader__ray loader__ray--9"></div>
           <div class="loader__ray loader__ray--10"></div>
         </div>
+        <span class="loader__text">{{ $t('messages.loading') }}</span>
       </div>
       <div v-hoverMessage="$t('messages.loading')" class="theme__loader">
         <span class="tooltip" :class="`tooltip--${theme}`"></span>
