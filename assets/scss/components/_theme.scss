@@ -50,6 +50,10 @@
       }
     }
 
+    #{$self}__loader {
+      filter: drop-shadow(0 0 15px $color-green);
+    }
+
     #{$self}__background {
       background-color: $color-black;
     }
@@ -65,6 +69,10 @@
       &:after {
         background-image: url('@/assets/gfx/clf-logo-lite.svg');
       }
+    }
+
+    #{$self}__loader {
+      filter: drop-shadow(0 0 15px $color-blackish);
     }
 
     #{$self}__background {
