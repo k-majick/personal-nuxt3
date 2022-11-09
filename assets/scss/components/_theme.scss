@@ -3,7 +3,6 @@
   min-height: 100%;
 
   &__background {
-    background-color: $color-red;
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +21,10 @@
     height: 90px;
     position: relative;
 
+    @include media('<=m') {
+      transform: scale(0.9);
+    }
+
     &:after {
       content: '';
       display: block;
@@ -29,7 +32,6 @@
       width: 100%;
       height: 100%;
       left: 10px;
-      background-image: url('@/assets/gfx/clf-logo-white.svg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -37,11 +39,14 @@
   }
 
   &--dark {
-    background-color: $color-black;
     color: $color-white;
-
+    
     #{$self}__loader {
       filter: drop-shadow(0 0 15px $color-green);
+      
+      &:after {
+        background-image: url('@/assets/gfx/clf-logo-dark.svg');
+      }
     }
 
     #{$self}__background {
@@ -50,15 +55,18 @@
   }
 
   &--lite {
-    background-color: $color-white;
     color: $color-black;
-
+    
     #{$self}__loader {
-      filter: drop-shadow(0 0 15px $color-blackish);
+      filter: drop-shadow(0 0 15px $color-white);
+      
+      &:after {
+        background-image: url('@/assets/gfx/clf-logo-lite.svg');
+      }
     }
 
     #{$self}__background {
-      background-color: $color-red;
+      background-color: $color-silver-lite;
     }
   }
 }

@@ -1,4 +1,5 @@
 .loader {
+  $self: &;
   position: absolute;
   margin: auto;
   top: 0px;
@@ -6,7 +7,7 @@
   right: 0;
   bottom: 0;
   width: 70px;
-  animation: rays 10s linear infinite;
+  animation: rays 9s linear infinite;
 
   &__container {
     position: absolute;
@@ -21,16 +22,31 @@
     opacity: 0.9;
   }
 
+  &__text {
+    position: absolute;
+    top: calc(100% + 30px);
+    left: calc(50% + 30px);
+    font-size: 0.75em;
+    font-weight: thin;
+    letter-spacing: 1.5em;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+    white-space: nowrap;
+
+    @include media('>=l-s') {
+      display: none;
+    }
+
+    @include media('<=m') {
+      left: calc(50% + 15px);
+      font-size: 0.66em;
+    }
+  }
+
   &__ray {
-    background-image: linear-gradient(
-      to top,
-      transparent,
-      $color-white 50%,
-      transparent
-    );
     border-radius: 80% 80% 0 0;
     position: absolute;
-    opacity: 0.1;
 
     &--1 {
       height: 170px;
@@ -110,6 +126,42 @@
       transform: rotate(150deg);
       top: -185px;
       left: -60px;
+    }
+  }
+
+  &--lite {
+    filter: drop-shadow(0 0 15px $color-white);
+
+    #{$self}__ray {
+      background-image: linear-gradient(
+        to top,
+        transparent,
+        $color-red 50%,
+        transparent
+      );
+      opacity: 0.033;
+    }
+
+    & + #{$self}__text {
+      color: $color-black;
+    }
+  }
+
+  &--dark {
+    filter: drop-shadow(0 0 15px $color-green);
+
+    #{$self}__ray {
+      background-image: linear-gradient(
+        to top,
+        transparent,
+        $color-white 50%,
+        transparent
+      );
+      opacity: 0.125;
+    }
+
+    & + #{$self}__text {
+      color: $color-white;
     }
   }
 }
