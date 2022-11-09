@@ -43,7 +43,7 @@
     
     #{$self}__loader {
       filter: drop-shadow(0 0 15px $color-green);
-      
+
       &:after {
         background-image: url('@/assets/gfx/clf-logo-dark.svg');
       }
@@ -59,7 +59,7 @@
     
     #{$self}__loader {
       filter: drop-shadow(0 0 15px $color-white);
-      
+
       &:after {
         background-image: url('@/assets/gfx/clf-logo-lite.svg');
       }
