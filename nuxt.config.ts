@@ -18,7 +18,7 @@ export default defineNuxtConfig({
         },
         {
           name: 'msapplication-TileColor',
-          content: '#ffffff',
+          content: '#b91d47',
         },
         {
           name: 'theme-color',
@@ -32,33 +32,34 @@ export default defineNuxtConfig({
       link: [
         {
           rel: 'icon',
+          sizes: '16x16',
+          type: 'image/png',
+          href: '/favicon-16x16.png',
+        },
+        {
+          rel: 'icon',
           sizes: '32x32',
           type: 'image/png',
-          href: '/favicon-32.png',
-        },
-        {
-          rel: 'icon',
-          sizes: '128x128', // android
-          href: '/favicon-128.png',
-        },
-        {
-          rel: 'apple-touch-icon',
-          sizes: '180x180', // safari
-          href: '/favicon-180.png',
-        },
-        {
-          rel: 'icon',
-          sizes: '192x192', // android-chrome
-          href: '/favicon-192.png',
+          href: '/favicon-32x32.png',
         },
         {
           rel: 'icon',
           sizes: '228x228', // opera
-          href: '/favicon-228.png',
+          type: 'image/png',
+          href: '/favicon-228x228.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '180x180',
+          href: '/favicon-180x180.png',
         },
         {
           rel: 'mask-icon',
           href: '/safari-pinned-tab.svg',
+        },
+        {
+          rel: 'manifest',
+          href: '/site.webmanifest',
         },
         {
           rel: 'stylesheet',
