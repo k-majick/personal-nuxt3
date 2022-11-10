@@ -28,6 +28,10 @@ export default defineNuxtConfig({
           property: 'og:image',
           content: '/clf-og-min.png',
         },
+        {
+          name: 'application-name',
+          content: `${process.env.APP_NAME}`,
+        },
       ],
       link: [
         {
@@ -44,9 +48,21 @@ export default defineNuxtConfig({
         },
         {
           rel: 'icon',
-          sizes: '228x228', // opera
+          sizes: '192x192',
+          type: 'image/png',
+          href: '/android-chrome-192x192.png',
+        },
+        {
+          rel: 'icon',
+          sizes: '228x228',
           type: 'image/png',
           href: '/favicon-228x228.png',
+        },
+        {
+          rel: 'icon',
+          sizes: '512x512',
+          type: 'image/png',
+          href: '/android-chrome-512x512.png',
         },
         {
           rel: 'apple-touch-icon',
@@ -56,6 +72,7 @@ export default defineNuxtConfig({
         {
           rel: 'mask-icon',
           href: '/safari-pinned-tab.svg',
+          color: '#ffffff',
         },
         {
           rel: 'manifest',
