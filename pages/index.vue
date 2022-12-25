@@ -1,7 +1,7 @@
 <template>
-  <Header ref="headerComponent" />
+  <Header v-if="!isLoadError" ref="headerComponent" />
 
-  <main ref="mainEl" :class="`main main--${theme}`">
+  <main v-if="!isLoadError" ref="mainEl" :class="`main main--${theme}`">
     <div class="main__background"></div>
     <div
       class="burger"
@@ -30,12 +30,15 @@
 
 <script lang="ts">
 import type { Ref } from 'vue'
+import { usePagesStore } from '@/store/pages'
 import { useSettingsStore } from '@/store/settings'
 import { MainElKey, HeaderElKey } from '@/symbols/symbols'
 
 export default defineComponent({
   layout: 'default',
   setup() {
+    const pagesStore = usePagesStore()
+    const isLoadError = ref(pagesStore.loadError) 
     const settingsStore = useSettingsStore()
     const theme = ref(settingsStore.currentTheme)
     const headerComponent: Ref<any> = ref()
@@ -59,13 +62,18 @@ export default defineComponent({
     })
 
     watch(
+      () => pagesStore.loadError,
+      () => isLoadError.value = pagesStore.loadError,
+    )
+
+    watch(
       () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => theme.value = settingsStore.currentTheme,
     )
 
     watch(
       () => headerComponent.value,
-      () => (headerEl.value = headerComponent.value.headerEl),
+      () => headerEl.value = headerComponent.value.headerEl,
     )
 
     provide(MainElKey, mainEl)
@@ -82,6 +90,8 @@ export default defineComponent({
       mainEl,
       headerComponent,
       isNavActivated,
+      isLoadError,
+      pagesStore,
     }
   },
 })

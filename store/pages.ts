@@ -11,6 +11,8 @@ import {
 } from '@/api/queries'
 
 interface IPagesState {
+  loading: boolean
+  loadError: boolean
   page: null | Record<string, unknown>
   pages: null | Record<string, unknown>
   skills: null | Record<string, unknown>
@@ -24,6 +26,8 @@ interface IPagesState {
 export const usePagesStore = defineStore({
   id: 'pages-store',
   state: (): IPagesState => ({
+    loading: false,
+    loadError: false,
     page: null,
     pages: null,
     skills: null,
@@ -35,22 +39,27 @@ export const usePagesStore = defineStore({
   }),
   actions: {
     async getPage(locale: string, id: number) {
+      this.loading = true
+      console.dir('getPage') // eslint-disable-line
       const { $apolloClient } = useNuxtApp()
-
+      
       try {
         const res = await $apolloClient.query({
           query: GET_PAGE(locale, id),
         })
 
         this.page = res.data.page.data
+        this.loading = false
 
         return this.page
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getPages(locale: string) {
+      this.loading = true
       const { $apolloClient } = useNuxtApp()
 
       try {
@@ -59,30 +68,37 @@ export const usePagesStore = defineStore({
         })
 
         this.pages = res.data.pages.data
+        this.loading = false
 
         return this.pages
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getSkills(locale: string) {
+      this.loading = true
+      
       const { $apolloClient } = useNuxtApp()
-
+      
       try {
         const res = await $apolloClient.query({
           query: GET_SKILLS(locale),
         })
-
+        
         this.skills = res.data.skills.data.attributes
-
+        this.loading = false
+        
         return this.skills
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getTechnology(locale: string) {
+      this.loading = true
       const { $apolloClient } = useNuxtApp()
 
       try {
@@ -91,14 +107,17 @@ export const usePagesStore = defineStore({
         })
 
         this.technology = res.data.technology.data.attributes
+        this.loading = false
 
         return this.technology
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getExperience(locale: string) {
+      this.loading = true
       const { $apolloClient } = useNuxtApp()
 
       try {
@@ -107,14 +126,17 @@ export const usePagesStore = defineStore({
         })
 
         this.experience = res.data.experience.data.attributes
+        this.loading = false
 
         return this.experience
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getPortfolio(locale: string) {
+      this.loading = true
       const { $apolloClient } = useNuxtApp()
 
       try {
@@ -123,14 +145,17 @@ export const usePagesStore = defineStore({
         })
 
         this.portfolio = res.data.portfolio.data.attributes
+        this.loading = false
 
         return this.portfolio
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getContact(locale: string) {
+      this.loading = true
       const { $apolloClient } = useNuxtApp()
 
       try {
@@ -139,14 +164,17 @@ export const usePagesStore = defineStore({
         })
 
         this.contact = res.data.contact.data.attributes
+        this.loading = false
 
         return this.contact
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
 
     async getInspiration(locale: string) {
+      this.loading = true
       const { $apolloClient } = useNuxtApp()
 
       try {
@@ -155,10 +183,12 @@ export const usePagesStore = defineStore({
         })
 
         this.inspiration = res.data.inspiration.data.attributes
+        this.loading = false
 
         return this.inspiration
       } catch (error) {
         console.error(error)
+        this.loadError = true
       }
     },
   },
