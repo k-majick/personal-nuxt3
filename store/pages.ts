@@ -40,7 +40,6 @@ export const usePagesStore = defineStore({
   actions: {
     async getPage(locale: string, id: number) {
       this.loading = true
-      console.dir('getPage') // eslint-disable-line
       const { $apolloClient } = useNuxtApp()
       
       try {
