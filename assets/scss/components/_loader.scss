@@ -34,10 +34,6 @@
     transform: translateX(-50%);
     white-space: nowrap;
 
-    @include media('>=l-s') {
-      display: none;
-    }
-
     @include media('<=m') {
       left: calc(50% + 15px);
       font-size: 0.66em;
