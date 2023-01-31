@@ -18,11 +18,9 @@
 
     <div class="main__container">
       <router-view v-slot="{ Component, route }">
-        <Transition name="fade" mode="out-in">
-          <div :key="(route.name as string)">
-            <component :is="Component" />
-          </div>
-        </Transition>
+        <transition name="fade" mode="out-in">
+          <component :is="Component" :key="(route.name as string)" />
+        </transition>
       </router-view>
     </div>
   </main>

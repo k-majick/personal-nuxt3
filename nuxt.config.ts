@@ -94,7 +94,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  publicRuntimeConfig: {
+  runtimeConfig: {
     apiUrl: process.env.API_URL || 'http://localhost:3000',
     appName: process.env.APP_NAME,
     appTitle: process.env.APP_TITLE,
@@ -102,7 +102,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@apollo/client', 'ts-invariant/process'],
   },
-  buildModules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt'],
   router: {
     options: {
       linkActiveClass: 'active',
