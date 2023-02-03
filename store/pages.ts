@@ -39,16 +39,11 @@ export const usePagesStore = defineStore({
   }),
   actions: {
     async getPage(locale: string, id: number) {
-      this.loading = true
-      const { $apolloClient } = useNuxtApp()
-      
-      try {
-        const res = await $apolloClient.query({
-          query: GET_PAGE(locale, id),
-        })
+      try { 
+        const res = await useAsyncQuery(GET_PAGE(locale, id));
 
-        this.page = res.data.page.data
-        this.loading = false
+        this.page = (res as any).data.value.page.data;
+        this.loading = false;
 
         return this.page
       } catch (error) {
@@ -59,14 +54,11 @@ export const usePagesStore = defineStore({
 
     async getPages(locale: string) {
       this.loading = true
-      const { $apolloClient } = useNuxtApp()
 
       try {
-        const res = await $apolloClient.query({
-          query: GET_PAGES(locale),
-        })
+        const res = await useAsyncQuery(GET_PAGES(locale));
 
-        this.pages = res.data.pages.data
+        this.pages = (res as any).data.value.pages.data
         this.loading = false
 
         return this.pages
@@ -79,14 +71,10 @@ export const usePagesStore = defineStore({
     async getSkills(locale: string) {
       this.loading = true
       
-      const { $apolloClient } = useNuxtApp()
-      
       try {
-        const res = await $apolloClient.query({
-          query: GET_SKILLS(locale),
-        })
+        const res = await useAsyncQuery(GET_SKILLS(locale));
         
-        this.skills = res.data.skills.data.attributes
+        this.skills = (res as any).data.value.skills.data.attributes
         this.loading = false
         
         return this.skills
@@ -98,14 +86,11 @@ export const usePagesStore = defineStore({
 
     async getTechnology(locale: string) {
       this.loading = true
-      const { $apolloClient } = useNuxtApp()
 
       try {
-        const res = await $apolloClient.query({
-          query: GET_TECHNOLOGY(locale),
-        })
+        const res = await useAsyncQuery(GET_TECHNOLOGY(locale));
 
-        this.technology = res.data.technology.data.attributes
+        this.technology = (res as any).data.value.technology.data.attributes
         this.loading = false
 
         return this.technology
@@ -117,14 +102,11 @@ export const usePagesStore = defineStore({
 
     async getExperience(locale: string) {
       this.loading = true
-      const { $apolloClient } = useNuxtApp()
 
       try {
-        const res = await $apolloClient.query({
-          query: GET_EXPERIENCE(locale),
-        })
+        const res = await useAsyncQuery(GET_EXPERIENCE(locale));
 
-        this.experience = res.data.experience.data.attributes
+        this.experience = (res as any).data.value.experience.data.attributes
         this.loading = false
 
         return this.experience
@@ -136,14 +118,11 @@ export const usePagesStore = defineStore({
 
     async getPortfolio(locale: string) {
       this.loading = true
-      const { $apolloClient } = useNuxtApp()
 
       try {
-        const res = await $apolloClient.query({
-          query: GET_PORTFOLIO(locale),
-        })
+        const res = await useAsyncQuery(GET_PORTFOLIO(locale));
 
-        this.portfolio = res.data.portfolio.data.attributes
+        this.portfolio = (res as any).data.value.portfolio.data.attributes
         this.loading = false
 
         return this.portfolio
@@ -155,14 +134,11 @@ export const usePagesStore = defineStore({
 
     async getContact(locale: string) {
       this.loading = true
-      const { $apolloClient } = useNuxtApp()
 
       try {
-        const res = await $apolloClient.query({
-          query: GET_CONTACT(locale),
-        })
+        const res = await useAsyncQuery(GET_CONTACT(locale));
 
-        this.contact = res.data.contact.data.attributes
+        this.contact = (res as any).data.value.contact.data.attributes
         this.loading = false
 
         return this.contact
@@ -174,14 +150,11 @@ export const usePagesStore = defineStore({
 
     async getInspiration(locale: string) {
       this.loading = true
-      const { $apolloClient } = useNuxtApp()
 
       try {
-        const res = await $apolloClient.query({
-          query: GET_INSPIRATION(locale),
-        })
+        const res = await useAsyncQuery(GET_INSPIRATION(locale));
 
-        this.inspiration = res.data.inspiration.data.attributes
+        this.inspiration = (res as any).data.value.inspiration.data.attributes
         this.loading = false
 
         return this.inspiration

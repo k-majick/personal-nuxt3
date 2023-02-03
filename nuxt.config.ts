@@ -94,20 +94,22 @@ export default defineNuxtConfig({
       ],
     },
   },
-  runtimeConfig: {
-    apiUrl: process.env.API_URL || 'http://localhost:3000',
-    appName: process.env.APP_NAME,
-    appTitle: process.env.APP_TITLE,
-  },
   build: {
-    transpile: ['@apollo/client', 'ts-invariant/process'],
+    transpile: [
+      '@vue/apollo-composable'
+    ]
   },
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxtjs/apollo'],
   router: {
     options: {
       linkActiveClass: 'active',
       linkExactActiveClass: 'active',
     },
+  },
+  runtimeConfig: {
+    apiUrl: process.env.API_URL,
+    appName: process.env.APP_NAME,
+    appTitle: process.env.APP_TITLE,
   },
   vite: {
     plugins: [eslint()],
@@ -118,5 +120,12 @@ export default defineNuxtConfig({
         },
       },
     },
+  },      
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: process.env.API_URL,
+      }
+    }
   },
 })

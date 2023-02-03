@@ -70,6 +70,8 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
 
+    console.dir(config); //eslint-disable-line
+
     const mainEl = inject(MainElKey)
     const headerEl = ref<HTMLElement>()
 
