@@ -107,9 +107,14 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    apiUrl: process.env.API_URL,
-    appName: process.env.APP_NAME,
-    appTitle: process.env.APP_TITLE,
+    public: {
+      appName: process.env.APP_NAME,
+      appTitle: process.env.APP_TITLE,
+      appEmail: process.env.APP_EMAIL,
+    },
+    private: {
+      apiUrl: process.env.API_URL,
+    },
   },
   vite: {
     plugins: [eslint()],
