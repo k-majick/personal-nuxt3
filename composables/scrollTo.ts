@@ -1,9 +1,9 @@
 export default ($event: MouseEvent, target: HTMLElement | undefined) => {
   if (!target) {
-    return
+    return;
   }
 
   target.scrollIntoView({
     behavior: 'smooth',
-  })
-}
+  });
+};

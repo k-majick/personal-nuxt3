@@ -51,67 +51,67 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings'
-import { MainElKey } from '@/symbols/symbols'
-import scrollTo from '@/composables/scrollTo'
-import iconSun from '@/assets/gfx/icon-sun.svg?raw'
-import iconMoon from '@/assets/gfx/icon-moon.svg?raw'
-import DOMPurify from 'dompurify'
-import { ILocale, locales } from '@/composables/i18n'
-import { useI18n } from 'vue-i18n'
-import { hoverMessage } from '@/composables/hoverMessage'
+import { useSettingsStore } from '@/store/settings';
+import { MainElKey } from '@/symbols/symbols';
+import scrollTo from '@/composables/scrollTo';
+import iconSun from '@/assets/gfx/icon-sun.svg?raw';
+import iconMoon from '@/assets/gfx/icon-moon.svg?raw';
+import DOMPurify from 'dompurify';
+import { ILocale, locales } from '@/composables/i18n';
+import { useI18n } from 'vue-i18n';
+import { hoverMessage } from '@/composables/hoverMessage';
 
 export default defineComponent({
   directives: {
     hoverMessage,
   },
   setup() {
-    const config = useRuntimeConfig()
-    const route = useRoute()
-    const router = useRouter()
+    const config = useRuntimeConfig();
+    const route = useRoute();
+    const router = useRouter();
 
-    const mainEl = inject(MainElKey)
-    const headerEl = ref<HTMLElement>()
+    const mainEl = inject(MainElKey);
+    const headerEl = ref<HTMLElement>();
 
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
 
-    const { locale } = useI18n({ useScope: 'global' })
+    const { locale } = useI18n({ useScope: 'global' });
     const setAvailableLocales = () =>
-      locales.filter(l => l.code !== locale.value)
-    const availableLocales = ref<ILocale[]>(setAvailableLocales())
+      locales.filter(l => l.code !== locale.value);
+    const availableLocales = ref<ILocale[]>(setAvailableLocales());
 
     const switchLocale = (l: string) => {
-      locale.value = l
-      settingsStore.setLocale(l)
-      localStorage.setItem('user-locale', l)
-      availableLocales.value = setAvailableLocales()
-      setRouteParam(l)
-    }
+      locale.value = l;
+      settingsStore.setLocale(l);
+      localStorage.setItem('user-locale', l);
+      availableLocales.value = setAvailableLocales();
+      setRouteParam(l);
+    };
 
     const setRouteParam = (locale: string) => {
-      const pageSlug = route.path.split('/').pop()
+      const pageSlug = route.path.split('/').pop();
 
       router.replace({
         path: `/${locale}/${pageSlug}`,
-      })
-    }
+      });
+    };
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     const toggleTheme = (theme: string) => {
-      settingsStore.setTheme(theme)
-      localStorage.setItem('user-theme', theme)
-    }
+      settingsStore.setTheme(theme);
+      localStorage.setItem('user-theme', theme);
+    };
 
-    switchLocale(route.params.locale as string)
+    switchLocale(route.params.locale as string);
 
     localStorage.getItem('user-theme')
       ? toggleTheme(localStorage.getItem('user-theme') as string)
-      : toggleTheme('lite')
+      : toggleTheme('lite');
 
     return {
       scrollTo,
@@ -128,9 +128,9 @@ export default defineComponent({
       availableLocales,
       switchLocale,
       hoverMessage,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

@@ -1,45 +1,45 @@
-'use strict'
-const express = require('express')
-const serverless = require('serverless-http')
-const nodemailer = require('nodemailer')
-const formidable = require('express-formidable')
-const app = express()
-const router = express.Router()
+'use strict';
+const express = require('express');
+const serverless = require('serverless-http');
+const nodemailer = require('nodemailer');
+const formidable = require('express-formidable');
+const app = express();
+const router = express.Router();
 
-require('dotenv').config()
+require('dotenv').config();
 
-const emailTo = process.env.EMAIL
-const clientId = process.env.CLIENT_ID
-const clientSecret = process.env.CLIENT_SECRET
-const redirectUrl = process.env.REDIRECT_URL
-const refreshToken = process.env.REFRESH_TOKEN
+const emailTo = process.env.EMAIL;
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+const redirectUrl = process.env.REDIRECT_URL;
+const refreshToken = process.env.REFRESH_TOKEN;
 
-app.use(formidable())
-app.use('/.netlify/functions/send-email', router) // path must route to lambda
+app.use(formidable());
+app.use('/.netlify/functions/send-email', router); // path must route to lambda
 
 router.post('/', async (req, res) => {
   await sendEmail(req.fields).then(r => {
     if (r === 200) {
       res.status(201).json({
         status: 'ok',
-      })
+      });
     } else {
       res.status(400).json({
         status: 'fail...',
-      })
+      });
     }
-  })
-})
+  });
+});
 
-const { google } = require('googleapis')
-const OAuth2 = google.auth.OAuth2
-const oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl)
+const { google } = require('googleapis');
+const OAuth2 = google.auth.OAuth2;
+const oauth2Client = new OAuth2(clientId, clientSecret, redirectUrl);
 
 oauth2Client.setCredentials({
   refresh_token: refreshToken,
-})
+});
 
-const accessToken = oauth2Client.getAccessToken()
+const accessToken = oauth2Client.getAccessToken();
 
 const sendEmail = async data => {
   const transporter = nodemailer.createTransport({
@@ -55,7 +55,7 @@ const sendEmail = async data => {
       refreshToken: refreshToken,
       accessToken: accessToken,
     },
-  })
+  });
 
   const mailOptions = {
     from: `${data.name} <${data.email}>`,
@@ -63,15 +63,15 @@ const sendEmail = async data => {
     subject: `Message from <${data.email}>`,
     generateTextFromHTML: true,
     html: data.message,
-  }
+  };
 
-  const info = await transporter.sendMail(mailOptions)
+  const info = await transporter.sendMail(mailOptions);
 
   if (info.messageId) {
-    return 200
+    return 200;
   } else {
-    return 400
+    return 400;
   }
-}
+};
 
-module.exports.handler = serverless(app)
+module.exports.handler = serverless(app);

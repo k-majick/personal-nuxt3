@@ -34,44 +34,44 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
+import type { Ref } from 'vue';
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default defineComponent({
   async setup() {
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
     const experience: Ref<any> = ref(
       await pagesStore.getExperience(settingsStore.currentLocale as string),
-    )
+    );
 
     const sortItems = (pagesArr: Record<string, any>[]) =>
-      pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1))
+      pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1));
 
     const workplaces = ref(
       experience.value ? sortItems([...experience.value.workplaces]) : [],
-    )
+    );
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     watch(
       () => settingsStore.currentLocale,
       async () => {
         experience.value = await pagesStore.getExperience(
           settingsStore.currentLocale as string,
-        )
+        );
         workplaces.value = experience.value
           ? sortItems([...experience.value.workplaces])
-          : []
+          : [];
       },
-    )
+    );
 
     return {
       marked,
@@ -79,9 +79,9 @@ export default defineComponent({
       workplaces,
       DOMPurify,
       theme,
-    }
+    };
   },
-})
+});
 </script>
 
 <style scoped lang="scss">

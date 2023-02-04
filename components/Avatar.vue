@@ -17,29 +17,29 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings'
-import { hoverMessage } from '@/composables/hoverMessage'
-import DOMPurify from 'dompurify'
+import { useSettingsStore } from '@/store/settings';
+import { hoverMessage } from '@/composables/hoverMessage';
+import DOMPurify from 'dompurify';
 
 export default defineComponent({
   directives: {
     hoverMessage,
   },
   setup() {
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     return {
       DOMPurify,
       theme,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

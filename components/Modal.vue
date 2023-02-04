@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings'
+import { useSettingsStore } from '@/store/settings';
 
 export default defineComponent({
   props: {
@@ -27,17 +27,17 @@ export default defineComponent({
   },
   emits: ['close'],
   setup() {
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     return {
       theme,
-    }
+    };
   },
-})
+});
 </script>

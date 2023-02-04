@@ -19,25 +19,25 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
+import type { Ref } from 'vue';
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default defineComponent({
   async setup() {
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
     const technology: Ref<any> = ref(
       await pagesStore.getTechnology(settingsStore.currentLocale as string),
-    )
+    );
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     watch(
       () => settingsStore.currentLocale,
@@ -45,16 +45,16 @@ export default defineComponent({
         (technology.value = await pagesStore.getTechnology(
           settingsStore.currentLocale as string,
         )),
-    )
+    );
 
     return {
       marked,
       technology,
       DOMPurify,
       theme,
-    }
+    };
   },
-})
+});
 </script>
 
 <style scoped lang="scss">

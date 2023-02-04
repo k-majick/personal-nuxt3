@@ -62,16 +62,16 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { hoverMessage } from '@/composables/hoverMessage'
-import scrollTo from '@/composables/scrollTo'
-import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw'
-import { MainElKey, HeaderElKey } from '@/symbols/symbols'
-import iconGit from '@/assets/gfx/icon-git-min.svg?raw'
-import rawCat from '@/assets/gfx/cat_1.svg?raw'
-import DOMPurify from 'dompurify'
+import type { Ref } from 'vue';
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { hoverMessage } from '@/composables/hoverMessage';
+import scrollTo from '@/composables/scrollTo';
+import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw';
+import { MainElKey, HeaderElKey } from '@/symbols/symbols';
+import iconGit from '@/assets/gfx/icon-git-min.svg?raw';
+import rawCat from '@/assets/gfx/cat_1.svg?raw';
+import DOMPurify from 'dompurify';
 
 export default defineComponent({
   directives: {
@@ -82,19 +82,19 @@ export default defineComponent({
   },
   emits: ['closeNav'],
   async setup() {
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
 
-    const isActive = ref(false)
-    const theme = ref(settingsStore.currentTheme)
+    const isActive = ref(false);
+    const theme = ref(settingsStore.currentTheme);
 
-    const headerEl = inject(HeaderElKey)
-    const mainEl = inject(MainElKey)
+    const headerEl = inject(HeaderElKey);
+    const mainEl = inject(MainElKey);
 
     const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr
         .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-        .filter(item => item.attributes.slug !== 'inspiration')
+        .filter(item => item.attributes.slug !== 'inspiration');
 
     const pages: Ref<any> = ref(
       sortItems([
@@ -102,32 +102,32 @@ export default defineComponent({
           settingsStore.currentLocale as string,
         )) as unknown as []),
       ]),
-    )
+    );
 
     const killModal = () => {
-      const body = document.body
+      const body = document.body;
 
       if (body.classList.contains('locked')) {
-        toggleModal(0, true)
+        toggleModal(0, true);
       }
-    }
+    };
 
     const handleScroll = () => {
       if (!mainEl || !mainEl.value) {
-        return
+        return;
       }
 
       mainEl.value.getBoundingClientRect().top < 100
         ? (isActive.value = true)
-        : (isActive.value = false)
-    }
+        : (isActive.value = false);
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll);
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     watch(
       () => settingsStore.currentLocale,
@@ -137,7 +137,7 @@ export default defineComponent({
             settingsStore.currentLocale as string,
           )) as unknown as []),
         ])),
-    )
+    );
 
     return {
       isActive,
@@ -151,9 +151,9 @@ export default defineComponent({
       DOMPurify,
       theme,
       killModal,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

@@ -28,43 +28,43 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
+import type { Ref } from 'vue';
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default defineComponent({
   components: {},
   async setup() {
-    const config = useRuntimeConfig()
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
+    const config = useRuntimeConfig();
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
     const pageData: Ref<any> = ref(
       await pagesStore.getPage(settingsStore.currentLocale as string, 5),
-    )
+    );
     const inspiration: Ref<any> = ref(
       await pagesStore.getInspiration(settingsStore.currentLocale as string),
-    )
-    const theme = ref(settingsStore.currentTheme)
+    );
+    const theme = ref(settingsStore.currentTheme);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
-    })
+    });
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     return {
       marked,
       inspiration,
       DOMPurify,
       theme,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

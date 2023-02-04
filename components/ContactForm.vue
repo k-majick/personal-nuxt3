@@ -81,7 +81,7 @@
           type="submit"
           @click="sendForm"
         >
-          <p>{{ $t('content.sendIt') }}</p>
+          {{ $t('content.sendIt') }}
         </button>
       </div>
       <div v-if="sendError.length" class="form__group form__group--errors">
@@ -111,39 +111,39 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { useSettingsStore } from '@/store/settings'
-import { usePagesStore } from '@/store/pages'
-import { marked } from 'marked'
-import useVuelidate from '@vuelidate/core'
+import type { Ref } from 'vue';
+import { useSettingsStore } from '@/store/settings';
+import { usePagesStore } from '@/store/pages';
+import { marked } from 'marked';
+import useVuelidate from '@vuelidate/core';
 import {
   email,
   minLength,
   maxLength,
   required,
   helpers,
-} from '@vuelidate/validators'
-import { useI18n } from 'vue-i18n'
-import DOMPurify from 'dompurify'
+} from '@vuelidate/validators';
+import { useI18n } from 'vue-i18n';
+import DOMPurify from 'dompurify';
 
 export default defineComponent({
   async setup() {
-    const { t } = useI18n()
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const { t } = useI18n();
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
     const contact: Ref<any> = ref(
       await pagesStore.getContact(settingsStore.currentLocale as string),
-    )
-    const submitBtn: Ref<any> = ref<HTMLElement | undefined>()
-    const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/)
-    const sendError = ref<string>('')
+    );
+    const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
+    const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
+    const sendError = ref<string>('');
 
     const state = ref({
       name: '',
       email: '',
       message: '',
-    })
+    });
 
     const rules = {
       name: {
@@ -183,9 +183,9 @@ export default defineComponent({
           maxLength(1000),
         ),
       },
-    }
+    };
 
-    const v$ = useVuelidate(rules, state)
+    const v$ = useVuelidate(rules, state);
 
     watch(
       () => v$.value.$invalid,
@@ -193,28 +193,28 @@ export default defineComponent({
         v$.value.$invalid === true
           ? (submitBtn.value.disabled = true)
           : (submitBtn.value.disabled = false),
-    )
+    );
 
     const processForm = () => {
-      v$.value.$touch()
+      v$.value.$touch();
       v$.value.$invalid === true
         ? (submitBtn.value.disabled = true)
-        : (submitBtn.value.disabled = false)
-    }
+        : (submitBtn.value.disabled = false);
+    };
 
     const sendForm = async () => {
       if (v$.value.$invalid === true) {
-        return
+        return;
       }
 
-      submitBtn.value.disabled = true
-      submitBtn.value.innerHTML = `<p>${t('content.sending')}</p>`
+      submitBtn.value.disabled = true;
+      submitBtn.value.innerHTML = `<p>${t('content.sending')}</p>`;
 
-      const fd = new FormData()
+      const fd = new FormData();
 
-      fd.append('name', v$.value.name.$model)
-      fd.append('email', v$.value.email.$model)
-      fd.append('message', v$.value.message.$model)
+      fd.append('name', v$.value.name.$model);
+      fd.append('email', v$.value.email.$model);
+      fd.append('message', v$.value.message.$model);
 
       // for (let pair of fd.entries()) {
       //   console.log(pair[0] + ', ' + pair[1])
@@ -227,31 +227,31 @@ export default defineComponent({
             method: 'POST',
             body: fd,
           },
-        )
+        );
 
         if (res?.status === 'ok') {
-          toggleModal(1, false)
+          toggleModal(1, false);
         }
       } catch (e) {
-        console.error(e)
-        sendError.value = t('content.sendError')
+        console.error(e);
+        sendError.value = t('content.sendError');
       }
-    }
+    };
 
     const resetForm = () => {
-      v$.value.$reset()
-      submitBtn.value.innerHTML = `<p>${t('content.sendIt')}</p>`
+      v$.value.$reset();
+      submitBtn.value.innerHTML = `<p>${t('content.sendIt')}</p>`;
       state.value = {
         name: '',
         email: '',
         message: '',
-      }
-    }
+      };
+    };
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     watch(
       () => settingsStore.currentLocale,
@@ -259,7 +259,7 @@ export default defineComponent({
         (contact.value = await pagesStore.getContact(
           settingsStore.currentLocale as string,
         )),
-    )
+    );
 
     return {
       theme,
@@ -275,9 +275,9 @@ export default defineComponent({
       openModal,
       resetForm,
       DOMPurify,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

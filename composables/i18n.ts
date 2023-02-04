@@ -1,6 +1,6 @@
 export interface ILocale {
-  name: string
-  code: string
+  name: string;
+  code: string;
 }
 
 export const locales: ILocale[] = [
@@ -16,4 +16,4 @@ export const locales: ILocale[] = [
     name: 'Polski',
     code: 'pl',
   },
-]
+];

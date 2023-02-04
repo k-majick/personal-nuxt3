@@ -1,42 +1,42 @@
-const activeModal = ref(0)
+const activeModal = ref(0);
 
 export const toggleModal = (id: number, useLock: boolean) => {
   if (activeModal.value !== 0) {
-    activeModal.value = 0
+    activeModal.value = 0;
 
     if (useLock === true) {
-      scrollUnlock()
+      scrollUnlock();
     }
 
-    return false
+    return false;
   }
 
-  activeModal.value = id
+  activeModal.value = id;
 
   if (useLock === true) {
-    scrollLock()
+    scrollLock();
   }
-}
+};
 
-export const openModal = (id: number) => activeModal.value === id
+export const openModal = (id: number) => activeModal.value === id;
 
 export const scrollLock = () => {
-  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y')
-  const body = document.body
+  const scrollY = document.documentElement.style.getPropertyValue('--scroll-y');
+  const body = document.body;
 
-  body.classList.add('locked')
-  body.style.width = '100%'
-  body.style.position = 'fixed'
-  body.style.top = `-${scrollY}`
-}
+  body.classList.add('locked');
+  body.style.width = '100%';
+  body.style.position = 'fixed';
+  body.style.top = `-${scrollY}`;
+};
 
 export const scrollUnlock = () => {
-  const scrollY = document.body.style.top
-  const body = document.body
+  const scrollY = document.body.style.top;
+  const body = document.body;
 
-  body.classList.remove('locked')
-  body.style.width = '100%'
-  body.style.position = ''
-  body.style.top = ''
-  window.scrollTo(0, parseInt(scrollY || '0') * -1)
-}
+  body.classList.remove('locked');
+  body.style.width = '100%';
+  body.style.position = '';
+  body.style.top = '';
+  window.scrollTo(0, parseInt(scrollY || '0') * -1);
+};

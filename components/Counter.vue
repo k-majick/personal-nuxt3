@@ -34,39 +34,39 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings'
+import { useSettingsStore } from '@/store/settings';
 
 export default defineComponent({
   setup() {
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
 
     const counter = (what: string) => {
-      const now = new Date().valueOf()
-      const countFrom = new Date('sep,01,2015,00:00:00').valueOf()
-      const diff = now - countFrom
-      const day = 1000 * 60 * 60 * 24
-      const days = Math.floor(diff / day)
-      const months = Math.floor(days / 31)
-      const years = Math.floor(months / 12)
-      const diffMonths = Math.floor(months % 12) + 1
+      const now = new Date().valueOf();
+      const countFrom = new Date('sep,01,2015,00:00:00').valueOf();
+      const diff = now - countFrom;
+      const day = 1000 * 60 * 60 * 24;
+      const days = Math.floor(diff / day);
+      const months = Math.floor(days / 31);
+      const years = Math.floor(months / 12);
+      const diffMonths = Math.floor(months % 12) + 1;
 
       switch (true) {
         case what == 'y':
-          return years
+          return years;
         case what == 'm':
-          return diffMonths
+          return diffMonths;
         default:
-          return 0
+          return 0;
       }
-    }
+    };
 
     return {
       counter,
       theme,
-    }
+    };
   },
-})
+});
 </script>
 
 <style scoped lang="scss">

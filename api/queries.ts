@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client/core'
+import { gql } from '@apollo/client/core';
 
 export const GET_PAGES = (locale: string) => gql`
   query Pages {
@@ -13,7 +13,7 @@ export const GET_PAGES = (locale: string) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_PAGE = (locale: string, id: number) => gql`
   query PageBySlug {
@@ -27,7 +27,7 @@ export const GET_PAGE = (locale: string, id: number) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_SKILLS = (locale: string) => gql`
   query Skills {
@@ -44,7 +44,7 @@ export const GET_SKILLS = (locale: string) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_TECHNOLOGY = (locale: string) => gql`
   query Technologies {
@@ -60,7 +60,7 @@ export const GET_TECHNOLOGY = (locale: string) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_EXPERIENCE = (locale: string) => gql`
   query Experience {
@@ -81,7 +81,7 @@ export const GET_EXPERIENCE = (locale: string) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_PORTFOLIO = (locale: string) => gql`
   query Portfolio {
@@ -102,7 +102,7 @@ export const GET_PORTFOLIO = (locale: string) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_CONTACT = (locale: string) => gql`
   query Contact {
@@ -115,7 +115,7 @@ export const GET_CONTACT = (locale: string) => gql`
       }
     }
   }
-`
+`;
 
 export const GET_INSPIRATION = (locale: string) => gql`
   query Inspiration {
@@ -132,4 +132,4 @@ export const GET_INSPIRATION = (locale: string) => gql`
       }
     }
   }
-`
+`;

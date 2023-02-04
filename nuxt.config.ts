@@ -1,4 +1,4 @@
-import eslint from 'vite-plugin-eslint'
+import eslint from 'vite-plugin-eslint';
 
 export default defineNuxtConfig({
   typescript: {
@@ -95,9 +95,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: [
-      '@vue/apollo-composable'
-    ]
+    transpile: ['@vue/apollo-composable'],
   },
   modules: ['@pinia/nuxt', '@nuxtjs/apollo'],
   router: {
@@ -121,16 +119,17 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/scss/_global.scss";',
+          additionalData: '@import "@/assets/scss/_variables.scss";',
         },
       },
     },
-  },      
+  },
+  css: ['@/assets/scss/_global.scss'],
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.API_URL,
-      }
-    }
+        httpEndpoint: process.env.API_URL as string,
+      },
+    },
   },
-})
+});

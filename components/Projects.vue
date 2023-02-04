@@ -54,25 +54,25 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
+import type { Ref } from 'vue';
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default {
   async setup() {
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
     const portfolio: Ref<any> = ref(
       await pagesStore.getPortfolio(settingsStore.currentLocale as string),
-    )
+    );
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     watch(
       () => settingsStore.currentLocale,
@@ -80,7 +80,7 @@ export default {
         (portfolio.value = await pagesStore.getPortfolio(
           settingsStore.currentLocale as string,
         )),
-    )
+    );
 
     return {
       marked,
@@ -89,9 +89,9 @@ export default {
       openModal,
       DOMPurify,
       theme,
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

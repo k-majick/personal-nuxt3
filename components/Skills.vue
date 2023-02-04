@@ -19,29 +19,29 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue'
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
+import type { Ref } from 'vue';
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 export default {
   async setup() {
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
     const skills: Ref<unknown> = ref(
       await pagesStore.getSkills(settingsStore.currentLocale as string),
-    )
+    );
 
     const skillBarWidth = (v: number) => ({
       width: v + '%',
-    })
+    });
 
     watch(
       () => settingsStore.currentTheme,
       () => (theme.value = settingsStore.currentTheme),
-    )
+    );
 
     watch(
       () => settingsStore.currentLocale,
@@ -49,7 +49,7 @@ export default {
         (skills.value = await pagesStore.getSkills(
           settingsStore.currentLocale as string,
         )),
-    )
+    );
 
     return {
       marked,
@@ -57,9 +57,9 @@ export default {
       skillBarWidth,
       DOMPurify,
       theme,
-    }
+    };
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

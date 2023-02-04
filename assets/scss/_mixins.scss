@@ -26,14 +26,10 @@
   padding: 15px 30px;
   cursor: pointer;
   border-radius: 5px;
+  display: inline-block;
 
-  p {
-    margin: 0;
-    font-weight: bold;
-
-    &:first-letter {
-      text-transform: uppercase;
-    }
+  &:first-letter {
+    text-transform: uppercase;
   }
 
   &:active,

@@ -14,9 +14,20 @@
           <div class="loader__ray loader__ray--9"></div>
           <div class="loader__ray loader__ray--10"></div>
         </div>
-        <span class="loader__text">{{ pagesStore.loadError ? $t('messages.loadError') : $t('messages.loading') }}</span>
+        <span class="loader__text">{{
+          pagesStore.loadError
+            ? $t('messages.loadError')
+            : $t('messages.loading')
+        }}</span>
       </div>
-      <div v-hoverMessage="pagesStore.loadError ? $t('messages.loadError') : $t('messages.loading')" class="theme__loader">
+      <div
+        v-hoverMessage="
+          pagesStore.loadError
+            ? $t('messages.loadError')
+            : $t('messages.loading')
+        "
+        class="theme__loader"
+      >
         <span class="tooltip" :class="`tooltip--${theme}`"></span>
       </div>
     </div>
@@ -25,28 +36,28 @@
 </template>
 
 <script lang="ts">
-import { usePagesStore } from '@/store/pages'
-import { useSettingsStore } from '@/store/settings'
-import { hoverMessage } from '@/composables/hoverMessage'
+import { usePagesStore } from '@/store/pages';
+import { useSettingsStore } from '@/store/settings';
+import { hoverMessage } from '@/composables/hoverMessage';
 
 export default defineComponent({
   directives: {
     hoverMessage,
   },
   setup() {
-    const pagesStore = usePagesStore()
-    const settingsStore = useSettingsStore()
-    const theme = ref(settingsStore.currentTheme)
+    const pagesStore = usePagesStore();
+    const settingsStore = useSettingsStore();
+    const theme = ref(settingsStore.currentTheme);
 
     watch(
       () => settingsStore.currentTheme,
-      () => theme.value = settingsStore.currentTheme,
-    )
+      () => (theme.value = settingsStore.currentTheme),
+    );
 
     return {
       theme,
       pagesStore,
-    }
+    };
   },
-})
+});
 </script>
