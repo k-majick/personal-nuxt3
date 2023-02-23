@@ -18,7 +18,7 @@
   }
 
   &__background {
-    background-image: url('@/assets/gfx/gfx-jungle-bw-1920.jpg');
+    background-image: url("@/assets/gfx/gfx-jungle-bw-1920.jpg");
     background-size: cover;
     background-position: 50%;
     background-repeat: no-repeat;
@@ -30,16 +30,16 @@
     width: 100%;
     z-index: 0;
 
-    @include media('>m', '<l-s') {
-      background-image: url('@/assets/gfx/gfx-jungle-bw-1366.jpg');
+    @include media(">m", "<l-s") {
+      background-image: url("@/assets/gfx/gfx-jungle-bw-1366.jpg");
     }
 
-    @include media('<=m') {
-      background-image: url('@/assets/gfx/gfx-jungle-bw-768.jpg');
+    @include media("<=m") {
+      background-image: url("@/assets/gfx/gfx-jungle-bw-768.jpg");
     }
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       width: 100%;
       height: 100%;
@@ -63,10 +63,10 @@
     padding-bottom: 15px;
     justify-content: center;
     height: 100vh;
-    @include media('<l-s') {
+    @include media("<l-s") {
       padding-top: 90px;
     }
-    @include media('<=m') {
+    @include media("<=m") {
       padding-top: 60px;
       height: auto;
       min-height: 100%;
@@ -86,7 +86,7 @@
       border: none !important;
       box-shadow: none;
       padding: 0;
-      @include media('<=m') {
+      @include media("<=m") {
         max-width: 480px;
         margin: 0 auto;
       }

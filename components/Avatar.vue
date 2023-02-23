@@ -1,6 +1,6 @@
 <template>
   <div class="avatar" :class="`avatar--${theme}`">
-    <h2 class="avatar__title">{{ $t('messages.name') }}</h2>
+    <h2 class="avatar__title">{{ $t("messages.name") }}</h2>
     <h3
       class="avatar__message"
       v-html="DOMPurify.sanitize($t('messages.hello'))"
@@ -17,21 +17,21 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings';
-import { hoverMessage } from '@/composables/hoverMessage';
-import DOMPurify from 'dompurify';
+import { useUiStore } from "@/store/ui";
+import { hoverMessage } from "@/composables/hoverMessage";
+import DOMPurify from "dompurify";
 
 export default defineComponent({
   directives: {
     hoverMessage,
   },
   setup() {
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     return {
@@ -43,6 +43,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import './assets/scss/components/_avatar';
-@import './assets/scss/components/_tooltip';
+@import "./assets/scss/components/_avatar";
+@import "./assets/scss/components/_tooltip";
 </style>

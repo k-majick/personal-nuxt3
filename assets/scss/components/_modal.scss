@@ -39,9 +39,9 @@
         position: relative;
 
         &:before {
-          content: '';
+          content: "";
           position: absolute;
-          background-image: url('@/assets/gfx/bg-modal-min.svg');
+          background-image: url("@/assets/gfx/bg-modal-min.svg");
           background-repeat: repeat-y;
           background-size: 270px;
           background-position: left;
@@ -49,7 +49,7 @@
           height: 100%;
           z-index: 1;
 
-          @include media('<=m') {
+          @include media("<=m") {
             background-size: 240px;
           }
         }
@@ -62,7 +62,7 @@
         p {
           text-align: left;
 
-          @include media('<=m') {
+          @include media("<=m") {
             text-align: center;
           }
         }
@@ -74,7 +74,7 @@
         align-items: center;
         text-align: left;
 
-        @include media('<=m') {
+        @include media("<=m") {
           flex-direction: column;
 
           &--text {
@@ -92,7 +92,7 @@
         border-radius: 10px;
         margin-right: 15px;
 
-        @include media('<=m') {
+        @include media("<=m") {
           margin-right: 0;
         }
       }

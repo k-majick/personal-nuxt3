@@ -19,35 +19,35 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import { marked } from 'marked';
-import DOMPurify from 'dompurify';
+import type { Ref } from "vue";
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 export default {
   async setup() {
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
     const skills: Ref<unknown> = ref(
-      await pagesStore.getSkills(settingsStore.currentLocale as string),
+      await pagesStore.getSkills(uiStore.currentLocale as string),
     );
 
     const skillBarWidth = (v: number) => ({
-      width: v + '%',
+      width: v + "%",
     });
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     watch(
-      () => settingsStore.currentLocale,
+      () => uiStore.currentLocale,
       async () =>
         (skills.value = await pagesStore.getSkills(
-          settingsStore.currentLocale as string,
+          uiStore.currentLocale as string,
         )),
     );
 
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/scss/components/_skills';
+@import "@/assets/scss/components/_skills";
 @keyframes skillBar {
   0% {
     width: 0;

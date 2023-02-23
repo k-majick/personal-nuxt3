@@ -1,4 +1,4 @@
-@import '@/node_modules/modern-normalize/modern-normalize.css';
+@import "@/node_modules/modern-normalize/modern-normalize.css";
 
 body,
 html {
@@ -29,7 +29,7 @@ body {
     }
   }
 
-  @include media('<=m') {
+  @include media("<=m") {
     font-size: 90%;
   }
 }

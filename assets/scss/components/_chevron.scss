@@ -6,7 +6,7 @@
   display: block;
   animation: bounce 1s infinite alternate;
 
-  @include media('<=m') {
+  @include media("<=m") {
     margin: -95px auto 0;
     width: 15%;
     clip-path: polygon(

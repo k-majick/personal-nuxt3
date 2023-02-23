@@ -62,16 +62,16 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import { hoverMessage } from '@/composables/hoverMessage';
-import scrollTo from '@/composables/scrollTo';
-import iconLinkedin from '@/assets/gfx/icon-linkedin-min.svg?raw';
-import { MainElKey, HeaderElKey } from '@/symbols/symbols';
-import iconGit from '@/assets/gfx/icon-git-min.svg?raw';
-import rawCat from '@/assets/gfx/cat_1.svg?raw';
-import DOMPurify from 'dompurify';
+import type { Ref } from "vue";
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import { hoverMessage } from "@/composables/hoverMessage";
+import scrollTo from "@/composables/scrollTo";
+import iconLinkedin from "@/assets/gfx/icon-linkedin-min.svg?raw";
+import { MainElKey, HeaderElKey } from "@/symbols/symbols";
+import iconGit from "@/assets/gfx/icon-git-min.svg?raw";
+import rawCat from "@/assets/gfx/cat_1.svg?raw";
+import DOMPurify from "dompurify";
 
 export default defineComponent({
   directives: {
@@ -80,13 +80,13 @@ export default defineComponent({
   props: {
     isActivated: Boolean,
   },
-  emits: ['closeNav'],
+  emits: ["closeNav"],
   async setup() {
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
+    const uiStore = useUiStore();
 
     const isActive = ref(false);
-    const theme = ref(settingsStore.currentTheme);
+    const theme = ref(uiStore.currentTheme);
 
     const headerEl = inject(HeaderElKey);
     const mainEl = inject(MainElKey);
@@ -94,12 +94,12 @@ export default defineComponent({
     const sortItems = (pagesArr: Record<string, any>[]) =>
       pagesArr
         .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-        .filter(item => item.attributes.slug !== 'inspiration');
+        .filter(item => item.attributes.slug !== "inspiration");
 
     const pages: Ref<any> = ref(
       sortItems([
         ...((await pagesStore.getPages(
-          settingsStore.currentLocale as string,
+          uiStore.currentLocale as string,
         )) as unknown as []),
       ]),
     );
@@ -107,7 +107,7 @@ export default defineComponent({
     const killModal = () => {
       const body = document.body;
 
-      if (body.classList.contains('locked')) {
+      if (body.classList.contains("locked")) {
         toggleModal(0, true);
       }
     };
@@ -122,19 +122,19 @@ export default defineComponent({
         : (isActive.value = false);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     watch(
-      () => settingsStore.currentLocale,
+      () => uiStore.currentLocale,
       async () =>
         (pages.value = await sortItems([
           ...((await pagesStore.getPages(
-            settingsStore.currentLocale as string,
+            uiStore.currentLocale as string,
           )) as unknown as []),
         ])),
     );
@@ -157,6 +157,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import './assets/scss/components/_nav';
-@import './assets/scss/components/_cat';
+@import "./assets/scss/components/_nav";
+@import "./assets/scss/components/_cat";
 </style>

@@ -28,33 +28,33 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import { marked } from 'marked';
-import DOMPurify from 'dompurify';
+import type { Ref } from "vue";
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 export default defineComponent({
   components: {},
   async setup() {
     const config = useRuntimeConfig();
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
+    const uiStore = useUiStore();
     const pageData: Ref<any> = ref(
-      await pagesStore.getPage(settingsStore.currentLocale as string, 5),
+      await pagesStore.getPage(uiStore.currentLocale as string, 5),
     );
     const inspiration: Ref<any> = ref(
-      await pagesStore.getInspiration(settingsStore.currentLocale as string),
+      await pagesStore.getInspiration(uiStore.currentLocale as string),
     );
-    const theme = ref(settingsStore.currentTheme);
+    const theme = ref(uiStore.currentTheme);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     });
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     return {
@@ -68,6 +68,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/components/_gallery';
-@import '@/assets/scss/components/_modal';
+@import "@/assets/scss/components/_gallery";
+@import "@/assets/scss/components/_modal";
 </style>

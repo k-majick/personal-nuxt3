@@ -45,7 +45,7 @@
         </template>
         <template #action>
           <a class="modal__action" :href="project.url" target="_blank">{{
-            $t('content.gotoSite')
+            $t("content.gotoSite")
           }}</a>
         </template>
       </Modal>
@@ -54,31 +54,31 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import { marked } from 'marked';
-import DOMPurify from 'dompurify';
+import type { Ref } from "vue";
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 export default {
   async setup() {
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
     const portfolio: Ref<any> = ref(
-      await pagesStore.getPortfolio(settingsStore.currentLocale as string),
+      await pagesStore.getPortfolio(uiStore.currentLocale as string),
     );
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     watch(
-      () => settingsStore.currentLocale,
+      () => uiStore.currentLocale,
       async () =>
         (portfolio.value = await pagesStore.getPortfolio(
-          settingsStore.currentLocale as string,
+          uiStore.currentLocale as string,
         )),
     );
 
@@ -95,6 +95,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/components/_gallery';
-@import '@/assets/scss/components/_modal';
+@import "@/assets/scss/components/_gallery";
+@import "@/assets/scss/components/_modal";
 </style>

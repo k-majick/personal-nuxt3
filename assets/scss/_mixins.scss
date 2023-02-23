@@ -7,7 +7,7 @@
   padding-right: 15px;
   width: 100%;
   max-width: 970px;
-  @include media('<=m') {
+  @include media("<=m") {
     max-width: 768px;
   }
 }
@@ -62,8 +62,8 @@
   font-weight: bold;
 }
 /* effects */
-@mixin trans($time, $prop: '') {
-  @if $prop != '' {
+@mixin trans($time, $prop: "") {
+  @if $prop != "" {
     transition: $prop #{$time}s;
   } @else {
     transition: all #{$time}s;

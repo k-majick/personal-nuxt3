@@ -14,7 +14,7 @@
     opacity: 1;
     padding: 5px 7.5px;
   }
-  @include media('<l-s') {
+  @include media("<l-s") {
     display: none;
   }
 

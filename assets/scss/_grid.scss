@@ -16,7 +16,7 @@
   }
 }
 @each $name, $value in $breakpoints {
-  @include media('<=#{$name}') {
+  @include media("<=#{$name}") {
     @for $i from 1 through 12 {
       .grid__item--#{$i}\@#{$name} {
         width: calc(100% / 12 * $i);
@@ -26,7 +26,7 @@
 }
 
 .grid__item--auto\@l-s {
-  @include media('<=l-s') {
+  @include media("<=l-s") {
     width: auto;
   }
 }

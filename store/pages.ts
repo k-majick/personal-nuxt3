@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 import {
   GET_PAGES,
   GET_PAGE,
@@ -8,7 +8,7 @@ import {
   GET_PORTFOLIO,
   GET_CONTACT,
   GET_INSPIRATION,
-} from '@/api/queries';
+} from "@/api/queries";
 
 interface IPagesState {
   loading: boolean;
@@ -24,7 +24,7 @@ interface IPagesState {
 }
 
 export const usePagesStore = defineStore({
-  id: 'pages-store',
+  id: "pages-store",
   state: (): IPagesState => ({
     loading: false,
     loadError: false,

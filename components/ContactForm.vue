@@ -30,7 +30,7 @@
           class="form__input"
           @blur="v$.name.$touch()"
         />
-        <label class="form__label">{{ $t('content.name') }}</label>
+        <label class="form__label">{{ $t("content.name") }}</label>
       </div>
       <div
         class="form__group"
@@ -51,7 +51,7 @@
           class="form__input"
           @blur="v$.email.$touch()"
         />
-        <label class="form__label">{{ $t('content.email') }}</label>
+        <label class="form__label">{{ $t("content.email") }}</label>
       </div>
       <div
         class="form__group form__group--textarea"
@@ -72,7 +72,7 @@
           class="form__input"
           @blur="v$.message.$touch()"
         ></textarea>
-        <label class="form__label">{{ $t('content.message') }}</label>
+        <label class="form__label">{{ $t("content.message") }}</label>
       </div>
       <div class="form__group form__group--submit">
         <button
@@ -81,7 +81,7 @@
           type="submit"
           @click="sendForm"
         >
-          {{ $t('content.sendIt') }}
+          {{ $t("content.sendIt") }}
         </button>
       </div>
       <div v-if="sendError.length" class="form__group form__group--errors">
@@ -97,12 +97,12 @@
       >
         <template #header>
           <h3 class="modal__title">
-            {{ $t('messages.sentTitle') }}
+            {{ $t("messages.sentTitle") }}
           </h3>
         </template>
         <template #content>
           <div class="modal__content">
-            <p>{{ $t('messages.sentMessage') }}</p>
+            <p>{{ $t("messages.sentMessage") }}</p>
           </div>
         </template>
       </Modal>
@@ -111,75 +111,75 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { useSettingsStore } from '@/store/settings';
-import { usePagesStore } from '@/store/pages';
-import { marked } from 'marked';
-import useVuelidate from '@vuelidate/core';
+import type { Ref } from "vue";
+import { useUiStore } from "@/store/ui";
+import { usePagesStore } from "@/store/pages";
+import { marked } from "marked";
+import useVuelidate from "@vuelidate/core";
 import {
   email,
   minLength,
   maxLength,
   required,
   helpers,
-} from '@vuelidate/validators';
-import { useI18n } from 'vue-i18n';
-import DOMPurify from 'dompurify';
+} from "@vuelidate/validators";
+import { useI18n } from "vue-i18n";
+import DOMPurify from "dompurify";
 
 export default defineComponent({
   async setup() {
     const { t } = useI18n();
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
     const contact: Ref<any> = ref(
-      await pagesStore.getContact(settingsStore.currentLocale as string),
+      await pagesStore.getContact(uiStore.currentLocale as string),
     );
     const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
     const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
-    const sendError = ref<string>('');
+    const sendError = ref<string>("");
 
     const state = ref({
-      name: '',
-      email: '',
-      message: '',
+      name: "",
+      email: "",
+      message: "",
     });
 
     const rules = {
       name: {
-        required: helpers.withMessage(t('validation.nameRequired'), required),
+        required: helpers.withMessage(t("validation.nameRequired"), required),
         minLength: helpers.withMessage(
-          () => t('validation.nameMin'),
+          () => t("validation.nameMin"),
           minLength(3),
         ),
         maxLength: helpers.withMessage(
-          () => t('validation.nameMax'),
+          () => t("validation.nameMax"),
           maxLength(30),
         ),
         alphaDiacritic: helpers.withMessage(
-          () => t('validation.nameFormat'),
+          () => t("validation.nameFormat"),
           alphaDiacritic,
         ),
       },
       email: {
-        required: helpers.withMessage(t('validation.emailRequired'), required),
+        required: helpers.withMessage(t("validation.emailRequired"), required),
         maxLength: helpers.withMessage(
-          () => t('validation.emailMax'),
+          () => t("validation.emailMax"),
           maxLength(50),
         ),
-        email: helpers.withMessage(t('validation.emailInvalid'), email),
+        email: helpers.withMessage(t("validation.emailInvalid"), email),
       },
       message: {
         required: helpers.withMessage(
-          t('validation.messageRequired'),
+          t("validation.messageRequired"),
           required,
         ),
         minLength: helpers.withMessage(
-          () => t('validation.messageMin'),
+          () => t("validation.messageMin"),
           minLength(10),
         ),
         maxLength: helpers.withMessage(
-          () => t('validation.messageMax'),
+          () => t("validation.messageMax"),
           maxLength(1000),
         ),
       },
@@ -208,56 +208,41 @@ export default defineComponent({
       }
 
       submitBtn.value.disabled = true;
-      submitBtn.value.innerHTML = `<p>${t('content.sending')}</p>`;
+      submitBtn.value.innerHTML = t("content.sending");
 
-      const fd = new FormData();
+      const fd = {
+        name: v$.value.name.$model,
+        email: v$.value.email.$model,
+        message: v$.value.message.$model,
+      };
 
-      fd.append('name', v$.value.name.$model);
-      fd.append('email', v$.value.email.$model);
-      fd.append('message', v$.value.message.$model);
+      const res = await uiStore.sendMessage(fd);
 
-      // for (let pair of fd.entries()) {
-      //   console.log(pair[0] + ', ' + pair[1])
-      // }
-
-      try {
-        const res: Record<string, unknown> = await $fetch(
-          '/.netlify/functions/send-email',
-          {
-            method: 'POST',
-            body: fd,
-          },
-        );
-
-        if (res?.status === 'ok') {
-          toggleModal(1, false);
-        }
-      } catch (e) {
-        console.error(e);
-        sendError.value = t('content.sendError');
+      if (res) {
+        toggleModal(1, false);
       }
     };
 
     const resetForm = () => {
       v$.value.$reset();
-      submitBtn.value.innerHTML = `<p>${t('content.sendIt')}</p>`;
+      submitBtn.value.innerHTML = t("content.sendIt");
       state.value = {
-        name: '',
-        email: '',
-        message: '',
+        name: "",
+        email: "",
+        message: "",
       };
     };
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     watch(
-      () => settingsStore.currentLocale,
+      () => uiStore.currentLocale,
       async () =>
         (contact.value = await pagesStore.getContact(
-          settingsStore.currentLocale as string,
+          uiStore.currentLocale as string,
         )),
     );
 
@@ -281,5 +266,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import './assets/scss/components/_form';
+@import "./assets/scss/components/_form";
 </style>

@@ -15,12 +15,12 @@
   font-weight: bolder;
   font-size: 0.85em;
 
-  @include media('<=m') {
+  @include media("<=m") {
     margin-bottom: 7.5px;
   }
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     width: 90px;
     height: 100%;

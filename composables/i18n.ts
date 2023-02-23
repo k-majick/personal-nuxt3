@@ -5,15 +5,15 @@ export interface ILocale {
 
 export const locales: ILocale[] = [
   {
-    name: 'Deutsch',
-    code: 'de',
+    name: "Deutsch",
+    code: "de",
   },
   {
-    name: 'English',
-    code: 'en',
+    name: "English",
+    code: "en",
   },
   {
-    name: 'Polski',
-    code: 'pl',
+    name: "Polski",
+    code: "pl",
   },
 ];

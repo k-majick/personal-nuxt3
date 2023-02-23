@@ -51,15 +51,15 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings';
-import { MainElKey } from '@/symbols/symbols';
-import scrollTo from '@/composables/scrollTo';
-import iconSun from '@/assets/gfx/icon-sun.svg?raw';
-import iconMoon from '@/assets/gfx/icon-moon.svg?raw';
-import DOMPurify from 'dompurify';
-import { ILocale, locales } from '@/composables/i18n';
-import { useI18n } from 'vue-i18n';
-import { hoverMessage } from '@/composables/hoverMessage';
+import { useUiStore } from "@/store/ui";
+import { MainElKey } from "@/symbols/symbols";
+import scrollTo from "@/composables/scrollTo";
+import iconSun from "@/assets/gfx/icon-sun.svg?raw";
+import iconMoon from "@/assets/gfx/icon-moon.svg?raw";
+import DOMPurify from "dompurify";
+import { ILocale, locales } from "@/composables/i18n";
+import { useI18n } from "vue-i18n";
+import { hoverMessage } from "@/composables/hoverMessage";
 
 export default defineComponent({
   directives: {
@@ -73,24 +73,24 @@ export default defineComponent({
     const mainEl = inject(MainElKey);
     const headerEl = ref<HTMLElement>();
 
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
 
-    const { locale } = useI18n({ useScope: 'global' });
+    const { locale } = useI18n({ useScope: "global" });
     const setAvailableLocales = () =>
       locales.filter(l => l.code !== locale.value);
     const availableLocales = ref<ILocale[]>(setAvailableLocales());
 
     const switchLocale = (l: string) => {
       locale.value = l;
-      settingsStore.setLocale(l);
-      localStorage.setItem('user-locale', l);
+      uiStore.setLocale(l);
+      localStorage.setItem("user-locale", l);
       availableLocales.value = setAvailableLocales();
       setRouteParam(l);
     };
 
     const setRouteParam = (locale: string) => {
-      const pageSlug = route.path.split('/').pop();
+      const pageSlug = route.path.split("/").pop();
 
       router.replace({
         path: `/${locale}/${pageSlug}`,
@@ -98,20 +98,20 @@ export default defineComponent({
     };
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     const toggleTheme = (theme: string) => {
-      settingsStore.setTheme(theme);
-      localStorage.setItem('user-theme', theme);
+      uiStore.setTheme(theme);
+      localStorage.setItem("user-theme", theme);
     };
 
     switchLocale(route.params.locale as string);
 
-    localStorage.getItem('user-theme')
-      ? toggleTheme(localStorage.getItem('user-theme') as string)
-      : toggleTheme('lite');
+    localStorage.getItem("user-theme")
+      ? toggleTheme(localStorage.getItem("user-theme") as string)
+      : toggleTheme("lite");
 
     return {
       scrollTo,
@@ -134,6 +134,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import './assets/scss/components/_header';
-@import './assets/scss/components/_chevron';
+@import "./assets/scss/components/_header";
+@import "./assets/scss/components/_chevron";
 </style>

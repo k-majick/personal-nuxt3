@@ -13,7 +13,7 @@
     display: flex;
     padding: 0 5vw;
 
-    @include media('<=m') {
+    @include media("<=m") {
       align-items: center;
     }
 
@@ -22,7 +22,7 @@
       justify-content: space-between;
       min-height: 20vh;
 
-      @include media('<=m') {
+      @include media("<=m") {
         min-height: 150px;
         align-items: flex-end;
         justify-content: center;
@@ -48,7 +48,7 @@
     margin-right: 30px;
     box-sizing: border-box;
 
-    @include media('<=m') {
+    @include media("<=m") {
       margin-right: 0;
     }
   }
@@ -57,7 +57,7 @@
     display: flex;
     align-items: center;
 
-    @include media('<=m') {
+    @include media("<=m") {
       position: absolute;
       top: 15px;
       right: 15px;
@@ -70,7 +70,7 @@
     & + & {
       margin-left: 15px;
 
-      @include media('<=m') {
+      @include media("<=m") {
         margin-left: 7.5px;
       }
     }
@@ -81,7 +81,7 @@
       height: 33px;
       font-size: 0.85em;
 
-      @include media('<=m') {
+      @include media("<=m") {
         height: 30px;
       }
 
@@ -111,7 +111,7 @@
         text-transform: uppercase;
         min-width: 60px;
 
-        @include media('<=m') {
+        @include media("<=m") {
           padding: 0 10px;
         }
       }
@@ -148,7 +148,7 @@
     &--theme {
       position: relative;
 
-      @include media('<=m') {
+      @include media("<=m") {
         height: 30px;
         width: 30px;
       }
@@ -188,13 +188,13 @@
     cursor: pointer;
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       padding-bottom: 90px;
 
       clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
 
-      @include media('<=m') {
+      @include media("<=m") {
         padding-bottom: 45px;
       }
     }
@@ -214,7 +214,7 @@
     }
 
     #{$self}__logo {
-      background-image: url('@/assets/gfx/clf-logo-full-lite-min.svg');
+      background-image: url("@/assets/gfx/clf-logo-full-lite-min.svg");
     }
 
     #{$self}__switch {
@@ -243,7 +243,7 @@
       }
 
       &--theme {
-        background-image: url('@/assets/gfx/icon-moon.svg');
+        background-image: url("@/assets/gfx/icon-moon.svg");
 
         svg {
           fill: $color-white;
@@ -267,7 +267,7 @@
     }
 
     #{$self}__logo {
-      background-image: url('@/assets/gfx/clf-logo-full-dark-min.svg');
+      background-image: url("@/assets/gfx/clf-logo-full-dark-min.svg");
     }
 
     #{$self}__switch {
@@ -296,7 +296,7 @@
       }
 
       &--theme {
-        background-image: url('@/assets/gfx/icon-sun.svg');
+        background-image: url("@/assets/gfx/icon-sun.svg");
 
         svg {
           fill: $color-silver-lite;

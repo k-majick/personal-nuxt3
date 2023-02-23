@@ -27,29 +27,29 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import { MainElKey, HeaderElKey } from '@/symbols/symbols';
+import type { Ref } from "vue";
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 
 export default defineComponent({
-  layout: 'default',
+  layout: "default",
   setup() {
     const pagesStore = usePagesStore();
     const isLoadError = ref(pagesStore.loadError);
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
     const headerComponent: Ref<any> = ref();
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
     const isNavActivated = ref(false);
 
     const scrollListen = () => {
-      window.addEventListener('scroll', () => {
+      window.addEventListener("scroll", () => {
         const scrollTop = window.scrollY;
 
         document.documentElement.style.setProperty(
-          '--scroll-y',
+          "--scroll-y",
           `${scrollTop}px`,
         );
       });
@@ -63,8 +63,8 @@ export default defineComponent({
     );
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     watch(
@@ -93,16 +93,16 @@ export default defineComponent({
 });
 
 definePageMeta({
-  layout: 'default',
+  layout: "default",
 });
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/_animations.scss';
-@import '@/assets/scss/components/_theme';
-@import '@/assets/scss/components/_loader';
-@import '@/assets/scss/components/_main';
-@import '@/assets/scss/components/_burger';
+@import "@/assets/scss/_animations.scss";
+@import "@/assets/scss/components/_theme";
+@import "@/assets/scss/components/_loader";
+@import "@/assets/scss/components/_main";
+@import "@/assets/scss/components/_burger";
 
 .fade-enter-from {
   opacity: 0;

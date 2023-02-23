@@ -16,8 +16,8 @@
         </div>
         <span class="loader__text">{{
           pagesStore.loadError
-            ? $t('messages.loadError')
-            : $t('messages.loading')
+            ? $t("messages.loadError")
+            : $t("messages.loading")
         }}</span>
       </div>
       <div
@@ -36,9 +36,9 @@
 </template>
 
 <script lang="ts">
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import { hoverMessage } from '@/composables/hoverMessage';
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import { hoverMessage } from "@/composables/hoverMessage";
 
 export default defineComponent({
   directives: {
@@ -46,12 +46,12 @@ export default defineComponent({
   },
   setup() {
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     return {

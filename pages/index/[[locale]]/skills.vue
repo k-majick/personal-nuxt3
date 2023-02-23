@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts">
-import type { Ref } from 'vue';
-import { usePagesStore } from '@/store/pages';
-import { useSettingsStore } from '@/store/settings';
-import Skills from '@/components/Skills.vue';
-import Technologies from '@/components/Technologies.vue';
+import type { Ref } from "vue";
+import { usePagesStore } from "@/store/pages";
+import { useUiStore } from "@/store/ui";
+import Skills from "@/components/Skills.vue";
+import Technologies from "@/components/Technologies.vue";
 
 export default defineComponent({
   components: {
@@ -20,9 +20,9 @@ export default defineComponent({
   async setup() {
     const config = useRuntimeConfig();
     const pagesStore = usePagesStore();
-    const settingsStore = useSettingsStore();
+    const uiStore = useUiStore();
     const pageData: Ref<any> = ref(
-      await pagesStore.getPage(settingsStore.currentLocale as string, 1),
+      await pagesStore.getPage(uiStore.currentLocale as string, 1),
     );
 
     useHead({

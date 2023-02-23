@@ -16,23 +16,23 @@
 </template>
 
 <script lang="ts">
-import { useSettingsStore } from '@/store/settings';
+import { useUiStore } from "@/store/ui";
 
 export default defineComponent({
   props: {
     modalType: {
       type: String,
-      default: '',
+      default: "",
     },
   },
-  emits: ['close'],
+  emits: ["close"],
   setup() {
-    const settingsStore = useSettingsStore();
-    const theme = ref(settingsStore.currentTheme);
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
 
     watch(
-      () => settingsStore.currentTheme,
-      () => (theme.value = settingsStore.currentTheme),
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
     );
 
     return {

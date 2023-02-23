@@ -21,12 +21,12 @@
     height: 90px;
     position: relative;
 
-    @include media('<=m') {
+    @include media("<=m") {
       transform: scale(0.9);
     }
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       width: 100%;
@@ -45,7 +45,7 @@
       filter: drop-shadow(0 0 15px $color-green);
 
       &:after {
-        background-image: url('@/assets/gfx/clf-logo-dark.svg');
+        background-image: url("@/assets/gfx/clf-logo-dark.svg");
       }
     }
 
@@ -61,7 +61,7 @@
       filter: drop-shadow(0 0 15px $color-white);
 
       &:after {
-        background-image: url('@/assets/gfx/clf-logo-lite.svg');
+        background-image: url("@/assets/gfx/clf-logo-lite.svg");
       }
     }
 
