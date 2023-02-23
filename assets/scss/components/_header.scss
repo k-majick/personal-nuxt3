@@ -51,6 +51,10 @@
     @include media("<=m") {
       margin-right: 0;
     }
+
+    @include media(">=l") {
+      max-width: 360px;
+    }
   }
 
   &__control {
@@ -66,6 +70,10 @@
 
   &__switch {
     height: 45px;
+
+    @include media(">=l") {
+      height: 60px;
+    }
 
     & + & {
       margin-left: 15px;
@@ -83,6 +91,10 @@
 
       @include media("<=m") {
         height: 30px;
+      }
+
+      @include media(">=l") {
+        height: 45px;
       }
 
       &:hover {
@@ -114,6 +126,10 @@
         @include media("<=m") {
           padding: 0 10px;
         }
+
+        @include media(">=l") {
+          min-width: 75px;
+        }
       }
 
       #{$self}__options {
@@ -137,11 +153,19 @@
         align-items: center;
         justify-content: center;
         text-transform: uppercase;
+        
+        @include media(">=l") {
+          height: 45px;
+        }
       }
 
       #{$self}__button,
       #{$self}__options {
         border-radius: 15px;
+
+        @include media(">=l") {
+          border-radius: 20px;
+        }
       }
     }
 
@@ -163,6 +187,11 @@
         background-repeat: no-repeat;
         cursor: pointer;
         background: none;
+
+        @include media(">=l") {
+          height: 55px;
+          width: 55px;
+        }
       }
 
       svg {

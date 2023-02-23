@@ -40,6 +40,10 @@
       max-width: 240px;
       max-height: 240px;
     }
+    @include media(">=l") {
+      max-width: 350px;
+      max-height: 350px;
+    }
   }
 
   &__back,

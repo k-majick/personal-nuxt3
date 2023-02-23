@@ -185,7 +185,7 @@
     text-align: right;
     padding: 15px;
     position: relative;
-    font-size: 1.1rem;
+    font-size: 1.1em;
     font-weight: bold;
 
     @include media(">m", "<l-s") {
@@ -260,6 +260,11 @@
       background-size: contain;
       cursor: pointer;
       position: relative;
+
+      @include media(">=l") {
+        width: calc(30px * 1.1);
+        height: calc(30px * 1.1);
+      }
 
       svg {
         @include img;

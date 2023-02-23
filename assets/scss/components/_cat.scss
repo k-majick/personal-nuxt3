@@ -25,6 +25,11 @@
       height: 90px;
       left: 45px;
     }
+
+    @include media(">=l") {
+      width: 120px;
+      height: 120px;
+    }
   }
 
   svg {

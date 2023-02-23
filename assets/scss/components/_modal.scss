@@ -57,7 +57,6 @@
 
       #{$self}__content {
         @include mk-container;
-        max-width: 640px !important;
 
         p {
           text-align: left;
@@ -168,7 +167,7 @@
       }
 
       #{$self}__title {
-        font-size: 1.1rem;
+        font-size: 1.1em;
         margin: 0;
       }
     }
@@ -202,7 +201,7 @@
     width: 60px;
     height: 60px;
     font-weight: bolder;
-    font-size: 3rem;
+    font-size: 3em;
     cursor: pointer;
     z-index: 10;
 
