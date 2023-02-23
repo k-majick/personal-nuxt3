@@ -1,3 +1,5 @@
+# K-Majick Personal Folio
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0cea6192-a2b9-4732-a33d-2b17bf279c2a/deploy-status)](https://app.netlify.com/sites/k-majick/deploys)
 
 ## Setup
