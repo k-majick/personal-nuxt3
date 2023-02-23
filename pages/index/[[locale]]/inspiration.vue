@@ -57,6 +57,14 @@ export default defineComponent({
       () => (theme.value = uiStore.currentTheme),
     );
 
+    watch(
+      () => uiStore.currentLocale,
+      async () =>
+        (inspiration.value = await pagesStore.getInspiration(
+          uiStore.currentLocale as string,
+        )),
+    );
+
     return {
       marked,
       inspiration,
