@@ -216,7 +216,7 @@ export default defineComponent({
         message: v$.value.message.$model,
       };
 
-      const res = await uiStore.sendMessage(fd);
+      const res = await uiStore.sendEmail(fd);
 
       if (res) {
         toggleModal(1, false);

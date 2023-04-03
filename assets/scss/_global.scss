@@ -10,7 +10,7 @@ body {
   font-size: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  
+
   @include media(">=l") {
     font-size: 110%;
   }

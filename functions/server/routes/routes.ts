@@ -12,10 +12,10 @@ export class Routes {
   }
 
   routes() {
-    this.router.post("/sendMessage", this.sendMessage);
+    this.router.post("/sendEmail", this.sendEmail);
   }
 
-  sendMessage(req: Request, res: Response): any {
+  sendEmail(req: Request, res: Response): any {
     const emailTo = process.env.APP_EMAIL;
     const clientId = process.env.CLIENT_ID;
     const clientSecret = process.env.CLIENT_SECRET;

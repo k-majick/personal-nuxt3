@@ -20,9 +20,9 @@ export const useUiStore = defineStore({
       this.locale = locale;
     },
 
-    sendMessage(fd: any) {
+    sendEmail(fd: any) {
       try {
-        const res = fetch("/.netlify/functions/server/sendMessage", {
+        const res = fetch("/.netlify/functions/server/sendEmail", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(fd),
