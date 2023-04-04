@@ -57,19 +57,29 @@
   }
 
   &__container {
-    @include mk-container();
-    position: relative;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    justify-content: center;
-    height: 100vh;
-    @include media("<l-s") {
-      padding-top: 90px;
+    &--card {
+      @include mk-container();
+      position: relative;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      justify-content: center;
+      height: 100vh;
+      @include media("<l-s") {
+        padding-top: 90px;
+      }
+      @include media("<=m") {
+        padding-top: 60px;
+        height: auto;
+        min-height: 100%;
+      }
     }
-    @include media("<=m") {
-      padding-top: 60px;
-      height: auto;
-      min-height: 100%;
+
+    &--full {
+      background-color: $color-white;
+      height: 100vh;
+      width: calc(100% - 12.5vw - 5px);
+      margin-left: auto;
+      position: relative;
     }
   }
 

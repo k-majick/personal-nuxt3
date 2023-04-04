@@ -16,13 +16,13 @@
 
     <Nav :is-activated="isNavActivated" @close-nav="toggleNav" />
 
-    <div class="main__container">
-      <router-view v-slot="{ Component, route }">
+    <router-view v-slot="{ Component, route }">
+      <div class="main__container" :class="`main__container--${route.path.includes('blog') ? 'full' : 'card'}`">
         <transition name="fade" mode="out-in">
           <component :is="Component" :key="(route.name as string)" />
         </transition>
-      </router-view>
-    </div>
+      </div>
+    </router-view>
   </main>
 </template>
 
