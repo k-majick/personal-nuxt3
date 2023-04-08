@@ -5,7 +5,6 @@
   height: auto;
   margin: 0 auto;
   padding: 30px 15px;
-  border-radius: 5px;
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -17,6 +16,7 @@
   }
 
   &__mask {
+    @include trans(0.5);
     position: fixed;
     z-index: 9999;
     top: 0;
@@ -26,7 +26,8 @@
     background-color: transparentize($color-black, 0.5);
     display: table;
     display: block;
-    @include trans(0.5);
+    backdrop-filter: blur(3px);
+
     overflow-y: scroll;
 
     &--full {
@@ -37,6 +38,14 @@
         min-height: 100%;
         width: 100%;
         position: relative;
+
+        &--lite {
+          background-color: $color-white;
+        }
+
+        &--dark {
+          background-color: $color-black;
+        }
 
         &:before {
           content: "";
@@ -101,10 +110,6 @@
         margin-bottom: 15px;
       }
 
-      #{$self}__date {
-        @include label;
-      }
-
       #{$self}__image {
         @include img;
         max-width: 400px;
@@ -147,19 +152,40 @@
 
     &--message {
       #{$self} {
-        padding: 45px;
+        padding: 60px 90px;
 
-        &--dark {
-          box-shadow: 0 0 15px $color-green;
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
         }
 
-        &--lite {
-          box-shadow: 0 0 15px $color-black;
+        &:before {
+          left: 2px;
+          right: 0px;
+          top: 2px;
+          bottom: 2px;
+          z-index: -1;
+          backdrop-filter: blur(3px);
+          mask-image: linear-gradient(
+            135deg,
+            transparent 0% 2.45%,
+            $color-white 2.45% 97.55%,
+            transparent 97.55% 100%
+          );
+        }
+
+        &:after {
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: -2;
         }
       }
 
       #{$self}__close {
-        transform: translate(25%, -25%) scale(0.75);
+        transform: translate(15%, -20%) scale(0.75);
       }
 
       #{$self}__cell {
@@ -226,10 +252,6 @@
     }
   }
 
-  &__action {
-    @include btn;
-  }
-
   &-leave-active {
     opacity: 0;
   }
@@ -243,7 +265,24 @@
   }
 
   &--lite {
-    background-color: $color-white;
+    &:before {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.45%,
+        $color-white 2.45% 25%,
+        transparentize($color-white, 0.25) 75% 97.45%,
+        transparent 97.55% 100%
+      );
+    }
+
+    &:after {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.5%,
+        $color-red 2.5% 25%,
+        transparent 30%
+      );
+    }
 
     #{$self}__close {
       color: $color-red;
@@ -252,28 +291,27 @@
     #{$self}__logo {
       box-shadow: 0 0 15px $color-gray;
     }
-
-    #{$self}__date {
-      background-color: $color-gray;
-      box-shadow: inset 0 0 10px $color-satan;
-      color: $color-white;
-    }
-
-    #{$self}__action {
-      color: $color-white;
-      background-color: $color-gray;
-      box-shadow: inset 0 0 10px $color-satan;
-
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: $color-red;
-      }
-    }
   }
 
   &--dark {
-    background-color: $color-black;
+    &:before {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.45%,
+        $color-black 2.45% 25%,
+        transparentize($color-black, 0.25) 75% 97.45%,
+        transparent 97.55% 100%
+      );
+    }
+
+    &:after {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.5%,
+        $color-green 2.5% 25%,
+        transparent 30%
+      );
+    }
 
     &:before {
       filter: brightness(0.25);
@@ -285,24 +323,6 @@
 
     #{$self}__logo {
       box-shadow: 0 0 15px $color-green;
-    }
-
-    #{$self}__date {
-      background-color: $color-silver-lite;
-      box-shadow: inset 0 0 10px $color-black;
-      color: $color-black;
-    }
-
-    #{$self}__action {
-      color: $color-black;
-      background-color: $color-silver-lite;
-      box-shadow: inset 0 0 10px $color-black;
-
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: $color-green;
-      }
     }
   }
 }

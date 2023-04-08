@@ -2,13 +2,12 @@
   $self: &;
   background: none;
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 15px $color-black;
   padding: 0;
   display: grid;
   grid-gap: 0;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   overflow: hidden;
+  margin-top: 30px;
   @include media("<=m") {
     grid-template-columns: 1fr 1fr;
   }
@@ -76,8 +75,6 @@
   }
 
   &--lite {
-    background: $color-silver-lite;
-
     #{$self}__title {
       color: $color-white;
       background-color: $color-red;
@@ -92,8 +89,6 @@
   }
 
   &--dark {
-    background: $color-silver-lite;
-
     #{$self}__title {
       color: $color-black;
       background-color: $color-red;

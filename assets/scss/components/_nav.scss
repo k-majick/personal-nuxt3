@@ -186,7 +186,7 @@
     padding: 15px;
     position: relative;
     font-size: 1.1em;
-    font-weight: bold;
+    font-weight: 700;
 
     @include media(">m", "<l-s") {
       transform-origin: bottom;
@@ -380,7 +380,7 @@
       color: $color-black;
 
       &:after {
-        background-color: $color-red;
+        background: linear-gradient(to right, $color-red 50%, transparent 100%);
       }
 
       &.active,

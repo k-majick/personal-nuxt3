@@ -4,7 +4,7 @@
     class="main__content"
     v-html="DOMPurify.sanitize(marked.parse(skills.content))"
   ></div>
-  <div v-if="skills && skills.sets" class="main__content">
+  <div v-if="skills && skills.sets" class="main__content skill__container">
     <div
       v-for="set in skills.sets"
       :key="set.name"
@@ -30,7 +30,7 @@ export default {
     const pagesStore = usePagesStore();
     const uiStore = useUiStore();
     const theme = ref(uiStore.currentTheme);
-    const skills: Ref<unknown> = ref(
+    const skills: Ref<any> = ref(
       await pagesStore.getSkills(uiStore.currentLocale as string),
     );
 
@@ -62,7 +62,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/_skills";
 @keyframes skillBar {
   0% {

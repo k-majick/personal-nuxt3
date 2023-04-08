@@ -14,15 +14,24 @@
       <span class="burger__bar"></span>
     </div>
 
-    <Nav :is-activated="isNavActivated" @close-nav="toggleNav" />
+    <Nav
+      :is-activated="isNavActivated"
+      :is-active="isNavActive"
+      @close-nav="toggleNav"
+    />
 
-    <div class="main__container">
-      <router-view v-slot="{ Component, route }">
+    <router-view v-slot="{ Component, route }">
+      <div
+        class="main__container"
+        :class="`main__container--${
+          route.path.includes('blog') ? 'full' : 'card'
+        } ${isNavActive ? 'main__container--active' : ''}`"
+      >
         <transition name="fade" mode="out-in">
           <component :is="Component" :key="(route.name as string)" />
         </transition>
-      </router-view>
-    </div>
+      </div>
+    </router-view>
   </main>
 </template>
 
@@ -43,6 +52,7 @@ export default defineComponent({
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
     const isNavActivated = ref(false);
+    const isNavActive = ref(false);
 
     const scrollListen = () => {
       window.addEventListener("scroll", () => {
@@ -52,6 +62,14 @@ export default defineComponent({
           "--scroll-y",
           `${scrollTop}px`,
         );
+
+        if (!mainEl || !mainEl.value) {
+          return;
+        }
+
+        mainEl.value.getBoundingClientRect().top < 10
+          ? (isNavActive.value = true)
+          : (isNavActive.value = false);
       });
     };
 
@@ -86,6 +104,7 @@ export default defineComponent({
       mainEl,
       headerComponent,
       isNavActivated,
+      isNavActive,
       isLoadError,
       pagesStore,
     };
@@ -103,6 +122,7 @@ definePageMeta({
 @import "@/assets/scss/components/_loader";
 @import "@/assets/scss/components/_main";
 @import "@/assets/scss/components/_burger";
+@import "@/assets/scss/components/_tooltip";
 
 .fade-enter-from {
   opacity: 0;

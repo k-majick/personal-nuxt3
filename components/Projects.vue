@@ -42,7 +42,7 @@
           />
           <div class="modal__details--text">
             <h3 class="modal__title">{{ activeProject.name }}</h3>
-            <div class="modal__date">{{ activeProject.date }}</div>
+            <div class="main__label">{{ activeProject.date }}</div>
             <div class="modal__txt">
               <p>{{ activeProject.description }}</p>
             </div>
@@ -56,7 +56,7 @@
       </div>
     </template>
     <template #action>
-      <a class="modal__action" :href="activeProject.url" target="_blank">{{
+      <a class="main__btn" :href="activeProject.url" target="_blank">{{
         $t("content.gotoSite")
       }}</a>
     </template>

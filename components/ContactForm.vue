@@ -77,7 +77,7 @@
       <div class="form__group form__group--submit">
         <button
           ref="submitBtn"
-          class="form__btn"
+          class="main__btn"
           type="submit"
           @click="sendForm"
         >
@@ -265,6 +265,6 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "./assets/scss/components/_form";
 </style>

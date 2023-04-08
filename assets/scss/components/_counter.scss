@@ -8,7 +8,6 @@
 
   &__value {
     @include trans(0.5);
-    box-shadow: inset 0 0 10px $color-black;
     border-radius: 100%;
     width: 40px;
     height: 40px;
@@ -19,24 +18,27 @@
 
   &--lite {
     #{$self}__value {
-      color: $color-white;
-      background-color: $color-gray;
-      box-shadow: inset 0 0 10px $color-satan;
+      color: $color-black;
+      background: $color-silver-lite;
+      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
 
       &:hover {
         background-color: $color-red;
+        color: $color-white;
+        box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
       }
     }
   }
 
   &--dark {
     #{$self}__value {
-      color: $color-black;
-      background-color: $color-silver-lite;
-      box-shadow: inset 0 0 10px $color-black;
+      color: $color-white;
+      background-color: $color-satan;
+      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
 
       &:hover {
         background-color: $color-green;
+        color: $color-black;
       }
     }
   }

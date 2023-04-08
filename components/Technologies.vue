@@ -57,6 +57,6 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/scss/components/_technology";
 </style>

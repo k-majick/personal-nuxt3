@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  font-family: $font-stack;
+  font-family: $font-primary;
   font-size: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -27,6 +27,11 @@ body {
     box-sizing: border-box;
   }
 
+  b,
+  strong {
+    font-weight: 600;
+  }
+
   &.locked {
     .header {
       display: none;
@@ -41,3 +46,9 @@ body {
 :root {
   --scroll: -100%;
 }
+
+// @property --bgrotation {
+//   syntax: '<angle>';
+//   inherits: false;
+//   initial-value: 0deg;
+// }
