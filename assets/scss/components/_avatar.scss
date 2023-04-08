@@ -9,7 +9,6 @@
   &__container {
     position: relative;
     perspective: 1000px;
-    cursor: pointer;
 
     &.active,
     &:hover {
@@ -59,8 +58,7 @@
 
   &__front {
     background-image: url("@/assets/gfx/clf-avatar-min.svg");
-    z-index: 2;
-    transform: rotateY(0deg);
+    position: relative;
   }
 
   &__back {

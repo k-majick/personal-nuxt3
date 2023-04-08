@@ -2,6 +2,7 @@
   $self: &;
   max-width: 720px;
   width: 100%;
+  margin-top: 30px;
 
   &__group {
     display: flex;
@@ -20,7 +21,8 @@
     &--submit {
       display: flex;
       align-items: center;
-      margin-bottom: 15px;
+      margin-top: 30px !important;
+      margin-bottom: 30px;
     }
 
     &--errors {
@@ -52,27 +54,10 @@
     font-size: 0.8em;
   }
 
-  &__btn {
-    @include btn;
-  }
-
   &--lite {
-    #{$self}__btn {
-      color: $color-white;
-      background-color: $color-gray;
-      box-shadow: inset 0 0 10px $color-satan;
-
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: $color-red;
-      }
-    }
-
     #{$self}__group {
       &--error {
         #{$self}__input {
-          background-color: transparentize($color-red, 0.9);
           box-shadow: inset 0 0 10px $color-red;
         }
 
@@ -83,7 +68,7 @@
     }
 
     #{$self}__input {
-      background-color: $color-silver-lite;
+      background-color: transparentize($color-silver-lite, 0.25);
       box-shadow: inset 0 0 10px $color-silver;
     }
 
@@ -93,18 +78,6 @@
   }
 
   &--dark {
-    #{$self}__btn {
-      color: $color-black;
-      background-color: $color-silver-lite;
-      box-shadow: inset 0 0 10px $color-black;
-
-      &:active,
-      &:focus,
-      &:hover {
-        background-color: $color-green;
-      }
-    }
-
     #{$self}__group {
       &--error {
         #{$self}__input {
@@ -119,8 +92,8 @@
     }
 
     #{$self}__input {
-      background-color: $color-blackish;
-      box-shadow: inset 0 0 10px $color-gray;
+      background-color: transparentize($color-blackish, 0.25);
+      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
       color: $color-silver-lite;
     }
 

@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   max-width: 720px;
-  margin: 0 auto 15px;
+  margin: 15px auto;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -17,24 +17,26 @@
 
   &--lite {
     #{$self}__item {
-      color: $color-white;
-      background-color: $color-gray;
-      box-shadow: inset 0 0 10px $color-satan;
+      color: $color-black;
+      background-color: $color-silver-lite;
+      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
 
       &:hover {
         background: $color-red;
+        color: $color-white;
       }
     }
   }
 
   &--dark {
     #{$self}__item {
-      color: $color-black;
-      background-color: $color-silver-lite;
-      box-shadow: inset 0 0 10px $color-black;
+      color: $color-silver-lite;
+      background-color: $color-satan;
+      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
 
       &:hover {
         background: $color-green;
+        color: $color-black;
       }
     }
   }

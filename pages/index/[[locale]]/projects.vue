@@ -1,5 +1,6 @@
 <template>
   <section class="main__card main__card--gallery">
+    <h2 class="main__title">{{ pageTitle }}</h2>
     <Projects />
   </section>
 </template>
@@ -21,10 +22,15 @@ export default defineComponent({
     const pageData: Ref<any> = ref(
       await pagesStore.getPage(uiStore.currentLocale as string, 3),
     );
+    const pageTitle: Ref<string> = ref(pageData.value.attributes.title);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     });
+
+    return {
+      pageTitle,
+    };
   },
 });
 </script>

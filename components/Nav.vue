@@ -79,13 +79,13 @@ export default defineComponent({
   },
   props: {
     isActivated: Boolean,
+    isActive: Boolean,
   },
   emits: ["closeNav"],
   async setup() {
     const pagesStore = usePagesStore();
     const uiStore = useUiStore();
 
-    const isActive = ref(false);
     const theme = ref(uiStore.currentTheme);
 
     const headerEl = inject(HeaderElKey);
@@ -112,18 +112,6 @@ export default defineComponent({
       }
     };
 
-    const handleScroll = () => {
-      if (!mainEl || !mainEl.value) {
-        return;
-      }
-
-      mainEl.value.getBoundingClientRect().top < 100
-        ? (isActive.value = true)
-        : (isActive.value = false);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
     watch(
       () => uiStore.currentTheme,
       () => (theme.value = uiStore.currentTheme),
@@ -140,7 +128,6 @@ export default defineComponent({
     );
 
     return {
-      isActive,
       iconGit,
       iconLinkedin,
       scrollTo,

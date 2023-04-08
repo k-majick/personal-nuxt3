@@ -23,13 +23,14 @@
   @include trans(0.33);
   width: fit-content;
   border: 0;
-  font-family: $font-stack;
+  font-family: $font-primary;
   font-weight: bold;
   font-size: 0.9em;
   padding: 15px 30px;
   cursor: pointer;
   border-radius: 5px;
   display: inline-block;
+  position: relative;
 
   &:first-letter {
     text-transform: uppercase;

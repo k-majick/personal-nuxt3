@@ -87,7 +87,7 @@
       margin-left: auto;
       position: relative;
       height: 33px;
-      font-size: 0.85em;
+      // font-size: 0.85em;
 
       @include media("<=m") {
         height: 30px;
@@ -249,13 +249,13 @@
     #{$self}__switch {
       &--locale {
         #{$self}__button {
-          color: $color-white;
-          background-color: $color-gray;
-          box-shadow: inset 0 0 10px $color-satan;
+          color: $color-black;
+          background-color: $color-silver-lite;
+          box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
         }
 
         #{$self}__options {
-          background: $color-white;
+          background: $color-silver-lite;
           color: $color-black;
           filter: drop-shadow(0 0 5px $color-gray);
         }
@@ -302,15 +302,14 @@
     #{$self}__switch {
       &--locale {
         #{$self}__button {
-          color: $color-black;
-          background-color: $color-silver-lite;
-          box-shadow: inset 0 0 10px $color-black;
+          color: $color-silver-lite;
+          background-color: $color-satan;
+          box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
         }
 
         #{$self}__options {
-          background: $color-blackish;
+          background: $color-satan;
           color: $color-silver-lite;
-          filter: drop-shadow(0 0 5px $color-green);
         }
 
         #{$self}__option {
@@ -319,7 +318,7 @@
           &:hover {
             color: $color-black;
             background-color: $color-green;
-            box-shadow: inset 0 0 10px $color-black;
+            box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
           }
         }
       }

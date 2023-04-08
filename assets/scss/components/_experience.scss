@@ -72,7 +72,7 @@
     justify-content: center;
     width: 100%;
     max-width: 720px;
-    margin: 0 auto;
+    margin: 15px auto;
 
     tbody {
       min-width: 40px;
@@ -145,8 +145,8 @@
         &:before {
           background: linear-gradient(
             to bottom,
-            $color-gray 0%,
-            transparentize($color-gray, 1) 100%
+            $color-silver 0%,
+            transparentize($color-silver, 1) 100%
           );
         }
 
@@ -161,7 +161,7 @@
 
       #{$self}__tip {
         &:before {
-          border-bottom-color: $color-gray;
+          border-bottom-color: $color-silver;
         }
 
         &:after {
@@ -187,8 +187,8 @@
         &:before {
           background: linear-gradient(
             to bottom,
-            $color-silver-lite 0%,
-            transparentize($color-silver-lite, 1) 100%
+            $color-satan 0%,
+            transparentize($color-satan, 1) 100%
           );
         }
 
@@ -203,7 +203,7 @@
 
       #{$self}__tip {
         &:before {
-          border-bottom-color: $color-silver-lite;
+          border-bottom-color: $color-satan;
         }
 
         &:after {
