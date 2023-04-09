@@ -102,7 +102,17 @@ export default defineComponent({
       () => (theme.value = uiStore.currentTheme),
     );
 
+    const rootEl = document.documentElement;
+
     const toggleTheme = (theme: string) => {
+      console.dir(rootEl); // eslint-disable-line
+
+      if (theme === "lite") {
+        rootEl.style.setProperty("--color-primary", "red");
+      } else {
+        rootEl.style.setProperty("--color-primary", "green");
+      }
+
       uiStore.setTheme(theme);
       localStorage.setItem("user-theme", theme);
     };

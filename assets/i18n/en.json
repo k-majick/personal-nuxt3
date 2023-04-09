@@ -3,6 +3,22 @@
     "skills": {
       "title": "Skills",
       "slug": "skills"
+    },
+    "experience": {
+      "title": "Experience",
+      "slug": "experience"
+    },
+    "projects": {
+      "title": "Projects",
+      "slug": "projects"
+    },
+    "hire-me": {
+      "title": "Hire me",
+      "slug": "hire-me"
+    },
+    "inspiration": {
+      "title": "Inspiration",
+      "slug": "inspiration"
     }
   },
   "messages": {

@@ -1,6 +1,6 @@
 <template>
   <section class="main__card">
-    <h2 class="main__title">{{ pageTitle }}</h2>
+    <h2 class="main__title">{{ $t(`pages.${pageSlug}.title`) }}</h2>
     <ContactForm />
   </section>
 </template>
@@ -22,14 +22,14 @@ export default defineComponent({
     const pageData: Ref<any> = ref(
       await pagesStore.getPage(uiStore.currentLocale as string, 4),
     );
-    const pageTitle: Ref<string> = ref(pageData.value.attributes.title);
+    const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     });
 
     return {
-      pageTitle,
+      pageSlug,
     };
   },
 });
