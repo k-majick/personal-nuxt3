@@ -58,7 +58,6 @@
     #{$self}__group {
       &--error {
         #{$self}__input {
-          background-color: transparentize($color-red, 0.9);
           box-shadow: inset 0 0 10px $color-red;
         }
 
