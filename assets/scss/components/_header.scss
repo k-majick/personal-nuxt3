@@ -23,7 +23,7 @@
       min-height: 20vh;
 
       @include media("<=m") {
-        min-height: 150px;
+        min-height: 180px;
         align-items: flex-end;
         justify-content: center;
         padding-bottom: 15px;
@@ -63,12 +63,12 @@
 
     @include media("<=m") {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 30px;
+      right: 30px;
     }
   }
 
-  &__switch {
+  &__selector {
     height: 45px;
 
     @include media(">=l") {
@@ -87,7 +87,6 @@
       margin-left: auto;
       position: relative;
       height: 33px;
-      // font-size: 0.85em;
 
       @include media("<=m") {
         height: 30px;
@@ -108,6 +107,7 @@
           flex-flow: column;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
+          border-top: 0;
           opacity: 1;
         }
       }
@@ -179,6 +179,7 @@
 
       #{$self}__button {
         display: flex;
+        position: relative;
         border: 0;
         height: 45px;
         width: 45px;
@@ -246,27 +247,20 @@
       background-image: url("@/assets/gfx/clf-logo-full-lite-min.svg");
     }
 
-    #{$self}__switch {
+    #{$self}__selector {
       &--locale {
-        #{$self}__button {
-          color: $color-black;
-          background-color: $color-silver-lite;
-          box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
-        }
-
+        #{$self}__button,
         #{$self}__options {
-          background: $color-silver-lite;
-          color: $color-black;
-          filter: drop-shadow(0 0 5px $color-gray);
+          color: $color-red;
+          background-color: $color-white;
+          border: 2px solid $color-red;
+          box-shadow: inset 0 0 10px transparentize($color-red, 0.5);
         }
 
         #{$self}__option {
-          color: $color-black;
-
           &:hover {
             color: $color-white;
             background-color: $color-red;
-            box-shadow: inset 0 0 10px $color-satan;
           }
         }
       }
@@ -299,26 +293,20 @@
       background-image: url("@/assets/gfx/clf-logo-full-dark-min.svg");
     }
 
-    #{$self}__switch {
+    #{$self}__selector {
       &--locale {
-        #{$self}__button {
-          color: $color-silver-lite;
-          background-color: $color-satan;
-          box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
-        }
-
+        #{$self}__button,
         #{$self}__options {
-          background: $color-satan;
-          color: $color-silver-lite;
+          color: $color-green;
+          background-color: $color-black;
+          border: 2px solid $color-green;
+          box-shadow: inset 0 0 10px $color-green;
         }
 
         #{$self}__option {
-          color: $color-white;
-
           &:hover {
             color: $color-black;
             background-color: $color-green;
-            box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
           }
         }
       }

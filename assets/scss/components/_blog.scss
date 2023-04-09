@@ -1,7 +1,14 @@
 .blog {
-  padding: 60px 0;
+  height: 100%;
+  padding-top: 30px;
+  background: linear-gradient(to bottom, transparent 0 300px, #fff 300px 100%);
 
   &__container {
     @include mk-container;
+  }
+
+  &__img {
+    width: 100%;
+    height: auto;
   }
 }
