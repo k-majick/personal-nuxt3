@@ -61,6 +61,11 @@ export default defineComponent({
       }
     };
 
+    watch(
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
+    );
+
     return {
       counter,
       theme,

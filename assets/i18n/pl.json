@@ -3,6 +3,22 @@
     "skills": {
       "title": "Umiejętności",
       "slug": "umiejetnosci"
+    },
+    "experience": {
+      "title": "Doświadczenie",
+      "slug": "doswiadczenie"
+    },
+    "projects": {
+      "title": "Projekty",
+      "slug": "projekty"
+    },
+    "hire-me": {
+      "title": "Zatrudnij mnie",
+      "slug": "zatrudnij-mnie"
+    },
+    "inspiration": {
+      "title": "Inspiracja",
+      "slug": "inspiracja"
     }
   },
   "messages": {

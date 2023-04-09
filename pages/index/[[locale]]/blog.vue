@@ -1,6 +1,8 @@
 <template>
-  <div class="blog__container">
-    <div class="blog">blog</div>
+  <div class="blog">
+    <div class="blog__container">
+      <img src="https://picsum.photos/1920/1080" class="blog__img" />
+    </div>
   </div>
 </template>
 

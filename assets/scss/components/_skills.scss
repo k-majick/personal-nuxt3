@@ -44,23 +44,8 @@
     animation: scan 5s ease infinite;
   }
 
-  &__title {
-    @include trans(0.25);
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0 15px;
-    height: inherit;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
-
   &__bar {
-    @include trans(0.5);
+    @include trans(1);
     height: 40px;
     width: 0;
     position: relative;
@@ -76,25 +61,39 @@
     }
   }
 
+  &__title,
   &__percent {
-    @include trans(0.5);
+    @include trans(0.25);
     position: absolute;
-    right: 10px;
     top: 0;
-    height: 40px;
-    line-height: 40px;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    left: 0;
+    padding: 0 15px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  &__percent {
+    right: 10px;
   }
 
   &--lite {
-    background: $color-silver-lite;
-    box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
+    background-color: transparentize($color-silver-lite, 0.25);
+    box-shadow: inset 0 0 10px $color-silver;
 
     &:before {
       background-color: transparentize($color-satan, 0.9);
     }
 
-    #{$self}__title {
-      color: $color-black;
+    #{$self}__title,
+    #{$self}__percent {
+      color: $color-satan;
     }
 
     #{$self}__bar {
@@ -110,15 +109,16 @@
       }
     }
 
-    #{$self}__percent {
-      color: $color-satan;
-    }
-
     &:hover {
-      background: lighten($color-red, 50%);
+      background-color: transparentize($color-red, 0.9);
+      box-shadow: inset 0 0 10px $color-red;
 
       #{$self}__title {
         color: $color-white;
+      }
+
+      #{$self}__percent {
+        color: $color-red;
       }
 
       #{$self}__bar {
@@ -133,10 +133,6 @@
           background: $color-red;
         }
       }
-
-      #{$self}__percent {
-        color: $color-red;
-      }
     }
 
     &:after {
@@ -149,14 +145,15 @@
   }
 
   &--dark {
-    background: $color-blackish;
+    background-color: transparentize($color-blackish, 0.25);
     box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
 
     &:before {
       background-color: transparentize($color-black, 0.75);
     }
 
-    #{$self}__title {
+    #{$self}__title,
+    #{$self}__percent {
       color: $color-silver;
     }
 
@@ -173,15 +170,16 @@
       }
     }
 
-    #{$self}__percent {
-      color: $color-silver;
-    }
-
     &:hover {
-      background: darken($color-green, 30%);
+      background-color: transparentize($color-green, 0.9);
+      box-shadow: inset 0 0 10px $color-green;
 
       #{$self}__title {
         color: $color-black;
+      }
+
+      #{$self}__percent {
+        color: $color-green;
       }
 
       #{$self}__bar {
@@ -195,10 +193,6 @@
         &:after {
           background: $color-green;
         }
-      }
-
-      #{$self}__percent {
-        color: $color-green;
       }
     }
 

@@ -289,7 +289,7 @@
     }
 
     #{$self}__logo {
-      box-shadow: 0 0 15px $color-gray;
+      box-shadow: 0 0 10px transparentize($color-black, 0.5);
     }
   }
 
@@ -322,7 +322,7 @@
     }
 
     #{$self}__logo {
-      box-shadow: 0 0 15px $color-green;
+      box-shadow: 0 0 10px $color-green;
     }
   }
 }

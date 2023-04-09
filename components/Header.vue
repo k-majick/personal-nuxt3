@@ -6,7 +6,7 @@
         <h1 class="header__title">{{ config.public.appTitle }}</h1>
       </a>
       <div class="header__control">
-        <div class="header__switch header__switch--locale">
+        <div class="header__selector header__selector--locale">
           <button class="header__button">{{ locale }}</button>
           <ul class="header__options">
             <li
@@ -25,7 +25,7 @@
               ? $t('messages.switch2lite')
               : $t('messages.switch2dark')
           "
-          class="header__switch header__switch--theme"
+          class="header__selector header__selector--theme"
         >
           <!-- eslint-disable risxss/catch-potential-xss-vue -->
           <button
@@ -102,7 +102,17 @@ export default defineComponent({
       () => (theme.value = uiStore.currentTheme),
     );
 
+    const rootEl = document.documentElement;
+
     const toggleTheme = (theme: string) => {
+      console.dir(rootEl); // eslint-disable-line
+
+      if (theme === "lite") {
+        rootEl.style.setProperty("--color-primary", "red");
+      } else {
+        rootEl.style.setProperty("--color-primary", "green");
+      }
+
       uiStore.setTheme(theme);
       localStorage.setItem("user-theme", theme);
     };
@@ -116,6 +126,7 @@ export default defineComponent({
     return {
       scrollTo,
       toggleTheme,
+      switchLocale,
       theme,
       route,
       DOMPurify,
@@ -126,7 +137,6 @@ export default defineComponent({
       iconMoon,
       locale,
       availableLocales,
-      switchLocale,
       hoverMessage,
     };
   },
