@@ -7,7 +7,6 @@
   line-height: 1;
 
   &__value {
-    @include trans(0.5);
     border-radius: 100%;
     width: 40px;
     height: 40px;
@@ -16,7 +15,6 @@
     justify-content: center;
     white-space: nowrap;
     font-size: 0.85em;
-
     @include label-face;
     @include button-actions;
   }

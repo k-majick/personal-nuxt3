@@ -238,5 +238,6 @@
 
   &__label {
     @include label;
+    border: 2px solid;
   }
 }

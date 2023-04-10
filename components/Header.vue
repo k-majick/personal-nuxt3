@@ -106,7 +106,6 @@ export default defineComponent({
 
     const toggleTheme = (theme: string) => {
       rootEl.style.setProperty("--theme", theme);
-
       uiStore.setTheme(theme);
       localStorage.setItem("user-theme", theme);
     };
