@@ -45,10 +45,26 @@ body {
 
 :root {
   --scroll: -100%;
+  --theme: dark;
+  container: root;
 }
 
-// @property --bgrotation {
-//   syntax: '<angle>';
-//   inherits: false;
-//   initial-value: 0deg;
-// }
+@container root style(--theme: lite) {
+  body {
+    --color-primary: #{$color-red};
+    --color-secondary: #{$color-white};
+    --color-ternary: #{$color-silver-lite};
+    --color-quaternary: #{$color-satan};
+    --color-quinary: #{$color-black};
+  }
+}
+
+@container root style(--theme: dark) {
+  body {
+    --color-primary: #{$color-green};
+    --color-secondary: #{$color-black};
+    --color-ternary: #{$color-blackish};
+    --color-quaternary: #{$color-silver};
+    --color-quinary: #{$color-white};
+  }
+}

@@ -33,55 +33,38 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Ref } from "vue";
 import { usePagesStore } from "@/store/pages";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-export default defineComponent({
-  async setup() {
-    const pagesStore = usePagesStore();
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
-    const experience: Ref<any> = ref(
-      await pagesStore.getExperience(uiStore.currentLocale as string),
+const pagesStore = usePagesStore();
+const uiStore = useUiStore();
+const theme = ref(uiStore.currentTheme);
+const experience: Ref<any> = ref(
+  await pagesStore.getExperience(uiStore.currentLocale as string),
+);
+
+const sortItems = (pagesArr: Record<string, any>[]) =>
+  pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1));
+
+const workplaces = ref(
+  experience.value ? sortItems([...experience.value.workplaces]) : [],
+);
+
+watch(
+  () => uiStore.currentLocale,
+  async () => {
+    experience.value = await pagesStore.getExperience(
+      uiStore.currentLocale as string,
     );
-
-    const sortItems = (pagesArr: Record<string, any>[]) =>
-      pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1));
-
-    const workplaces = ref(
-      experience.value ? sortItems([...experience.value.workplaces]) : [],
-    );
-
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    watch(
-      () => uiStore.currentLocale,
-      async () => {
-        experience.value = await pagesStore.getExperience(
-          uiStore.currentLocale as string,
-        );
-        workplaces.value = experience.value
-          ? sortItems([...experience.value.workplaces])
-          : [];
-      },
-    );
-
-    return {
-      marked,
-      experience,
-      workplaces,
-      DOMPurify,
-      theme,
-    };
+    workplaces.value = experience.value
+      ? sortItems([...experience.value.workplaces])
+      : [];
   },
-});
+);
 </script>
 
 <style lang="scss" scoped>

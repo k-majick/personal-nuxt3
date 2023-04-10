@@ -30,6 +30,18 @@
     width: 100%;
     z-index: 0;
 
+    @container root style(--theme: lite) {
+      background-color: $color-red;
+      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2)
+        contrast(1);
+    }
+
+    @container root style(--theme: dark) {
+      background-color: $color-black;
+      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2)
+        contrast(1);
+    }
+
     @include media(">m", "<l-s") {
       background-image: url("@/assets/gfx/gfx-jungle-bw-1366.jpg");
     }
@@ -128,6 +140,48 @@
       z-index: -2;
     }
 
+    @container root style(--theme: lite) {
+      &:before {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.45%,
+          $color-white 2.45% 25%,
+          transparentize($color-white, 0.25) 75% 97.45%,
+          transparent 97.55% 100%
+        );
+      }
+
+      &:after {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.5%,
+          $color-red 2.5% 25%,
+          transparent 30%
+        );
+      }
+    }
+
+    @container root style(--theme: dark) {
+      &:before {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.45%,
+          $color-black 2.45% 25%,
+          transparentize($color-black, 0.25) 75% 97.45%,
+          transparent 97.55% 100%
+        );
+      }
+
+      &:after {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.5%,
+          $color-green 2.5% 25%,
+          transparent 30%
+        );
+      }
+    }
+
     &--gallery {
       padding: 35px 0px 0 2px;
 
@@ -175,123 +229,15 @@
     font-weight: bold;
     font-size: 2.25em;
     margin: 0 0 30px;
+    color: var(--color-primary);
   }
 
-  &__btn {
-    @include btn;
-    border: 2px solid;
+  &__button {
+    @include button;
   }
 
   &__label {
     @include label;
     border: 2px solid;
-  }
-
-  &--lite {
-    #{$self}__background {
-      background-color: $color-red;
-      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2)
-        contrast(1);
-    }
-
-    #{$self}__card {
-      &:before {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.45%,
-          $color-white 2.45% 25%,
-          transparentize($color-white, 0.25) 75% 97.45%,
-          transparent 97.55% 100%
-        );
-      }
-
-      &:after {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.5%,
-          $color-red 2.5% 25%,
-          transparent 30%
-        );
-      }
-    }
-
-    #{$self}__title {
-      color: $color-red;
-    }
-
-    #{$self}__btn {
-      color: $color-red;
-      background-color: $color-white;
-      border-color: $color-red;
-      box-shadow: inset 0 0 10px transparentize($color-red, 0.5);
-
-      &:active,
-      &:focus,
-      &:hover {
-        color: $color-white;
-        background: $color-red;
-      }
-    }
-
-    #{$self}__label {
-      color: $color-satan;
-      background-color: $color-white;
-      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
-      border-color: $color-satan;
-    }
-  }
-
-  &--dark {
-    #{$self}__background {
-      background-color: $color-black;
-      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2)
-        contrast(1);
-    }
-
-    #{$self}__card {
-      &:before {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.45%,
-          $color-black 2.45% 25%,
-          transparentize($color-black, 0.25) 75% 97.45%,
-          transparent 97.55% 100%
-        );
-      }
-
-      &:after {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.5%,
-          $color-green 2.5% 25%,
-          transparent 30%
-        );
-      }
-    }
-
-    #{$self}__title {
-      color: $color-green;
-    }
-
-    #{$self}__btn {
-      color: $color-green;
-      background-color: $color-black;
-      border-color: $color-green;
-      box-shadow: inset 0 0 10px $color-green;
-
-      &:active,
-      &:focus,
-      &:hover {
-        color: $color-black;
-        background: $color-green;
-      }
-    }
-
-    #{$self}__label {
-      color: $color-silver;
-      background-color: $color-black;
-      box-shadow: inset 0 0 10px $color-silver;
-      border-color: $color-silver;
-    }
   }
 }

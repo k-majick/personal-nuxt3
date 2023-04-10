@@ -4,7 +4,7 @@
     class="main__content"
     v-html="DOMPurify.sanitize(marked.parse(portfolio.content))"
   ></div>
-  <div v-if="portfolio.projects.length" :class="`gallery gallery--${theme}`">
+  <div v-if="portfolio.projects.length" class="gallery">
     <div
       v-for="(project, index) in portfolio.projects"
       :key="index"
@@ -56,7 +56,7 @@
       </div>
     </template>
     <template #action>
-      <a class="main__btn" :href="activeProject.url" target="_blank">{{
+      <a class="main__button" :href="activeProject.url" target="_blank">{{
         $t("content.gotoSite")
       }}</a>
     </template>
@@ -72,7 +72,6 @@ import DOMPurify from "dompurify";
 
 const pagesStore = usePagesStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
 const portfolio: Ref<any> = ref(
   await pagesStore.getPortfolio(uiStore.currentLocale as string),
 );
@@ -82,11 +81,6 @@ const setActiveProject = (project: any, index: number) => {
   activeProject.value = project;
   activeProject.value.id = index + 1;
 };
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
 
 watch(
   () => uiStore.currentLocale,

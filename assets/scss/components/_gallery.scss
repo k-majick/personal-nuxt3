@@ -44,7 +44,6 @@
     width: 100%;
     height: 100%;
     display: block;
-    box-shadow: inset 0 0 15px $color-black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,6 +53,28 @@
     font-size: 1em;
     cursor: pointer;
     z-index: 1;
+    color: var(--color-secondary);
+    box-shadow: inset 0 0 15px $color-black;
+
+    @container root style(--theme: lite) {
+      background: repeating-linear-gradient(
+        to bottom,
+        transparentize($color-red, 0.05),
+        transparentize($color-red, 0.05) 1px,
+        transparentize($color-red, 0.2) 2px,
+        transparentize($color-red, 0.2) 3px
+      );
+    }
+
+    @container root style(--theme: dark) {
+      background: repeating-linear-gradient(
+        to bottom,
+        transparentize($color-green, 0.05),
+        transparentize($color-green, 0.05) 1px,
+        transparentize($color-green, 0.2) 2px,
+        transparentize($color-green, 0.2) 3px
+      );
+    }
 
     &:active,
     &:focus,
@@ -71,34 +92,6 @@
     @include media("<=m") {
       top: 0;
       transform: translateY(0);
-    }
-  }
-
-  &--lite {
-    #{$self}__title {
-      color: $color-white;
-      background-color: $color-red;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparentize($color-red, 0.05),
-        transparentize($color-red, 0.05) 1px,
-        transparentize($color-red, 0.2) 2px,
-        transparentize($color-red, 0.2) 3px
-      );
-    }
-  }
-
-  &--dark {
-    #{$self}__title {
-      color: $color-black;
-      background-color: $color-red;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparentize($color-green, 0.05),
-        transparentize($color-green, 0.05) 1px,
-        transparentize($color-green, 0.2) 2px,
-        transparentize($color-green, 0.2) 3px
-      );
     }
   }
 }

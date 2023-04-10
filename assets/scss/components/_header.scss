@@ -7,7 +7,6 @@
   z-index: 2;
 
   &__container {
-    background-color: $color-silver-lite;
     position: relative;
     z-index: 3;
     display: flex;
@@ -21,6 +20,33 @@
       align-items: center;
       justify-content: space-between;
       min-height: 20vh;
+      backdrop-filter: blur(3px);
+
+      @container root style(--theme: lite) {
+        background-image: linear-gradient(
+          to bottom,
+          transparentize($color-silver-lite, 0.15) 25%,
+          $color-silver-lite 100%
+        );
+      }
+
+      @container root style(--theme: dark) {
+        background-image: linear-gradient(
+          to bottom,
+          transparentize($color-black, 0.15) 25%,
+          $color-black 100%
+        );
+      }
+
+      @include media(">m", "<l-s") {
+        @container root style(--theme: lite) {
+          background: $color-silver-lite;
+        }
+
+        @container root style(--theme: dark) {
+          background: $color-black;
+        }
+      }
 
       @include media("<=m") {
         min-height: 180px;
@@ -33,6 +59,50 @@
     &--avatar {
       flex-direction: column;
       min-height: 50vh;
+
+      @container root style(--theme: lite) {
+        background-color: $color-silver-lite;
+      }
+
+      @container root style(--theme: dark) {
+        background-color: $color-black;
+      }
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    cursor: pointer;
+
+    @container root style(--theme: lite) {
+      filter: drop-shadow(0 10px 5px transparentize($color-black, 0.5));
+    }
+
+    @container root style(--theme: dark) {
+      filter: drop-shadow(0 10px 5px transparentize($color-green, 0.85));
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 90px;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+
+      @include media("<=m") {
+        padding-bottom: 45px;
+      }
+
+      @container root style(--theme: lite) {
+        background-color: $color-silver-lite;
+      }
+
+      @container root style(--theme: dark) {
+        background-color: $color-black;
+      }
     }
   }
 
@@ -54,6 +124,14 @@
 
     @include media(">=l") {
       max-width: 360px;
+    }
+
+    @container root style(--theme: lite) {
+      background-image: url("@/assets/gfx/clf-logo-full-lite-min.svg");
+    }
+
+    @container root style(--theme: dark) {
+      background-image: url("@/assets/gfx/clf-logo-full-dark-min.svg");
     }
   }
 
@@ -112,10 +190,23 @@
         }
       }
 
+      #{$self}__button,
+      #{$self}__options {
+        border-radius: 15px;
+        border: 2px solid;
+        color: var(--color-primary);
+        background-color: var(--color-secondary);
+        border-color: var(--color-primary);
+        box-shadow: inset 0 0 10px var(--color-primary);
+
+        @include media(">=l") {
+          border-radius: 20px;
+        }
+      }
+
       #{$self}__button {
         cursor: pointer;
         padding: 10px 15px;
-        border: 0;
         padding: 0 20px;
         height: 100%;
         z-index: 1;
@@ -157,14 +248,10 @@
         @include media(">=l") {
           height: 45px;
         }
-      }
 
-      #{$self}__button,
-      #{$self}__options {
-        border-radius: 15px;
-
-        @include media(">=l") {
-          border-radius: 20px;
+        &:hover {
+          color: var(--color-secondary);
+          background: var(--color-primary);
         }
       }
     }
@@ -175,6 +262,20 @@
       @include media("<=m") {
         height: 30px;
         width: 30px;
+      }
+
+      @container root style(--theme: lite) {
+        svg {
+          fill: $color-white;
+          filter: drop-shadow(0 0 5px $color-satan);
+        }
+      }
+
+      @container root style(--theme: dark) {
+        svg {
+          fill: $color-silver-lite;
+          filter: drop-shadow(0 0 5px $color-silver);
+        }
       }
 
       #{$self}__button {
@@ -193,6 +294,11 @@
           height: 55px;
           width: 55px;
         }
+
+        @include media("<=m") {
+          height: 30px;
+          width: 30px;
+        }
       }
 
       svg {
@@ -207,118 +313,5 @@
 
   &__title {
     text-indent: -9999px;
-  }
-
-  &__arrow {
-    position: absolute;
-    z-index: 2;
-    top: calc(100% - 1px);
-    left: 0;
-    right: 0;
-    cursor: pointer;
-
-    &:after {
-      content: "";
-      display: block;
-      padding-bottom: 90px;
-
-      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-
-      @include media("<=m") {
-        padding-bottom: 45px;
-      }
-    }
-  }
-
-  &--lite {
-    #{$self}__container {
-      background-color: $color-silver-lite;
-    }
-
-    #{$self}__arrow {
-      filter: drop-shadow(0 5px 2.5px rgba(0, 0, 0, 0.5));
-
-      &:after {
-        background: $color-silver-lite;
-      }
-    }
-
-    #{$self}__logo {
-      background-image: url("@/assets/gfx/clf-logo-full-lite-min.svg");
-    }
-
-    #{$self}__selector {
-      &--locale {
-        #{$self}__button,
-        #{$self}__options {
-          color: $color-red;
-          background-color: $color-white;
-          border: 2px solid $color-red;
-          box-shadow: inset 0 0 10px transparentize($color-red, 0.5);
-        }
-
-        #{$self}__option {
-          &:hover {
-            color: $color-white;
-            background-color: $color-red;
-          }
-        }
-      }
-
-      &--theme {
-        background-image: url("@/assets/gfx/icon-moon.svg");
-
-        svg {
-          fill: $color-white;
-          filter: drop-shadow(0 0 5px $color-gray);
-        }
-      }
-    }
-  }
-
-  &--dark {
-    #{$self}__container {
-      background-color: $color-black;
-    }
-
-    #{$self}__arrow {
-      filter: drop-shadow(0 7.5px 2.5px rgba(255, 255, 255, 0.15));
-
-      &:after {
-        background: $color-black;
-      }
-    }
-
-    #{$self}__logo {
-      background-image: url("@/assets/gfx/clf-logo-full-dark-min.svg");
-    }
-
-    #{$self}__selector {
-      &--locale {
-        #{$self}__button,
-        #{$self}__options {
-          color: $color-green;
-          background-color: $color-black;
-          border: 2px solid $color-green;
-          box-shadow: inset 0 0 10px $color-green;
-        }
-
-        #{$self}__option {
-          &:hover {
-            color: $color-black;
-            background-color: $color-green;
-          }
-        }
-      }
-
-      &--theme {
-        background-image: url("@/assets/gfx/icon-sun.svg");
-
-        svg {
-          fill: $color-silver-lite;
-          filter: drop-shadow(0 0 5px $color-gray);
-        }
-      }
-    }
   }
 }

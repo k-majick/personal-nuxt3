@@ -2,16 +2,21 @@
 @import "@/assets/scss/_fonts.scss";
 @import "@/assets/scss/_mixins.scss";
 
-$color-black: #000;
-$color-blackish: #222;
-$color-white: #fff;
-$color-green: #00ff00;
-$color-green-dark: #0f2200;
-$color-silver: #ccc;
-$color-silver-lite: #eee;
+// primary
 $color-red: #c10000;
+$color-green: #00ff00;
+
+// secondary
+$color-white: #fff;
+$color-black: #000;
+
+// ternary
+$color-silver-lite: #eee;
+$color-blackish: #222;
+
+// quaternary
 $color-satan: #666;
-$color-gray: #999;
+$color-silver: #ccc;
 
 $breakpoint_laptop_large: 1600px;
 $breakpoint_laptop_medium: 1440px;

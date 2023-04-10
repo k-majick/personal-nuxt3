@@ -15,6 +15,49 @@
     z-index: 2;
   }
 
+  @container root style(--theme: lite) {
+    &:before {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.45%,
+        $color-white 2.45% 25%,
+        transparentize($color-white, 0.25) 75% 97.45%,
+        transparent 97.55% 100%
+      );
+    }
+
+    &:after {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.5%,
+        $color-red 2.5% 25%,
+        transparent 30%
+      );
+    }
+  }
+
+  @container root style(--theme: dark) {
+    &:before {
+      filter: brightness(0.15);
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.45%,
+        $color-black 2.45% 25%,
+        transparentize($color-black, 0.25) 75% 97.45%,
+        transparent 97.55% 100%
+      );
+    }
+
+    &:after {
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.5%,
+        $color-green 2.5% 25%,
+        transparent 30%
+      );
+    }
+  }
+
   &__mask {
     @include trans(0.5);
     position: fixed;
@@ -27,23 +70,20 @@
     display: table;
     display: block;
     backdrop-filter: blur(3px);
-
     overflow-y: scroll;
 
     &--full {
-      overflow-y: scroll;
-
       #{$self} {
         border-radius: 0;
         min-height: 100%;
         width: 100%;
         position: relative;
 
-        &--lite {
+        @container root style(--theme: lite) {
           background-color: $color-white;
         }
 
-        &--dark {
+        @container root style(--theme: dark) {
           background-color: $color-black;
         }
 
@@ -103,18 +143,27 @@
         @include media("<=m") {
           margin-right: 0;
         }
+
+        @container root style(--theme: lite) {
+          box-shadow: 0 0 10px transparentize($color-black, 0.5);
+        }
+
+        @container root style(--theme: dark) {
+          box-shadow: 0 0 10px $color-green;
+        }
       }
 
       #{$self}__title {
-        font-size: 1.5em;
-        margin-bottom: 15px;
+        color: var(--color-primary);
+        font-size: 2em;
+        margin: 0 0 15px;
       }
 
       #{$self}__image {
         @include img;
         max-width: 400px;
         margin: 30px 0;
-        border: 1px solid $color-gray;
+        border: 1px solid $color-silver;
       }
     }
 
@@ -230,6 +279,7 @@
     font-size: 3em;
     cursor: pointer;
     z-index: 10;
+    color: var(--color-primary);
 
     &:focus {
       outline: 0;
@@ -262,67 +312,5 @@
 
   &-enter-active &__container {
     animation: modalContainer 0.25s ease 0s;
-  }
-
-  &--lite {
-    &:before {
-      background-image: linear-gradient(
-        135deg,
-        transparent 2.45%,
-        $color-white 2.45% 25%,
-        transparentize($color-white, 0.25) 75% 97.45%,
-        transparent 97.55% 100%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        135deg,
-        transparent 2.5%,
-        $color-red 2.5% 25%,
-        transparent 30%
-      );
-    }
-
-    #{$self}__close {
-      color: $color-red;
-    }
-
-    #{$self}__logo {
-      box-shadow: 0 0 10px transparentize($color-black, 0.5);
-    }
-  }
-
-  &--dark {
-    &:before {
-      background-image: linear-gradient(
-        135deg,
-        transparent 2.45%,
-        $color-black 2.45% 25%,
-        transparentize($color-black, 0.25) 75% 97.45%,
-        transparent 97.55% 100%
-      );
-    }
-
-    &:after {
-      background-image: linear-gradient(
-        135deg,
-        transparent 2.5%,
-        $color-green 2.5% 25%,
-        transparent 30%
-      );
-    }
-
-    &:before {
-      filter: brightness(0.25);
-    }
-
-    #{$self}__close {
-      color: $color-green;
-    }
-
-    #{$self}__logo {
-      box-shadow: 0 0 10px $color-green;
-    }
   }
 }

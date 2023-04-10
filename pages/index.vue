@@ -1,13 +1,9 @@
 <template>
   <Header v-if="!isLoadError" ref="headerComponent" />
 
-  <main v-if="!isLoadError" ref="mainEl" :class="`main main--${theme}`">
+  <main v-if="!isLoadError" ref="mainEl">
     <div class="main__background"></div>
-    <div
-      class="burger"
-      :class="[`burger--${theme}`, { active: isNavActivated }]"
-      @click="toggleNav"
-    >
+    <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
@@ -38,7 +34,6 @@
 <script lang="ts">
 import type { Ref } from "vue";
 import { usePagesStore } from "@/store/pages";
-import { useUiStore } from "@/store/ui";
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 
 export default defineComponent({
@@ -46,8 +41,6 @@ export default defineComponent({
   setup() {
     const pagesStore = usePagesStore();
     const isLoadError = ref(pagesStore.loadError);
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
     const headerComponent: Ref<any> = ref();
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
@@ -81,11 +74,6 @@ export default defineComponent({
     );
 
     watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    watch(
       () => headerComponent.value,
       () => (headerEl.value = headerComponent.value.headerEl),
     );
@@ -99,7 +87,6 @@ export default defineComponent({
         : (isNavActivated.value = false);
 
     return {
-      theme,
       toggleNav,
       mainEl,
       headerComponent,

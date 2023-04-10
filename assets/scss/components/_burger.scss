@@ -24,6 +24,8 @@
     left: 50%;
     transform: translateX(-50%) rotate(0deg);
     flex: 1;
+    background: $color-white;
+    filter: drop-shadow(0 0 1px var(--color-primary));
 
     &:nth-child(1) {
       top: 25%;
@@ -40,7 +42,10 @@
   }
 
   &.active {
+    filter: drop-shadow(0 0 1px $color-white);
     #{$self}__bar {
+      background: var(--color-primary);
+
       &:nth-child(1) {
         top: calc(25% + 10px);
         width: 0;
@@ -59,38 +64,6 @@
         top: calc(25% + 10px);
         width: 0;
         left: 50%;
-      }
-    }
-  }
-
-  &--dark {
-    filter: drop-shadow(0 0 1px $color-green);
-
-    #{$self}__bar {
-      background: $color-white;
-    }
-
-    &.active {
-      filter: drop-shadow(0 0 1px $color-white);
-
-      #{$self}__bar {
-        background: $color-green;
-      }
-    }
-  }
-
-  &--lite {
-    filter: drop-shadow(0 0 1px $color-red);
-
-    #{$self}__bar {
-      background: $color-white;
-    }
-
-    &.active {
-      filter: drop-shadow(0 0 1px $color-white);
-
-      #{$self}__bar {
-        background: $color-red;
       }
     }
   }

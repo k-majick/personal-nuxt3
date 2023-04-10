@@ -1,5 +1,5 @@
 <template>
-  <header ref="headerEl" class="header" :class="`header--${theme}`">
+  <header ref="headerEl" class="header">
     <section class="header__container header__container--logo">
       <a class="main__anchor"></a>
       <a class="header__logo">
@@ -36,7 +36,7 @@
             v-html="theme === 'dark' ? iconSun : iconMoon"
           />
           <!-- eslint-enable risxss/catch-potential-xss-vue -->
-          <span class="tooltip" :class="`tooltip--${theme}`"></span>
+          <span class="tooltip"></span>
         </div>
       </div>
     </section>
@@ -44,7 +44,7 @@
       <Avatar />
       <div class="header__arrow" @click="scrollTo($event, mainEl)"></div>
       <a class="chevron__container" @click="scrollTo($event, mainEl)">
-        <div class="chevron" :class="`chevron--${theme}`"></div>
+        <div class="chevron"></div>
       </a>
     </section>
   </header>
@@ -105,14 +105,7 @@ export default defineComponent({
     const rootEl = document.documentElement;
 
     const toggleTheme = (theme: string) => {
-      console.dir(rootEl); // eslint-disable-line
-
-      if (theme === "lite") {
-        rootEl.style.setProperty("--color-primary", "red");
-      } else {
-        rootEl.style.setProperty("--color-primary", "green");
-      }
-
+      rootEl.style.setProperty("--theme", theme);
       uiStore.setTheme(theme);
       localStorage.setItem("user-theme", theme);
     };
