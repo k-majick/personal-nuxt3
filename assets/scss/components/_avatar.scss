@@ -59,6 +59,10 @@
   &__front {
     background-image: url("@/assets/gfx/clf-avatar-min.svg");
     position: relative;
+
+    @container root style(--theme: dark) {
+      filter: brightness(0.75);
+    }
   }
 
   &__back {
@@ -72,6 +76,7 @@
     font-size: 3em;
     font-weight: 300;
     margin: 0 0 15px;
+    color: var(--color-quinary);
     @include media("<=m") {
       display: none;
     }
@@ -94,17 +99,12 @@
     text-align: center;
     font-weight: lighter;
     font-size: 1.15em;
+    color: var(--color-quinary);
     @include media(">m", "<l-s") {
       display: block;
     }
     @include media("<=m") {
       display: block;
-    }
-  }
-
-  &--dark {
-    #{$self}__front {
-      filter: brightness(0.75);
     }
   }
 }

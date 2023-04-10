@@ -8,23 +8,16 @@
   padding: 0;
   opacity: 0;
   text-align: center;
+  background-color: var(--color-quinary);
+  color: var(--color-secondary);
 
   &.show {
     @include trans(0.5, opacity);
     opacity: 1;
     padding: 5px 7.5px;
   }
+
   @include media("<l-s") {
     display: none;
-  }
-
-  &--lite {
-    background-color: $color-black;
-    color: $color-white;
-  }
-
-  &--dark {
-    background-color: $color-white;
-    color: $color-blackish;
   }
 }

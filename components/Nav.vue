@@ -1,7 +1,5 @@
 <template>
-  <nav
-    :class="[`nav nav--${theme}`, { active: isActive, activated: isActivated }]"
-  >
+  <nav class="nav" :class="{ active: isActive, activated: isActivated }">
     <div class="nav__mask" @click="$emit('closeNav')"></div>
     <ul class="nav__items">
       <li class="nav__item">
@@ -31,7 +29,7 @@
           class="nav__socialLink"
         >
           <span v-html="DOMPurify.sanitize(iconGit)"></span>
-          <span class="tooltip" :class="`tooltip--${theme}`"></span>
+          <span class="tooltip"></span>
         </a>
       </li>
       <li class="nav__socialItem">
@@ -42,21 +40,17 @@
           class="nav__socialLink"
         >
           <span v-html="DOMPurify.sanitize(iconLinkedin)"></span>
-          <span class="tooltip" :class="`tooltip--${theme}`"></span>
+          <span class="tooltip"></span>
         </a>
       </li>
     </ul>
     <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
-      <nuxt-link
-        :to="'inspiration'"
-        :class="`cat cat--${theme}`"
-        @click.stop="killModal()"
-      >
+      <nuxt-link :to="'inspiration'" class="cat" @click.stop="killModal()">
         <!-- eslint-disable risxss/catch-potential-xss-vue -->
         <div v-html="rawCat"></div>
         <!-- eslint-enable risxss/catch-potential-xss-vue -->
       </nuxt-link>
-      <span class="tooltip" :class="`tooltip--${theme}`"></span>
+      <span class="tooltip"></span>
     </div>
   </nav>
 </template>
@@ -86,8 +80,6 @@ export default defineComponent({
     const pagesStore = usePagesStore();
     const uiStore = useUiStore();
 
-    const theme = ref(uiStore.currentTheme);
-
     const headerEl = inject(HeaderElKey);
     const mainEl = inject(MainElKey);
 
@@ -113,11 +105,6 @@ export default defineComponent({
     };
 
     watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    watch(
       () => uiStore.currentLocale,
       async () =>
         (pages.value = await sortItems([
@@ -136,7 +123,6 @@ export default defineComponent({
       pages,
       rawCat,
       DOMPurify,
-      theme,
       killModal,
     };
   },

@@ -7,7 +7,7 @@
     ></div>
     <div
       v-if="inspiration.pictures.length"
-      :class="`gallery gallery--inspiration gallery--${theme}`"
+      class="gallery gallery--inspiration"
     >
       <div
         v-for="(picture, index) in inspiration.pictures"
@@ -46,16 +46,10 @@ export default defineComponent({
     const inspiration: Ref<any> = ref(
       await pagesStore.getInspiration(uiStore.currentLocale as string),
     );
-    const theme = ref(uiStore.currentTheme);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
     });
-
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
 
     watch(
       () => uiStore.currentLocale,
@@ -69,7 +63,6 @@ export default defineComponent({
       marked,
       inspiration,
       DOMPurify,
-      theme,
     };
   },
 });

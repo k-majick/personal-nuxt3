@@ -16,74 +16,32 @@
   font-weight: bolder;
   font-size: 0.85em;
 
-  &__container {
-    margin: 15px 0;
-  }
-
+  &:after,
   &:before {
     content: "";
     display: block;
+    position: absolute;
+  }
+
+  &:before {
     height: 5px;
     width: 100%;
-    position: absolute;
     bottom: 0;
+  }
+
+  &:after {
+    height: 100%;
+    width: 90px;
+    top: 0;
+    left: -90px;
+    animation: scan 5s ease infinite;
   }
 
   @include media("<=m") {
     margin-bottom: 7.5px;
   }
 
-  &:after {
-    content: "";
-    display: block;
-    width: 90px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: -90px;
-    animation: scan 5s ease infinite;
-  }
-
-  &__bar {
-    @include trans(1);
-    height: 40px;
-    width: 0;
-    position: relative;
-    animation: skillBar 3s ease-in-out;
-
-    &:after {
-      content: "";
-      display: block;
-      top: 100%;
-      height: 5px;
-      width: 100%;
-      position: absolute;
-    }
-  }
-
-  &__title,
-  &__percent {
-    @include trans(0.25);
-    position: absolute;
-    top: 0;
-    height: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__title {
-    left: 0;
-    padding: 0 15px;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  &__percent {
-    right: 10px;
-  }
-
-  &--lite {
+  @container root style(--theme: lite) {
     background-color: transparentize($color-silver-lite, 0.25);
     box-shadow: inset 0 0 10px $color-silver;
 
@@ -91,22 +49,12 @@
       background-color: transparentize($color-satan, 0.9);
     }
 
-    #{$self}__title,
-    #{$self}__percent {
-      color: $color-satan;
-    }
-
-    #{$self}__bar {
+    &:after {
       background: linear-gradient(
-        to right,
-        darken($color-silver, 0.5) 0%,
-        transparent 90%
+        to left,
+        transparentize($color-white, 0.66),
+        transparentize($color-white, 1)
       );
-      background-size: 100%;
-
-      &:after {
-        background: $color-gray;
-      }
     }
 
     &:hover {
@@ -135,16 +83,21 @@
       }
     }
 
-    &:after {
+    #{$self}__bar {
       background: linear-gradient(
-        to left,
-        transparentize($color-white, 0.66),
-        transparentize($color-white, 1)
+        to right,
+        darken($color-silver, 0.5) 0%,
+        transparent 90%
       );
+      background-size: 100%;
+
+      &:after {
+        background: $color-satan;
+      }
     }
   }
 
-  &--dark {
+  @container root style(--theme: dark) {
     background-color: transparentize($color-blackish, 0.25);
     box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
 
@@ -152,22 +105,12 @@
       background-color: transparentize($color-black, 0.75);
     }
 
-    #{$self}__title,
-    #{$self}__percent {
-      color: $color-silver;
-    }
-
-    #{$self}__bar {
+    &:after {
       background: linear-gradient(
-        to right,
-        darken($color-satan, 0.5) 0%,
-        transparent 90%
+        to left,
+        transparentize($color-white, 0.85),
+        transparentize($color-white, 1)
       );
-      background-size: 100%;
-
-      &:after {
-        background: $color-gray;
-      }
     }
 
     &:hover {
@@ -196,12 +139,68 @@
       }
     }
 
-    &:after {
+    #{$self}__bar {
       background: linear-gradient(
-        to left,
-        transparentize($color-white, 0.85),
-        transparentize($color-white, 1)
+        to right,
+        darken($color-satan, 0.5) 0%,
+        transparent 90%
       );
+      background-size: 100%;
+
+      &:after {
+        background: $color-satan;
+      }
     }
+  }
+
+  &__container {
+    margin: 15px 0;
+  }
+
+  &__bar {
+    @include trans(1);
+    height: 40px;
+    width: 0;
+    position: relative;
+    animation: skillBar 3s ease-in-out;
+
+    &:after {
+      content: "";
+      display: block;
+      top: 100%;
+      height: 5px;
+      width: 100%;
+      position: absolute;
+    }
+  }
+
+  &__title,
+  &__percent {
+    @include trans(0.25);
+    position: absolute;
+    top: 0;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @container root style(--theme: lite) {
+      color: $color-satan;
+    }
+
+    @container root style(--theme: dark) {
+      color: $color-silver;
+    }
+  }
+
+  &__title {
+    left: 0;
+    padding: 0 15px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  &__percent {
+    right: 10px;
   }
 }

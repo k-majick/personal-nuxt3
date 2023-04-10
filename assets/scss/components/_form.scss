@@ -28,6 +28,24 @@
     &--errors {
       text-align: center;
     }
+
+    &--error {
+      #{$self}__input {
+        box-shadow: inset 0 0 10px var(--color-primary);
+
+        @container root style(--theme: lite) {
+          background-color: transparentize($color-red, 0.9);
+        }
+
+        @container root style(--theme: dark) {
+          background-color: transparentize($color-green, 0.9);
+        }
+      }
+
+      #{$self}__label {
+        color: var(--color-primary);
+      }
+    }
   }
 
   &__input {
@@ -35,6 +53,17 @@
     border-radius: 3px;
     padding: 15px;
     height: 40px;
+
+    @container root style(--theme: lite) {
+      background-color: transparentize($color-silver-lite, 0.25);
+      box-shadow: inset 0 0 10px $color-silver;
+    }
+
+    @container root style(--theme: dark) {
+      background-color: transparentize($color-blackish, 0.25);
+      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
+      color: $color-silver-lite;
+    }
 
     &:focus {
       outline: 0;
@@ -52,53 +81,6 @@
 
   &__alert {
     font-size: 0.8em;
-  }
-
-  &--lite {
-    #{$self}__group {
-      &--error {
-        #{$self}__input {
-          box-shadow: inset 0 0 10px $color-red;
-        }
-
-        #{$self}__label {
-          color: $color-red;
-        }
-      }
-    }
-
-    #{$self}__input {
-      background-color: transparentize($color-silver-lite, 0.25);
-      box-shadow: inset 0 0 10px $color-silver;
-    }
-
-    #{$self}__alert {
-      color: $color-red;
-    }
-  }
-
-  &--dark {
-    #{$self}__group {
-      &--error {
-        #{$self}__input {
-          background-color: transparentize($color-green, 0.9);
-          box-shadow: inset 0 0 10px $color-green;
-        }
-
-        #{$self}__label {
-          color: $color-green;
-        }
-      }
-    }
-
-    #{$self}__input {
-      background-color: transparentize($color-blackish, 0.25);
-      box-shadow: inset 0 0 10px transparentize($color-black, 0.5);
-      color: $color-silver-lite;
-    }
-
-    #{$self}__alert {
-      color: $color-green;
-    }
+    color: var(--color-primary);
   }
 }

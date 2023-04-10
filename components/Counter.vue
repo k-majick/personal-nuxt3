@@ -1,6 +1,6 @@
 <template>
   <div class="main__content">
-    <div class="counter" :class="`counter--${theme}`">
+    <div class="counter">
       <span v-if="counter('y')">
         <span class="counter__value">{{ counter("y") }}</span
         >&nbsp;<span v-if="counter('y') === 1">{{ $t("content.year") }}</span
@@ -33,45 +33,26 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useUiStore } from "@/store/ui";
+<script lang="ts" setup>
+const counter = (what: string) => {
+  const now = new Date().valueOf();
+  const countFrom = new Date("sep,01,2015,00:00:00").valueOf();
+  const diff = now - countFrom;
+  const day = 1000 * 60 * 60 * 24;
+  const days = Math.floor(diff / day);
+  const months = Math.floor(days / 31);
+  const years = Math.floor(months / 12);
+  const diffMonths = Math.floor(months % 12) + 1;
 
-export default defineComponent({
-  setup() {
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
-
-    const counter = (what: string) => {
-      const now = new Date().valueOf();
-      const countFrom = new Date("sep,01,2015,00:00:00").valueOf();
-      const diff = now - countFrom;
-      const day = 1000 * 60 * 60 * 24;
-      const days = Math.floor(diff / day);
-      const months = Math.floor(days / 31);
-      const years = Math.floor(months / 12);
-      const diffMonths = Math.floor(months % 12) + 1;
-
-      switch (true) {
-        case what == "y":
-          return years;
-        case what == "m":
-          return diffMonths;
-        default:
-          return 0;
-      }
-    };
-
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    return {
-      counter,
-      theme,
-    };
-  },
-});
+  switch (true) {
+    case what == "y":
+      return years;
+    case what == "m":
+      return diffMonths;
+    default:
+      return 0;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

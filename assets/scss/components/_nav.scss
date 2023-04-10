@@ -101,6 +101,7 @@
   }
 
   &:after {
+    background-color: var(--color-primary);
     width: 5px;
     right: -5px;
     z-index: 1;
@@ -112,6 +113,25 @@
     background-position: left;
     left: 0;
     width: 100%;
+
+    @container root style(--theme: lite) {
+      background-image: url("@/assets/gfx/bg-modal-min.svg"),
+        linear-gradient(
+          to right,
+          transparentize($color-white, 0.15) 0%,
+          $color-white 100%
+        );
+    }
+
+    @container root style(--theme: dark) {
+      background-image: url("@/assets/gfx/bg-modal-min.svg"),
+        linear-gradient(
+          to right,
+          transparentize($color-black, 0.15) 0%,
+          $color-black 100%
+        );
+      filter: brightness(0.15);
+    }
   }
 
   &__mask {
@@ -161,6 +181,7 @@
     }
 
     &:after {
+      background-color: var(--color-secondary);
       left: 100%;
       width: 5px;
       height: 5px;
@@ -168,6 +189,7 @@
     }
 
     &:before {
+      background-color: var(--color-primary);
       left: calc(100% - 5px);
       width: 15px;
       height: 15px;
@@ -196,6 +218,34 @@
       text-align: left;
     }
 
+    @container root style(--theme: lite) {
+      color: $color-black;
+
+      &.active,
+      &:active,
+      &:hover {
+        color: $color-red !important;
+      }
+
+      &:visited {
+        color: $color-black;
+      }
+    }
+
+    @container root style(--theme: dark) {
+      color: $color-silver-lite;
+
+      &.active,
+      &:active,
+      &:hover {
+        color: $color-green !important;
+      }
+
+      &:visited {
+        color: $color-silver-lite;
+      }
+    }
+
     // &:not([href="/projects"]):after {
     &:after {
       @include trans(2, max-width);
@@ -209,6 +259,11 @@
       transform: translateY(-50%);
       width: 0;
       max-width: 0;
+      background: linear-gradient(
+        to right,
+        var(--color-primary) 50%,
+        transparent 100%
+      );
 
       @include media(">m", "<l-s") {
         left: 0;
@@ -271,7 +326,20 @@
         position: absolute;
         left: 0;
         top: 0;
-        filter: drop-shadow(0 0 5px $color-gray);
+
+        @container root style(--theme: lite) {
+          fill: $color-white;
+          filter: drop-shadow(0 0 5px $color-satan);
+        }
+
+        @container root style(--theme: dark) {
+          fill: $color-silver-lite;
+          filter: drop-shadow(0 0 5px $color-silver);
+        }
+
+        &:hover {
+          fill: var(--color-primary);
+        }
 
         path {
           @include trans(0.33);
@@ -280,132 +348,6 @@
           position: absolute;
           left: 0;
           top: 0;
-          fill: $color-white;
-        }
-
-        &:hover {
-          path {
-            fill: $color-red;
-          }
-        }
-      }
-    }
-  }
-
-  &--dark {
-    &:after {
-      background-color: $color-green;
-    }
-
-    &:before {
-      background-image: url("@/assets/gfx/bg-modal-min.svg"),
-        linear-gradient(
-          to right,
-          transparentize($color-black, 0.15) 0%,
-          $color-black 100%
-        );
-      filter: brightness(0.25);
-    }
-
-    #{$self}__item {
-      &:before {
-        background-color: $color-green;
-      }
-
-      &:after {
-        background-color: $color-black;
-      }
-    }
-
-    #{$self}__link {
-      color: $color-silver-lite;
-
-      &:after {
-        background-color: $color-green;
-      }
-
-      &.active,
-      &:active,
-      &:hover {
-        color: $color-green !important;
-      }
-
-      &:visited {
-        color: $color-silver-lite;
-      }
-    }
-
-    #{$self}__social {
-      &Link {
-        svg {
-          path {
-            fill: $color-silver-lite;
-          }
-
-          &:hover {
-            path {
-              fill: $color-green;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &--lite {
-    &:after {
-      background-color: $color-red;
-    }
-
-    &:before {
-      background-image: url("@/assets/gfx/bg-modal-min.svg"),
-        linear-gradient(
-          to right,
-          transparentize($color-white, 0.15) 0%,
-          $color-white 100%
-        );
-    }
-
-    #{$self}__item {
-      &:before {
-        background-color: $color-red;
-      }
-
-      &:after {
-        background-color: $color-white;
-      }
-    }
-
-    #{$self}__link {
-      color: $color-black;
-
-      &:after {
-        background: linear-gradient(to right, $color-red 50%, transparent 100%);
-      }
-
-      &.active,
-      &:active,
-      &:hover {
-        color: $color-red !important;
-      }
-
-      &:visited {
-        color: $color-black;
-      }
-    }
-
-    #{$self}__social {
-      &Link {
-        svg {
-          path {
-            fill: $color-white;
-          }
-
-          &:hover {
-            path {
-              fill: $color-red;
-            }
-          }
         }
       }
     }

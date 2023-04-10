@@ -19,6 +19,14 @@
     );
   }
 
+  @container root style(--theme: lite) {
+    background-color: $color-silver-lite;
+  }
+
+  @container root style(--theme: dark) {
+    background-color: $color-black;
+  }
+
   &__container {
     position: absolute;
     z-index: 1;
@@ -27,13 +35,5 @@
     height: 45px;
     width: 100%;
     cursor: pointer;
-  }
-
-  &--lite {
-    background-color: $color-silver-lite;
-  }
-
-  &--dark {
-    background-color: $color-black;
   }
 }

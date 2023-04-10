@@ -1,6 +1,7 @@
 .theme {
   $self: &;
   min-height: 100%;
+  color: var(--color-quinary);
 
   &__background {
     position: fixed;
@@ -13,6 +14,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @container root style(--theme: lite) {
+      background-color: $color-silver-lite;
+    }
+
+    @container root style(--theme: dark) {
+      background-color: $color-black;
+    }
   }
 
   &__loader {
@@ -20,6 +29,14 @@
     width: 90px;
     height: 90px;
     position: relative;
+
+    @container root style(--theme: lite) {
+      filter: drop-shadow(0 0 15px $color-white);
+    }
+
+    @container root style(--theme: dark) {
+      filter: drop-shadow(0 0 15px $color-green);
+    }
 
     @include media("<=m") {
       transform: scale(0.9);
@@ -35,38 +52,14 @@
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
-    }
-  }
 
-  &--dark {
-    color: $color-white;
-
-    #{$self}__loader {
-      filter: drop-shadow(0 0 15px $color-green);
-
-      &:after {
-        background-image: url("@/assets/gfx/clf-logo-dark.svg");
-      }
-    }
-
-    #{$self}__background {
-      background-color: $color-black;
-    }
-  }
-
-  &--lite {
-    color: $color-black;
-
-    #{$self}__loader {
-      filter: drop-shadow(0 0 15px $color-white);
-
-      &:after {
+      @container root style(--theme: lite) {
         background-image: url("@/assets/gfx/clf-logo-lite.svg");
       }
-    }
 
-    #{$self}__background {
-      background-color: $color-silver-lite;
+      @container root style(--theme: dark) {
+        background-image: url("@/assets/gfx/clf-logo-dark.svg");
+      }
     }
   }
 }
