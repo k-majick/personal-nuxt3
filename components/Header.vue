@@ -41,7 +41,7 @@
       </div>
     </section>
     <section class="header__container header__container--avatar">
-      <Avatar />
+      <Avatar :theme="(theme as string)" />
       <div class="header__arrow" @click="scrollTo($event, mainEl)"></div>
       <a class="chevron__container" @click="scrollTo($event, mainEl)">
         <div :class="`chevron chevron--${theme}`"></div>

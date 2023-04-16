@@ -59,6 +59,10 @@
   &__front {
     background-image: url("@/assets/gfx/clf-avatar-min.svg");
     position: relative;
+
+    @container root style(--theme: dark) {
+      filter: brightness(0.75);
+    }
   }
 
   &__back {
@@ -101,12 +105,6 @@
     }
     @include media("<=m") {
       display: block;
-    }
-  }
-
-  &--dark {
-    #{$self}__front {
-      filter: brightness(0.75);
     }
   }
 }

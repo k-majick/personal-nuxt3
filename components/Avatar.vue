@@ -16,28 +16,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { useUiStore } from "@/store/ui";
-import { hoverMessage } from "@/composables/hoverMessage";
+<script lang="ts" setup>
+import { hoverMessage as vHoverMessage } from "@/composables/hoverMessage";
 import DOMPurify from "dompurify";
 
-export default defineComponent({
-  directives: {
-    hoverMessage,
-  },
-  setup() {
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
-
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    return {
-      theme,
-      DOMPurify,
-    };
+defineProps({
+  theme: {
+    type: String,
+    required: true,
   },
 });
 </script>

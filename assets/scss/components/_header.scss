@@ -56,6 +56,26 @@
     }
   }
 
+  &__arrow {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% - 1px);
+    left: 0;
+    right: 0;
+    cursor: pointer;
+
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 90px;
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+
+      @include media("<=m") {
+        padding-bottom: 45px;
+      }
+    }
+  }
+
   &__logo {
     display: block;
     background-size: contain;
