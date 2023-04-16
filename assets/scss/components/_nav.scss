@@ -113,25 +113,6 @@
     background-position: left;
     left: 0;
     width: 100%;
-
-    @container root style(--theme: lite) {
-      background-image: url("@/assets/gfx/bg-modal-min.svg"),
-        linear-gradient(
-          to right,
-          transparentize($color-white, 0.15) 0%,
-          $color-white 100%
-        );
-    }
-
-    @container root style(--theme: dark) {
-      background-image: url("@/assets/gfx/bg-modal-min.svg"),
-        linear-gradient(
-          to right,
-          transparentize($color-black, 0.15) 0%,
-          $color-black 100%
-        );
-      filter: brightness(0.15);
-    }
   }
 
   &__mask {
@@ -218,34 +199,6 @@
       text-align: left;
     }
 
-    @container root style(--theme: lite) {
-      color: $color-black;
-
-      &.active,
-      &:active,
-      &:hover {
-        color: $color-red !important;
-      }
-
-      &:visited {
-        color: $color-black;
-      }
-    }
-
-    @container root style(--theme: dark) {
-      color: $color-silver-lite;
-
-      &.active,
-      &:active,
-      &:hover {
-        color: $color-green !important;
-      }
-
-      &:visited {
-        color: $color-silver-lite;
-      }
-    }
-
     // &:not([href="/projects"]):after {
     &:after {
       @include trans(2, max-width);
@@ -327,18 +280,8 @@
         left: 0;
         top: 0;
 
-        @container root style(--theme: lite) {
-          fill: $color-white;
-          filter: drop-shadow(0 0 5px $color-satan);
-        }
-
-        @container root style(--theme: dark) {
-          fill: $color-silver-lite;
-          filter: drop-shadow(0 0 5px $color-silver);
-        }
-
         &:hover {
-          fill: var(--color-primary);
+          fill: var(--color-primary) !important;
         }
 
         path {
@@ -349,6 +292,75 @@
           left: 0;
           top: 0;
         }
+      }
+    }
+  }
+
+  &--lite {
+    &:before {
+      background-image: url("@/assets/gfx/bg-modal-min.svg"),
+        linear-gradient(
+          to right,
+          transparentize($color-white, 0.15) 0%,
+          $color-white 100%
+        );
+    }
+
+    #{$self}__social {
+      &Link {
+        svg {
+          fill: $color-white;
+          filter: drop-shadow(0 0 5px $color-satan);
+        }
+      }
+    }
+
+    #{$self}__link {
+      color: $color-black;
+
+      &.active,
+      &:active,
+      &:hover {
+        color: $color-red !important;
+      }
+
+      &:visited {
+        color: $color-black;
+      }
+    }
+  }
+
+  &--dark {
+    &:before {
+      background-image: url("@/assets/gfx/bg-modal-min.svg"),
+        linear-gradient(
+          to right,
+          transparentize($color-black, 0.15) 0%,
+          $color-black 100%
+        );
+      filter: brightness(0.15);
+    }
+
+    #{$self}__social {
+      &Link {
+        svg {
+          fill: $color-silver-lite;
+          filter: drop-shadow(0 0 5px $color-silver);
+        }
+      }
+    }
+
+    #{$self}__link {
+      color: $color-silver-lite;
+
+      &.active,
+      &:active,
+      &:hover {
+        color: $color-green !important;
+      }
+
+      &:visited {
+        color: $color-silver-lite;
       }
     }
   }

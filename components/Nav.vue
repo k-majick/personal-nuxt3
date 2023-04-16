@@ -1,5 +1,8 @@
 <template>
-  <nav class="nav" :class="{ active: isActive, activated: isActivated }">
+  <nav
+    class="nav"
+    :class="[`nav--${theme}`, { active: isActive, activated: isActivated }]"
+  >
     <div class="nav__mask" @click="$emit('closeNav')"></div>
     <ul class="nav__items">
       <li class="nav__item">
@@ -45,7 +48,11 @@
       </li>
     </ul>
     <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
-      <nuxt-link :to="'inspiration'" class="cat" @click.stop="killModal()">
+      <nuxt-link
+        :to="'inspiration'"
+        :class="`cat cat--${theme}`"
+        @click.stop="killModal()"
+      >
         <!-- eslint-disable risxss/catch-potential-xss-vue -->
         <div v-html="rawCat"></div>
         <!-- eslint-enable risxss/catch-potential-xss-vue -->
@@ -79,6 +86,7 @@ export default defineComponent({
   async setup() {
     const pagesStore = usePagesStore();
     const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
 
     const headerEl = inject(HeaderElKey);
     const mainEl = inject(MainElKey);
@@ -114,6 +122,11 @@ export default defineComponent({
         ])),
     );
 
+    watch(
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
+    );
+
     return {
       iconGit,
       iconLinkedin,
@@ -124,6 +137,7 @@ export default defineComponent({
       rawCat,
       DOMPurify,
       killModal,
+      theme,
     };
   },
 });

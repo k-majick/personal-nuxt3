@@ -42,10 +42,16 @@ import DOMPurify from "dompurify";
 
 const pagesStore = usePagesStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
 const experience: Ref<any> = ref(
   await pagesStore.getExperience(uiStore.currentLocale as string),
 );
+
+defineProps({
+  theme: {
+    type: String,
+    required: true,
+  },
+});
 
 const sortItems = (pagesArr: Record<string, any>[]) =>
   pagesArr.sort((a, b) => (b.order < a.order ? -1 : 1));

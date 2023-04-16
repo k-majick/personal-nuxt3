@@ -1,5 +1,5 @@
 <template>
-  <div class="avatar">
+  <div :class="`avatar avatar--${theme}`">
     <h2 class="avatar__title">{{ $t("messages.name") }}</h2>
     <h3
       class="avatar__message"
@@ -17,6 +17,7 @@
 </template>
 
 <script lang="ts">
+import { useUiStore } from "@/store/ui";
 import { hoverMessage } from "@/composables/hoverMessage";
 import DOMPurify from "dompurify";
 
@@ -25,7 +26,16 @@ export default defineComponent({
     hoverMessage,
   },
   setup() {
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
+
+    watch(
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
+    );
+
     return {
+      theme,
       DOMPurify,
     };
   },

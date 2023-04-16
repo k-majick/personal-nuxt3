@@ -4,7 +4,11 @@
     class="main__content"
     v-html="DOMPurify.sanitize(marked.parse(portfolio.content))"
   ></div>
-  <div v-if="portfolio.projects.length" class="gallery">
+  <div
+    v-if="portfolio.projects.length"
+    class="gallery"
+    :class="`gallery--${theme}`"
+  >
     <div
       v-for="(project, index) in portfolio.projects"
       :key="index"
@@ -27,6 +31,7 @@
     v-if="activeProject"
     v-show="openModal(activeProject.id)"
     :modal-type="'full'"
+    :theme="(theme as string)"
     @close="
       toggleModal(activeProject.id, true);
       activeProject = null;
@@ -81,6 +86,13 @@ const setActiveProject = (project: any, index: number) => {
   activeProject.value = project;
   activeProject.value.id = index + 1;
 };
+
+defineProps({
+  theme: {
+    type: String,
+    required: true,
+  },
+});
 
 watch(
   () => uiStore.currentLocale,

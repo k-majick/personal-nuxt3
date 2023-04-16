@@ -9,6 +9,7 @@
       ref="form"
       novalidate
       class="form"
+      :class="`form--${theme}`"
       @submit.prevent="processForm"
       @change="processForm"
     >
@@ -92,6 +93,7 @@
       <Modal
         v-show="openModal(1)"
         :modal-type="'message'"
+        :theme="(theme as string)"
         @close="toggleModal(1, false), resetForm()"
       >
         <template #header>
@@ -128,6 +130,7 @@ import DOMPurify from "dompurify";
 const { t } = useI18n();
 const pagesStore = usePagesStore();
 const uiStore = useUiStore();
+const theme = ref(uiStore.currentTheme);
 const contact: Ref<any> = ref(
   await pagesStore.getContact(uiStore.currentLocale as string),
 );
@@ -229,6 +232,11 @@ watch(
     (contact.value = await pagesStore.getContact(
       uiStore.currentLocale as string,
     )),
+);
+
+watch(
+  () => uiStore.currentTheme,
+  () => (theme.value = uiStore.currentTheme),
 );
 </script>
 
