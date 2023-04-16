@@ -48,7 +48,12 @@
       </li>
     </ul>
     <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
-      <nuxt-link :to="'inspiration'" class="cat" @click.stop="killModal()">
+      <nuxt-link 
+        :to="'inspiration'" 
+        class="cat"
+        :class="`cat--${theme}`"
+        @click.stop="killModal()"
+      >
         <!-- eslint-disable risxss/catch-potential-xss-vue -->
         <div v-html="rawCat"></div>
         <!-- eslint-enable risxss/catch-potential-xss-vue -->
