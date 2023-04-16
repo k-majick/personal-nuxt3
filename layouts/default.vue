@@ -55,8 +55,8 @@ export default defineComponent({
     );
 
     return {
-      theme,
       pagesStore,
+      theme,
     };
   },
 });

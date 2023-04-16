@@ -1,7 +1,7 @@
 <template>
   <Header v-if="!isLoadError" ref="headerComponent" />
 
-  <main v-if="!isLoadError" ref="mainEl">
+  <main v-if="!isLoadError" ref="mainEl" :class="`main main--${theme}`">
     <div class="main__background"></div>
     <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
       <span class="burger__bar"></span>
@@ -33,12 +33,15 @@
 
 <script lang="ts">
 import type { Ref } from "vue";
+import { useUiStore } from "@/store/ui";
 import { usePagesStore } from "@/store/pages";
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 
 export default defineComponent({
   layout: "default",
   setup() {
+    const uiStore = useUiStore();
+    const theme = ref(uiStore.currentTheme);
     const pagesStore = usePagesStore();
     const isLoadError = ref(pagesStore.loadError);
     const headerComponent: Ref<any> = ref();
@@ -69,6 +72,11 @@ export default defineComponent({
     onMounted(() => scrollListen());
 
     watch(
+      () => uiStore.currentTheme,
+      () => (theme.value = uiStore.currentTheme),
+    );
+
+    watch(
       () => pagesStore.loadError,
       () => (isLoadError.value = pagesStore.loadError),
     );
@@ -94,6 +102,7 @@ export default defineComponent({
       isNavActive,
       isLoadError,
       pagesStore,
+      theme,
     };
   },
 });

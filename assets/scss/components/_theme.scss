@@ -14,14 +14,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    @container root style(--theme: lite) {
-      background-color: $color-silver-lite;
-    }
-
-    @container root style(--theme: dark) {
-      background-color: $color-black;
-    }
   }
 
   &__loader {
@@ -29,14 +21,6 @@
     width: 90px;
     height: 90px;
     position: relative;
-
-    @container root style(--theme: lite) {
-      filter: drop-shadow(0 0 15px $color-white);
-    }
-
-    @container root style(--theme: dark) {
-      filter: drop-shadow(0 0 15px $color-green);
-    }
 
     @include media("<=m") {
       transform: scale(0.9);
@@ -52,12 +36,28 @@
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
+    }
+  }
 
-      @container root style(--theme: lite) {
+  &--lite {
+    #{$self}__background {
+      background-color: $color-silver-lite;
+    }
+
+    #{$self}__loader {
+      &:after {
         background-image: url("@/assets/gfx/clf-logo-lite.svg");
       }
+    }
+  }
 
-      @container root style(--theme: dark) {
+  &--dark {
+    #{$self}__background {
+      background-color: $color-black;
+    }
+
+    #{$self}__loader {
+      &:after {
         background-image: url("@/assets/gfx/clf-logo-dark.svg");
       }
     }

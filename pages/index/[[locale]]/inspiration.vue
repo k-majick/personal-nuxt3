@@ -8,6 +8,7 @@
     <div
       v-if="inspiration.pictures.length"
       class="gallery gallery--inspiration"
+      :class="`gallery--${theme}`"
     >
       <div
         v-for="(picture, index) in inspiration.pictures"
@@ -27,45 +28,40 @@
   </section>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Ref } from "vue";
 import { usePagesStore } from "@/store/pages";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-export default defineComponent({
-  components: {},
-  async setup() {
-    const config = useRuntimeConfig();
-    const pagesStore = usePagesStore();
-    const uiStore = useUiStore();
-    const pageData: Ref<any> = ref(
-      await pagesStore.getPage(uiStore.currentLocale as string, 5),
-    );
-    const inspiration: Ref<any> = ref(
-      await pagesStore.getInspiration(uiStore.currentLocale as string),
-    );
+const config = useRuntimeConfig();
+const pagesStore = usePagesStore();
+const uiStore = useUiStore();
+const theme = ref(uiStore.currentTheme);
+const pageData: Ref<any> = ref(
+  await pagesStore.getPage(uiStore.currentLocale as string, 5),
+);
+const inspiration: Ref<any> = ref(
+  await pagesStore.getInspiration(uiStore.currentLocale as string),
+);
 
-    useHead({
-      titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
-    });
-
-    watch(
-      () => uiStore.currentLocale,
-      async () =>
-        (inspiration.value = await pagesStore.getInspiration(
-          uiStore.currentLocale as string,
-        )),
-    );
-
-    return {
-      marked,
-      inspiration,
-      DOMPurify,
-    };
-  },
+useHead({
+  titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
 });
+
+watch(
+  () => uiStore.currentLocale,
+  async () =>
+    (inspiration.value = await pagesStore.getInspiration(
+      uiStore.currentLocale as string,
+    )),
+);
+
+watch(
+  () => uiStore.currentTheme,
+  () => (theme.value = uiStore.currentTheme),
+);
 </script>
 
 <style lang="scss" scoped>

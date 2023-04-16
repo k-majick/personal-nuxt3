@@ -1,5 +1,5 @@
 <template>
-  <header ref="headerEl" class="header">
+  <header ref="headerEl" class="header" :class="`header header--${theme}`">
     <section class="header__container header__container--logo">
       <a class="main__anchor"></a>
       <a class="header__logo">
@@ -41,10 +41,10 @@
       </div>
     </section>
     <section class="header__container header__container--avatar">
-      <Avatar />
+      <Avatar :theme="(theme as string)" />
       <div class="header__arrow" @click="scrollTo($event, mainEl)"></div>
       <a class="chevron__container" @click="scrollTo($event, mainEl)">
-        <div class="chevron"></div>
+        <div :class="`chevron chevron--${theme}`"></div>
       </a>
     </section>
   </header>
@@ -106,6 +106,7 @@ export default defineComponent({
 
     const toggleTheme = (theme: string) => {
       rootEl.style.setProperty("--theme", theme);
+      rootEl.setAttribute("data-theme", theme);
       uiStore.setTheme(theme);
       localStorage.setItem("user-theme", theme);
     };

@@ -46,8 +46,10 @@
     @include media("<=m") {
       top: 7.5px;
     }
+  }
 
-    @container root style(--theme: lite) {
+  &--lite {
+    svg {
       filter: drop-shadow(0 0 5px $color-white);
 
       path {
@@ -64,8 +66,10 @@
         fill: $color-red;
       }
     }
+  }
 
-    @container root style(--theme: dark) {
+  &--dark {
+    svg {
       filter: drop-shadow(0 0 5px $color-green);
 
       path {

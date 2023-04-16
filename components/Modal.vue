@@ -2,7 +2,7 @@
   <div class="modal__mask" :class="`modal__mask--${modalType}`">
     <div class="modal__table">
       <div class="modal__cell">
-        <div class="modal">
+        <div class="modal" :class="`modal--${theme}`">
           <button class="modal__close" type="button" @click="$emit('close')">
             &times;
           </button>
@@ -15,14 +15,17 @@
   </div>
 </template>
 
-<script lang="ts">
-export default defineComponent({
-  props: {
-    modalType: {
-      type: String,
-      default: "",
-    },
+<script lang="ts" setup>
+defineProps({
+  modalType: {
+    type: String,
+    default: "",
   },
-  emits: ["close"],
+  theme: {
+    type: String,
+    required: true,
+  },
 });
+
+defineEmits(["close"]);
 </script>

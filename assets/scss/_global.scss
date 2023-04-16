@@ -44,23 +44,19 @@ body {
 }
 
 :root {
+  container: root;
   --scroll: -100%;
   --theme: dark;
-  container: root;
-}
 
-@container root style(--theme: lite) {
-  body {
+  &[data-theme="lite"] {
     --color-primary: #{$color-red};
     --color-secondary: #{$color-white};
     --color-ternary: #{$color-silver-lite};
     --color-quaternary: #{$color-satan};
     --color-quinary: #{$color-black};
   }
-}
 
-@container root style(--theme: dark) {
-  body {
+  &[data-theme="dark"] {
     --color-primary: #{$color-green};
     --color-secondary: #{$color-black};
     --color-ternary: #{$color-blackish};

@@ -30,18 +30,6 @@
     width: 100%;
     z-index: 0;
 
-    @container root style(--theme: lite) {
-      background-color: $color-red;
-      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2)
-        contrast(1);
-    }
-
-    @container root style(--theme: dark) {
-      background-color: $color-black;
-      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2)
-        contrast(1);
-    }
-
     @include media(">m", "<l-s") {
       background-image: url("@/assets/gfx/gfx-jungle-bw-1366.jpg");
     }
@@ -140,48 +128,6 @@
       z-index: -2;
     }
 
-    @container root style(--theme: lite) {
-      &:before {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.45%,
-          $color-white 2.45% 25%,
-          transparentize($color-white, 0.25) 75% 97.45%,
-          transparent 97.55% 100%
-        );
-      }
-
-      &:after {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.5%,
-          $color-red 2.5% 25%,
-          transparent 30%
-        );
-      }
-    }
-
-    @container root style(--theme: dark) {
-      &:before {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.45%,
-          $color-black 2.45% 25%,
-          transparentize($color-black, 0.25) 75% 97.45%,
-          transparent 97.55% 100%
-        );
-      }
-
-      &:after {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.5%,
-          $color-green 2.5% 25%,
-          transparent 30%
-        );
-      }
-    }
-
     &--gallery {
       padding: 35px 0px 0 2px;
 
@@ -239,5 +185,63 @@
   &__label {
     @include label;
     border: 2px solid;
+  }
+
+  &--lite {
+    #{$self}__background {
+      background-color: $color-red;
+      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2)
+        contrast(1);
+    }
+
+    #{$self}__card {
+      &:before {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.45%,
+          $color-white 2.45% 25%,
+          transparentize($color-white, 0.25) 75% 97.45%,
+          transparent 97.55% 100%
+        );
+      }
+
+      &:after {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.5%,
+          $color-red 2.5% 25%,
+          transparent 30%
+        );
+      }
+    }
+  }
+
+  &--dark {
+    #{$self}__background {
+      background-color: $color-black;
+      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2)
+        contrast(1);
+    }
+
+    #{$self}__card {
+      &:before {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.45%,
+          $color-black 2.45% 25%,
+          transparentize($color-black, 0.25) 75% 97.45%,
+          transparent 97.55% 100%
+        );
+      }
+
+      &:after {
+        background-image: linear-gradient(
+          135deg,
+          transparent 2.5%,
+          $color-green 2.5% 25%,
+          transparent 30%
+        );
+      }
+    }
   }
 }

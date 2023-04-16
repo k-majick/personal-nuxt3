@@ -1,5 +1,5 @@
 <template>
-  <div class="avatar">
+  <div :class="`avatar avatar--${theme}`">
     <h2 class="avatar__title">{{ $t("messages.name") }}</h2>
     <h3
       class="avatar__message"
@@ -16,18 +16,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { hoverMessage } from "@/composables/hoverMessage";
+<script lang="ts" setup>
+import { hoverMessage as vHoverMessage } from "@/composables/hoverMessage";
 import DOMPurify from "dompurify";
 
-export default defineComponent({
-  directives: {
-    hoverMessage,
-  },
-  setup() {
-    return {
-      DOMPurify,
-    };
+defineProps({
+  theme: {
+    type: String,
+    required: true,
   },
 });
 </script>
