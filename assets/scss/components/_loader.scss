@@ -9,14 +9,6 @@
   width: 70px;
   animation: rays 9s linear infinite;
 
-  @container root style(--theme: lite) {
-    filter: drop-shadow(0 0 15px $color-white);
-  }
-
-  @container root style(--theme: dark) {
-    filter: drop-shadow(0 0 15px $color-green);
-  }
-
   & + &__text {
     color: var(--color-quinary);
   }
@@ -55,26 +47,6 @@
   &__ray {
     border-radius: 80% 80% 0 0;
     position: absolute;
-
-    @container root style(--theme: lite) {
-      background-image: linear-gradient(
-        to top,
-        transparent,
-        $color-red 50%,
-        transparent
-      );
-      opacity: 0.033;
-    }
-
-    @container root style(--theme: dark) {
-      background-image: linear-gradient(
-        to top,
-        transparent,
-        $color-white 50%,
-        transparent
-      );
-      opacity: 0.125;
-    }
 
     &--1 {
       height: 170px;
@@ -154,6 +126,34 @@
       transform: rotate(150deg);
       top: -185px;
       left: -60px;
+    }
+  }
+
+  &--lite {
+    filter: drop-shadow(0 0 15px $color-white);
+
+    #{$self}__ray {
+      background-image: linear-gradient(
+        to top,
+        transparent,
+        $color-red 50%,
+        transparent
+      );
+      opacity: 0.033;
+    }
+  }
+
+  &--dark {
+    filter: drop-shadow(0 0 15px $color-green);
+
+    #{$self}__ray {
+      background-image: linear-gradient(
+        to top,
+        transparent,
+        $color-white 50%,
+        transparent
+      );
+      opacity: 0.125;
     }
   }
 }
