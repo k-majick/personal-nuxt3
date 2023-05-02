@@ -58,10 +58,14 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 import { IPost } from "@/types/common";
 
+const config = useRuntimeConfig();
 const uiStore = useUiStore();
 const theme = ref(uiStore.currentTheme);
 
 const dataStore = useDataStore();
+const pageData: Ref<any> = ref(
+  await dataStore.getPage(uiStore.currentLocale as string, 3),
+);
 const posts: Ref<Array<IPost>> = ref(
   (await dataStore.getPosts()) as Array<IPost>,
 );
@@ -81,6 +85,10 @@ watch(
       uiStore.currentLocale as string,
     )),
 );
+
+useHead({
+  titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
+});
 </script>
 
 <style lang="scss">
