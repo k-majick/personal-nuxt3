@@ -15,14 +15,14 @@
           <div class="loader__ray loader__ray--10"></div>
         </div>
         <span class="loader__text">{{
-          pagesStore.loadError
+          dataStore.loadError
             ? $t("messages.loadError")
             : $t("messages.loading")
         }}</span>
       </div>
       <div
         v-hoverMessage="
-          pagesStore.loadError
+          dataStore.loadError
             ? $t('messages.loadError')
             : $t('messages.loading')
         "
@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { hoverMessage } from "@/composables/hoverMessage";
 
@@ -45,7 +45,7 @@ export default defineComponent({
     hoverMessage,
   },
   setup() {
-    const pagesStore = usePagesStore();
+    const dataStore = useDataStore();
     const uiStore = useUiStore();
     const theme = ref(uiStore.currentTheme);
 
@@ -55,7 +55,7 @@ export default defineComponent({
     );
 
     return {
-      pagesStore,
+      dataStore,
       theme,
     };
   },

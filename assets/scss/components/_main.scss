@@ -28,7 +28,7 @@
     min-height: 640px;
     height: 100vh;
     width: 100%;
-    z-index: 0;
+    filter: var(--filter-primary);
 
     @include media(">m", "<l-s") {
       background-image: url("@/assets/gfx/gfx-jungle-bw-1366.jpg");
@@ -70,6 +70,7 @@
       @include media("<l-s") {
         padding-top: 90px;
       }
+
       @include media("<=m") {
         padding-top: 60px;
         height: auto;
@@ -81,11 +82,32 @@
       width: calc(100% - 12.5vw - 5px);
       margin-left: auto;
       opacity: 0;
-      transition: all 0.5s;
+      transition: opacity 0.5s ease-in-out;
+      padding-top: 60px;
+      padding-bottom: 90px;
+      overflow: hidden;
+      backdrop-filter: blur(3px);
+      background: linear-gradient(
+        to bottom,
+        var(--color-secondary-trans) 0,
+        var(--color-secondary) 25vh 100%
+      );
+
+      @include media(">m", "<l-s") {
+        padding-top: 180px;
+      }
+
+      @include media("<l-s") {
+        width: 100%;
+      }
     }
 
     &--active {
       opacity: 1;
+    }
+
+    &--hasActiveModal {
+      backdrop-filter: none;
     }
   }
 
@@ -111,13 +133,20 @@
       top: 2px;
       bottom: 2px;
       z-index: -1;
-      backdrop-filter: blur(3px);
       mask-image: linear-gradient(
         135deg,
-        transparent 0% 2.45%,
-        $color-white 2.45% 97.55%,
+        transparent 0% 2.5%,
+        $color-white 2.5% 97.55%,
         transparent 97.55% 100%
       );
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.45%,
+        var(--color-secondary) 2.45% 25%,
+        var(--color-secondary-trans) 75% 97.45%,
+        transparent 97.55% 100%
+      );
+      backdrop-filter: blur(3px);
     }
 
     &:after {
@@ -126,6 +155,12 @@
       top: 0;
       bottom: 0;
       z-index: -2;
+      background-image: linear-gradient(
+        135deg,
+        transparent 2.5%,
+        var(--color-primary) 2.5% 25%,
+        transparent 30%
+      );
     }
 
     &--gallery {
@@ -163,19 +198,16 @@
     justify-content: center;
     align-items: center;
 
-    p {
+    > p {
+      @include text;
       text-align: center;
-      font-size: 1em;
-      font-weight: lighter;
-      font-family: $font-secondary;
     }
   }
 
   &__title {
-    font-weight: bold;
-    font-size: 2.25em;
+    @include title;
+    font-size: 2em;
     margin: 0 0 30px;
-    color: var(--color-primary);
   }
 
   &__button {
@@ -185,63 +217,5 @@
   &__label {
     @include label;
     border: 2px solid;
-  }
-
-  &--lite {
-    #{$self}__background {
-      background-color: $color-red;
-      filter: sepia(100%) brightness(75%) hue-rotate(-50deg) saturate(2)
-        contrast(1);
-    }
-
-    #{$self}__card {
-      &:before {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.45%,
-          $color-white 2.45% 25%,
-          transparentize($color-white, 0.25) 75% 97.45%,
-          transparent 97.55% 100%
-        );
-      }
-
-      &:after {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.5%,
-          $color-red 2.5% 25%,
-          transparent 30%
-        );
-      }
-    }
-  }
-
-  &--dark {
-    #{$self}__background {
-      background-color: $color-black;
-      filter: sepia(100%) brightness(100%) hue-rotate(50deg) saturate(2)
-        contrast(1);
-    }
-
-    #{$self}__card {
-      &:before {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.45%,
-          $color-black 2.45% 25%,
-          transparentize($color-black, 0.25) 75% 97.45%,
-          transparent 97.55% 100%
-        );
-      }
-
-      &:after {
-        background-image: linear-gradient(
-          135deg,
-          transparent 2.5%,
-          $color-green 2.5% 25%,
-          transparent 30%
-        );
-      }
-    }
   }
 }

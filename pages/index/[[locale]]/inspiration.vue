@@ -30,20 +30,20 @@
 
 <script lang="ts" setup>
 import type { Ref } from "vue";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
 const config = useRuntimeConfig();
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const theme = ref(uiStore.currentTheme);
 const pageData: Ref<any> = ref(
-  await pagesStore.getPage(uiStore.currentLocale as string, 5),
+  await dataStore.getPage(uiStore.currentLocale as string, 5),
 );
 const inspiration: Ref<any> = ref(
-  await pagesStore.getInspiration(uiStore.currentLocale as string),
+  await dataStore.getInspiration(uiStore.currentLocale as string),
 );
 
 useHead({
@@ -53,7 +53,7 @@ useHead({
 watch(
   () => uiStore.currentLocale,
   async () =>
-    (inspiration.value = await pagesStore.getInspiration(
+    (inspiration.value = await dataStore.getInspiration(
       uiStore.currentLocale as string,
     )),
 );
@@ -66,5 +66,4 @@ watch(
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/_gallery";
-@import "@/assets/scss/components/_modal";
 </style>

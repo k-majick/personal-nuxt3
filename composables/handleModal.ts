@@ -1,4 +1,4 @@
-const activeModal = ref(0);
+export const activeModal = ref(0);
 
 export const toggleModal = (id: number, useLock: boolean) => {
   if (activeModal.value !== 0) {

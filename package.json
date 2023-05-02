@@ -45,6 +45,7 @@
     "modern-normalize": "^1.1.0",
     "nuxt": "npm:nuxt3@latest",
     "pinia": "^2.0.17",
+    "swiper": "^9.2.3",
     "vue-i18n": "^9.2.2"
   }
 }

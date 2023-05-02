@@ -1,7 +1,7 @@
 <template>
   <Header v-if="!isLoadError" ref="headerComponent" />
 
-  <main v-if="!isLoadError" ref="mainEl" :class="`main main--${theme}`">
+  <main v-if="!isLoadError" ref="mainEl" class="main">
     <div class="main__background"></div>
     <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
       <span class="burger__bar"></span>
@@ -20,8 +20,10 @@
       <div
         class="main__container"
         :class="`main__container--${
-          route.path.includes('blog') ? 'full' : 'card'
-        } ${isNavActive ? 'main__container--active' : ''}`"
+          route.path.includes('creations') ? 'full' : 'card'
+        } ${isNavActive ? 'main__container--active' : ''} 
+        ${activeModal ? 'main__container--hasActiveModal' : ''}
+        `"
       >
         <transition name="fade" mode="out-in">
           <component :is="Component" :key="(route.name as string)" />
@@ -33,17 +35,14 @@
 
 <script lang="ts">
 import type { Ref } from "vue";
-import { useUiStore } from "@/store/ui";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 
 export default defineComponent({
   layout: "default",
   setup() {
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
-    const pagesStore = usePagesStore();
-    const isLoadError = ref(pagesStore.loadError);
+    const dataStore = useDataStore();
+    const isLoadError = ref(dataStore.loadError);
     const headerComponent: Ref<any> = ref();
     const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
     const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
@@ -72,13 +71,8 @@ export default defineComponent({
     onMounted(() => scrollListen());
 
     watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    watch(
-      () => pagesStore.loadError,
-      () => (isLoadError.value = pagesStore.loadError),
+      () => dataStore.loadError,
+      () => (isLoadError.value = dataStore.loadError),
     );
 
     watch(
@@ -101,8 +95,7 @@ export default defineComponent({
       isNavActivated,
       isNavActive,
       isLoadError,
-      pagesStore,
-      theme,
+      dataStore,
     };
   },
 });
@@ -119,10 +112,12 @@ definePageMeta({
 @import "@/assets/scss/components/_main";
 @import "@/assets/scss/components/_burger";
 @import "@/assets/scss/components/_tooltip";
+@import "@/assets/scss/components/_modal";
 
 .fade-enter-from {
   opacity: 0;
 }
+
 .fade-enter-active {
   transition: opacity 0.5s ease-out;
 }

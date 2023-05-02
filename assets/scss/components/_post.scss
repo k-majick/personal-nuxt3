@@ -1,0 +1,153 @@
+.post {
+  $self: &;
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+
+  & + & {
+    margin-top: 60px;
+  }
+
+  @include media("<=m") {
+    flex-flow: column;
+    max-width: 480px;
+  }
+
+  &__container,
+  &__image {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__container {
+    padding: 30px;
+    width: 66.66%;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+
+    @include media("<=m") {
+      width: 100%;
+    }
+  }
+
+  &__image {
+    margin: 2px 0 2px 2px;
+    mask-image: linear-gradient(
+      135deg,
+      transparent 0% 36px,
+      var(--color-secondary) 36px 100%
+    );
+    width: 33.33%;
+    padding-bottom: 25%;
+    position: relative;
+
+    @include media("<=m") {
+      width: 100%;
+      padding-bottom: 50%;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__title {
+    @include title;
+    margin: 0 0 15px;
+  }
+
+  &__content {
+    p {
+      @include text;
+      margin: 30px 0;
+      text-align: justify;
+    }
+  }
+
+  &__action {
+    @include media("<=m") {
+      align-self: center;
+    }
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+  }
+
+  &:before {
+    left: 2px;
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+    z-index: -1;
+    mask-image: linear-gradient(
+      135deg,
+      transparent 0% 36px,
+      var(--color-secondary) 36px calc(100% - 36px),
+      transparent calc(100% - 36px) 100%
+    );
+    background-color: var(--color-secondary);
+  }
+
+  &:after {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -2;
+    background-image: linear-gradient(
+      135deg,
+      transparent 36.5px,
+      var(--color-primary) 36.5px 15%,
+      transparent 20% 90%,
+      var(--color-primary) 95% calc(100% - 36.5px),
+      transparent calc(100% - 36.5px) 100%
+    );
+  }
+
+  &--top {
+    @include media(">=l-s") {
+      #{$self}__image {
+        width: 50%;
+        padding-bottom: 33%;
+      }
+
+      #{$self}__container {
+        width: 50%;
+      }
+
+      #{$self}__title {
+        font-size: 2em;
+      }
+    }
+  }
+
+  &--slide {
+    flex-flow: column;
+    max-width: 480px;
+
+    #{$self}__container {
+      padding: 30px 0;
+      align-items: center;
+    }
+
+    #{$self}__container,
+    #{$self}__image {
+      width: 100%;
+    }
+
+    #{$self}__image {
+      padding-bottom: 75%;
+    }
+  }
+}

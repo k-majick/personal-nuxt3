@@ -102,7 +102,7 @@
           </h3>
         </template>
         <template #content>
-          <div class="modal__content">
+          <div class="modal__text">
             <p>{{ $t("messages.sentMessage") }}</p>
           </div>
         </template>
@@ -114,7 +114,7 @@
 <script lang="ts" setup>
 import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { marked } from "marked";
 import useVuelidate from "@vuelidate/core";
 import {
@@ -128,11 +128,11 @@ import { useI18n } from "vue-i18n";
 import DOMPurify from "dompurify";
 
 const { t } = useI18n();
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const theme = ref(uiStore.currentTheme);
 const contact: Ref<any> = ref(
-  await pagesStore.getContact(uiStore.currentLocale as string),
+  await dataStore.getContact(uiStore.currentLocale as string),
 );
 const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
 const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
@@ -229,7 +229,7 @@ const resetForm = () => {
 watch(
   () => uiStore.currentLocale,
   async () =>
-    (contact.value = await pagesStore.getContact(
+    (contact.value = await dataStore.getContact(
       uiStore.currentLocale as string,
     )),
 );

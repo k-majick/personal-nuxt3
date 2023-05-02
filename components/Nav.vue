@@ -48,8 +48,8 @@
       </li>
     </ul>
     <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
-      <nuxt-link 
-        :to="'inspiration'" 
+      <nuxt-link
+        :to="'inspiration'"
         class="cat"
         :class="`cat--${theme}`"
         @click.stop="killModal()"
@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import type { Ref } from "vue";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { hoverMessage } from "@/composables/hoverMessage";
 import scrollTo from "@/composables/scrollTo";
@@ -85,7 +85,7 @@ export default defineComponent({
   },
   emits: ["closeNav"],
   async setup() {
-    const pagesStore = usePagesStore();
+    const dataStore = useDataStore();
     const uiStore = useUiStore();
     const theme = ref(uiStore.currentTheme);
 
@@ -99,7 +99,7 @@ export default defineComponent({
 
     const pages: Ref<any> = ref(
       sortItems([
-        ...((await pagesStore.getPages(
+        ...((await dataStore.getPages(
           uiStore.currentLocale as string,
         )) as unknown as []),
       ]),
@@ -117,7 +117,7 @@ export default defineComponent({
       () => uiStore.currentLocale,
       async () =>
         (pages.value = await sortItems([
-          ...((await pagesStore.getPages(
+          ...((await dataStore.getPages(
             uiStore.currentLocale as string,
           )) as unknown as []),
         ])),

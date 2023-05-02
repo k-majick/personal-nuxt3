@@ -19,15 +19,15 @@
 
 <script lang="ts" setup>
 import type { Ref } from "vue";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const skills: Ref<any> = ref(
-  await pagesStore.getSkills(uiStore.currentLocale as string),
+  await dataStore.getSkills(uiStore.currentLocale as string),
 );
 
 const skillBarWidth = (v: number) => ({
@@ -44,9 +44,7 @@ defineProps({
 watch(
   () => uiStore.currentLocale,
   async () =>
-    (skills.value = await pagesStore.getSkills(
-      uiStore.currentLocale as string,
-    )),
+    (skills.value = await dataStore.getSkills(uiStore.currentLocale as string)),
 );
 </script>
 

@@ -8,14 +8,14 @@
 <script lang="ts" setup>
 import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
 
 const config = useRuntimeConfig();
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const pageData: Ref<any> = ref(
-  await pagesStore.getPage(uiStore.currentLocale as string, 4),
+  await dataStore.getPage(uiStore.currentLocale as string, 4),
 );
 const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 

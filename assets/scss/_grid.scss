@@ -1,5 +1,5 @@
 .grid {
-  $self: &;
+  // $self: &;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -10,11 +10,13 @@
     justify-content: center;
   }
 }
+
 @for $i from 1 through 12 {
   .grid__item--#{$i} {
     width: calc(100% / 12 * $i);
   }
 }
+
 @each $name, $value in $breakpoints {
   @include media("<=#{$name}") {
     @for $i from 1 through 12 {
@@ -29,4 +31,8 @@
   @include media("<=l-s") {
     width: auto;
   }
+}
+
+@include media("<=l-s") {
+  width: auto;
 }

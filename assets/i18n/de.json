@@ -49,7 +49,10 @@
     "name": "name",
     "email": "e-mail",
     "message": "nachricht",
-    "gotoSite": "go to site"
+    "gotoSite": "go to site",
+    "readMore": "Weiterlesen",
+    "latestArticles": "Neueste Artikel",
+    "featuredProjects": "Vorgestellte Projekte"
   },
   "validation": {
     "nameRequired": "Bitte geben Sie Ihren Namen ein",
