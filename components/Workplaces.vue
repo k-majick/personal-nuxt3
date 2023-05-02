@@ -35,15 +35,15 @@
 
 <script lang="ts" setup>
 import type { Ref } from "vue";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const experience: Ref<any> = ref(
-  await pagesStore.getExperience(uiStore.currentLocale as string),
+  await dataStore.getExperience(uiStore.currentLocale as string),
 );
 
 defineProps({
@@ -63,7 +63,7 @@ const workplaces = ref(
 watch(
   () => uiStore.currentLocale,
   async () => {
-    experience.value = await pagesStore.getExperience(
+    experience.value = await dataStore.getExperience(
       uiStore.currentLocale as string,
     );
     workplaces.value = experience.value

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import {
   GET_PAGES,
   GET_PAGE,
+  GET_POSTS,
   GET_SKILLS,
   GET_TECHNOLOGY,
   GET_EXPERIENCE,
@@ -10,11 +11,14 @@ import {
   GET_INSPIRATION,
 } from "@/api/queries";
 
-interface IPagesState {
+import { IPost } from "@/types/common";
+
+interface IDataState {
   loading: boolean;
   loadError: boolean;
   page: null | Record<string, unknown>;
   pages: null | Record<string, unknown>;
+  posts: null | Array<IPost>;
   skills: null | Record<string, unknown>;
   technology: null | Record<string, unknown>;
   experience: null | Record<string, unknown>;
@@ -23,13 +27,14 @@ interface IPagesState {
   inspiration: null | Record<string, unknown>;
 }
 
-export const usePagesStore = defineStore({
-  id: "pages-store",
-  state: (): IPagesState => ({
+export const useDataStore = defineStore({
+  id: "data-store",
+  state: (): IDataState => ({
     loading: false,
     loadError: false,
     page: null,
     pages: null,
+    posts: null,
     skills: null,
     technology: null,
     experience: null,
@@ -62,6 +67,22 @@ export const usePagesStore = defineStore({
         this.loading = false;
 
         return this.pages;
+      } catch (error) {
+        console.error(error);
+        this.loadError = true;
+      }
+    },
+
+    async getPosts() {
+      this.loading = true;
+
+      try {
+        const res = await useAsyncQuery(GET_POSTS());
+
+        this.posts = (res as any).data.value.posts.data;
+        this.loading = false;
+
+        return this.posts;
       } catch (error) {
         console.error(error);
         this.loadError = true;

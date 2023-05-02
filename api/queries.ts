@@ -15,6 +15,25 @@ export const GET_PAGES = (locale: string) => gql`
   }
 `;
 
+export const GET_POSTS = () => gql`
+  query Posts {
+    posts {
+      data {
+        id
+        attributes {
+          Post {
+            title
+            date
+            lead
+            imageUrl
+            link
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_PAGE = (locale: string, id: number) => gql`
   query PageBySlug {
     page(locale: "${locale}", id: ${id}) {

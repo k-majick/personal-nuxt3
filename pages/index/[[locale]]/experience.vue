@@ -8,17 +8,17 @@
 
 <script lang="ts" setup>
 import type { Ref } from "vue";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import Workplaces from "@/components/Workplaces.vue";
 import Counter from "@/components/Counter.vue";
 
 const config = useRuntimeConfig();
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const theme = ref(uiStore.currentTheme);
 const pageData: Ref<any> = ref(
-  await pagesStore.getPage(uiStore.currentLocale as string, 2),
+  await dataStore.getPage(uiStore.currentLocale as string, 2),
 );
 const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 

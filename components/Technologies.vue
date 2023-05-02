@@ -16,21 +16,21 @@
 
 <script lang="ts" setup>
 import type { Ref } from "vue";
-import { usePagesStore } from "@/store/pages";
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-const pagesStore = usePagesStore();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 const technology: Ref<any> = ref(
-  await pagesStore.getTechnology(uiStore.currentLocale as string),
+  await dataStore.getTechnology(uiStore.currentLocale as string),
 );
 
 watch(
   () => uiStore.currentLocale,
   async () =>
-    (technology.value = await pagesStore.getTechnology(
+    (technology.value = await dataStore.getTechnology(
       uiStore.currentLocale as string,
     )),
 );

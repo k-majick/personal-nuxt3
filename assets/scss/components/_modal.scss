@@ -15,6 +15,16 @@
     z-index: 2;
   }
 
+  &__text {
+    p {
+      @include text;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   &__mask {
     @include trans(0.5);
     position: fixed;
@@ -35,14 +45,7 @@
         min-height: 100vh;
         width: 100%;
         position: relative;
-
-        &--lite {
-          background-color: $color-white;
-        }
-
-        &--dark {
-          background-color: $color-black;
-        }
+        background-color: var(--color-secondary);
 
         &:before {
           content: "";
@@ -63,7 +66,9 @@
 
       #{$self}__content {
         @include mk-container;
+      }
 
+      #{$self}__text {
         p {
           text-align: left;
 
@@ -71,48 +76,6 @@
             text-align: center;
           }
         }
-      }
-
-      #{$self}__details {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: left;
-
-        @include media("<=m") {
-          flex-direction: column;
-
-          &--text {
-            text-align: center;
-
-            #{$self}__title {
-              margin-top: 15px;
-            }
-          }
-        }
-      }
-
-      #{$self}__logo {
-        max-width: 150px;
-        border-radius: 10px;
-        margin-right: 15px;
-
-        @include media("<=m") {
-          margin-right: 0;
-        }
-      }
-
-      #{$self}__title {
-        color: var(--color-primary);
-        font-size: 2em;
-        margin: 0 0 15px;
-      }
-
-      #{$self}__image {
-        @include img;
-        max-width: 400px;
-        margin: 30px 0;
-        border: 1px solid $color-silver;
       }
     }
 
@@ -167,9 +130,9 @@
           backdrop-filter: blur(3px);
           mask-image: linear-gradient(
             135deg,
-            transparent 0% 2.45%,
-            $color-white 2.45% 97.55%,
-            transparent 97.55% 100%
+            transparent 0% 3.45%,
+            $color-white 3.45% 96.55%,
+            transparent 96.55% 100%
           );
         }
 
@@ -193,6 +156,12 @@
       #{$self}__title {
         font-size: 1.1em;
         margin: 0;
+      }
+
+      #{$self}__text {
+        p {
+          text-align: center;
+        }
       }
     }
   }
@@ -239,16 +208,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    p {
-      text-shadow: none;
-      font-weight: lighter;
-      margin: 15px 0;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
   }
 
   &-leave-active {
@@ -277,8 +236,8 @@
     &:after {
       background-image: linear-gradient(
         135deg,
-        transparent 2.5%,
-        $color-red 2.5% 25%,
+        transparent 3.5%,
+        $color-red 3.5% 25%,
         transparent 30%
       );
     }
@@ -303,8 +262,8 @@
     &:after {
       background-image: linear-gradient(
         135deg,
-        transparent 2.5%,
-        $color-green 2.5% 25%,
+        transparent 3.5%,
+        $color-green 3.5% 25%,
         transparent 30%
       );
     }

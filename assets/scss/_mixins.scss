@@ -14,6 +14,23 @@
     max-width: 1180px;
   }
 }
+@mixin text {
+  font-size: 1em;
+  font-weight: lighter;
+  font-family: $font-secondary;
+  line-height: 1.5;
+  margin: 15px 0;
+
+  p {
+    margin: 15px 0;
+  }
+}
+@mixin title {
+  color: var(--color-primary);
+  font-family: $font-primary;
+  font-weight: bold;
+}
+
 /* elements */
 @mixin img {
   width: 100%;

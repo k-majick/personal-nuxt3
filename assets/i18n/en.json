@@ -49,7 +49,10 @@
     "name": "name",
     "email": "e-mail",
     "message": "message",
-    "gotoSite": "go to site"
+    "gotoSite": "go to site",
+    "readMore": "Read more",
+    "latestArticles": "Latest articles",
+    "featuredProjects": "Featured projects"
   },
   "validation": {
     "nameRequired": "Please enter your name",
