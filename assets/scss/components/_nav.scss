@@ -198,8 +198,8 @@
       text-align: left;
     }
 
-    // &:not([href="/projects"]):after {
-    &:after {
+    &:not([href$="creations"]):after {
+    // &:after {
       @include trans(2, max-width);
       display: block;
       content: "";

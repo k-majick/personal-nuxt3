@@ -13,7 +13,7 @@
           >Start</a
         >
       </li>
-      <li v-for="page in pages" :key="page.id" class="nav__item">
+      <li v-for="page in pages" :key="(page.id as string)" class="nav__item">
         <nuxt-link
           :to="page.attributes.slug"
           class="nav__link"
@@ -74,6 +74,7 @@ import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 import iconGit from "@/assets/gfx/icon-git-min.svg?raw";
 import rawCat from "@/assets/gfx/cat_1.svg?raw";
 import DOMPurify from "dompurify";
+import { IResponse } from "@/types/common";
 
 export default defineComponent({
   directives: {
@@ -92,16 +93,16 @@ export default defineComponent({
     const headerEl = inject(HeaderElKey);
     const mainEl = inject(MainElKey);
 
-    const sortItems = (pagesArr: Record<string, any>[]) =>
+    const sortItems = (pagesArr: IResponse[]) =>
       pagesArr
         .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
         .filter(item => item.attributes.slug !== "inspiration");
 
-    const pages: Ref<any> = ref(
+    const pages: Ref<IResponse[]> = ref(
       sortItems([
         ...((await dataStore.getPages(
           uiStore.currentLocale as string,
-        )) as unknown as []),
+        )) as IResponse[]),
       ]),
     );
 
@@ -116,10 +117,10 @@ export default defineComponent({
     watch(
       () => uiStore.currentLocale,
       async () =>
-        (pages.value = await sortItems([
+        (pages.value = sortItems([
           ...((await dataStore.getPages(
             uiStore.currentLocale as string,
-          )) as unknown as []),
+          )) as IResponse[]),
         ])),
     );
 
