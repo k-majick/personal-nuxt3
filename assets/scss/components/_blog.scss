@@ -38,7 +38,7 @@
 
     &:before {
       content: "";
-      display: block;
+      display: none;
       border: 0;
       border-top: 2px solid var(--color-primary);
       top: 0;
@@ -46,6 +46,10 @@
       transform: translateX(-50%);
       position: absolute;
       width: 100%;
+
+      @include media("<=m") {
+        display: block;
+      }
     }
 
     #{$self}__title {

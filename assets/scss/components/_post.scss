@@ -12,7 +12,7 @@
 
   @include media("<=m") {
     flex-flow: column;
-    max-width: 480px;
+    max-width: 640px;
   }
 
   &__container,
@@ -30,6 +30,7 @@
 
     @include media("<=m") {
       width: 100%;
+      padding: 0;
     }
   }
 
@@ -62,6 +63,10 @@
   &__title {
     @include title;
     margin: 0 0 15px;
+
+    @include media("<=m") {
+      margin-top: 30px;
+    }
   }
 
   &__content {
@@ -113,6 +118,15 @@
       var(--color-primary) 95% calc(100% - 36.5px),
       transparent calc(100% - 36.5px) 100%
     );
+
+    @include media("<=m") {
+      background-image: linear-gradient(
+        135deg,
+        transparent 36.5px,
+        var(--color-primary) 36.5px 15%,
+        transparent 20% 100%
+      );
+    }
   }
 
   &--top {

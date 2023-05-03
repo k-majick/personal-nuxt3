@@ -11,20 +11,20 @@ import {
   GET_INSPIRATION,
 } from "@/api/queries";
 
-import { IPost } from "@/types/common";
+import { IResponse } from "@/types/common";
 
 interface IDataState {
   loading: boolean;
   loadError: boolean;
-  page: null | Record<string, unknown>;
-  pages: null | Record<string, unknown>;
-  posts: null | Array<IPost>;
-  skills: null | Record<string, unknown>;
-  technology: null | Record<string, unknown>;
-  experience: null | Record<string, unknown>;
-  portfolio: null | Record<string, unknown>;
-  contact: null | Record<string, unknown>;
-  inspiration: null | Record<string, unknown>;
+  page: null | IResponse;
+  pages: null | Array<IResponse>;
+  posts: null | Array<IResponse>;
+  skills: null | IResponse;
+  technology: null | IResponse;
+  experience: null | IResponse;
+  portfolio: null | IResponse;
+  contact: null | IResponse;
+  inspiration: null | IResponse;
 }
 
 export const useDataStore = defineStore({
@@ -97,6 +97,7 @@ export const useDataStore = defineStore({
 
         this.skills = (res as any).data.value.skills.data.attributes;
         this.loading = false;
+        console.dir(this.skills); //eslint-disable-line
 
         return this.skills;
       } catch (error) {

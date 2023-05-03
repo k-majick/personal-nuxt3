@@ -1,13 +1,10 @@
-export type IPost = {
-  id: string;
-  top: boolean;
+export type IItem = {
+  [key: string]: string;
+};
+
+export type IResponse = {
+  [key: string]: string | Record<string, unknown> | Array<IItem>;
   attributes: {
-    Post: {
-      date: string;
-      imageUrl: string;
-      lead: string;
-      link: string;
-      title: string;
-    };
+    [key: string]: IItem | any;
   };
 };

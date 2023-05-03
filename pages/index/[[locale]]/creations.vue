@@ -36,14 +36,14 @@
         <div
           v-if="portfolio && portfolio.content"
           class="post__content"
-          v-html="DOMPurify.sanitize(marked.parse(portfolio.content))"
+          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string))"
         ></div>
       </div>
 
       <Projects
         v-if="portfolio.projects && portfolio.projects.length"
         :theme="(theme as string)"
-        :projects="portfolio.projects"
+        :projects="(portfolio.projects as Array<IItem>)"
       />
     </section>
   </div>
@@ -56,21 +56,21 @@ import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-import { IPost } from "@/types/common";
+import { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
 const theme = ref(uiStore.currentTheme);
 
 const dataStore = useDataStore();
-const pageData: Ref<any> = ref(
-  await dataStore.getPage(uiStore.currentLocale as string, 3),
+const pageData: Ref<IResponse> = ref(
+  (await dataStore.getPage(uiStore.currentLocale as string, 3)) as IResponse,
 );
-const posts: Ref<Array<IPost>> = ref(
-  (await dataStore.getPosts()) as Array<IPost>,
+const posts: Ref<Array<IResponse>> = ref(
+  (await dataStore.getPosts()) as Array<IResponse>,
 );
-const portfolio: Ref<any> = ref(
-  await dataStore.getPortfolio(uiStore.currentLocale as string),
+const portfolio: Ref<IResponse> = ref(
+  (await dataStore.getPortfolio(uiStore.currentLocale as string)) as IResponse,
 );
 
 watch(
@@ -81,9 +81,9 @@ watch(
 watch(
   () => uiStore.currentLocale,
   async () =>
-    (portfolio.value = await dataStore.getPortfolio(
+    (portfolio.value = (await dataStore.getPortfolio(
       uiStore.currentLocale as string,
-    )),
+    )) as IResponse),
 );
 
 useHead({
