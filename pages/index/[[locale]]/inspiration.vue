@@ -3,7 +3,7 @@
     <div
       v-if="inspiration"
       class="main__content"
-      v-html="DOMPurify.sanitize(marked.parse(inspiration.content))"
+      v-html="DOMPurify.sanitize(marked.parse(inspiration.content as string))"
     ></div>
     <div
       v-if="inspiration.pictures.length"
@@ -11,7 +11,7 @@
       :class="`gallery--${theme}`"
     >
       <div
-        v-for="(picture, index) in inspiration.pictures"
+        v-for="(picture, index) in inspiration.pictures as IItem[]"
         :key="index"
         class="gallery__item"
       >
@@ -34,6 +34,7 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
+import { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
@@ -42,8 +43,10 @@ const theme = ref(uiStore.currentTheme);
 const pageData: Ref<any> = ref(
   await dataStore.getPage(uiStore.currentLocale as string, 5),
 );
-const inspiration: Ref<any> = ref(
-  await dataStore.getInspiration(uiStore.currentLocale as string),
+const inspiration: Ref<IResponse> = ref(
+  (await dataStore.getInspiration(
+    uiStore.currentLocale as string,
+  )) as IResponse,
 );
 
 useHead({
@@ -53,9 +56,9 @@ useHead({
 watch(
   () => uiStore.currentLocale,
   async () =>
-    (inspiration.value = await dataStore.getInspiration(
+    (inspiration.value = (await dataStore.getInspiration(
       uiStore.currentLocale as string,
-    )),
+    )) as IResponse),
 );
 
 watch(

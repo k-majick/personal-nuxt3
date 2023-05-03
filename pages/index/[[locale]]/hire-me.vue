@@ -10,12 +10,13 @@ import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
+import { IResponse } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const pageData: Ref<any> = ref(
-  await dataStore.getPage(uiStore.currentLocale as string, 4),
+const pageData: Ref<IResponse> = ref(
+  (await dataStore.getPage(uiStore.currentLocale as string, 4)) as IResponse,
 );
 const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 

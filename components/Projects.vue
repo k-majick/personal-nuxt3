@@ -66,6 +66,7 @@
 </template>
 
 <script lang="ts" setup>
+import { IItem } from "@/types/common";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/css";
@@ -76,10 +77,6 @@ const activeProject = ref();
 const setActiveProject = (project: any, index: number) => {
   activeProject.value = project;
   activeProject.value.id = index + 1;
-};
-
-type Project = {
-  [key: string]: string;
 };
 
 const swiperProps = {
@@ -113,7 +110,7 @@ defineProps({
     required: true,
   },
   projects: {
-    type: Array<Project>,
+    type: Array<IItem>,
     required: true,
   },
 });

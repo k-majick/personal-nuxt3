@@ -12,13 +12,14 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import Skills from "@/components/Skills.vue";
 import Technologies from "@/components/Technologies.vue";
+import { IResponse } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 const theme = ref(uiStore.currentTheme);
-const pageData: Ref<any> = ref(
-  await dataStore.getPage(uiStore.currentLocale as string, 1),
+const pageData: Ref<IResponse> = ref(
+  (await dataStore.getPage(uiStore.currentLocale as string, 1)) as IResponse,
 );
 const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 
