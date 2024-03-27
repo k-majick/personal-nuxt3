@@ -34,7 +34,7 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-import { IResponse, IItem } from "@/types/common";
+import type { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();

@@ -10,7 +10,7 @@ import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
-import { IResponse } from "@/types/common";
+import type { IResponse } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();

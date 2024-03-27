@@ -12,7 +12,7 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import Skills from "@/components/Skills.vue";
 import Technologies from "@/components/Technologies.vue";
-import { IResponse } from "@/types/common";
+import type { IResponse } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();

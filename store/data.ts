@@ -11,7 +11,7 @@ import {
   GET_INSPIRATION,
 } from "@/api/queries";
 
-import { IResponse } from "@/types/common";
+import type { IResponse } from "@/types/common";
 
 interface IDataState {
   loading: boolean;
