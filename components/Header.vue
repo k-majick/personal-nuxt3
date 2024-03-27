@@ -20,7 +20,7 @@
           </ul>
         </div>
         <div
-          v-hoverMessage="
+          v-Tooltip="
             theme === 'dark'
               ? $t('messages.switch2lite')
               : $t('messages.switch2dark')
@@ -36,7 +36,6 @@
             v-html="theme === 'dark' ? iconSun : iconMoon"
           />
           <!-- eslint-enable risxss/catch-potential-xss-vue -->
-          <span class="tooltip"></span>
         </div>
       </div>
     </section>
@@ -50,91 +49,67 @@
   </header>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { useI18n } from "vue-i18n";
 import { useUiStore } from "@/store/ui";
 import { MainElKey } from "@/symbols/symbols";
 import scrollTo from "@/composables/scrollTo";
 import iconSun from "@/assets/gfx/icon-sun.svg?raw";
 import iconMoon from "@/assets/gfx/icon-moon.svg?raw";
-import DOMPurify from "dompurify";
-import { ILocale, locales } from "@/composables/i18n";
-import { useI18n } from "vue-i18n";
-import { hoverMessage } from "@/composables/hoverMessage";
+import { type ILocale, locales } from "@/composables/i18n";
+import { vTooltip } from "@/composables/tooltip";
 
-export default defineComponent({
-  directives: {
-    hoverMessage,
-  },
-  setup() {
-    const config = useRuntimeConfig();
-    const route = useRoute();
-    const router = useRouter();
+const config = useRuntimeConfig();
+const route = useRoute();
+const router = useRouter();
 
-    const mainEl = inject(MainElKey);
-    const headerEl = ref<HTMLElement>();
+const mainEl = inject(MainElKey);
+const headerEl = ref<HTMLElement>();
 
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
+const uiStore = useUiStore();
+const theme = ref(uiStore.currentTheme);
 
-    const { locale } = useI18n({ useScope: "global" });
-    const setAvailableLocales = () =>
-      locales.filter(l => l.code !== locale.value);
-    const availableLocales = ref<ILocale[]>(setAvailableLocales());
+const { locale } = useI18n({ useScope: "global" });
+const setAvailableLocales = () =>
+  locales.filter(l => l.code !== locale.value);
+const availableLocales = ref<ILocale[]>(setAvailableLocales());
 
-    const switchLocale = (l: string) => {
-      locale.value = l;
-      uiStore.setLocale(l);
-      localStorage.setItem("user-locale", l);
-      availableLocales.value = setAvailableLocales();
-      setRouteParam(l);
-    };
+const switchLocale = (l: string) => {
+  locale.value = l;
+  uiStore.setLocale(l);
+  localStorage.setItem("user-locale", l);
+  availableLocales.value = setAvailableLocales();
+  setRouteParam(l);
+};
 
-    const setRouteParam = (locale: string) => {
-      const pageSlug = route.path.split("/").pop();
+const setRouteParam = (locale: string) => {
+  const pageSlug = route.path.split("/").pop();
 
-      router.replace({
-        path: `/${locale}/${pageSlug}`,
-      });
-    };
+  router.replace({
+    path: `/${locale}/${pageSlug}`,
+  });
+};
 
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
+watch(
+  () => uiStore.currentTheme,
+  () => (theme.value = uiStore.currentTheme),
+);
 
-    const rootEl = document.documentElement;
+const rootEl = document.documentElement;
 
-    const toggleTheme = (theme: string) => {
-      rootEl.style.setProperty("--theme", theme);
-      rootEl.setAttribute("data-theme", theme);
-      uiStore.setTheme(theme);
-      localStorage.setItem("user-theme", theme);
-    };
+const toggleTheme = (theme: string) => {
+  rootEl.style.setProperty("--theme", theme);
+  rootEl.setAttribute("data-theme", theme);
+  uiStore.setTheme(theme);
+  localStorage.setItem("user-theme", theme);
+};
 
-    switchLocale(route.params.locale as string);
+switchLocale(route.params.locale as string);
 
-    localStorage.getItem("user-theme")
-      ? toggleTheme(localStorage.getItem("user-theme") as string)
-      : toggleTheme("lite");
+localStorage.getItem("user-theme")
+  ? toggleTheme(localStorage.getItem("user-theme") as string)
+  : toggleTheme("lite");
 
-    return {
-      scrollTo,
-      toggleTheme,
-      switchLocale,
-      theme,
-      route,
-      DOMPurify,
-      config,
-      headerEl,
-      mainEl,
-      iconSun,
-      iconMoon,
-      locale,
-      availableLocales,
-      hoverMessage,
-    };
-  },
-});
 </script>
 
 <style lang="scss">

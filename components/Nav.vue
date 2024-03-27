@@ -26,28 +26,26 @@
     <ul class="nav__social">
       <li class="nav__socialItem">
         <a
-          v-hoverMessage="$t('messages.git')"
+          v-Tooltip="$t('messages.git')"
           href="https://github.com/k-majick"
           target="_blank"
           class="nav__socialLink"
         >
           <span v-html="DOMPurify.sanitize(iconGit)"></span>
-          <span class="tooltip"></span>
         </a>
       </li>
       <li class="nav__socialItem">
         <a
-          v-hoverMessage="$t('messages.linked')"
+          v-Tooltip="$t('messages.linked')"
           href="https://www.linkedin.com/in/maciej-klimowicz"
           target="_blank"
           class="nav__socialLink"
         >
           <span v-html="DOMPurify.sanitize(iconLinkedin)"></span>
-          <span class="tooltip"></span>
         </a>
       </li>
     </ul>
-    <div v-hoverMessage="$t('messages.meow')" class="cat__wrapper">
+    <div v-Tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
         :to="'inspiration'"
         class="cat"
@@ -58,91 +56,78 @@
         <div v-html="rawCat"></div>
         <!-- eslint-enable risxss/catch-potential-xss-vue -->
       </nuxt-link>
-      <span class="tooltip"></span>
     </div>
   </nav>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Ref } from "vue";
+import DOMPurify from "dompurify";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import { hoverMessage } from "@/composables/hoverMessage";
 import scrollTo from "@/composables/scrollTo";
+import { vTooltip } from "@/composables/tooltip";
 import iconLinkedin from "@/assets/gfx/icon-linkedin-min.svg?raw";
-import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 import iconGit from "@/assets/gfx/icon-git-min.svg?raw";
 import rawCat from "@/assets/gfx/cat_1.svg?raw";
-import DOMPurify from "dompurify";
-import { IResponse } from "@/types/common";
+import { MainElKey, HeaderElKey } from "@/symbols/symbols";
+import type { IResponse } from "@/types/common";
 
-export default defineComponent({
-  directives: {
-    hoverMessage,
+defineProps({
+  isActivated: {    
+    type: Boolean,
+    required: true,
   },
-  props: {
-    isActivated: Boolean,
-    isActive: Boolean,
-  },
-  emits: ["closeNav"],
-  async setup() {
-    const dataStore = useDataStore();
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
-
-    const headerEl = inject(HeaderElKey);
-    const mainEl = inject(MainElKey);
-
-    const sortItems = (pagesArr: IResponse[]) =>
-      pagesArr
-        .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-        .filter(item => item.attributes.slug !== "inspiration");
-
-    const pages: Ref<IResponse[]> = ref(
-      sortItems([
-        ...((await dataStore.getPages(
-          uiStore.currentLocale as string,
-        )) as IResponse[]),
-      ]),
-    );
-
-    const killModal = () => {
-      const body = document.body;
-
-      if (body.classList.contains("locked")) {
-        toggleModal(0, true);
-      }
-    };
-
-    watch(
-      () => uiStore.currentLocale,
-      async () =>
-        (pages.value = sortItems([
-          ...((await dataStore.getPages(
-            uiStore.currentLocale as string,
-          )) as IResponse[]),
-        ])),
-    );
-
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
-
-    return {
-      iconGit,
-      iconLinkedin,
-      scrollTo,
-      headerEl,
-      mainEl,
-      pages,
-      rawCat,
-      DOMPurify,
-      killModal,
-      theme,
-    };
+  isActive: {
+    type: Boolean,
+    required: true,
   },
 });
+
+defineEmits(["closeNav"]);
+
+const dataStore = useDataStore();
+const uiStore = useUiStore();
+const theme = ref(uiStore.currentTheme);
+
+const headerEl = inject(HeaderElKey);
+const mainEl = inject(MainElKey);
+
+const sortItems = (pagesArr: IResponse[]) =>
+  pagesArr
+    .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
+    .filter(item => item.attributes.slug !== "inspiration");
+
+const pages: Ref<IResponse[]> = ref(
+  sortItems([
+    ...((await dataStore.getPages(
+      uiStore.currentLocale as string,
+    )) as IResponse[]),
+  ]),
+);
+
+const killModal = () => {
+  const body = document.body;
+
+  if (body.classList.contains("locked")) {
+    toggleModal(0, true);
+  }
+};
+
+watch(
+  () => uiStore.currentLocale,
+  async () =>
+    (pages.value = sortItems([
+      ...((await dataStore.getPages(
+        uiStore.currentLocale as string,
+      )) as IResponse[]),
+    ])),
+);
+
+watch(
+  () => uiStore.currentTheme,
+  () => (theme.value = uiStore.currentTheme),
+);
 </script>
 
 <style lang="scss">

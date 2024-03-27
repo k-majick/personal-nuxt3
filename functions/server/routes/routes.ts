@@ -31,13 +31,6 @@ export class Routes {
     const accessToken = oauth2Client.getAccessToken();
 
     const sendEmail = async (data: any) => {
-      console.dir(data);
-      console.dir(emailTo);
-      console.dir(clientId);
-      console.dir(clientSecret);
-      console.dir(redirectUrl);
-      console.dir(refreshToken);
-
       const transporter = nodemailer.createTransport({
         service: "gmail",
         host: "smtp.gmail.com",

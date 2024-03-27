@@ -97,7 +97,6 @@ export const useDataStore = defineStore({
 
         this.skills = (res as any).data.value.skills.data.attributes;
         this.loading = false;
-        console.dir(this.skills); //eslint-disable-line
 
         return this.skills;
       } catch (error) {

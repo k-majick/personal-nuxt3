@@ -5,8 +5,7 @@
       class="avatar__message"
       v-html="DOMPurify.sanitize($t('messages.hello'))"
     ></h3>
-    <div v-hoverMessage="$t('messages.hello')" class="avatar__container">
-      <span class="tooltip"></span>
+    <div v-Tooltip="$t('messages.hello')" class="avatar__container">
       <div class="avatar__flipper">
         <div class="avatar__front"></div>
         <div class="avatar__back"></div>
@@ -17,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { hoverMessage as vHoverMessage } from "@/composables/hoverMessage";
+import { vTooltip } from "@/composables/tooltip";
 import DOMPurify from "dompurify";
 
 defineProps({

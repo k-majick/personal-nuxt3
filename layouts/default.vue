@@ -21,43 +21,39 @@
         }}</span>
       </div>
       <div
-        v-hoverMessage="
+        v-Tooltip="
           dataStore.loadError
             ? $t('messages.loadError')
             : $t('messages.loading')
         "
         class="theme__loader"
       >
-        <span class="tooltip" :class="`tooltip--${theme}`"></span>
       </div>
     </div>
     <slot />
   </div>
+
+  <span ref="tooltip" class="tooltip"></span>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import { hoverMessage } from "@/composables/hoverMessage";
+import { vTooltip } from "@/composables/tooltip";
+import { globalRefs } from '@/plugins/globalRefs';
 
-export default defineComponent({
-  directives: {
-    hoverMessage,
-  },
-  setup() {
-    const dataStore = useDataStore();
-    const uiStore = useUiStore();
-    const theme = ref(uiStore.currentTheme);
+const dataStore = useDataStore();
+const uiStore = useUiStore();
 
-    watch(
-      () => uiStore.currentTheme,
-      () => (theme.value = uiStore.currentTheme),
-    );
+const theme = ref(uiStore.currentTheme);
+const tooltip = ref();
 
-    return {
-      dataStore,
-      theme,
-    };
-  },
+onMounted(() => {
+  globalRefs.tooltip = tooltip.value;
 });
+
+watch(
+  () => uiStore.currentTheme,
+  () => (theme.value = uiStore.currentTheme),
+);
 </script>

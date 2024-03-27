@@ -33,72 +33,57 @@
   </main>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 
-export default defineComponent({
-  layout: "default",
-  setup() {
-    const dataStore = useDataStore();
-    const isLoadError = ref(dataStore.loadError);
-    const headerComponent: Ref<any> = ref();
-    const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
-    const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
-    const isNavActivated = ref(false);
-    const isNavActive = ref(false);
+const dataStore = useDataStore();
+const isLoadError = ref(dataStore.loadError);
+const headerComponent: Ref<any> = ref();
+const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
+const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
+const isNavActivated = ref(false);
+const isNavActive = ref(false);
 
-    const scrollListen = () => {
-      window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
+const scrollListen = () => {
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
 
-        document.documentElement.style.setProperty(
-          "--scroll-y",
-          `${scrollTop}px`,
-        );
-
-        if (!mainEl || !mainEl.value) {
-          return;
-        }
-
-        mainEl.value.getBoundingClientRect().top < 10
-          ? (isNavActive.value = true)
-          : (isNavActive.value = false);
-      });
-    };
-
-    onMounted(() => scrollListen());
-
-    watch(
-      () => dataStore.loadError,
-      () => (isLoadError.value = dataStore.loadError),
+    document.documentElement.style.setProperty(
+      "--scroll-y",
+      `${scrollTop}px`,
     );
 
-    watch(
-      () => headerComponent.value,
-      () => (headerEl.value = headerComponent.value.headerEl),
-    );
+    if (!mainEl || !mainEl.value) {
+      return;
+    }
 
-    provide(MainElKey, mainEl);
-    provide(HeaderElKey, headerEl);
+    mainEl.value.getBoundingClientRect().top < 10
+      ? (isNavActive.value = true)
+      : (isNavActive.value = false);
+  });
+};
 
-    const toggleNav = () =>
-      isNavActivated.value === false
-        ? (isNavActivated.value = true)
-        : (isNavActivated.value = false);
+onMounted(() => scrollListen());
 
-    return {
-      toggleNav,
-      mainEl,
-      headerComponent,
-      isNavActivated,
-      isNavActive,
-      isLoadError,
-      dataStore,
-    };
-  },
-});
+watch(
+  () => dataStore.loadError,
+  () => (isLoadError.value = dataStore.loadError),
+);
+
+watch(
+  () => headerComponent.value,
+  () => (headerEl.value = headerComponent.value.headerEl),
+);
+
+provide(MainElKey, mainEl);
+provide(HeaderElKey, headerEl);
+
+const toggleNav = () =>
+  isNavActivated.value === false
+    ? (isNavActivated.value = true)
+    : (isNavActivated.value = false);
 
 definePageMeta({
   layout: "default",
