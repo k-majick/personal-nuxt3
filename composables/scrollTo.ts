@@ -1,4 +1,4 @@
-export default ($event: MouseEvent, target: HTMLElement | undefined) => {
+export default (_$event: MouseEvent, target: HTMLElement | undefined) => {
   if (!target) {
     return;
   }

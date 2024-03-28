@@ -62,14 +62,14 @@ import { vTooltip } from "@/composables/tooltip";
 const config = useRuntimeConfig();
 const route = useRoute();
 const router = useRouter();
-
-const mainEl = inject(MainElKey);
-const headerEl = ref<HTMLElement>();
-
 const uiStore = useUiStore();
+const { locale } = useI18n({ useScope: "global" });
+
 const theme = ref(uiStore.currentTheme);
 
-const { locale } = useI18n({ useScope: "global" });
+const mainEl = inject(MainElKey);
+const headerEl: Ref<HTMLElement | undefined> = ref();
+
 const setAvailableLocales = () =>
   locales.filter(l => l.code !== locale.value);
 const availableLocales = ref<ILocale[]>(setAvailableLocales());
@@ -110,6 +110,9 @@ localStorage.getItem("user-theme")
   ? toggleTheme(localStorage.getItem("user-theme") as string)
   : toggleTheme("lite");
 
+defineExpose({
+  headerEl,
+});
 </script>
 
 <style lang="scss">

@@ -1,5 +1,5 @@
 <template>
-  <Header v-if="!isLoadError" ref="headerComponent" />
+  <Header v-if="!isLoadError" ref="headerRef" />
 
   <main v-if="!isLoadError" ref="mainEl" class="main">
     <div class="main__background"></div>
@@ -34,15 +34,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 
 const dataStore = useDataStore();
 const isLoadError = ref(dataStore.loadError);
-const headerComponent: Ref<any> = ref();
-const mainEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
-const headerEl: Ref<HTMLElement | undefined> = ref<HTMLElement>();
+const headerRef: Ref<any> = ref();
+const mainEl: Ref<HTMLElement | undefined> = ref();
+const headerEl: Ref<HTMLElement | undefined> = ref();
 const isNavActivated = ref(false);
 const isNavActive = ref(false);
 
@@ -65,25 +64,23 @@ const scrollListen = () => {
   });
 };
 
-onMounted(() => scrollListen());
+const toggleNav = () =>
+  isNavActivated.value === false
+    ? (isNavActivated.value = true)
+    : (isNavActivated.value = false);
+
+onMounted(() => {
+  headerEl.value = headerRef.value.headerEl;
+  scrollListen();
+});
 
 watch(
   () => dataStore.loadError,
   () => (isLoadError.value = dataStore.loadError),
 );
 
-watch(
-  () => headerComponent.value,
-  () => (headerEl.value = headerComponent.value.headerEl),
-);
-
-provide(MainElKey, mainEl);
-provide(HeaderElKey, headerEl);
-
-const toggleNav = () =>
-  isNavActivated.value === false
-    ? (isNavActivated.value = true)
-    : (isNavActivated.value = false);
+provide(MainElKey, mainEl as Ref<HTMLElement>);
+provide(HeaderElKey, headerEl as Ref<HTMLElement>);
 
 definePageMeta({
   layout: "default",
