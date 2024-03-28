@@ -5,7 +5,7 @@ interface IGlobalRefs {
 }
 
 export const globalRefs = reactive<IGlobalRefs>({
-  tooltip: null,
+  tooltipEl: null,
 });
 
 export default defineNuxtPlugin((nuxtApp) => {

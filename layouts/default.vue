@@ -33,7 +33,7 @@
     <slot />
   </div>
 
-  <span ref="tooltip" class="tooltip"></span>
+  <span ref="tooltipEl" class="tooltip"></span>
 </template>
 
 <script lang="ts" setup>
@@ -46,11 +46,9 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 
 const theme = ref(uiStore.currentTheme);
-const tooltip = ref();
+const tooltipEl = ref();
 
-onMounted(() => {
-  globalRefs.tooltip = tooltip.value;
-});
+onMounted(() => globalRefs.tooltipEl = tooltipEl.value);
 
 watch(
   () => uiStore.currentTheme,

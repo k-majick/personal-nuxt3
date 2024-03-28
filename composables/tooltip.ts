@@ -7,48 +7,51 @@ interface IBinding {
 
 export const vTooltip = {
   created(el: HTMLElement, binding: IBinding) {
-    setTimeout(() => {
-      const bar = globalRefs.tooltip as HTMLElement;      
-  
-      if (!bar) {
-        return;
-      }
 
+    const getTooltip = () => {     
+      const tooltipEl = globalRefs.tooltipEl as HTMLElement;
+
+      tooltipEl ? onCreated(tooltipEl) : setTimeout(() => getTooltip(), 200);
+    }
+
+    const onCreated = (tooltipEl: HTMLElement) => {
       el.addEventListener("mouseenter", () => {
-        (bar as HTMLElement).innerHTML = binding.value as string;
-        bar.innerHTML = binding.value as string;
-        bar.classList.add("show");
+        (tooltipEl as HTMLElement).innerHTML = binding.value as string;
+        tooltipEl.innerHTML = binding.value as string;
+        tooltipEl.classList.add("show");
       });
-
-      el.addEventListener("mousemove", (e: MouseEvent) => {
-        const barRect = bar.getBoundingClientRect();        
   
-        if (e.pageX + barRect.width + 20 > window.innerWidth) {
-          bar.style.top = `calc(${e.pageY}px + 10px)`;
-          bar.style.left = `calc(${e.pageX}px - ${barRect.width}px - 20px)`;
+      el.addEventListener("mousemove", (e: MouseEvent) => {
+        const tooltipElRect = tooltipEl.getBoundingClientRect();        
+  
+        if (e.pageX + tooltipElRect.width + 20 > window.innerWidth) {
+          tooltipEl.style.top = `calc(${e.pageY}px + 10px)`;
+          tooltipEl.style.left = `calc(${e.pageX}px - ${tooltipElRect.width}px - 20px)`;
         } else {
-          bar.style.top = `calc(${e.pageY}px + 10px)`;
-          bar.style.left = `calc(${e.pageX}px + 20px)`;
+          tooltipEl.style.top = `calc(${e.pageY}px + 10px)`;
+          tooltipEl.style.left = `calc(${e.pageX}px + 20px)`;
         }
       });
   
       el.addEventListener("mouseleave", () => {
-        bar.classList.remove("show");
-        (bar as HTMLElement).innerHTML = "";
+        tooltipEl.classList.remove("show");
+        (tooltipEl as HTMLElement).innerHTML = "";
       });
-    }, 0);
+    }
+
+    getTooltip();
   },
 
   updated(el: HTMLElement, binding: IBinding) {
-    const bar = globalRefs.tooltip as HTMLElement;
+    const tooltipEl = globalRefs.tooltipEl as HTMLElement;
 
-    if (!bar) {
+    if (!tooltipEl) {
       return;
     }
 
     el.addEventListener("mouseenter", () => {
-      (bar as HTMLElement).innerHTML = binding.value as string;
-      bar.innerHTML = binding.value as string;
+      (tooltipEl as HTMLElement).innerHTML = binding.value as string;
+      tooltipEl.innerHTML = binding.value as string;
     });
   },
 };
