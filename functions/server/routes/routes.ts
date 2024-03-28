@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import { google } from "googleapis";
-import nodemailer, { TransportOptions, SentMessageInfo } from "nodemailer";
+import nodemailer, { type TransportOptions, type SentMessageInfo } from "nodemailer";
 
 export class Routes {
   public router: Router;
