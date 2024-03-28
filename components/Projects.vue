@@ -66,9 +66,10 @@
 </template>
 
 <script lang="ts" setup>
-import { IItem } from "@/types/common";
+import type { IItem } from "@/types/common";
+import SwiperCore from "swiper";
+import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/vue";
-import SwiperCore, { Navigation } from "swiper";
 import "swiper/css";
 
 SwiperCore.use([Navigation]);
