@@ -5,7 +5,7 @@
       class="avatar__message"
       v-html="DOMPurify.sanitize($t('messages.hello'))"
     ></h3>
-    <div v-Tooltip="$t('messages.hello')" class="avatar__container">
+    <div v-tooltip="$t('messages.hello')" class="avatar__container">
       <div class="avatar__flipper">
         <div class="avatar__front"></div>
         <div class="avatar__back"></div>

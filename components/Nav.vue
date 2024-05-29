@@ -26,7 +26,7 @@
     <ul class="nav__social">
       <li class="nav__socialItem">
         <a
-          v-Tooltip="$t('messages.git')"
+          v-tooltip="$t('messages.git')"
           href="https://github.com/k-majick"
           target="_blank"
           class="nav__socialLink"
@@ -36,7 +36,7 @@
       </li>
       <li class="nav__socialItem">
         <a
-          v-Tooltip="$t('messages.linked')"
+          v-tooltip="$t('messages.linked')"
           href="https://www.linkedin.com/in/maciej-klimowicz"
           target="_blank"
           class="nav__socialLink"
@@ -45,7 +45,7 @@
         </a>
       </li>
     </ul>
-    <div v-Tooltip="$t('messages.meow')" class="cat__wrapper">
+    <div v-tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
         :to="'inspiration'"
         class="cat"

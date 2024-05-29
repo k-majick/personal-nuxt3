@@ -20,7 +20,7 @@
           </ul>
         </div>
         <div
-          v-Tooltip="
+          v-tooltip="
             theme === 'dark'
               ? $t('messages.switch2lite')
               : $t('messages.switch2dark')
