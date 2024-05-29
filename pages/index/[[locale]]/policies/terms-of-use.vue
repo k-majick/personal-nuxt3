@@ -1,8 +1,9 @@
 <template>
   <section class="main__card">
     <h2 class="main__title">{{ $t(`pages.${pageSlug}.title`) }}</h2>
-    <Skills :theme="(theme as string)" />
-    <Technologies />
+
+    Termz
+
   </section>
 </template>
 
@@ -10,8 +11,6 @@
 import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import Skills from "@/components/Skills.vue";
-import Technologies from "@/components/Technologies.vue";
 import type { IResponse } from "@/types/common";
 
 const config = useRuntimeConfig();
@@ -30,9 +29,5 @@ watch(
 
 useHead({
   titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
-});
-
-definePageMeta({
-  layout: "portfolio",
 });
 </script>

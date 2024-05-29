@@ -65,6 +65,10 @@ watch(
   () => uiStore.currentTheme,
   () => (theme.value = uiStore.currentTheme),
 );
+
+definePageMeta({
+  layout: "portfolio",
+});
 </script>
 
 <style lang="scss" scoped>

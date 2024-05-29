@@ -89,6 +89,10 @@ watch(
 useHead({
   titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
 });
+
+definePageMeta({
+  layout: "portfolio",
+});
 </script>
 
 <style lang="scss">

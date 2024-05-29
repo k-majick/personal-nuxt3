@@ -23,4 +23,8 @@ const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 useHead({
   titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
 });
+
+definePageMeta({
+  layout: "portfolio",
+});
 </script>

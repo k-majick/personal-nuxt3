@@ -82,9 +82,9 @@ watch(
 provide(MainElKey, mainEl as Ref<HTMLElement>);
 provide(HeaderElKey, headerEl as Ref<HTMLElement>);
 
-definePageMeta({
-  layout: "default",
-});
+// definePageMeta({
+//   layout: "portfolio",
+// });
 </script>
 
 <style lang="scss">

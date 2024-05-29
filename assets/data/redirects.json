@@ -1,15 +1,15 @@
 [
   {
     "from": "/",
-    "to": "/start"
-  },
-  {
-    "from": "/en/projects",
-    "to": "/en/creations"
+    "to": "/skills"
   },
   {
     "from": "/de/projects",
     "to": "/de/creations"
+  },
+  {
+    "from": "/en/projects",
+    "to": "/en/creations"
   },
   {
     "from": "/pl/projects",
