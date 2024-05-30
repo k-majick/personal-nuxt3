@@ -22,12 +22,11 @@ const uiStore = useUiStore();
 
 <style lang="scss">
 @import "@/assets/scss/_animations.scss";
-@import "@/assets/scss/components/_theme";
-@import "@/assets/scss/components/_loader";
-@import "@/assets/scss/components/_main";
-@import "@/assets/scss/components/_burger";
-@import "@/assets/scss/components/_tooltip";
-@import "@/assets/scss/components/_modal";
+@import "@/assets/scss/components/theme";
+@import "@/assets/scss/components/main";
+@import "@/assets/scss/components/burger";
+@import "@/assets/scss/components/tooltip";
+@import "@/assets/scss/components/modal";
 
 .fade-enter-from {
   opacity: 0;

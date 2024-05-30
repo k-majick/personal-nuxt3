@@ -88,7 +88,7 @@ defineEmits(["closeNav"]);
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
 
 const headerEl = inject(HeaderElKey);
 const mainEl = inject(MainElKey);
@@ -122,11 +122,6 @@ watch(
         uiStore.currentLocale as string,
       )) as IResponse[]),
     ])),
-);
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
 );
 </script>
 

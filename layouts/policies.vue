@@ -1,18 +1,12 @@
 <template>
   <div :class="`theme theme--${theme}`">
     <div class="theme__background">
-      <div
-        v-tooltip="
-          dataStore.loadError
-            ? $t('messages.loadError')
-            : $t('messages.loading')
-        "
-        class="theme__loader"
-      >
-      </div>
+      <Loader />
     </div>
 
-    <main v-if="!isLoadError" class="main">
+    <HeaderPolicies v-show="!dataStore.loadError" />
+
+    <main v-if="!dataStore.loadError" class="main main--policies">
       <div class="main__background"></div>
       <slot />
     </main>
@@ -24,27 +18,21 @@
 <script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import { vTooltip } from "@/composables/tooltip";
 import { globalRefs } from '@/plugins/globalRefs';
+import Loader from "@/components/Loader.vue";
+import HeaderPolicies from "@/components/HeaderPolicies.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
 const tooltipEl = ref();
-const isLoadError = ref(dataStore.loadError);
 
 onMounted(() => {
   globalRefs.tooltipEl = tooltipEl.value;
 });
-
-watch(
-  () => dataStore.loadError,
-  () => (isLoadError.value = dataStore.loadError),
-);
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
 </script>
+
+<style lang="scss">
+@import "./assets/scss/components/policies";
+</style>

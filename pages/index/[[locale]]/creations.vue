@@ -36,7 +36,7 @@
         <div
           v-if="portfolio && portfolio.content"
           class="post__content"
-          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string))"
+          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string) as string)"
         ></div>
       </div>
 
@@ -60,7 +60,7 @@ import type { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
 
 const dataStore = useDataStore();
 const pageData: Ref<IResponse> = ref(
@@ -71,11 +71,6 @@ const posts: Ref<Array<IResponse>> = ref(
 );
 const portfolio: Ref<IResponse> = ref(
   (await dataStore.getPortfolio(uiStore.currentLocale as string)) as IResponse,
-);
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
 );
 
 watch(

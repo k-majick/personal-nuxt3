@@ -17,16 +17,13 @@ import type { IResponse } from "@/types/common";
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+
+const theme = computed(() => uiStore.currentTheme);
+
 const pageData: Ref<IResponse> = ref(
   (await dataStore.getPage(uiStore.currentLocale as string, 2)) as IResponse,
 );
 const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
 
 useHead({
   titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,

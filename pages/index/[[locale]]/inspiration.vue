@@ -3,7 +3,7 @@
     <div
       v-if="inspiration"
       class="main__content"
-      v-html="DOMPurify.sanitize(marked.parse(inspiration.content as string))"
+      v-html="DOMPurify.sanitize(marked.parse(inspiration.content as string) as string)"
     ></div>
     <div
       v-if="inspiration.pictures.length"
@@ -39,7 +39,9 @@ import type { IResponse, IItem } from "@/types/common";
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+
+const theme = computed(() => uiStore.currentTheme);
+
 const pageData: Ref<any> = ref(
   await dataStore.getPage(uiStore.currentLocale as string, 5),
 );
@@ -59,11 +61,6 @@ watch(
     (inspiration.value = (await dataStore.getInspiration(
       uiStore.currentLocale as string,
     )) as IResponse),
-);
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
 );
 
 definePageMeta({

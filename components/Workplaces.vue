@@ -2,7 +2,7 @@
   <div
     v-if="experience && experience.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(experience.content))"
+    v-html="DOMPurify.sanitize(marked.parse(experience.content) as string)"
   ></div>
   <div class="main__content">
     <table class="experience__table" :class="`experience__table--${theme}`">

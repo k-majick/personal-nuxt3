@@ -14,6 +14,7 @@ type Next = {
 
 export default defineNuxtPlugin(({ vueApp, $router }) => {
   const i18n = createI18n({
+    warnHtmlMessage: false,
     legacy: false,
     globalInjection: true,
     locale: "en",
@@ -25,25 +26,27 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
   });
 
   vueApp.use(i18n);
-
+ 
   ($router as Router).beforeEach(
     (
       to: RouteLocationNormalizedLoaded,
-      _: unknown,
+      _from: RouteLocationNormalizedLoaded,
       next: (route?: Next) => void,
     ) => {
-      if (!to.params.locale) {
+      if (!to.params.locale?.length) {
         const userLocale = localStorage.getItem("user-locale") as string;
         const locale =  userLocale ? userLocale : "en";
-        const path = to.path ? `/${locale}${to.path}` : `/${locale}/skills`;
+
+        if (!to.name) {          
+          return
+        }
 
         next({
-          path: path,
+          name: to.name as string,
           params: {
             locale: `${locale}`,
           },
         });
-
         return;
       }
 

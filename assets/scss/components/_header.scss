@@ -1,102 +1,10 @@
 .header {
   $self: &;
-  height: 100vh;
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  z-index: 2;
-
-  &__container {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    padding: 0 5vw;
-
-    @include media("<=m") {
-      align-items: center;
-    }
-
-    &--logo {
-      align-items: center;
-      justify-content: space-between;
-      min-height: 20vh;
-      backdrop-filter: blur(3px);
-
-      @include media("<=m") {
-        min-height: 180px;
-        align-items: flex-end;
-        justify-content: center;
-        padding-bottom: 15px;
-      }
-    }
-
-    &--avatar {
-      flex-direction: column;
-      min-height: 50vh;
-    }
-  }
-
-  &__arrow {
-    position: absolute;
-    z-index: 2;
-    top: calc(100% - 1px);
-    left: 0;
-    right: 0;
-    cursor: pointer;
-
-    &:after {
-      content: "";
-      display: block;
-      padding-bottom: 90px;
-      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-
-      @include media("<=m") {
-        padding-bottom: 45px;
-      }
-    }
-  }
-
-  &__arrow {
-    position: absolute;
-    z-index: 2;
-    top: calc(100% - 1px);
-    left: 0;
-    right: 0;
-    cursor: pointer;
-
-    &:after {
-      content: "";
-      display: block;
-      padding-bottom: 90px;
-      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-
-      @include media("<=m") {
-        padding-bottom: 45px;
-      }
-    }
-  }
-
-  &__logo {
-    display: block;
-    background-size: contain;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    height: auto;
-    width: calc(100% - 30px);
-    max-width: 320px;
-    padding: 0 15px;
-    margin-right: 30px;
-    box-sizing: border-box;
-
-    @include media("<=m") {
-      margin-right: 0;
-    }
-
-    @include media(">=l") {
-      max-width: 360px;
-    }
-  }
-
+  z-index: 3;
+    
   &__control {
     display: flex;
     align-items: center;
@@ -259,8 +167,125 @@
     }
   }
 
-  &__title {
-    text-indent: -9999px;
+  &--portfolio {
+    position: relative;
+    height: 100vh;
+
+    #{$self}__container {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      padding: 0 5vw;
+  
+      @include media("<=m") {
+        align-items: center;
+      }
+  
+      &--logo {
+        align-items: center;
+        justify-content: space-between;
+        min-height: 20vh;
+        backdrop-filter: blur(3px);
+  
+        @include media("<=m") {
+          min-height: 180px;
+          align-items: flex-end;
+          justify-content: center;
+          padding-bottom: 15px;
+        }
+      }
+  
+      &--avatar {
+        flex-direction: column;
+        min-height: 50vh;
+      }
+    }
+  
+    #{$self}__arrow {
+      position: absolute;
+      z-index: 2;
+      top: calc(100% - 1px);
+      left: 0;
+      right: 0;
+      cursor: pointer;
+  
+      &:after {
+        content: "";
+        display: block;
+        padding-bottom: 90px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  
+        @include media("<=m") {
+          padding-bottom: 45px;
+        }
+      }
+    }
+  
+    #{$self}__arrow {
+      position: absolute;
+      z-index: 2;
+      top: calc(100% - 1px);
+      left: 0;
+      right: 0;
+      cursor: pointer;
+  
+      &:after {
+        content: "";
+        display: block;
+        padding-bottom: 90px;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  
+        @include media("<=m") {
+          padding-bottom: 45px;
+        }
+      }
+    }
+  
+    #{$self}__logo {
+      display: block;
+      background-size: contain;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      height: auto;
+      width: calc(100% - 30px);
+      max-width: 320px;
+      padding: 0 15px;
+      margin-right: 30px;
+      box-sizing: border-box;
+  
+      @include media("<=m") {
+        margin-right: 0;
+      }
+  
+      @include media(">=l") {
+        max-width: 360px;
+      }
+    }
+  
+    #{$self}__title {
+      text-indent: -9999px;
+    }
+  }
+
+  &--policies {
+    flex-direction: row;
+    position: relative;
+    width: 100%;
+
+    a {
+      color: red;
+    }
+
+    #{$self}__container {
+      @include mk-container;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    #{$self}__nav {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &--lite {

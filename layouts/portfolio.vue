@@ -1,39 +1,12 @@
 <template>
   <div :class="`theme theme--${theme}`">
     <div class="theme__background">
-      <div class="loader__container">
-        <div :class="`loader loader--${theme}`">
-          <div class="loader__ray loader__ray--1"></div>
-          <div class="loader__ray loader__ray--2"></div>
-          <div class="loader__ray loader__ray--3"></div>
-          <div class="loader__ray loader__ray--4"></div>
-          <div class="loader__ray loader__ray--5"></div>
-          <div class="loader__ray loader__ray--6"></div>
-          <div class="loader__ray loader__ray--7"></div>
-          <div class="loader__ray loader__ray--8"></div>
-          <div class="loader__ray loader__ray--9"></div>
-          <div class="loader__ray loader__ray--10"></div>
-        </div>
-        <span class="loader__text">{{
-          dataStore.loadError
-            ? $t("messages.loadError")
-            : $t("messages.loading")
-        }}</span>
-      </div>
-      <div
-        v-tooltip="
-          dataStore.loadError
-            ? $t('messages.loadError')
-            : $t('messages.loading')
-        "
-        class="theme__loader"
-      >
-      </div>
+      <Loader />
     </div>
 
-    <Header v-if="!isLoadError" ref="headerRef" />
+    <Header v-show="!dataStore.loadError" ref="headerRef" />
 
-    <main v-if="!isLoadError" ref="mainEl" class="main">
+    <main v-if="!dataStore.loadError" ref="mainEl" class="main main--portfolio">
       <div class="main__background"></div>
       <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
         <span class="burger__bar"></span>
@@ -58,21 +31,22 @@
 <script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import { vTooltip } from "@/composables/tooltip";
+
 import { globalRefs } from '@/plugins/globalRefs';
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
+import Loader from "@/components/Loader.vue";
+import Header from "@/components/Header.vue";
+import Nav from "@/components/Nav.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
 
 const tooltipEl = ref();
 const headerRef: Ref<any> = ref();
 const mainEl: Ref<HTMLElement | undefined> = ref();
 const headerEl: Ref<HTMLElement | undefined> = ref();
-
-const isLoadError = ref(dataStore.loadError);
 const isNavActivated = ref(false);
 
 const toggleNav = () => 
@@ -102,16 +76,6 @@ onMounted(() => {
   headerEl.value = headerRef.value.headerEl;
   scrollListen();
 });
-
-watch(
-  () => dataStore.loadError,
-  () => (isLoadError.value = dataStore.loadError),
-);
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
 
 provide(MainElKey, mainEl as Ref<HTMLElement>);
 provide(HeaderElKey, headerEl as Ref<HTMLElement>);

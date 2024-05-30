@@ -14,5 +14,17 @@
   {
     "from": "/pl/projects",
     "to": "/pl/creations"
+  },
+  {
+    "from": "/de/policies",
+    "to": "/de/policies/privacy-policy"
+  },
+  {
+    "from": "/en/policies",
+    "to": "/en/policies/privacy-policy"
+  },
+  {
+    "from": "/pl/policies",
+    "to": "/pl/policies/privacy-policy"
   }
 ]

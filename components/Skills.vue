@@ -2,7 +2,7 @@
   <div
     v-if="skills && skills.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(skills.content))"
+    v-html="DOMPurify.sanitize(marked.parse(skills.content) as string)"
   ></div>
   <div v-if="skills && skills.sets" class="main__content skill__container">
     <div
