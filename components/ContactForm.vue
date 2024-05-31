@@ -2,7 +2,7 @@
   <div
     v-if="contact && contact.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(contact.content))"
+    v-html="DOMPurify.sanitize(marked.parse(contact.content) as string)"
   ></div>
   <div class="main__content">
     <form
@@ -112,7 +112,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import { marked } from "marked";
@@ -130,7 +129,8 @@ import DOMPurify from "dompurify";
 const { t } = useI18n();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
+
 const contact: Ref<any> = ref(
   await dataStore.getContact(uiStore.currentLocale as string),
 );
@@ -233,13 +233,8 @@ watch(
       uiStore.currentLocale as string,
     )),
 );
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_form";
+@import "./assets/scss/components/form";
 </style>

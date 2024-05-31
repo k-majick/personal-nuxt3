@@ -1,13 +1,12 @@
 <template>
   <nav
+    v-click-outside:[exclude]="() => $emit('closeNav')"
     class="nav"
     :class="[`nav--${theme}`, { active: isActive, activated: isActivated }]"
   >
-    <div class="nav__mask" @click="$emit('closeNav')"></div>
     <ul class="nav__items">
       <li class="nav__item">
         <a
-          href=""
           class="nav__link"
           @click.stop.prevent="killModal(), scrollTo($event, headerEl)"
           >Start</a
@@ -26,7 +25,7 @@
     <ul class="nav__social">
       <li class="nav__socialItem">
         <a
-          v-Tooltip="$t('messages.git')"
+          v-tooltip="$t('messages.git')"
           href="https://github.com/k-majick"
           target="_blank"
           class="nav__socialLink"
@@ -36,7 +35,7 @@
       </li>
       <li class="nav__socialItem">
         <a
-          v-Tooltip="$t('messages.linked')"
+          v-tooltip="$t('messages.linked')"
           href="https://www.linkedin.com/in/maciej-klimowicz"
           target="_blank"
           class="nav__socialLink"
@@ -45,7 +44,7 @@
         </a>
       </li>
     </ul>
-    <div v-Tooltip="$t('messages.meow')" class="cat__wrapper">
+    <div v-tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
         :to="'inspiration'"
         class="cat"
@@ -61,12 +60,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import DOMPurify from "dompurify";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import scrollTo from "@/composables/scrollTo";
 import { vTooltip } from "@/composables/tooltip";
+import { vClickOutside } from "@/composables/clickOutside";
 import iconLinkedin from "@/assets/gfx/icon-linkedin-min.svg?raw";
 import iconGit from "@/assets/gfx/icon-git-min.svg?raw";
 import rawCat from "@/assets/gfx/cat_1.svg?raw";
@@ -88,15 +87,18 @@ defineEmits(["closeNav"]);
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
 
 const headerEl = inject(HeaderElKey);
 const mainEl = inject(MainElKey);
+const exclude = "burger";
+
+const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
 
 const sortItems = (pagesArr: IResponse[]) =>
   pagesArr
     .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-    .filter(item => item.attributes.slug !== "inspiration");
+    .filter(item => !excludedPages.includes(item.attributes.slug));
 
 const pages: Ref<IResponse[]> = ref(
   sortItems([
@@ -123,14 +125,9 @@ watch(
       )) as IResponse[]),
     ])),
 );
-
-watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/_nav";
-@import "./assets/scss/components/_cat";
+@import "./assets/scss/components/nav";
+@import "./assets/scss/components/cat";
 </style>

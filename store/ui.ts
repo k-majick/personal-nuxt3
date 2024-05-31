@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 interface IUiState {
   theme: null | string;
   locale: null | string;
+  navActive: boolean,
 }
 
 export const useUiStore = defineStore({
@@ -10,6 +11,7 @@ export const useUiStore = defineStore({
   state: (): IUiState => ({
     theme: null,
     locale: null,
+    navActive: false,
   }),
   actions: {
     setTheme(theme: string) {

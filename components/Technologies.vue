@@ -2,7 +2,7 @@
   <div
     v-if="technology && technology.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(technology.content))"
+    v-html="DOMPurify.sanitize(marked.parse(technology.content as string) as string)"
   ></div>
   <div v-if="technology && technology.items" class="technology">
     <span
@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
@@ -37,5 +36,5 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/_technology";
+@import "@/assets/scss/components/technology";
 </style>

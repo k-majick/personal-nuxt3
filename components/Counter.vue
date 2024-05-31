@@ -56,5 +56,5 @@ const counter = (what: string) => {
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_counter";
+@import "./assets/scss/components/counter";
 </style>

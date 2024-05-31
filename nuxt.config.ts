@@ -93,7 +93,7 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;600&display=swap",
+          href: "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;600&display=swap",
         },
       ],
     },

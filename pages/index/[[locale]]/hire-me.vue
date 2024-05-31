@@ -6,7 +6,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
@@ -22,5 +21,9 @@ const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
 
 useHead({
   titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
+});
+
+definePageMeta({
+  layout: "portfolio",
 });
 </script>

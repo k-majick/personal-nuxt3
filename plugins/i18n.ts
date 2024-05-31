@@ -1,8 +1,8 @@
 import { createI18n } from "vue-i18n";
-import de from "../assets/i18n/de.json";
-import en from "../assets/i18n/en.json";
-import pl from "../assets/i18n/pl.json";
-import { type RouteLocationNormalizedLoaded } from "vue-router";
+import de from "@/assets/i18n/de.json";
+import en from "@/assets/i18n/en.json";
+import pl from "@/assets/i18n/pl.json";
+import type { RouteLocationNormalizedLoaded, Router } from "vue-router";
 
 type Next = {
   [key: string]:
@@ -14,6 +14,7 @@ type Next = {
 
 export default defineNuxtPlugin(({ vueApp, $router }) => {
   const i18n = createI18n({
+    warnHtmlMessage: false,
     legacy: false,
     globalInjection: true,
     locale: "en",
@@ -25,23 +26,27 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
   });
 
   vueApp.use(i18n);
-
-  $router.beforeEach(
+ 
+  ($router as Router).beforeEach(
     (
       to: RouteLocationNormalizedLoaded,
-      _: unknown,
+      _from: RouteLocationNormalizedLoaded,
       next: (route?: Next) => void,
     ) => {
-      if (!to.params.locale) {
+      if (!to.params.locale?.length) {
         const userLocale = localStorage.getItem("user-locale") as string;
+        const locale =  userLocale ? userLocale : "en";
+
+        if (!to.name) {          
+          return
+        }
 
         next({
-          path: `/${userLocale ? userLocale : "en"}/skills`,
+          name: to.name as string,
           params: {
-            locale: `${userLocale ? userLocale : "en"}`,
+            locale: `${locale}`,
           },
         });
-
         return;
       }
 

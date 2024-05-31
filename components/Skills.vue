@@ -2,7 +2,7 @@
   <div
     v-if="skills && skills.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(skills.content))"
+    v-html="DOMPurify.sanitize(marked.parse(skills.content) as string)"
   ></div>
   <div v-if="skills && skills.sets" class="main__content skill__container">
     <div
@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
@@ -49,7 +48,7 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/_skills";
+@import "@/assets/scss/components/skills";
 @keyframes skillBar {
   0% {
     width: 0;

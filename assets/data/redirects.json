@@ -1,18 +1,30 @@
 [
   {
     "from": "/",
-    "to": "/start"
-  },
-  {
-    "from": "/en/projects",
-    "to": "/en/creations"
+    "to": "/skills"
   },
   {
     "from": "/de/projects",
     "to": "/de/creations"
   },
   {
+    "from": "/en/projects",
+    "to": "/en/creations"
+  },
+  {
     "from": "/pl/projects",
     "to": "/pl/creations"
+  },
+  {
+    "from": "/de/policies",
+    "to": "/de/policies/privacy-policy"
+  },
+  {
+    "from": "/en/policies",
+    "to": "/en/policies/privacy-policy"
+  },
+  {
+    "from": "/pl/policies",
+    "to": "/pl/policies/privacy-policy"
   }
 ]

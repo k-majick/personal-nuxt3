@@ -19,6 +19,14 @@
     "inspiration": {
       "title": "Inspiracja",
       "slug": "inspiracja"
+    },
+    "privacy-policy": {
+      "title": "Polityka prywatności",
+      "slug": "polityka-prywatnosci"
+    },
+    "terms-of-use": {
+      "title": "Warunki użytkowania",
+      "slug": "warunki-uzytkowania"
     }
   },
   "messages": {
@@ -52,7 +60,12 @@
     "gotoSite": "Przejdź do strony",
     "readMore": "Czytaj dalej",
     "latestArticles": "Najnowsze artykuły",
-    "featuredProjects": "Wybrane projekty"
+    "featuredProjects": "Wybrane projekty",
+    "reserved": "Wszelkie prawa zastrzeżone",
+    "termsOfUse": "Warunki użytkowania",
+    "privacyPolicy": "Polityka prywatności",
+    "about": "O nas",
+    "updatedAt": "Ostatnia aktualizacja"
   },
   "validation": {
     "nameRequired": "Podaj swoje imię",

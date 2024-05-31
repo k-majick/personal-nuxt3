@@ -1,29 +1,48 @@
 .loader {
   $self: &;
-  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: auto;
-  top: 0px;
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 70px;
-  animation: rays 9s linear infinite;
-
-  & + &__text {
-    color: var(--color-quinary);
-  }
+  height: 70px;
+  border-radius: 50%;
+  opacity: 0.9;
 
   &__container {
     position: absolute;
-    top: 0;
+    margin: auto;
+    top: 0px;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    opacity: 0.9;
+    animation: rays 9s linear infinite;
+
+    & + &__text {
+      color: var(--color-quinary);
+    }
+  }
+
+  &__logo {
+    color: $color-white;
+    width: inherit;
+    height: inherit;
+
+    @include media("<=m") {
+      transform: scale(0.9);
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 10px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   &__text {
@@ -141,6 +160,12 @@
       );
       opacity: 0.033;
     }
+
+    #{$self}__logo {
+      &:after {
+        background-image: url("@/assets/gfx/clf-logo-lite.svg");
+      }
+    }
   }
 
   &--dark {
@@ -154,6 +179,12 @@
         transparent
       );
       opacity: 0.125;
+    }
+
+    #{$self}__logo {
+      &:after {
+        background-image: url("@/assets/gfx/clf-logo-dark.svg");
+      }
     }
   }
 }

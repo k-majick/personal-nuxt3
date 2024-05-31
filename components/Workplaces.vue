@@ -2,7 +2,7 @@
   <div
     v-if="experience && experience.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(experience.content))"
+    v-html="DOMPurify.sanitize(marked.parse(experience.content) as string)"
   ></div>
   <div class="main__content">
     <table class="experience__table" :class="`experience__table--${theme}`">
@@ -34,7 +34,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
@@ -74,5 +73,5 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_experience";
+@import "./assets/scss/components/experience";
 </style>

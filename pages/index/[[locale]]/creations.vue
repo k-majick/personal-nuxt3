@@ -36,7 +36,7 @@
         <div
           v-if="portfolio && portfolio.content"
           class="post__content"
-          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string))"
+          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string) as string)"
         ></div>
       </div>
 
@@ -50,7 +50,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import Projects from "@/components/Projects.vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
@@ -60,7 +59,7 @@ import type { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
-const theme = ref(uiStore.currentTheme);
+const theme = computed(() => uiStore.currentTheme);
 
 const dataStore = useDataStore();
 const pageData: Ref<IResponse> = ref(
@@ -74,11 +73,6 @@ const portfolio: Ref<IResponse> = ref(
 );
 
 watch(
-  () => uiStore.currentTheme,
-  () => (theme.value = uiStore.currentTheme),
-);
-
-watch(
   () => uiStore.currentLocale,
   async () =>
     (portfolio.value = (await dataStore.getPortfolio(
@@ -89,9 +83,13 @@ watch(
 useHead({
   titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
 });
+
+definePageMeta({
+  layout: "portfolio",
+});
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/_blog";
-@import "@/assets/scss/components/_post";
+@import "@/assets/scss/components/blog";
+@import "@/assets/scss/components/post";
 </style>

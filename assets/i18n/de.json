@@ -19,6 +19,14 @@
     "inspiration": {
       "title": "Inspiration",
       "slug": "inspiration"
+    },
+    "privacy-policy": {
+      "title": "Datenschutz-Bestimmungen",
+      "slug": "datenschutz-bestimmungen"
+    },
+    "terms-of-use": {
+      "title": "Nutzungsbedingungen",
+      "slug": "nutzungsbedingungen"
     }
   },
   "messages": {
@@ -30,7 +38,7 @@
     "loadError": "Ladefehler...",
     "meow": "Miau 🐾",
     "switch2lite": "In den Lichtmodus Wechseln",
-    "switch2dark": "In den dunklen Modus Wechseln",
+    "switch2dark": "In den Dunkelmodus Wechseln",
     "sentTitle": "Vielen Dank für Ihre Nachricht!",
     "sentMessage": "Ich werde so schnell wie möglich antworten.",
     "sendError": "Entschuldigung, etwas ist schief gelaufen... Bitte neu laden und erneut versuchen"
@@ -52,7 +60,12 @@
     "gotoSite": "go to site",
     "readMore": "Weiterlesen",
     "latestArticles": "Neueste Artikel",
-    "featuredProjects": "Vorgestellte Projekte"
+    "featuredProjects": "Vorgestellte Projekte",
+    "reserved": "Alle Rechte vorbehalten",
+    "termsOfUse": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutz-Bestimmungen",
+    "about": "Über uns",
+    "updatedAt": "Letzte Aktualisierung"
   },
   "validation": {
     "nameRequired": "Bitte geben Sie Ihren Namen ein",

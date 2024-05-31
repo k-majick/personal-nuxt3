@@ -1,0 +1,54 @@
+.footer {
+  $self: &;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  &__logo {
+    align-self: center;
+    display: block;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    height: auto;
+    width: calc(100% - 30px);
+    max-width: 240px;
+    padding: 0 15px;
+
+    @include media("<=m") {
+      margin-right: 0;
+    }
+  }
+  
+  &__title {
+    text-indent: -9999px;
+    margin: 15px 0;
+  }
+
+  &__copy {
+    align-self: center;
+    font-size: small;
+    text-align: center;
+  }
+
+  &--lite {
+    #{$self}__logo {
+      background-image: url("@/assets/gfx/clf-logo-full-lite-min.svg");
+    }
+
+    #{$self}__copy {
+      color: $color-red;
+    }
+  }
+  
+  &--dark {
+    #{$self}__logo {
+      background-image: url("@/assets/gfx/clf-logo-full-dark-min.svg");
+    }
+    
+    #{$self}__copy {
+      color: $color-green;
+    }
+  }
+}
