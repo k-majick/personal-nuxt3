@@ -112,7 +112,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import { marked } from "marked";
@@ -237,5 +236,5 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_form";
+@import "./assets/scss/components/form";
 </style>

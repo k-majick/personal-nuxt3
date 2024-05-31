@@ -43,6 +43,6 @@ defineExpose({
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/_header";
-@import "./assets/scss/components/_chevron";
+@import "./assets/scss/components/header";
+@import "./assets/scss/components/chevron";
 </style>

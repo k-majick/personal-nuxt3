@@ -6,7 +6,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";

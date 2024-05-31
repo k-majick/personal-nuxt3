@@ -24,7 +24,7 @@ module.exports = {
     "no-console": [
       "error",
       {
-        allow: ["warn", "error"],
+        allow: ["warn", "error", "info", "dir"],
       },
     ],
     "@typescript-eslint/explicit-module-boundary-types": "off",

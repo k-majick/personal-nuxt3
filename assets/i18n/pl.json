@@ -52,7 +52,11 @@
     "gotoSite": "Przejdź do strony",
     "readMore": "Czytaj dalej",
     "latestArticles": "Najnowsze artykuły",
-    "featuredProjects": "Wybrane projekty"
+    "featuredProjects": "Wybrane projekty",
+    "reserved": "Wszelkie prawa zastrzeżone",
+    "termsOfUse": "Warunki użytkowania",
+    "privacyPolicy": "Polityka prywatności",
+    "about": "O nas"
   },
   "validation": {
     "nameRequired": "Podaj swoje imię",

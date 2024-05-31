@@ -1,6 +1,6 @@
 .theme {
   $self: &;
-  min-height: 100%;
+  min-height: 100vh;
   color: var(--color-quinary);
 
   &__background {

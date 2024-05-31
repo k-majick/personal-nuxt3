@@ -34,7 +34,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
@@ -74,5 +73,5 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/_experience";
+@import "./assets/scss/components/experience";
 </style>

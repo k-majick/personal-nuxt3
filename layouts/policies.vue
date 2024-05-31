@@ -4,9 +4,27 @@
       <Loader />
     </div>
 
-    <HeaderPolicies v-show="!dataStore.loadError" />
+    <PoliciesHeader
+      v-show="!dataStore.loadError"
+      :nav-active="navActive"
+      @toggle-nav="toggleNav"
+    />
 
-    <main v-if="!dataStore.loadError" class="main main--policies">
+    <Burger 
+      :nav-active="navActive" 
+      @toggle-nav="toggleNav"
+    />
+
+    <PoliciesNav
+      :is-active="navActive"
+      @close-nav="navActive = false"
+    />
+
+    <main 
+      v-if="!dataStore.loadError"
+      class="main main--policies"
+      :class="`main--${theme}`"
+    >
       <div class="main__background"></div>
       <slot />
     </main>
@@ -20,13 +38,18 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { globalRefs } from '@/plugins/globalRefs';
 import Loader from "@/components/Loader.vue";
-import HeaderPolicies from "@/components/HeaderPolicies.vue";
+import Burger from "@/components/Burger.vue";
+import PoliciesHeader from "@/components/PoliciesHeader.vue";
+import PoliciesNav from "@/components/PoliciesNav.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 
 const theme = computed(() => uiStore.currentTheme);
 const tooltipEl = ref();
+const navActive = ref(false);
+
+const toggleNav = () => navActive.value = !navActive.value;
 
 onMounted(() => {
   globalRefs.tooltipEl = tooltipEl.value;

@@ -8,12 +8,6 @@
   &__control {
     display: flex;
     align-items: center;
-
-    @include media("<=m") {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-    }
   }
 
   &__selector {
@@ -128,6 +122,8 @@
 
     &--theme {
       position: relative;
+      display: flex;
+      align-items: center;
 
       @include media("<=m") {
         height: 30px;
@@ -170,6 +166,14 @@
   &--portfolio {
     position: relative;
     height: 100vh;
+
+    #{$self}__control {
+      @include media("<=m") {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+      }
+    }
 
     #{$self}__container {
       position: relative;
@@ -271,20 +275,34 @@
     flex-direction: row;
     position: relative;
     width: 100%;
-
-    a {
-      color: red;
-    }
+    padding-top: 15px;
 
     #{$self}__container {
       @include mk-container;
       flex-direction: row;
       justify-content: space-between;
+
+      @include media("<=m") {
+        flex-direction: column;
+      }
     }
 
     #{$self}__nav {
       display: flex;
       align-items: center;
+
+      @include media("<=m") {
+        display: none;
+      }
+    }
+
+    #{$self}__link {
+      @include trans(0.33);
+      font-weight: bold;
+
+      & + #{$self}__link {
+        margin-left: 15px;
+      }
     }
   }
 
@@ -327,6 +345,16 @@
         }
       }
     }
+
+    #{$self}__link {
+      color: $color-red;
+
+      &:hover,
+      &:active,
+      &.active {
+        color: $color-black;
+      }
+    }
   }
 
   &--dark {
@@ -366,6 +394,16 @@
           fill: $color-silver-lite;
           filter: drop-shadow(0 0 5px $color-silver);
         }
+      }
+    }
+
+    #{$self}__link {
+      color: $color-green;
+
+      &:hover,
+      &:active,
+      &.active {
+        color: $color-white;
       }
     }
   }

@@ -52,7 +52,11 @@
     "gotoSite": "go to site",
     "readMore": "Read more",
     "latestArticles": "Latest articles",
-    "featuredProjects": "Featured projects"
+    "featuredProjects": "Featured projects",
+    "reserved": "All rights reserved",
+    "termsOfUse": "Terms of use",
+    "privacyPolicy": "Privacy policy",
+    "about": "About us"
   },
   "validation": {
     "nameRequired": "Please enter your name",

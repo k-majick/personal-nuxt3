@@ -50,7 +50,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import Projects from "@/components/Projects.vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
@@ -91,6 +90,6 @@ definePageMeta({
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/components/_blog";
-@import "@/assets/scss/components/_post";
+@import "@/assets/scss/components/blog";
+@import "@/assets/scss/components/post";
 </style>

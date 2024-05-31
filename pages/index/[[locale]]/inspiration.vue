@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
@@ -69,5 +68,5 @@ definePageMeta({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/_gallery";
+@import "@/assets/scss/components/gallery";
 </style>

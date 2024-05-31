@@ -1,13 +1,12 @@
 <template>
   <nav
+    v-click-outside:[exclude]="() => $emit('closeNav')"
     class="nav"
     :class="[`nav--${theme}`, { active: isActive, activated: isActivated }]"
   >
-    <div class="nav__mask" @click="$emit('closeNav')"></div>
     <ul class="nav__items">
       <li class="nav__item">
         <a
-          href=""
           class="nav__link"
           @click.stop.prevent="killModal(), scrollTo($event, headerEl)"
           >Start</a
@@ -61,12 +60,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { Ref } from "vue";
 import DOMPurify from "dompurify";
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import scrollTo from "@/composables/scrollTo";
 import { vTooltip } from "@/composables/tooltip";
+import { vClickOutside } from "@/composables/clickOutside";
 import iconLinkedin from "@/assets/gfx/icon-linkedin-min.svg?raw";
 import iconGit from "@/assets/gfx/icon-git-min.svg?raw";
 import rawCat from "@/assets/gfx/cat_1.svg?raw";
@@ -92,6 +91,7 @@ const theme = computed(() => uiStore.currentTheme);
 
 const headerEl = inject(HeaderElKey);
 const mainEl = inject(MainElKey);
+const exclude = "burger";
 
 const sortItems = (pagesArr: IResponse[]) =>
   pagesArr
@@ -126,6 +126,6 @@ watch(
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/_nav";
-@import "./assets/scss/components/_cat";
+@import "./assets/scss/components/nav";
+@import "./assets/scss/components/cat";
 </style>

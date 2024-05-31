@@ -4,26 +4,27 @@
       <Loader />
     </div>
 
-    <Header v-show="!dataStore.loadError" ref="headerRef" />
+    <Header 
+      v-show="!dataStore.loadError" 
+      ref="headerRef" 
+    />
+
+    <Burger 
+      :nav-active="isNavActivated" 
+      @toggle-nav="toggleNav"
+    />
+
+    <Nav
+      :is-activated="isNavActivated"
+      :is-active="uiStore.navActive"
+      @close-nav="isNavActivated = false"
+    />
 
     <main v-if="!dataStore.loadError" ref="mainEl" class="main main--portfolio">
-      <div class="main__background"></div>
-      <div class="burger" :class="{ active: isNavActivated }" @click="toggleNav">
-        <span class="burger__bar"></span>
-        <span class="burger__bar"></span>
-        <span class="burger__bar"></span>
-        <span class="burger__bar"></span>
-      </div>
-
-      <Nav
-        :is-activated="isNavActivated"
-        :is-active="uiStore.navActive"
-        @close-nav="toggleNav"
-      />
-
+      <div class="main__background"></div>     
       <slot />
     </main>
-
+    
     <span ref="tooltipEl" class="tooltip"></span>
   </div>
 </template>

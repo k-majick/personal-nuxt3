@@ -51,10 +51,11 @@ const theme = computed(() => uiStore.currentTheme);
 const localesAvailable = computed(() => locales.filter(l => l.code !== locale.value))
 
 const setRouteParam = (locale: string) => {
-  const pageSlug = route.path.split("/").pop();
+  const slugs = route.path.split("/").slice(2);
+  const path = `/${locale}/`+ slugs.join("/");
 
   router.replace({
-    path: `/${locale}/${pageSlug}`,
+    path,
   });
 };
 

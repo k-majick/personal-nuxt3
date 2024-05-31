@@ -1,16 +1,16 @@
 <template>
   <swiper v-bind="swiperProps" :class="`gallery--slider gallery--${theme}`">
     <swiper-slide
-      v-for="(project, index) in projects"
-      :key="index"
+      v-for="(project, i) in projects"
+      :key="i"
       class="swiper__slide"
     >
       <div class="gallery__item">
         <div
           class="gallery__title"
           @click.self="
-            setActiveProject(project, index);
-            toggleModal(activeProject.id, true);
+            setActiveProject(project, i + 1);
+            toggleModal(i + 1, true);
           "
         >
           {{ project.name }}
@@ -26,11 +26,11 @@
 
   <Modal
     v-if="activeProject"
-    v-show="openModal(activeProject.id)"
+    v-show="openModal(activeProjectId)"
     :modal-type="'full'"
     :theme="(theme as string)"
     @close="
-      toggleModal(activeProject.id, true);
+      toggleModal(activeProjectId, true);
       activeProject = null;
     "
   >
@@ -75,9 +75,11 @@ import "swiper/css";
 SwiperCore.use([Navigation]);
 
 const activeProject = ref();
-const setActiveProject = (project: any, index: number) => {
+const activeProjectId = ref();
+
+const setActiveProject = (project: any, i: number) => {
   activeProject.value = project;
-  activeProject.value.id = index + 1;
+  activeProjectId.value = i;
 };
 
 const swiperProps = {
@@ -118,8 +120,8 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/_gallery";
-@import "@/assets/scss/components/_project";
+@import "@/assets/scss/components/gallery";
+@import "@/assets/scss/components/project";
 </style>
 
 <style lang="scss">
