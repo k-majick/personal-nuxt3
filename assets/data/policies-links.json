@@ -1,9 +1,5 @@
 [
   {
-    "to": "/",
-    "title": "content.about"
-  },
-  {
     "to": "/policies/terms-of-use",
     "title": "content.termsOfUse"
   },

@@ -42,6 +42,8 @@ export const GET_PAGE = (locale: string, id: number) => gql`
         attributes {
           slug
           title
+          content
+          updatedAt
         }
       }
     }

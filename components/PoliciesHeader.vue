@@ -7,11 +7,14 @@
       <a class="main__anchor main__anchor--top"></a>
 
       <nav class="header__nav">
-
+        <nuxt-link
+          to="/"
+          class="header__link"
+        >{{ $t('content.about') }}</nuxt-link>
         <nuxt-link
           v-for="link, i in links"
           :key="i"
-          :to="link.to"
+          :to="`/${locale}${link.to}`"
           class="header__link"
         >{{ $t(link.title)}}</nuxt-link>
       </nav>
@@ -25,6 +28,9 @@
 import UiControls from "@/components/UiControls.vue";
 import { useUiStore } from "@/store/ui";
 import links from "@/assets/data/policies-links.json";
+
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n({ useScope: "global" });
 
 defineProps({
   navActive: {

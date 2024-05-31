@@ -44,6 +44,7 @@ export const useDataStore = defineStore({
   }),
   actions: {
     async getPage(locale: string, id: number) {
+      console.dir("getPage")
       try {
         const res = await useAsyncQuery(GET_PAGE(locale, id));
 

@@ -19,6 +19,14 @@
     "inspiration": {
       "title": "Inspiration",
       "slug": "inspiration"
+    },
+    "privacy-policy": {
+      "title": "Privacy policy",
+      "slug": "privacy-policy"
+    },
+    "terms-of-use": {
+      "title": "Terms of use",
+      "slug": "terms-of-use"
     }
   },
   "messages": {
@@ -56,7 +64,8 @@
     "reserved": "All rights reserved",
     "termsOfUse": "Terms of use",
     "privacyPolicy": "Privacy policy",
-    "about": "About us"
+    "about": "About us",
+    "updatedAt": "Last update"
   },
   "validation": {
     "nameRequired": "Please enter your name",

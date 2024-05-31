@@ -13,7 +13,7 @@
         <nuxt-link
           :to="link.to"
           class="nav__link"
-        >{{ $t(link.title)}}</nuxt-link>
+        >{{ $t(link.title) }}</nuxt-link>
       </li>
     </ul>
   </nav>
@@ -30,6 +30,8 @@ defineProps({
     type: Boolean,
   },
 });
+
+defineEmits(["closeNav"]);
 
 const uiStore = useUiStore();
 const theme = computed(() => uiStore.currentTheme);

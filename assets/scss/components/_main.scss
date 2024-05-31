@@ -164,6 +164,17 @@
       @include text;
       text-align: center;
     }
+
+    &--justify {
+      align-items: flex-start;
+      > p {
+        text-align: justify;
+      }
+
+      h2 {
+        text-align: left;
+      }
+    }
   }
 
   &__title {

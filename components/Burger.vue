@@ -18,4 +18,6 @@ defineProps({
     type: Boolean,
   },
 });
+
+defineEmits(["toggleNav"]);
 </script>

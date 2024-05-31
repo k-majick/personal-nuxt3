@@ -93,10 +93,12 @@ const headerEl = inject(HeaderElKey);
 const mainEl = inject(MainElKey);
 const exclude = "burger";
 
+const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
+
 const sortItems = (pagesArr: IResponse[]) =>
   pagesArr
     .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-    .filter(item => item.attributes.slug !== "inspiration");
+    .filter(item => !excludedPages.includes(item.attributes.slug));
 
 const pages: Ref<IResponse[]> = ref(
   sortItems([

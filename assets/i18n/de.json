@@ -19,6 +19,14 @@
     "inspiration": {
       "title": "Inspiration",
       "slug": "inspiration"
+    },
+    "privacy-policy": {
+      "title": "Datenschutz-Bestimmungen",
+      "slug": "datenschutz-bestimmungen"
+    },
+    "terms-of-use": {
+      "title": "Nutzungsbedingungen",
+      "slug": "nutzungsbedingungen"
     }
   },
   "messages": {
@@ -56,7 +64,8 @@
     "reserved": "Alle Rechte vorbehalten",
     "termsOfUse": "Nutzungsbedingungen",
     "privacyPolicy": "Datenschutz-Bestimmungen",
-    "about": "Über uns"
+    "about": "Über uns",
+    "updatedAt": "Letzte Aktualisierung"
   },
   "validation": {
     "nameRequired": "Bitte geben Sie Ihren Namen ein",
