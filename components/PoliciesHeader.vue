@@ -8,13 +8,9 @@
 
       <nav class="header__nav">
         <nuxt-link
-          to="/"
-          class="header__link"
-        >{{ $t('content.about') }}</nuxt-link>
-        <nuxt-link
           v-for="link, i in links"
           :key="i"
-          :to="`/${locale}${link.to}`"
+          :to="`${link.useLocale ? '/' + locale : ''}${link.to}`"
           class="header__link"
         >{{ $t(link.title)}}</nuxt-link>
       </nav>
