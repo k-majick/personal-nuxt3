@@ -16,7 +16,7 @@ export default defineNuxtConfig({
           name: "viewport",
           content: "width=device-width, initial-scale=1",
         },
-        {
+        { 
           name: "msapplication-TileColor",
           content: "#b91d47",
         },
@@ -98,10 +98,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  build: {
-    transpile: ["@vue/apollo-composable"],
-  },
-  modules: ["@pinia/nuxt", "@nuxtjs/apollo"],
+  modules: ["@pinia/nuxt"],
   router: {
     options: {
       linkActiveClass: "active",
@@ -113,8 +110,6 @@ export default defineNuxtConfig({
       appName: process.env.APP_NAME,
       appTitle: process.env.APP_TITLE,
       appEmail: process.env.APP_EMAIL,
-    },
-    private: {
       apiUrl: process.env.API_URL,
     },
   },
@@ -129,11 +124,5 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/scss/_global.scss"],
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: process.env.API_URL as string,
-      },
-    },
-  },
+  plugins: ['@/plugins/apollo-client.js'],
 });

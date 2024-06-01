@@ -34,13 +34,12 @@ export const GET_POSTS = () => gql`
   }
 `;
 
-export const GET_PAGE = (locale: string, id: number) => gql`
+export const GET_PAGE = (locale: string, slug: string) => gql`
   query PageBySlug {
-    page(locale: "${locale}", id: ${id}) {
+    page(locale: "${locale}", slug: "${slug}") {
       data {
         id
         attributes {
-          slug
           title
           content
           updatedAt
