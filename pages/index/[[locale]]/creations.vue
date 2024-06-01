@@ -87,6 +87,10 @@ watchEffect(async (): Promise<IResponse | void> => {
 definePageMeta({
   layout: "portfolio",
 });
+
+definePageMeta({
+  layout: "portfolio",
+});
 </script>
 
 <style lang="scss">
