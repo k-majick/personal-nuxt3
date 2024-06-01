@@ -41,7 +41,7 @@
       </div>
 
       <Projects
-        v-if="portfolio.projects && portfolio.projects.length"
+        v-if="portfolio?.projects && portfolio.projects.length"
         :theme="(theme as string)"
         :projects="(portfolio.projects as Array<IItem>)"
       />
@@ -58,30 +58,30 @@ import DOMPurify from "dompurify";
 import type { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
+const route = useRoute();
+
 const theme = computed(() => uiStore.currentTheme);
 
-const dataStore = useDataStore();
-const pageData: Ref<IResponse> = ref(
-  (await dataStore.getPage(uiStore.currentLocale as string, 3)) as IResponse,
-);
-const posts: Ref<Array<IResponse>> = ref(
-  (await dataStore.getPosts()) as Array<IResponse>,
-);
-const portfolio: Ref<IResponse> = ref(
-  (await dataStore.getPortfolio(uiStore.currentLocale as string)) as IResponse,
-);
+const page: Ref<IResponse | undefined> = ref();
+const posts: Ref<Array<IResponse> | undefined> = ref();
+const portfolio: Ref<IResponse | undefined> = ref();
 
-watch(
-  () => uiStore.currentLocale,
-  async () =>
-    (portfolio.value = (await dataStore.getPortfolio(
-      uiStore.currentLocale as string,
-    )) as IResponse),
-);
+watchEffect(async (): Promise<IResponse | void> => {
+  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
+  const postsData = (await dataStore.getPosts()) as Array<IResponse>;
+  const portfolioData = (await dataStore.getPortfolio(uiStore.currentLocale as string)) as IResponse;
 
-useHead({
-  titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
+  if (pageData) {
+    page.value = pageData;
+    posts.value = postsData;
+    portfolio.value = portfolioData;
+
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
+    });
+  }
 });
 
 definePageMeta({

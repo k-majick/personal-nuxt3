@@ -40,6 +40,7 @@ import iconMoon from "@/assets/gfx/icon-moon.svg?raw";
 import { vTooltip } from "@/composables/tooltip";
 import { useUiStore } from "@/store/ui";
 import { useI18n } from "vue-i18n";
+import { locales } from "@/assets/data/locales";
 
 const route = useRoute();
 const router = useRouter();

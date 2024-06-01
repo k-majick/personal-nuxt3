@@ -1,6 +1,6 @@
 <template>
   <section class="main__card">
-    <h2 class="main__title">{{ $t(`pages.${pageSlug}.title`) }}</h2>
+    <h2 class="main__title">{{ page?.attributes.title }}</h2>
     <Workplaces :theme="(theme as string)" />
     <Counter />
   </section>
@@ -16,16 +16,23 @@ import type { IResponse } from "@/types/common";
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
+const route = useRoute();
 
 const theme = computed(() => uiStore.currentTheme);
+const page: Ref<IResponse | undefined> = ref();
 
-const pageData: Ref<IResponse> = ref(
-  (await dataStore.getPage(uiStore.currentLocale as string, 2)) as IResponse,
-);
-const pageSlug: Ref<string> = ref(pageData.value.attributes.slug);
+watchEffect(async (): Promise<IResponse | void> => {
+  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
 
-useHead({
-  titleTemplate: `${config.public.appName} | ${pageData.value.attributes.title}`,
+  if (!pageData) {
+    return;
+  }
+
+  page.value = pageData;
+
+  useHead({
+    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
+  });
 });
 
 definePageMeta({

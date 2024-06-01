@@ -1,6 +1,6 @@
 <template>
-  <section v-if="pageData?.attributes" class="main__card">
-    <h2 class="main__title">{{ $t(`pages.${pageSlug}.title`) }}</h2>
+  <section v-if="page?.attributes" class="main__card">
+    <h2 class="main__title">{{ page?.attributes.title }}</h2>
 
     <div v-if="updatedAt" class="main__content">
       <p><b>{{ $t('content.updatedAt') }}:</b> {{ updatedAt }}</p>
@@ -29,28 +29,21 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const slugToIdMap = {
-  'privacy-policy': 16,
-  'terms-of-use': 17,
-};
+const page: Ref<IResponse | undefined> = ref();
+const pageContent = computed(() => page.value?.attributes?.content);
+const updatedAt = computed(() => new Date(page.value?.attributes?.updatedAt).toLocaleDateString());
 
-const id = slugToIdMap[(route.params.slug as string)];
+watchEffect(async (): Promise<IResponse | void> => {
+  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
 
-const pageData: Ref<IResponse> = ref(await dataStore.getPage(uiStore.currentLocale as string, id) as IResponse);
-const pageSlug = computed(() => pageData.value?.attributes?.slug);
-const pageContent = computed(() => pageData.value?.attributes?.content);
-const updatedAt = computed(() => new Date(pageData.value?.attributes?.updatedAt).toLocaleDateString());
+  if (!pageData) {
+    return;
+  }
 
-useHead({
-  titleTemplate: `${config.public.appName} | ${pageData?.value?.attributes?.title}`,
+  page.value = pageData;
+
+  useHead({
+    titleTemplate: `${config.public.appName} | ${page?.value?.attributes?.title}`,
+  });
 });
-
-watch(
-  () => [uiStore.currentLocale, route.path],
-  async () => {
-    const id = slugToIdMap[(route.params.slug as string)];
-
-    (pageData.value = await dataStore.getPage(uiStore.currentLocale as string, id) as IResponse);
-  },
-);
 </script>

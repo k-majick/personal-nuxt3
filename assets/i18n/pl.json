@@ -1,34 +1,4 @@
 {
-  "pages": {
-    "skills": {
-      "title": "Umiejętności",
-      "slug": "umiejetnosci"
-    },
-    "experience": {
-      "title": "Doświadczenie",
-      "slug": "doswiadczenie"
-    },
-    "projects": {
-      "title": "Projekty",
-      "slug": "projekty"
-    },
-    "hire-me": {
-      "title": "Zatrudnij mnie",
-      "slug": "zatrudnij-mnie"
-    },
-    "inspiration": {
-      "title": "Inspiracja",
-      "slug": "inspiracja"
-    },
-    "privacy-policy": {
-      "title": "Polityka prywatności",
-      "slug": "polityka-prywatnosci"
-    },
-    "terms-of-use": {
-      "title": "Warunki użytkowania",
-      "slug": "warunki-uzytkowania"
-    }
-  },
   "messages": {
     "name": "K-Majick",
     "hello": "Cześć! Mam na imię <strong>K-Majick</strong>. Pracuję jako profesjonalny <strong>JavaScript Developer</strong>.",
@@ -57,7 +27,7 @@
     "name": "imię",
     "email": "e-mail",
     "message": "wiadomość",
-    "gotoSite": "Przejdź do strony",
+    "gotoSite": "Otwórz stronę",
     "readMore": "Czytaj dalej",
     "latestArticles": "Najnowsze artykuły",
     "featuredProjects": "Wybrane projekty",

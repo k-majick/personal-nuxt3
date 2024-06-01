@@ -1,34 +1,4 @@
 {
-  "pages": {
-    "skills": {
-      "title": "Skills",
-      "slug": "skills"
-    },
-    "experience": {
-      "title": "Experience",
-      "slug": "experience"
-    },
-    "projects": {
-      "title": "Projects",
-      "slug": "projects"
-    },
-    "hire-me": {
-      "title": "Hire me",
-      "slug": "hire-me"
-    },
-    "inspiration": {
-      "title": "Inspiration",
-      "slug": "inspiration"
-    },
-    "privacy-policy": {
-      "title": "Privacy policy",
-      "slug": "privacy-policy"
-    },
-    "terms-of-use": {
-      "title": "Terms of use",
-      "slug": "terms-of-use"
-    }
-  },
   "messages": {
     "name": "K-Majick",
     "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;professional <strong>JavaScript Developer</strong>.",
