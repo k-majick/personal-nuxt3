@@ -13,6 +13,7 @@
     "format": "prettier .  --write"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
     "@types/dompurify": "^3.0.5",
     "@types/eslint": "^8.21.1",
     "@types/marked": "^6.0.0",
@@ -36,6 +37,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@vuelidate/core": "^2.0.0-alpha.44",
     "@vuelidate/validators": "^2.0.0-alpha.31",
+    "cookie-parser": "^1.4.6",
     "dompurify": "^3.0.0",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",

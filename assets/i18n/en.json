@@ -35,7 +35,8 @@
     "termsOfUse": "Terms of use",
     "privacyPolicy": "Privacy policy",
     "about": "About us",
-    "updatedAt": "Last update"
+    "updatedAt": "Last update",
+    "cookieBanner": "We use cookies and similar technologies to deliver, maintain, improve our services and for security purposes."
   },
   "validation": {
     "nameRequired": "Please enter your name",

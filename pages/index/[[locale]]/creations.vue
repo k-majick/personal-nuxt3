@@ -42,7 +42,7 @@
 
       <Projects
         v-if="portfolio?.projects && portfolio.projects.length"
-        :theme="(theme as string)"
+        :theme="theme"
         :projects="(portfolio.projects as Array<IItem>)"
       />
     </section>

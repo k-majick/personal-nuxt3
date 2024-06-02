@@ -1,7 +1,7 @@
 <template>
   <section class="main__card">
     <h2 class="main__title">{{ page?.attributes.title }}</h2>
-    <Workplaces :theme="(theme as string)" />
+    <Workplaces :theme="theme" />
     <Counter />
   </section>
 </template>
