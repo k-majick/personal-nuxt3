@@ -21,8 +21,11 @@
 
 <script lang="ts" setup>
 import { useUiStore } from "@/store/ui";
+import { useI18n } from "vue-i18n";
 import { vClickOutside } from "@/composables/clickOutside";
 import links from "@/assets/data/policies-links.json";
+
+const { locale } = useI18n({ useScope: "global" });
 
 defineProps({
   isActive: {

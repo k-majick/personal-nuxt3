@@ -1,16 +1,16 @@
 import { defineStore } from "pinia";
 
 interface IUiState {
-  theme: null | string;
-  locale: null | string;
+  theme: string;
+  locale: string;
   navActive: boolean,
 }
 
 export const useUiStore = defineStore({
   id: "settings-store",
   state: (): IUiState => ({
-    theme: null,
-    locale: null,
+    theme: "lite",
+    locale: "en",
     navActive: false,
   }),
   actions: {
@@ -31,6 +31,20 @@ export const useUiStore = defineStore({
         })
           .then(res => res.json())
           .then(data => data);
+
+        return res;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+
+    async consent(action: string, consent?: string) {
+      try {
+        const res = await fetch(`/.netlify/functions/server/consent${action}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ consent }),
+        });
 
         return res;
       } catch (e) {

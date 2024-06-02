@@ -113,7 +113,7 @@
 
     &--message {
       #{$self} {
-        padding: 60px 90px;
+        padding: 45px 90px;
 
         &:before,
         &:after {
@@ -208,6 +208,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
   }
 
   &-leave-active {

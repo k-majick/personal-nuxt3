@@ -93,7 +93,7 @@
       <Modal
         v-show="openModal(1)"
         :modal-type="'message'"
-        :theme="(theme as string)"
+        :theme="theme"
         @close="toggleModal(1, false), resetForm()"
       >
         <template #header>
@@ -104,6 +104,16 @@
         <template #content>
           <div class="modal__text">
             <p>{{ $t("messages.sentMessage") }}</p>
+          </div>
+        </template>
+        <template #action>
+          <div class="modal__actions">
+            <button 
+              class="main__button" 
+              @click="toggleModal(1, false), resetForm()"
+            >
+              Ok
+            </button>
           </div>
         </template>
       </Modal>

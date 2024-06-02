@@ -28,7 +28,7 @@
     v-if="activeProject"
     v-show="openModal(activeProjectId)"
     :modal-type="'full'"
-    :theme="(theme as string)"
+    :theme="theme"
     @close="
       toggleModal(activeProjectId, true);
       activeProject = null;

@@ -3,8 +3,8 @@
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  z-index: 3;
-    
+  z-index: 2;
+
   &__control {
     display: flex;
     align-items: center;
@@ -170,8 +170,8 @@
     #{$self}__control {
       @include media("<=m") {
         position: absolute;
-        top: 30px;
-        right: 30px;
+        top: 15px;
+        right: 15px;
       }
     }
 
@@ -276,6 +276,7 @@
     position: relative;
     width: 100%;
     padding-top: 15px;
+    z-index: 3;
 
     #{$self}__container {
       @include mk-container;
