@@ -1,4 +1,4 @@
-.modal {
+.dialog {
   $self: &;
   @include trans(0.5);
   width: fit-content;
@@ -114,6 +114,7 @@
     &--message {
       #{$self} {
         padding: 45px 90px;
+        display: inline-flex;
 
         &:before,
         &:after {
