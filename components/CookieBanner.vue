@@ -10,7 +10,7 @@
       <div class="cookie__actions">
         <button 
           class="main__button main__button--small"
-          @click="toggleModal(10, false)"
+          @click="toggleDialog(10, false)"
         >Customize</button>
         <button
           class="main__button main__button--small"
@@ -25,27 +25,27 @@
   </div>
 
   <Transition name="fade">
-    <Modal
-      v-show="openModal(10)"
-      :modal-type="'message'"
-      :theme="theme"
-      @close="toggleModal(10, false)"
+    <Dialog
+      v-show="isDialogOpen(10)"
+      :dialog-type="'message'"
+      :id="1"
+      @close="toggleDialog(10, false)"
     >
       <template #header>
-        <h3 class="modal__title">
+        <h3 class="dialog__title">
           {{ $t("content.cookieSettings") }}
         </h3>
       </template>
       <template #content>
-        <div class="modal__text">
+        <div class="dialog__text">
           <p></p>
         </div>
       </template>
       <template #action>
-        <div class="modal__actions">
+        <div class="dialog__actions">
         </div>
       </template>
-    </Modal>
+    </Dialog>
   </Transition>
 </template>
 

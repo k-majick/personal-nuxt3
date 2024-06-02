@@ -112,7 +112,7 @@ const killModal = () => {
   const body = document.body;
 
   if (body.classList.contains("locked")) {
-    toggleModal(0, true);
+    toggleDialog(0);
   }
 };
 
