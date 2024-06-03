@@ -27,8 +27,8 @@
   <Dialog
     v-if="activeProject"
     v-show="isDialogOpen(activeProjectId)"
-    :dialog-type="'full'"
     :id="1"
+    :dialog-type="'full'"
     @close="
       toggleDialog(activeProjectId);
       activeProject = null;
