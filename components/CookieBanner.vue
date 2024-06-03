@@ -27,8 +27,8 @@
   <Transition name="fade">
     <Dialog
       v-show="isDialogOpen(10)"
-      :dialog-type="'message'"
       :id="1"
+      :dialog-type="'message'"
       @close="toggleDialog(10, false)"
     >
       <template #header>
