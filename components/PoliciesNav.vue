@@ -1,19 +1,16 @@
 <template>
-  <nav 
+  <nav
     v-click-outside:[exclude]="() => $emit('closeNav')"
     class="nav nav--policies"
     :class="[`nav--${theme}`, { activated: isActive }]"
   >
     <ul class="nav__items">
-      <li
-        v-for="link, i in links"
-        :key="i"
-        class="nav__item"
-      >
+      <li v-for="(link, i) in links" :key="i" class="nav__item">
         <nuxt-link
           :to="`${link.useLocale ? '/' + locale : ''}${link.to}`"
           class="nav__link"
-        >{{ $t(link.title)}}</nuxt-link>
+          >{{ $t(link.title) }}</nuxt-link
+        >
       </li>
     </ul>
   </nav>

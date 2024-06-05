@@ -2,10 +2,7 @@
   <div class="dialog__mask" :class="`dialog__mask--${dialogType}`">
     <div class="dialog__table">
       <div class="dialog__cell">
-        <div
-          class="dialog" 
-          :class="`dialog--${uiStore.currentTheme}`"
-        >
+        <div class="dialog" :class="`dialog--${uiStore.currentTheme}`">
           <button class="dialog__close" type="button" @click="$emit('close')">
             &times;
           </button>

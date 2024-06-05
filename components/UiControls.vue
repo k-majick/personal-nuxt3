@@ -24,9 +24,7 @@
       <!-- eslint-disable risxss/catch-potential-xss-vue -->
       <button
         class="header__button"
-        @click="
-          theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')
-        "
+        @click="theme === 'dark' ? toggleTheme('lite') : toggleTheme('dark')"
         v-html="theme === 'dark' ? iconSun : iconMoon"
       />
       <!-- eslint-enable risxss/catch-potential-xss-vue -->
@@ -49,11 +47,13 @@ const { locale } = useI18n({ useScope: "global" });
 const rootEl = document.documentElement;
 
 const theme = computed(() => uiStore.currentTheme);
-const localesAvailable = computed(() => locales.filter(l => l.code !== locale.value))
+const localesAvailable = computed(() =>
+  locales.filter(l => l.code !== locale.value),
+);
 
 const setRouteParam = (locale: string) => {
   const slugs = route.path.split("/").slice(2);
-  const path = `/${locale}/`+ slugs.join("/");
+  const path = `/${locale}/` + slugs.join("/");
 
   router.replace({
     path,
@@ -74,9 +74,9 @@ const toggleTheme = (theme: string) => {
   localStorage.setItem("user-theme", theme);
 };
 
-localStorage.getItem("user-theme") ? 
-  toggleTheme(localStorage.getItem("user-theme") as string) :
-  toggleTheme("lite");
+localStorage.getItem("user-theme")
+  ? toggleTheme(localStorage.getItem("user-theme") as string)
+  : toggleTheme("lite");
 
 switchLocale(route.params.locale as string);
 </script>

@@ -265,7 +265,11 @@
   &--lite {
     #{$self}__background {
       &::before {
-        background: linear-gradient(to bottom, transparentize($color-white, 0) 0%, transparentize($color-white, 1) 80%);
+        background: linear-gradient(
+          to bottom,
+          transparentize($color-white, 0) 0%,
+          transparentize($color-white, 1) 80%
+        );
       }
     }
   }
@@ -273,7 +277,11 @@
   &--dark {
     #{$self}__background {
       &::before {
-        background: linear-gradient(to bottom, transparentize($color-black, 0.1) 0%, transparentize($color-black, 1) 80%);
+        background: linear-gradient(
+          to bottom,
+          transparentize($color-black, 0.1) 0%,
+          transparentize($color-black, 1) 80%
+        );
       }
     }
   }

@@ -108,8 +108,8 @@
         </template>
         <template #action>
           <div class="dialog__actions">
-            <button 
-              class="main__button" 
+            <button
+              class="main__button"
               @click="toggleDialog(1, false), resetForm()"
             >
               Ok

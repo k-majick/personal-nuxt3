@@ -9,7 +9,7 @@
     />
     <Burger
       v-show="!isLoading"
-      :nav-active="navActive" 
+      :nav-active="navActive"
       @toggle-nav="toggleNav"
     />
     <PoliciesNav
@@ -25,9 +25,7 @@
       <div class="main__background"></div>
       <slot />
     </main>
-    <CookieBanner 
-      :theme="theme"
-    />
+    <CookieBanner :theme="theme" />
     <span ref="tooltipEl" class="tooltip"></span>
   </div>
 </template>
@@ -35,7 +33,7 @@
 <script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import { globalRefs } from '@/plugins/globalRefs';
+import { globalRefs } from "@/plugins/globalRefs";
 import Loader from "@/components/Loader.vue";
 import Burger from "@/components/Burger.vue";
 import PoliciesHeader from "@/components/PoliciesHeader.vue";
@@ -51,7 +49,7 @@ const isLoading = computed(() => dataStore.loading || dataStore.loadError);
 const tooltipEl = ref();
 const navActive = ref(false);
 
-const toggleNav = () => navActive.value = !navActive.value;
+const toggleNav = () => (navActive.value = !navActive.value);
 
 onMounted(() => {
   globalRefs.tooltipEl = tooltipEl.value;

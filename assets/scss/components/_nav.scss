@@ -193,7 +193,7 @@
     }
 
     &:not([href$="creations"]):after {
-    // &:after {
+      // &:after {
       @include trans(2, max-width);
       display: block;
       content: "";

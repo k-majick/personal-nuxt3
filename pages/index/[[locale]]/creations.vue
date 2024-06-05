@@ -36,14 +36,18 @@
         <div
           v-if="portfolio && portfolio.content"
           class="post__content"
-          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string) as string)"
+          v-html="
+            DOMPurify.sanitize(
+              marked.parse(portfolio.content as string) as string,
+            )
+          "
         ></div>
       </div>
 
       <Projects
         v-if="portfolio?.projects && portfolio.projects.length"
         :theme="theme"
-        :projects="(portfolio.projects as Array<IItem>)"
+        :projects="portfolio.projects as Array<IItem>"
       />
     </section>
   </div>
@@ -69,9 +73,14 @@ const posts: Ref<Array<IResponse> | undefined> = ref();
 const portfolio: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
+  const pageData = await dataStore.getPage(
+    uiStore.currentLocale as string,
+    getSlug(route.path as string),
+  );
   const postsData = (await dataStore.getPosts()) as Array<IResponse>;
-  const portfolioData = (await dataStore.getPortfolio(uiStore.currentLocale as string)) as IResponse;
+  const portfolioData = (await dataStore.getPortfolio(
+    uiStore.currentLocale as string,
+  )) as IResponse;
 
   if (pageData) {
     page.value = pageData;

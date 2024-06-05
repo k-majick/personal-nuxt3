@@ -2,9 +2,9 @@ import type { Request, Response } from "express";
 
 export class CookieController {
   public checkConsentCookie(req: Request, res: Response): void {
-    req.cookies?.consent ?
-      res.status(200).send(req.cookies?.consent) :
-      res.sendStatus(204);
+    req.cookies?.consent
+      ? res.status(200).send(req.cookies?.consent)
+      : res.sendStatus(204);
   }
 
   public saveConsentCookie(req: Request, res: Response): void {

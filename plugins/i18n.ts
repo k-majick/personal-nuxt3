@@ -26,7 +26,7 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
   });
 
   vueApp.use(i18n);
- 
+
   ($router as Router).beforeEach(
     (
       to: RouteLocationNormalizedLoaded,
@@ -35,10 +35,10 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
     ) => {
       if (!to.params.locale?.length) {
         const userLocale = localStorage.getItem("user-locale") as string;
-        const locale =  userLocale ? userLocale : "en";
+        const locale = userLocale ? userLocale : "en";
 
-        if (!to.name) {          
-          return
+        if (!to.name) {
+          return;
         }
 
         next({
