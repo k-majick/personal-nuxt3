@@ -1,27 +1,22 @@
 <template>
   <div :class="`theme theme--${theme}`">
     <div class="theme__background"></div>
-
     <Loader v-if="isLoading" />
-
     <PoliciesHeader
       v-show="!isLoading"
       :nav-active="navActive"
       @toggle-nav="toggleNav"
     />
-
     <Burger
       v-show="!isLoading"
       :nav-active="navActive" 
       @toggle-nav="toggleNav"
     />
-
     <PoliciesNav
       v-show="!isLoading"
       :is-active="navActive"
       @close-nav="navActive = false"
     />
-
     <main
       v-show="!isLoading"
       class="main main--policies"
@@ -30,11 +25,9 @@
       <div class="main__background"></div>
       <slot />
     </main>
-
     <CookieBanner 
       :theme="theme"
     />
-
     <span ref="tooltipEl" class="tooltip"></span>
   </div>
 </template>
@@ -53,9 +46,10 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 
 const theme = computed(() => uiStore.currentTheme);
+const isLoading = computed(() => dataStore.loading || dataStore.loadError);
+
 const tooltipEl = ref();
 const navActive = ref(false);
-const isLoading = computed(() => dataStore.loading || dataStore.loadError);
 
 const toggleNav = () => navActive.value = !navActive.value;
 
