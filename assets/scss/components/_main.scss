@@ -65,7 +65,7 @@
       opacity: 1;
     }
 
-    &--hasActiveModal {
+    &--hasactiveDialog {
       backdrop-filter: none;
     }
   }
@@ -185,6 +185,14 @@
 
   &__button {
     @include button;
+
+    &--small {
+      padding: 7.5px 15px;
+    }
+
+    & + & {
+      margin-left: 7.5px;
+    }
   }
 
   &__label {

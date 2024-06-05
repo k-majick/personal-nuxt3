@@ -90,23 +90,33 @@
     </form>
 
     <Transition name="fade">
-      <Modal
-        v-show="openModal(1)"
-        :modal-type="'message'"
-        :theme="(theme as string)"
-        @close="toggleModal(1, false), resetForm()"
+      <Dialog
+        v-show="isDialogOpen(1)"
+        :id="1"
+        :dialog-type="'message'"
+        @close="toggleDialog(1, false), resetForm()"
       >
         <template #header>
-          <h3 class="modal__title">
+          <h3 class="dialog__title">
             {{ $t("messages.sentTitle") }}
           </h3>
         </template>
         <template #content>
-          <div class="modal__text">
+          <div class="dialog__text">
             <p>{{ $t("messages.sentMessage") }}</p>
           </div>
         </template>
-      </Modal>
+        <template #action>
+          <div class="dialog__actions">
+            <button 
+              class="main__button" 
+              @click="toggleDialog(1, false), resetForm()"
+            >
+              Ok
+            </button>
+          </div>
+        </template>
+      </Dialog>
     </Transition>
   </div>
 </template>
@@ -212,7 +222,7 @@ const sendForm = async () => {
   const res = await uiStore.sendEmail(fd);
 
   if (res) {
-    toggleModal(1, false);
+    toggleDialog(1, false);
   }
 };
 

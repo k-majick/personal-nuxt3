@@ -10,7 +10,7 @@
           class="gallery__title"
           @click.self="
             setActiveProject(project, i + 1);
-            toggleModal(i + 1, true);
+            toggleDialog(i + 1);
           "
         >
           {{ project.name }}
@@ -24,18 +24,18 @@
     </swiper-slide>
   </swiper>
 
-  <Modal
+  <Dialog
     v-if="activeProject"
-    v-show="openModal(activeProjectId)"
-    :modal-type="'full'"
-    :theme="(theme as string)"
+    v-show="isDialogOpen(activeProjectId)"
+    :id="1"
+    :dialog-type="'full'"
     @close="
-      toggleModal(activeProjectId, true);
+      toggleDialog(activeProjectId);
       activeProject = null;
     "
   >
     <template #content>
-      <div class="modal__content">
+      <div class="dialog__content">
         <div class="project__details">
           <img
             class="project__logo"
@@ -62,7 +62,7 @@
         $t("content.gotoSite")
       }}</a>
     </template>
-  </Modal>
+  </Dialog>
 </template>
 
 <script lang="ts" setup>

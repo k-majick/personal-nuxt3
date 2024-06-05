@@ -1,33 +1,39 @@
 <template>
   <div :class="`theme theme--${theme}`">
-    <div class="theme__background">
-      <Loader />
-    </div>
+    <div class="theme__background"></div>
+
+    <Loader v-if="isLoading" />
 
     <PoliciesHeader
-      v-show="!dataStore.loadError"
+      v-show="!isLoading"
       :nav-active="navActive"
       @toggle-nav="toggleNav"
     />
 
-    <Burger 
+    <Burger
+      v-show="!isLoading"
       :nav-active="navActive" 
       @toggle-nav="toggleNav"
     />
 
     <PoliciesNav
+      v-show="!isLoading"
       :is-active="navActive"
       @close-nav="navActive = false"
     />
 
-    <main 
-      v-if="!dataStore.loadError"
+    <main
+      v-show="!isLoading"
       class="main main--policies"
       :class="`main--${theme}`"
     >
       <div class="main__background"></div>
       <slot />
     </main>
+
+    <CookieBanner 
+      :theme="theme"
+    />
 
     <span ref="tooltipEl" class="tooltip"></span>
   </div>
@@ -41,6 +47,7 @@ import Loader from "@/components/Loader.vue";
 import Burger from "@/components/Burger.vue";
 import PoliciesHeader from "@/components/PoliciesHeader.vue";
 import PoliciesNav from "@/components/PoliciesNav.vue";
+import CookieBanner from "@/components/CookieBanner.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
@@ -48,6 +55,7 @@ const uiStore = useUiStore();
 const theme = computed(() => uiStore.currentTheme);
 const tooltipEl = ref();
 const navActive = ref(false);
+const isLoading = computed(() => dataStore.loading || dataStore.loadError);
 
 const toggleNav = () => navActive.value = !navActive.value;
 

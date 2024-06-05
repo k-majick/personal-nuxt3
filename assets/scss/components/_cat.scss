@@ -4,7 +4,8 @@
   &__wrapper {
     position: absolute;
     bottom: -7.5px;
-    left: 4vw;
+    left: 50%;
+    transform: translateX(-50%);
     width: 90px;
     height: 90px;
     z-index: 10;
@@ -23,7 +24,8 @@
       bottom: 0;
       width: 90px;
       height: 90px;
-      left: 45px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     @include media(">=l") {

@@ -21,11 +21,11 @@
 </template>
 
 <script lang="ts" setup>
-import UiControls from "@/components/UiControls.vue";
 import { useUiStore } from "@/store/ui";
+import { useI18n } from "vue-i18n";
+import UiControls from "@/components/UiControls.vue";
 import links from "@/assets/data/policies-links.json";
 
-import { useI18n } from "vue-i18n";
 const { locale } = useI18n({ useScope: "global" });
 
 defineProps({

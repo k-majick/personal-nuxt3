@@ -1,8 +1,21 @@
-export const activeModal = ref(0);
+export const activeDialog = ref(0);
+export const dialogType = ref("");
 
-export const toggleModal = (id: number, useLock: boolean) => {
-  if (activeModal.value !== 0) {
-    activeModal.value = 0;
+export const toggleDialog = (id: number, useLock = true, type = "") => {
+  if (id !== activeDialog.value) {
+    // open
+    setTimeout(() => {
+      activeDialog.value = id;
+      dialogType.value = type ? type : "";
+    }, 0);   
+
+    if (useLock === true) {
+      scrollLock();
+    }
+  } else {
+    // close
+    activeDialog.value = 0;
+    dialogType.value = "";
 
     if (useLock === true) {
       scrollUnlock();
@@ -10,15 +23,9 @@ export const toggleModal = (id: number, useLock: boolean) => {
 
     return false;
   }
-
-  activeModal.value = id;
-
-  if (useLock === true) {
-    scrollLock();
-  }
 };
 
-export const openModal = (id: number) => activeModal.value === id;
+export const isDialogOpen = (id: number) => activeDialog.value === id;
 
 export const scrollLock = () => {
   const scrollY = document.documentElement.style.getPropertyValue("--scroll-y");
@@ -33,7 +40,7 @@ export const scrollLock = () => {
 export const scrollUnlock = () => {
   const scrollY = document.body.style.top;
   const body = document.body;
-
+  
   body.classList.remove("locked");
   body.style.width = "100%";
   body.style.position = "";

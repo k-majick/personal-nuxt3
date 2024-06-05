@@ -35,7 +35,8 @@
     "termsOfUse": "Nutzungsbedingungen",
     "privacyPolicy": "Datenschutz-Bestimmungen",
     "about": "Über uns",
-    "updatedAt": "Letzte Aktualisierung"
+    "updatedAt": "Letzte Aktualisierung",
+    "cookieBanner": "Wir verwenden Cookies und ähnliche Technologien zur Bereitstellung, Wartung und Verbesserung unserer Dienste sowie für Sicherheitszwecke."
   },
   "validation": {
     "nameRequired": "Bitte geben Sie Ihren Namen ein",

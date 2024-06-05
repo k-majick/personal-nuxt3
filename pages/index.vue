@@ -4,7 +4,7 @@
       class="main__container"
       :class="`main__container--${route.path.includes('creations') ?
         'full' : 'card' } ${uiStore.navActive ? 'main__container--active' : ''}
-        ${activeModal ? 'main__container--hasActiveModal' : ''}
+        ${activeDialog ? 'main__container--hasactiveDialog' : ''}
       `"
     >
       <transition name="fade" mode="out-in">
@@ -26,7 +26,7 @@ const uiStore = useUiStore();
 @import "@/assets/scss/components/main";
 @import "@/assets/scss/components/burger";
 @import "@/assets/scss/components/tooltip";
-@import "@/assets/scss/components/modal";
+@import "@/assets/scss/components/dialog";
 
 .fade-enter-from {
   opacity: 0;

@@ -6,12 +6,12 @@
   padding-left: 15px;
   padding-right: 15px;
   width: 100%;
-  max-width: 970px;
+  max-width: 870px;
   @include media("<=m") {
     max-width: 768px;
   }
   @include media(">=l") {
-    max-width: 1180px;
+    max-width: 1080px;
   }
 }
 @mixin text {

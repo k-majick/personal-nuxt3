@@ -1,4 +1,4 @@
-.modal {
+.dialog {
   $self: &;
   @include trans(0.5);
   width: fit-content;
@@ -37,7 +37,7 @@
     display: table;
     display: block;
     backdrop-filter: blur(3px);
-    overflow-y: scroll;
+    overflow-y: auto;
 
     &--full {
       #{$self} {
@@ -113,7 +113,8 @@
 
     &--message {
       #{$self} {
-        padding: 60px 90px;
+        padding: 45px 90px;
+        display: inline-flex;
 
         &:before,
         &:after {
@@ -208,6 +209,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
   }
 
   &-leave-active {

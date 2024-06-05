@@ -7,7 +7,6 @@
   position: fixed;
   left: 0;
   top: 0;
-  min-width: 240px;
   width: 12.5vw;
   height: 100%;
   z-index: 2;
@@ -59,6 +58,7 @@
   @include media("<=m") {
     transform: translateX(calc(-100% - 15px));
     z-index: 3;
+    min-width: 240px;
 
     &.activated {
       transform: translateX(0%);

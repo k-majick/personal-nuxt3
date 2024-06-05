@@ -1,7 +1,8 @@
+import dotenv from "dotenv";
 import express from "express";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import cors from "cors";
-import dotenv from "dotenv";
 import { Routes } from "../routes/routes";
 
 if (process.env.NODE_ENV !== "production") {
@@ -35,6 +36,7 @@ class Server {
       next();
     });
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser());
   }
 
   public routes(): void {
