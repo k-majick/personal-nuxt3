@@ -7,7 +7,7 @@ export const toggleDialog = (id: number, useLock = true, type = "") => {
     setTimeout(() => {
       activeDialog.value = id;
       dialogType.value = type ? type : "";
-    }, 0);   
+    }, 0);
 
     if (useLock === true) {
       scrollLock();
@@ -40,7 +40,7 @@ export const scrollLock = () => {
 export const scrollUnlock = () => {
   const scrollY = document.body.style.top;
   const body = document.body;
-  
+
   body.classList.remove("locked");
   body.style.width = "100%";
   body.style.position = "";

@@ -1,20 +1,11 @@
 <template>
-  <footer 
-    class="footer footer--policies"
-    :class="`footer--${theme}`"
-  >
-      <nuxt-link
-        class="footer__logo" 
-        to="/"
-      >
-        <h1 class="footer__title">{{ config.public.appTitle }}</h1>
-      </nuxt-link>
-      <nuxt-link
-        class="footer__copy"
-        to="/"
-      >
-        &copy; {{ date.getFullYear() }} {{ $t("content.reserved") }}.
-      </nuxt-link>
+  <footer class="footer footer--policies" :class="`footer--${theme}`">
+    <nuxt-link class="footer__logo" to="/">
+      <h1 class="footer__title">{{ config.public.appTitle }}</h1>
+    </nuxt-link>
+    <nuxt-link class="footer__copy" to="/">
+      &copy; {{ date.getFullYear() }} {{ $t("content.reserved") }}.
+    </nuxt-link>
   </footer>
 </template>
 

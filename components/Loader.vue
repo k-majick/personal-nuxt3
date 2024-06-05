@@ -14,19 +14,16 @@
         <div class="loader__ray loader__ray--10"></div>
       </div>
       <span class="loader__text">{{
-        dataStore.loadError ?
-          $t("messages.loadError") :
-          $t("messages.loading")
+        dataStore.loadError ? $t("messages.loadError") : $t("messages.loading")
       }}</span>
       <div
         v-tooltip="
           dataStore.loadError
-          ? $t('messages.loadError')
-          : $t('messages.loading')
+            ? $t('messages.loadError')
+            : $t('messages.loading')
         "
-          class="loader__logo"
-        >
-      </div>
+        class="loader__logo"
+      ></div>
     </div>
   </div>
 </template>

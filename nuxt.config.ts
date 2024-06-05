@@ -16,7 +16,7 @@ export default defineNuxtConfig({
           name: "viewport",
           content: "width=device-width, initial-scale=1",
         },
-        { 
+        {
           name: "msapplication-TileColor",
           content: "#b91d47",
         },
@@ -125,5 +125,5 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/scss/_global.scss"],
-  plugins: ['@/plugins/apollo-client.js'],
+  plugins: ["@/plugins/apollo-client.js"],
 });

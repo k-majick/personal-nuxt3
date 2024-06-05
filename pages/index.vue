@@ -2,13 +2,14 @@
   <router-view v-slot="{ Component, route }">
     <div
       class="main__container"
-      :class="`main__container--${route.path.includes('creations') ?
-        'full' : 'card' } ${uiStore.navActive ? 'main__container--active' : ''}
+      :class="`main__container--${
+        route.path.includes('creations') ? 'full' : 'card'
+      } ${uiStore.navActive ? 'main__container--active' : ''}
         ${activeDialog ? 'main__container--hasactiveDialog' : ''}
       `"
     >
       <transition name="fade" mode="out-in">
-        <component :is="Component" :key="(route.name as string)" />
+        <component :is="Component" :key="route.name as string" />
       </transition>
     </div>
   </router-view>
@@ -41,21 +42,23 @@ watch(
 
 const enableGtag = () => {
   useHead({
-    script: [{
-      src: `https://www.googletagmanager.com/gtag/js?id=${config.public.appGtag}`,
-      async: true,
-    }],
+    script: [
+      {
+        src: `https://www.googletagmanager.com/gtag/js?id=${config.public.appGtag}`,
+        async: true,
+      },
+    ],
   });
-  
+
   window.dataLayer = window.dataLayer || [];
 
   function gtag(_a: string, _b: string | Date) {
     window.dataLayer.push(arguments);
   }
 
-  gtag('js', new Date());
-  gtag('config', config.public.appGtag);
-}
+  gtag("js", new Date());
+  gtag("config", config.public.appGtag);
+};
 </script>
 
 <style lang="scss">

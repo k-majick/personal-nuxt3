@@ -19,7 +19,10 @@ const route = useRoute();
 const page: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
+  const pageData = await dataStore.getPage(
+    uiStore.currentLocale as string,
+    getSlug(route.path as string),
+  );
 
   if (!pageData) {
     return;

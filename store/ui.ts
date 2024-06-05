@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 interface IUiState {
   theme: string;
   locale: string;
-  navActive: boolean,
-  consent: string,
+  navActive: boolean;
+  consent: string;
 }
 
 export const useUiStore = defineStore({

@@ -2,7 +2,9 @@
   <div
     v-if="technology && technology.content"
     class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(technology.content as string) as string)"
+    v-html="
+      DOMPurify.sanitize(marked.parse(technology.content as string) as string)
+    "
   ></div>
   <div v-if="technology && technology.items" class="technology">
     <span

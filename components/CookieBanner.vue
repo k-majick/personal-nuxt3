@@ -1,21 +1,19 @@
 <template>
-  <div
-    v-if="!uiStore.consent" 
-    :class="`cookie cookie--${theme}`"
-  >
+  <div v-if="!uiStore.consent" :class="`cookie cookie--${theme}`">
     <div class="cookie__container">
       <div class="cookie__info">
-        {{ $t('content.cookieBanner') }}
+        {{ $t("content.cookieBanner") }}
       </div>
       <div class="cookie__actions">
         <button
           class="main__button main__button--small"
           @click="choose('essential')"
-        >Reject non-essential</button>
-        <button
-          class="main__button main__button--small"
-          @click="choose('all')"
-        >Accept all</button>
+        >
+          Reject non-essential
+        </button>
+        <button class="main__button main__button--small" @click="choose('all')">
+          Accept all
+        </button>
       </div>
     </div>
   </div>
@@ -37,7 +35,7 @@ const choose = (choice: string) => {
   uiStore.doConsentAction("Save", choice).then(res => {
     uiStore.consent = res?.status === 200 ? choice : "essential";
   });
-}
+};
 </script>
 
 <style lang="scss">
