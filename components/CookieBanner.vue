@@ -8,10 +8,6 @@
         {{ $t('content.cookieBanner') }}
       </div>
       <div class="cookie__actions">
-        <button 
-          class="main__button main__button--small"
-          @click="toggleDialog(10, false)"
-        >Customize</button>
         <button
           class="main__button main__button--small"
           @click="choose('essential')"
@@ -23,30 +19,6 @@
       </div>
     </div>
   </div>
-
-  <Transition name="fade">
-    <Dialog
-      v-show="isDialogOpen(10)"
-      :id="1"
-      :dialog-type="'message'"
-      @close="toggleDialog(10, false)"
-    >
-      <template #header>
-        <h3 class="dialog__title">
-          {{ $t("content.cookieSettings") }}
-        </h3>
-      </template>
-      <template #content>
-        <div class="dialog__text">
-          <p></p>
-        </div>
-      </template>
-      <template #action>
-        <div class="dialog__actions">
-        </div>
-      </template>
-    </Dialog>
-  </Transition>
 </template>
 
 <script lang="ts" setup>

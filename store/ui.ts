@@ -8,7 +8,7 @@ interface IUiState {
 }
 
 export const useUiStore = defineStore({
-  id: "settings-store",
+  id: "ui-store",
   state: (): IUiState => ({
     theme: "lite",
     locale: "en",
