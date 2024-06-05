@@ -30,7 +30,7 @@
     "include-media": "^2.0.0",
     "prettier": "^3.2.5",
     "sass": "^1.72.0",
-    "vite-plugin-eslint": "^1.7.0"
+    "vite-plugin-eslint": "^1.8.1"
   },
   "dependencies": {
     "@apollo/client": "^3.9.9",
