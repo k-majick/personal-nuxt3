@@ -27,7 +27,6 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-risxss": "^2.1.0",
     "eslint-plugin-vue": "^9.3.0",
-    "include-media": "^2.0.0",
     "prettier": "^3.2.5",
     "sass": "^1.72.0"
   },
@@ -40,6 +39,7 @@
     "dompurify": "^3.0.0",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
+    "include-media": "^2.0.0",
     "marked": "^12.0.1",
     "modern-normalize": "^2.0.0",
     "nuxt": "npm:nuxt3@latest",

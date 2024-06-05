@@ -114,7 +114,7 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    plugins: process.env.NODE_ENV === 'production' ? [] : [eslint()],
+    plugins: [eslint()],
     css: {
       preprocessorOptions: {
         scss: {
