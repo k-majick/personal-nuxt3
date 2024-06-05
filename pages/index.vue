@@ -17,7 +17,48 @@
 <script lang="ts" setup>
 import { useUiStore } from "@/store/ui";
 
+const config = useRuntimeConfig();
 const uiStore = useUiStore();
+
+uiStore.doConsentAction("Check").then(res => {
+  if (res?.status !== 200) {
+    uiStore.consent = "essential";
+    return;
+  }
+
+  res?.text().then(consent => {
+    uiStore.consent = consent;
+  });
+});
+
+watch(
+  () => uiStore.consent,
+  () => {
+    if (uiStore.consent === "all") {
+      console.dir("enableGtag");
+      enableGtag();
+    }
+  },
+);
+
+const enableGtag = () => {
+  useHead({
+    script: [{
+      src: `https://www.googletagmanager.com/gtag/js?id=${config.public.appGtag}`,
+      async: true,
+    }],
+  });
+  
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(_a: string, _b: string | Date) {
+    console.dir(arguments)
+    window.dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'G-E0S7STEPC3');
+}
 </script>
 
 <style lang="scss">

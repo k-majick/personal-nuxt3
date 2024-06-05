@@ -1,3 +1,7 @@
+declare global {
+  interface Window { dataLayer: any; }
+}
+
 export type IItem = {
   [key: string]: string;
 };

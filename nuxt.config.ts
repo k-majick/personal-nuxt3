@@ -110,6 +110,7 @@ export default defineNuxtConfig({
       appName: process.env.APP_NAME,
       appTitle: process.env.APP_TITLE,
       appEmail: process.env.APP_EMAIL,
+      appGtag: process.env.APP_GTAG,
       apiUrl: process.env.API_URL,
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="showMe" 
+    v-if="!uiStore.consent" 
     :class="`cookie cookie--${theme}`"
   >
     <div class="cookie__container">
@@ -60,20 +60,12 @@ defineProps({
 });
 
 const uiStore = useUiStore();
-const showMe = ref(false);
 
 const choose = (choice: string) => {
-  uiStore.consent("Save", choice).then(res => {
-    showMe.value = res?.status === 200 ? false : true;
+  uiStore.doConsentAction("Save", choice).then(res => {
+    uiStore.consent = res?.status === 200 ? choice : "essential";
   });
 }
-
-uiStore.consent("Check").then(res => {
-  res?.text().then(consent => console.dir(consent));
-
-  // showMe.value = res?.status === 200 ? false : true;
-  showMe.value = true;
-});
 </script>
 
 <style lang="scss">
