@@ -57,7 +57,7 @@ const enableGtag = () => {
   }
 
   gtag('js', new Date());
-  gtag('config', 'G-E0S7STEPC3');
+  gtag('config', config.public.appGtag);
 }
 </script>
 
