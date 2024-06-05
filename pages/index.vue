@@ -22,7 +22,6 @@ const uiStore = useUiStore();
 
 uiStore.doConsentAction("Check").then(res => {
   if (res?.status !== 200) {
-    uiStore.consent = "essential";
     return;
   }
 
@@ -35,7 +34,6 @@ watch(
   () => uiStore.consent,
   () => {
     if (uiStore.consent === "all") {
-      console.dir("enableGtag");
       enableGtag();
     }
   },
@@ -52,7 +50,6 @@ const enableGtag = () => {
   window.dataLayer = window.dataLayer || [];
 
   function gtag(_a: string, _b: string | Date) {
-    console.dir(arguments)
     window.dataLayer.push(arguments);
   }
 
