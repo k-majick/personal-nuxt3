@@ -40,7 +40,7 @@ export const scrollLock = () => {
 export const scrollUnlock = () => {
   const scrollY = document.body.style.top;
   const body = document.body;
-
+  
   body.classList.remove("locked");
   body.style.width = "100%";
   body.style.position = "";

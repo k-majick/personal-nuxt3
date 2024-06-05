@@ -1,26 +1,32 @@
 <template>
   <div :class="`theme theme--${theme}`">
-    <div class="theme__background">
-      <Loader />
-    </div>
+    <div class="theme__background"></div>
+
+    <Loader v-if="isLoading" />
 
     <Header 
-      v-show="!dataStore.loadError" 
+      v-show="!isLoading"
       ref="headerRef" 
     />
 
-    <Burger 
+    <Burger
+      v-show="!isLoading"
       :nav-active="isNavActivated" 
       @toggle-nav="toggleNav"
     />
 
     <Nav
+      v-show="!isLoading"
       :is-activated="isNavActivated"
       :is-active="uiStore.navActive"
       @close-nav="isNavActivated = false"
     />
 
-    <main v-if="!dataStore.loadError" ref="mainEl" class="main main--portfolio">
+    <main 
+      v-show="!isLoading"
+      ref="mainEl" 
+      class="main main--portfolio"
+    >
       <div class="main__background"></div>     
       <slot />
     </main>
@@ -49,6 +55,7 @@ const headerRef: Ref<any> = ref();
 const mainEl: Ref<HTMLElement | undefined> = ref();
 const headerEl: Ref<HTMLElement | undefined> = ref();
 const isNavActivated = ref(false);
+const isLoading = computed(() => dataStore.loading || dataStore.loadError);
 
 const toggleNav = () => 
   isNavActivated.value = isNavActivated.value === false ?

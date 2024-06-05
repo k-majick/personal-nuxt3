@@ -38,7 +38,7 @@ interface IDataState {
 export const useDataStore = defineStore({
   id: "data-store",
   state: (): IDataState => ({
-    loading: false,
+    loading: true,
     loadError: false,
     page: null,
     pages: null,

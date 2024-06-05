@@ -71,7 +71,8 @@ const choose = (choice: string) => {
 uiStore.consent("Check").then(res => {
   res?.text().then(consent => console.dir(consent));
 
-  showMe.value = res?.status === 200 ? false : true;
+  // showMe.value = res?.status === 200 ? false : true;
+  showMe.value = true;
 });
 </script>
 
