@@ -48,7 +48,7 @@ class Server {
     this.config();
     this.routes();
     this.app.listen(this.port, () =>
-      console.log(`Server running on port ${this.port}`),
+      console.info(`Server running on port ${this.port}`),
     );
   }
 }

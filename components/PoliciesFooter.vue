@@ -20,5 +20,5 @@ const date = new Date();
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/footer";
+@import "@/assets/scss/components/footer";
 </style>

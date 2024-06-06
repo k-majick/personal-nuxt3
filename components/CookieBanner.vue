@@ -39,5 +39,5 @@ const choose = (choice: string) => {
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/cookie";
+@import "@/assets/scss/components/cookie";
 </style>

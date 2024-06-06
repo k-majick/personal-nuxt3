@@ -38,5 +38,5 @@ const theme = computed(() => uiStore.currentTheme);
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/header";
+@import "@/assets/scss/components/header";
 </style>

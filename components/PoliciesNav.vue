@@ -39,5 +39,5 @@ const exclude = "burger";
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/nav";
+@import "@/assets/scss/components/nav";
 </style>

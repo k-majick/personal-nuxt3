@@ -128,6 +128,6 @@ watch(
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/nav";
-@import "./assets/scss/components/cat";
+@import "@/assets/scss/components/nav";
+@import "@/assets/scss/components/cat";
 </style>

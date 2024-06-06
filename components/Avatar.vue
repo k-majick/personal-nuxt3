@@ -28,6 +28,6 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/avatar";
-@import "./assets/scss/components/tooltip";
+@import "@/assets/scss/components/avatar";
+@import "@/assets/scss/components/tooltip";
 </style>

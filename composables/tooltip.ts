@@ -21,7 +21,6 @@ export const vTooltip = {
     const onCreated = (tooltipEl: HTMLElement) => {
       el.addEventListener("mouseenter", () => {
         (tooltipEl as HTMLElement).innerHTML = binding.value as string;
-        console.log(tooltipEl); //eslint-disable-line
         tooltipEl.innerHTML = binding.value as string;
         tooltipEl.style.opacity = "1";
         tooltipEl.classList.add("show");

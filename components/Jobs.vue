@@ -49,5 +49,5 @@ const jobsSorted = computed(() =>
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/experience";
+@import "@/assets/scss/components/experience";
 </style>

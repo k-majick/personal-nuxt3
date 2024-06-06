@@ -41,5 +41,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "./assets/scss/components/policies";
+@import "@/assets/scss/components/policies";
 </style>

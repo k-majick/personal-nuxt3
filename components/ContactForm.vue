@@ -226,5 +226,5 @@ const resetForm = () => {
 </script>
 
 <style lang="scss" scoped>
-@import "./assets/scss/components/form";
+@import "@/assets/scss/components/form";
 </style>
