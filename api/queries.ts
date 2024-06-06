@@ -71,6 +71,7 @@ export const GET_TECHNOLOGY = (locale: string) => gql`
       data {
         id
         attributes {
+          content
           items {
             name
           }

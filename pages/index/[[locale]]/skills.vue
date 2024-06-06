@@ -16,7 +16,7 @@
       class="main__content"
       v-html="
         DOMPurify.sanitize(
-          marked.parse(page?.attributes.content as string) as string,
+          marked.parse(technology?.content as string) as string,
         )
       "
     ></div>
