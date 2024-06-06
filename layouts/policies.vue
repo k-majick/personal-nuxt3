@@ -10,7 +10,7 @@
       <slot />
     </main>
     <CookieBanner :theme="theme" />
-    <span ref="tooltipEl" class="tooltip"></span>
+    <span ref="tooltipEl" class="tooltip tooltip--policies"></span>
   </div>
 </template>
 

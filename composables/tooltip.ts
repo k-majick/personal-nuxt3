@@ -13,10 +13,17 @@ export const vTooltip = {
       tooltipEl ? onCreated(tooltipEl) : setTimeout(() => getTooltip(), 200);
     };
 
+    watch(
+      () => globalRefs.tooltipEl,
+      () => getTooltip(),
+    );
+
     const onCreated = (tooltipEl: HTMLElement) => {
       el.addEventListener("mouseenter", () => {
         (tooltipEl as HTMLElement).innerHTML = binding.value as string;
+        console.log(tooltipEl); //eslint-disable-line
         tooltipEl.innerHTML = binding.value as string;
+        tooltipEl.style.opacity = "1";
         tooltipEl.classList.add("show");
       });
 
@@ -34,11 +41,10 @@ export const vTooltip = {
 
       el.addEventListener("mouseleave", () => {
         tooltipEl.classList.remove("show");
+        tooltipEl.style.opacity = "0";
         (tooltipEl as HTMLElement).innerHTML = "";
       });
     };
-
-    getTooltip();
   },
 
   updated(el: HTMLElement, binding: IBinding) {

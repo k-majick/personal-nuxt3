@@ -20,7 +20,7 @@
         )
       "
     ></div>
-    <Technologies :techs="technology?.items" />
+    <Technologies v-if="technology?.items.length" :techs="technology?.items" />
   </section>
 </template>
 

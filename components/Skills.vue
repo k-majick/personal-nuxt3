@@ -20,7 +20,8 @@ defineProps({
   },
   skills: {
     type: Array as PropType<any>,
-    required: true,
+    required: false,
+    default: () => [],
   },
 });
 

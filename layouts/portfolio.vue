@@ -14,7 +14,7 @@
       <slot />
     </main>
     <CookieBanner :theme="theme" />
-    <span ref="tooltipEl" class="tooltip"></span>
+    <span ref="tooltipEl" class="tooltip tooltip--portfolio"></span>
   </div>
 </template>
 

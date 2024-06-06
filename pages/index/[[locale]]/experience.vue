@@ -10,7 +10,7 @@
         )
       "
     ></div>
-    <Jobs :theme="theme" :jobs="jobs" />
+    <Jobs v-if="jobs?.length" :theme="theme" :jobs="jobs" />
     <Counter />
   </section>
 </template>
