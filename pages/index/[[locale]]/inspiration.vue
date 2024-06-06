@@ -1,10 +1,10 @@
 <template>
   <section class="main__card main__card--gallery">
     <div
-      v-if="pics"
+      v-if="page?.attributes.content"
       class="main__content"
       v-html="
-        DOMPurify.sanitize(marked.parse(pics.content as string) as string)
+        DOMPurify.sanitize(marked.parse(page?.attributes.content as string) as string)
       "
     ></div>
     <div

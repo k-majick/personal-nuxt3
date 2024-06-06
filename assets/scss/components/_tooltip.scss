@@ -1,6 +1,6 @@
 .tooltip {
   @include trans(0, opacity);
-  position: fixed;
+  position: absolute;
   z-index: 99;
   font-size: 0.9em;
   pointer-events: none;
