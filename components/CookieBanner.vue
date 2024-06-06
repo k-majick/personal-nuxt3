@@ -2,17 +2,17 @@
   <div v-if="!uiStore.consent" :class="`cookie cookie--${theme}`">
     <div class="cookie__container">
       <div class="cookie__info">
-        {{ $t("content.cookieBanner") }}
+        {{ $t("messages.cookieBanner") }}
       </div>
       <div class="cookie__actions">
         <button
-          class="main__button main__button--small"
+          class="main__button main__button--secondary main__button--small"
           @click="choose('essential')"
         >
-          Reject non-essential
+          {{ $t("ui.rejectNonEssential") }}
         </button>
         <button class="main__button main__button--small" @click="choose('all')">
-          Accept all
+          {{ $t("ui.acceptAll") }}
         </button>
       </div>
     </div>

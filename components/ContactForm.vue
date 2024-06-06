@@ -1,9 +1,4 @@
 <template>
-  <div
-    v-if="contact && contact.content"
-    class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(contact.content) as string)"
-  ></div>
   <div class="main__content">
     <form
       ref="form"
@@ -30,7 +25,7 @@
           class="form__input"
           @blur="v$.name.$touch()"
         />
-        <label class="form__label">{{ $t("content.name") }}</label>
+        <label class="form__label">{{ $t("ui.name") }}</label>
       </div>
       <div
         class="form__group"
@@ -51,7 +46,7 @@
           class="form__input"
           @blur="v$.email.$touch()"
         />
-        <label class="form__label">{{ $t("content.email") }}</label>
+        <label class="form__label">{{ $t("ui.email") }}</label>
       </div>
       <div
         class="form__group form__group--textarea"
@@ -72,7 +67,7 @@
           class="form__input"
           @blur="v$.message.$touch()"
         ></textarea>
-        <label class="form__label">{{ $t("content.message") }}</label>
+        <label class="form__label">{{ $t("ui.message") }}</label>
       </div>
       <div class="form__group form__group--submit">
         <button
@@ -81,7 +76,7 @@
           type="submit"
           @click="sendForm"
         >
-          {{ $t("content.sendIt") }}
+          {{ $t("ui.sendIt") }}
         </button>
       </div>
       <div v-if="sendError.length" class="form__group form__group--errors">
@@ -123,8 +118,6 @@
 
 <script lang="ts" setup>
 import { useUiStore } from "@/store/ui";
-import { useDataStore } from "@/store/data";
-import { marked } from "marked";
 import useVuelidate from "@vuelidate/core";
 import {
   email,
@@ -134,16 +127,11 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { useI18n } from "vue-i18n";
-import DOMPurify from "dompurify";
 
 const { t } = useI18n();
-const dataStore = useDataStore();
 const uiStore = useUiStore();
 const theme = computed(() => uiStore.currentTheme);
 
-const contact: Ref<any> = ref(
-  await dataStore.getContact(uiStore.currentLocale as string),
-);
 const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
 const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
 const sendError = ref<string>("");
@@ -211,7 +199,7 @@ const sendForm = async () => {
   }
 
   submitBtn.value.disabled = true;
-  submitBtn.value.innerHTML = t("content.sending");
+  submitBtn.value.innerHTML = t("ui.sending");
 
   const fd = {
     name: v$.value.name.$model,
@@ -228,21 +216,13 @@ const sendForm = async () => {
 
 const resetForm = () => {
   v$.value.$reset();
-  submitBtn.value.innerHTML = t("content.sendIt");
+  submitBtn.value.innerHTML = t("ui.sendIt");
   state.value = {
     name: "",
     email: "",
     message: "",
   };
 };
-
-watch(
-  () => uiStore.currentLocale,
-  async () =>
-    (contact.value = await dataStore.getContact(
-      uiStore.currentLocale as string,
-    )),
-);
 </script>
 
 <style lang="scss" scoped>

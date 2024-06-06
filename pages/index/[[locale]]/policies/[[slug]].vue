@@ -4,7 +4,7 @@
 
     <div v-if="updatedAt" class="main__content">
       <p>
-        <b>{{ $t("content.updatedAt") }}:</b> {{ updatedAt }}
+        <b>{{ $t("ui.updatedAt") }}:</b> {{ updatedAt }}
       </p>
     </div>
 
@@ -50,9 +50,10 @@ watchEffect(async (): Promise<IResponse | void> => {
   }
 
   page.value = pageData;
+  dataStore.loading = false;
 
   useHead({
-    titleTemplate: `${config.public.appName} | ${page?.value?.attributes?.title}`,
+    titleTemplate: `${config.public.appTitle} | ${page?.value?.attributes?.title}`,
   });
 });
 </script>

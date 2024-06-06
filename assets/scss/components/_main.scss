@@ -186,12 +186,29 @@
   &__button {
     @include button;
 
-    &--small {
-      padding: 7.5px 15px;
+    &::first-letter {
+      text-transform: uppercase;
     }
 
-    & + & {
-      margin-left: 7.5px;
+    &--danger {
+      @include button("danger");
+    }
+
+    &--primary {
+      @include button("primary");
+    }
+
+    &--secondary {
+      @include button("secondary");
+    }
+
+    &--ternary {
+      @include button("ternary");
+    }
+
+    &--small {
+      padding: 10px;
+      font-size: small;
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="loader__wrapper">
-    <div :class="`loader loader--${theme}`">
+  <div :class="`loader loader--${theme}`">
+    <div class="loader__wrapper">
       <div class="loader__container">
         <div class="loader__ray loader__ray--1"></div>
         <div class="loader__ray loader__ray--2"></div>

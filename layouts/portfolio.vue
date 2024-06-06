@@ -2,19 +2,14 @@
   <div :class="`theme theme--${theme}`">
     <div class="theme__background"></div>
     <Loader v-if="isLoading" />
-    <Header v-show="!isLoading" ref="headerRef" />
-    <Burger
-      v-show="!isLoading"
-      :nav-active="isNavActivated"
-      @toggle-nav="toggleNav"
-    />
+    <Header ref="headerRef" />
+    <Burger :nav-active="isNavActivated" @toggle-nav="toggleNav" />
     <Nav
-      v-show="!isLoading"
       :is-activated="isNavActivated"
       :is-active="uiStore.navActive"
       @close-nav="isNavActivated = false"
     />
-    <main v-show="!isLoading" ref="mainEl" class="main main--portfolio">
+    <main ref="mainEl" class="main main--portfolio">
       <div class="main__background"></div>
       <slot />
     </main>

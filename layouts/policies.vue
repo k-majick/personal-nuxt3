@@ -2,26 +2,10 @@
   <div :class="`theme theme--${theme}`">
     <div class="theme__background"></div>
     <Loader v-if="isLoading" />
-    <PoliciesHeader
-      v-show="!isLoading"
-      :nav-active="navActive"
-      @toggle-nav="toggleNav"
-    />
-    <Burger
-      v-show="!isLoading"
-      :nav-active="navActive"
-      @toggle-nav="toggleNav"
-    />
-    <PoliciesNav
-      v-show="!isLoading"
-      :is-active="navActive"
-      @close-nav="navActive = false"
-    />
-    <main
-      v-show="!isLoading"
-      class="main main--policies"
-      :class="`main--${theme}`"
-    >
+    <PoliciesHeader :nav-active="navActive" @toggle-nav="toggleNav" />
+    <Burger :nav-active="navActive" @toggle-nav="toggleNav" />
+    <PoliciesNav :is-active="navActive" @close-nav="navActive = false" />
+    <main class="main main--policies" :class="`main--${theme}`">
       <div class="main__background"></div>
       <slot />
     </main>

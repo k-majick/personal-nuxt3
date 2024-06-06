@@ -62,6 +62,7 @@ watchEffect(async (): Promise<IResponse | void> => {
 
   page.value = pageData;
   pics.value = picsData;
+  dataStore.loading = false;
 
   useHead({
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,

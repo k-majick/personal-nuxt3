@@ -3,33 +3,33 @@
     <div class="counter">
       <span v-if="counter('y')">
         <span class="counter__value">{{ counter("y") }}</span
-        >&nbsp;<span v-if="counter('y') === 1">{{ $t("content.year") }}</span
+        >&nbsp;<span v-if="counter('y') === 1">{{ $t("ui.year") }}</span
         ><span v-else>
           {{
             counter("y") > 1 && counter("y") < 5
-              ? $t("content.years2")
-              : $t("content.years")
+              ? $t("ui.years2")
+              : $t("ui.years")
           }}
         </span>
       </span>
       <span v-if="counter('y') && counter('m')">
-        &nbsp;{{ $t("content.and") }}&nbsp;
+        &nbsp;{{ $t("ui.and") }}&nbsp;
       </span>
       <span v-if="counter('m')">
         <span class="counter__value">{{ counter("m") }}</span
         >&nbsp;<span v-if="counter('m') && counter('m') === 1">{{
-          $t("content.month")
+          $t("ui.month")
         }}</span>
         <span v-else>
           {{
             counter("m") > 1 && counter("m") < 5
-              ? $t("content.months2")
-              : $t("content.months")
+              ? $t("ui.months2")
+              : $t("ui.months")
           }}
         </span>
       </span>
     </div>
-    <p>{{ $t("content.ofExperience") }}</p>
+    <p>{{ $t("ui.ofExperience") }}</p>
   </div>
 </template>
 

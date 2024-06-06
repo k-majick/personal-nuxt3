@@ -53,6 +53,7 @@ export const useDataStore = defineStore({
   actions: {
     async getPage(locale: string, slug: string) {
       const apolloClient = nuxtApp.$apolloClient;
+      this.loading = true;
 
       try {
         const { data } = await apolloClient.query({
@@ -60,7 +61,6 @@ export const useDataStore = defineStore({
         });
 
         this.page = data.page.data;
-        this.loading = false;
 
         return this.page;
       } catch (error) {
@@ -78,7 +78,6 @@ export const useDataStore = defineStore({
         });
 
         this.pages = data.pages.data;
-        this.loading = false;
 
         return this.pages;
       } catch (error) {
@@ -97,7 +96,6 @@ export const useDataStore = defineStore({
         });
 
         this.posts = data.posts.data;
-        this.loading = false;
 
         return this.posts;
       } catch (error) {
@@ -116,7 +114,6 @@ export const useDataStore = defineStore({
         });
 
         this.skills = data.skills.data.attributes;
-        this.loading = false;
 
         return this.skills;
       } catch (error) {
@@ -135,7 +132,6 @@ export const useDataStore = defineStore({
         });
 
         this.technology = data.technology.data.attributes;
-        this.loading = false;
 
         return this.technology;
       } catch (error) {
@@ -154,7 +150,6 @@ export const useDataStore = defineStore({
         });
 
         this.experience = data.experience.data.attributes;
-        this.loading = false;
 
         return this.experience;
       } catch (error) {
@@ -173,7 +168,6 @@ export const useDataStore = defineStore({
         });
 
         this.portfolio = data.portfolio.data.attributes;
-        this.loading = false;
 
         return this.portfolio;
       } catch (error) {
@@ -192,7 +186,6 @@ export const useDataStore = defineStore({
         });
 
         this.contact = data.contact.data.attributes;
-        this.loading = false;
 
         return this.contact;
       } catch (error) {
@@ -211,7 +204,6 @@ export const useDataStore = defineStore({
         });
 
         this.inspiration = data.inspiration.data.attributes;
-        this.loading = false;
 
         return this.inspiration;
       } catch (error) {

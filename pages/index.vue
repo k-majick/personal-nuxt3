@@ -9,7 +9,7 @@
       `"
     >
       <transition name="fade" mode="out-in">
-        <component :is="Component" :key="route.name as string" />
+        <component :is="Component" :key="route.name" />
       </transition>
     </div>
   </router-view>

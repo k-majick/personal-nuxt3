@@ -1,50 +1,32 @@
 <template>
-  <div
-    v-if="skills && skills.content"
-    class="main__content"
-    v-html="DOMPurify.sanitize(marked.parse(skills.content) as string)"
-  ></div>
-  <div v-if="skills && skills.sets" class="main__content skill__container">
+  <div v-if="skills?.length" class="main__content skill__container">
     <div
-      v-for="set in skills.sets"
-      :key="set.name"
+      v-for="skill in skills"
+      :key="skill.name"
       :class="`skill skill--${theme}`"
     >
-      <div class="skill__bar" :style="skillBarWidth(set.value)"></div>
-      <div class="skill__title">{{ set.name }}</div>
-      <div class="skill__percent">{{ set.value }}%</div>
+      <div class="skill__bar" :style="skillBarWidth(skill.value)"></div>
+      <div class="skill__title">{{ skill.name }}</div>
+      <div class="skill__percent">{{ skill.value }}%</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useDataStore } from "@/store/data";
-import { useUiStore } from "@/store/ui";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
-
-const dataStore = useDataStore();
-const uiStore = useUiStore();
-const skills: Ref<any> = ref(
-  await dataStore.getSkills(uiStore.currentLocale as string),
-);
-
-const skillBarWidth = (v: number) => ({
-  width: v + "%",
-});
-
 defineProps({
   theme: {
     type: String,
     required: true,
   },
+  skills: {
+    type: Array as PropType<any>,
+    required: true,
+  },
 });
 
-watch(
-  () => uiStore.currentLocale,
-  async () =>
-    (skills.value = await dataStore.getSkills(uiStore.currentLocale as string)),
-);
+const skillBarWidth = (v: number) => ({
+  width: v + "%",
+});
 </script>
 
 <style lang="scss" scoped>

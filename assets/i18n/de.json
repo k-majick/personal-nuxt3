@@ -11,9 +11,10 @@
     "switch2dark": "In den Dunkelmodus Wechseln",
     "sentTitle": "Vielen Dank für Ihre Nachricht!",
     "sentMessage": "Ich werde so schnell wie möglich antworten.",
-    "sendError": "Entschuldigung, etwas ist schief gelaufen... Bitte neu laden und erneut versuchen"
+    "sendError": "Entschuldigung, etwas ist schief gelaufen... Bitte neu laden und erneut versuchen",
+    "cookieBanner": "Wir verwenden Cookies und ähnliche Technologien zur Bereitstellung, Wartung und Verbesserung unserer Dienste sowie für Sicherheitszwecke."
   },
-  "content": {
+  "ui": {
     "and": "und",
     "year": "Jahr",
     "years": "Jahre",
@@ -36,7 +37,8 @@
     "privacyPolicy": "Datenschutz-Bestimmungen",
     "about": "Über uns",
     "updatedAt": "Letzte Aktualisierung",
-    "cookieBanner": "Wir verwenden Cookies und ähnliche Technologien zur Bereitstellung, Wartung und Verbesserung unserer Dienste sowie für Sicherheitszwecke."
+    "rejectNonEssential": "Nicht wesentliche ablehnen",
+    "acceptAll": "Alle akzeptieren"
   },
   "validation": {
     "nameRequired": "Bitte geben Sie Ihren Namen ein",
