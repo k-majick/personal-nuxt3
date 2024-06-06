@@ -3,7 +3,9 @@
     <div
       v-if="pics"
       class="main__content"
-      v-html="DOMPurify.sanitize(marked.parse(pics.content as string) as string)"
+      v-html="
+        DOMPurify.sanitize(marked.parse(pics.content as string) as string)
+      "
     ></div>
     <div
       v-if="pics?.pictures.length"
@@ -46,8 +48,13 @@ const page: Ref<IResponse | undefined> = ref();
 const pics: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
-  const picsData = await dataStore.getInspiration(uiStore.currentLocale as string) as IResponse;
+  const pageData = await dataStore.getPage(
+    uiStore.currentLocale as string,
+    getSlug(route.path as string),
+  );
+  const picsData = (await dataStore.getInspiration(
+    uiStore.currentLocale as string,
+  )) as IResponse;
 
   if (!pageData) {
     return;
@@ -55,6 +62,7 @@ watchEffect(async (): Promise<IResponse | void> => {
 
   page.value = pageData;
   pics.value = picsData;
+  dataStore.loading = false;
 
   useHead({
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,

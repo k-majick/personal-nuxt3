@@ -1,17 +1,17 @@
 [
   {
     "to": "/",
-    "title": "content.about",
+    "title": "ui.about",
     "useLocale": false
   },
   {
     "to": "/policies/terms-of-use",
-    "title": "content.termsOfUse",
+    "title": "ui.termsOfUse",
     "useLocale": true
   },
   {
     "to": "/policies/privacy-policy",
-    "title": "content.privacyPolicy",
+    "title": "ui.privacyPolicy",
     "useLocale": true
   }
 ]

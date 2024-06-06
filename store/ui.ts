@@ -3,15 +3,17 @@ import { defineStore } from "pinia";
 interface IUiState {
   theme: string;
   locale: string;
-  navActive: boolean,
+  navActive: boolean;
+  consent: string;
 }
 
 export const useUiStore = defineStore({
-  id: "settings-store",
+  id: "ui-store",
   state: (): IUiState => ({
     theme: "lite",
     locale: "en",
     navActive: false,
+    consent: "",
   }),
   actions: {
     setTheme(theme: string) {
@@ -38,7 +40,7 @@ export const useUiStore = defineStore({
       }
     },
 
-    async consent(action: string, consent?: string) {
+    async doConsentAction(action: string, consent?: string) {
       try {
         const res = await fetch(`/.netlify/functions/server/consent${action}`, {
           method: "POST",

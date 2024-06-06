@@ -186,12 +186,29 @@
   &__button {
     @include button;
 
-    &--small {
-      padding: 7.5px 15px;
+    &::first-letter {
+      text-transform: uppercase;
     }
 
-    & + & {
-      margin-left: 7.5px;
+    &--danger {
+      @include button("danger");
+    }
+
+    &--primary {
+      @include button("primary");
+    }
+
+    &--secondary {
+      @include button("secondary");
+    }
+
+    &--ternary {
+      @include button("ternary");
+    }
+
+    &--small {
+      padding: 10px;
+      font-size: small;
     }
   }
 
@@ -265,7 +282,11 @@
   &--lite {
     #{$self}__background {
       &::before {
-        background: linear-gradient(to bottom, transparentize($color-white, 0) 0%, transparentize($color-white, 1) 80%);
+        background: linear-gradient(
+          to bottom,
+          transparentize($color-white, 0) 0%,
+          transparentize($color-white, 1) 80%
+        );
       }
     }
   }
@@ -273,7 +294,11 @@
   &--dark {
     #{$self}__background {
       &::before {
-        background: linear-gradient(to bottom, transparentize($color-black, 0.1) 0%, transparentize($color-black, 1) 80%);
+        background: linear-gradient(
+          to bottom,
+          transparentize($color-black, 0.1) 0%,
+          transparentize($color-black, 1) 80%
+        );
       }
     }
   }

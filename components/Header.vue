@@ -1,5 +1,5 @@
 <template>
-  <header 
+  <header
     ref="headerEl"
     class="header header--portfolio"
     :class="`header--${theme}`"

@@ -11,9 +11,10 @@
     "switch2dark": "Tryb ciemny",
     "sentTitle": "Dziękuję za wiadomość!",
     "sentMessage": "Odpowiem tak szybko, jak mogę.",
-    "sendError": "Niestety coś poszło nie tak... Proszę przeładować stronę i spróbować ponownie"
+    "sendError": "Niestety coś poszło nie tak... Proszę przeładować stronę i spróbować ponownie",
+    "cookieBanner": "We use cookies and similar technologies to deliver, maintain, improve our services and for security purposes."
   },
-  "content": {
+  "ui": {
     "and": "i",
     "year": "rok",
     "years": "lat",
@@ -36,7 +37,8 @@
     "privacyPolicy": "Polityka prywatności",
     "about": "O nas",
     "updatedAt": "Ostatnia aktualizacja",
-    "cookieBanner": "Używamy plików cookie i podobnych technologii w celu dostarczania, utrzymywania i ulepszania naszych usług oraz ze względów bezpieczeństwa."
+    "rejectNonEssential": "Odrzuć opcjonalne",
+    "acceptAll": "Zaakceptuj wszystkie"
   },
   "validation": {
     "nameRequired": "Podaj swoje imię",

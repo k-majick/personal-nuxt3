@@ -59,7 +59,7 @@
     </template>
     <template #action>
       <a class="main__button" :href="activeProject.url" target="_blank">{{
-        $t("content.gotoSite")
+        $t("ui.gotoSite")
       }}</a>
     </template>
   </Dialog>
@@ -68,7 +68,7 @@
 <script lang="ts" setup>
 import type { IItem } from "@/types/common";
 import SwiperCore from "swiper";
-import { Navigation } from 'swiper/modules';
+import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 
@@ -140,16 +140,16 @@ defineProps({
     align-items: center;
     justify-content: center;
     padding: 27.5px 30px;
-    transform: opacity 0.5s;
 
     &:after {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -60%);
-      display: block;
+      transform: translate(-50%, -75%);
+      height: 30px;
       font-size: 2.25em;
       font-weight: normal;
+      line-height: 1;
     }
   }
 

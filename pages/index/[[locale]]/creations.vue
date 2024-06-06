@@ -3,7 +3,7 @@
     <section class="blog">
       <div class="blog__container">
         <h3 class="blog__title">
-          {{ $t("content.latestArticles") }} <sup>(English)</sup>
+          {{ $t("ui.latestArticles") }} <sup>(English)</sup>
         </h3>
         <article
           v-for="(post, index) in posts"
@@ -14,7 +14,9 @@
             <img alt="" :src="post.attributes.Post.imageUrl" />
           </div>
           <div class="post__container">
-            <h2 class="post__title">{{ post.attributes.Post.title }}</h2>
+            <a :href="post.attributes.Post.link" target="_blank">
+              <h2 class="post__title">{{ post.attributes.Post.title }}</h2>
+            </a>
             <div class="main__label">{{ post.attributes.Post.date }}</div>
             <div class="post__content">
               <p>{{ post.attributes.Post.lead }}</p>
@@ -24,7 +26,7 @@
               class="main__button post__action"
               target="_blank"
             >
-              {{ $t("content.readMore") }}
+              {{ $t("ui.readMore") }}
             </a>
           </div>
         </article>
@@ -32,18 +34,22 @@
     </section>
     <section class="blog blog--featured">
       <div class="blog__container">
-        <h3 class="blog__title">{{ $t("content.featuredProjects") }}</h3>
+        <h3 class="blog__title">{{ $t("ui.featuredProjects") }}</h3>
         <div
-          v-if="portfolio && portfolio.content"
+          v-if="page?.attributes.content"
           class="post__content"
-          v-html="DOMPurify.sanitize(marked.parse(portfolio.content as string) as string)"
+          v-html="
+            DOMPurify.sanitize(
+              marked.parse(page?.attributes.content as string) as string,
+            )
+          "
         ></div>
       </div>
 
       <Projects
         v-if="portfolio?.projects && portfolio.projects.length"
         :theme="theme"
-        :projects="(portfolio.projects as Array<IItem>)"
+        :projects="portfolio.projects as Array<IItem>"
       />
     </section>
   </div>
@@ -69,19 +75,27 @@ const posts: Ref<Array<IResponse> | undefined> = ref();
 const portfolio: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(uiStore.currentLocale as string, getSlug(route.path as string));
+  const pageData = await dataStore.getPage(
+    uiStore.currentLocale as string,
+    getSlug(route.path as string),
+  );
   const postsData = (await dataStore.getPosts()) as Array<IResponse>;
-  const portfolioData = (await dataStore.getPortfolio(uiStore.currentLocale as string)) as IResponse;
+  const portfolioData = (await dataStore.getPortfolio(
+    uiStore.currentLocale as string,
+  )) as IResponse;
 
-  if (pageData) {
-    page.value = pageData;
-    posts.value = postsData;
-    portfolio.value = portfolioData;
-
-    useHead({
-      titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
-    });
+  if (!pageData || !postsData || !portfolioData) {
+    return;
   }
+
+  page.value = pageData;
+  posts.value = postsData;
+  portfolio.value = portfolioData;
+  dataStore.loading = false;
+
+  useHead({
+    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
+  });
 });
 
 definePageMeta({

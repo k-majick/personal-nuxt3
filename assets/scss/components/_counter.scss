@@ -16,6 +16,6 @@
     white-space: nowrap;
     font-size: 0.85em;
     @include label-face;
-    @include button-actions;
+    @include button-actions(label);
   }
 }

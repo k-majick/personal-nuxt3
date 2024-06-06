@@ -1,7 +1,7 @@
 <template>
-  <div 
-    class="burger" 
-    :class="{ active: navActive }" 
+  <div
+    class="burger"
+    :class="{ active: navActive }"
     @click="$emit('toggleNav')"
   >
     <span class="burger__bar"></span>

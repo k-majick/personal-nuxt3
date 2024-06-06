@@ -7,11 +7,10 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  font-weight: bolder;
 
   &__item {
     @include label-base;
     @include label-face;
-    @include button-actions;
+    @include button-actions(label);
   }
 }

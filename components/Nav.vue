@@ -12,7 +12,7 @@
           >Start</a
         >
       </li>
-      <li v-for="page in pages" :key="(page.id as string)" class="nav__item">
+      <li v-for="page in pages" :key="page.id as string" class="nav__item">
         <nuxt-link
           :to="page.attributes.slug"
           class="nav__link"
@@ -73,7 +73,7 @@ import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 import type { IResponse } from "@/types/common";
 
 defineProps({
-  isActivated: {    
+  isActivated: {
     type: Boolean,
     required: true,
   },

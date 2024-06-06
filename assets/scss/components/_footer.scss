@@ -20,7 +20,7 @@
       margin-right: 0;
     }
   }
-  
+
   &__title {
     text-indent: -9999px;
     margin: 15px 0;
@@ -41,12 +41,12 @@
       color: $color-red;
     }
   }
-  
+
   &--dark {
     #{$self}__logo {
       background-image: url("@/assets/gfx/clf-logo-full-dark-min.svg");
     }
-    
+
     #{$self}__copy {
       color: $color-green;
     }

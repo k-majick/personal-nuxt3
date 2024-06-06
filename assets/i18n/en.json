@@ -11,9 +11,10 @@
     "switch2dark": "Switch to dark mode",
     "sentTitle": "Thank you for your message!",
     "sentMessage": "I'll respond as soon as I can.",
-    "sendError": "Sorry, something went wrong... Please reload and try again"
+    "sendError": "Sorry, something went wrong... Please reload and try again",
+    "cookieBanner": "We use cookies and similar technologies to deliver, maintain, improve our services and for security purposes."
   },
-  "content": {
+  "ui": {
     "and": "and",
     "year": "year",
     "years": "years",
@@ -36,7 +37,8 @@
     "privacyPolicy": "Privacy policy",
     "about": "About us",
     "updatedAt": "Last update",
-    "cookieBanner": "We use cookies and similar technologies to deliver, maintain, improve our services and for security purposes."
+    "rejectNonEssential": "Reject non-essential",
+    "acceptAll": "Accept all"
   },
   "validation": {
     "nameRequired": "Please enter your name",
