@@ -15,6 +15,21 @@ export const GET_PAGES = (locale: string) => gql`
   }
 `;
 
+export const GET_PAGE = (locale: string, slug: string) => gql`
+  query PageBySlug {
+    page(locale: "${locale}", slug: "${slug}") {
+      data {
+        id
+        attributes {
+          title
+          content
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+
 export const GET_POSTS = () => gql`
   query Posts {
     posts {
@@ -34,28 +49,12 @@ export const GET_POSTS = () => gql`
   }
 `;
 
-export const GET_PAGE = (locale: string, slug: string) => gql`
-  query PageBySlug {
-    page(locale: "${locale}", slug: "${slug}") {
-      data {
-        id
-        attributes {
-          title
-          content
-          updatedAt
-        }
-      }
-    }
-  }
-`;
-
 export const GET_SKILLS = (locale: string) => gql`
   query Skills {
     skills(locale: "${locale}") {
       data {
         id
         attributes {
-          content
           sets {
             name
             value
@@ -72,7 +71,6 @@ export const GET_TECHNOLOGY = (locale: string) => gql`
       data {
         id
         attributes {
-          content
           items {
             name
           }
@@ -88,7 +86,6 @@ export const GET_EXPERIENCE = (locale: string) => gql`
       data {
         id
         attributes {
-          content
           workplaces {
             name
             position
@@ -109,7 +106,6 @@ export const GET_PORTFOLIO = (locale: string) => gql`
       data {
         id
         attributes {
-          content
           projects {
             name
             date
@@ -124,26 +120,12 @@ export const GET_PORTFOLIO = (locale: string) => gql`
   }
 `;
 
-export const GET_CONTACT = (locale: string) => gql`
-  query Contact {
-    contact(locale: "${locale}") {
-      data {
-        id
-        attributes {
-          content
-        }
-      }
-    }
-  }
-`;
-
 export const GET_INSPIRATION = (locale: string) => gql`
   query Inspiration {
     inspiration(locale: "${locale}") {
       data {
         id
         attributes {
-          content
           pictures {
             title
             imageUrl

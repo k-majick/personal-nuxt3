@@ -7,7 +7,6 @@ import {
   GET_TECHNOLOGY,
   GET_EXPERIENCE,
   GET_PORTFOLIO,
-  GET_CONTACT,
   GET_INSPIRATION,
 } from "@/api/queries";
 
@@ -170,24 +169,6 @@ export const useDataStore = defineStore({
         this.portfolio = data.portfolio.data.attributes;
 
         return this.portfolio;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
-    },
-
-    async getContact(locale: string) {
-      const apolloClient = nuxtApp.$apolloClient;
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient.query({
-          query: GET_CONTACT(locale),
-        });
-
-        this.contact = data.contact.data.attributes;
-
-        return this.contact;
       } catch (error) {
         console.error(error);
         this.loadError = true;
