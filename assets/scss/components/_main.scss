@@ -97,18 +97,32 @@
       z-index: -1;
       mask-image: linear-gradient(
         135deg,
-        transparent 0% 2.5%,
-        $color-white 2.5% 97.55%,
-        transparent 97.55% 100%
+        transparent 0 30px,
+        $color-white 30px calc(100% - 30px),
+        transparent calc(100% - 30px) 100%
       );
       background-image: linear-gradient(
         135deg,
-        transparent 2.45%,
-        var(--color-secondary) 2.45% 25%,
-        var(--color-secondary-trans) 75% 97.45%,
-        transparent 97.55% 100%
+        transparent 30px,
+        var(--color-secondary) 30px 25%,
+        var(--color-secondary-trans) 75% 100%,
       );
       backdrop-filter: blur(3px);
+
+      @include media("<=m") {
+        mask-image: linear-gradient(
+          135deg,
+          transparent 0 15px,
+          $color-white 15px calc(100% - 15px),
+          transparent calc(100% - 15px) 100%
+        );
+        background-image: linear-gradient(
+          135deg,
+          transparent 15px,
+          var(--color-secondary) 15px 25%,
+          var(--color-secondary-trans) 75% 100%,
+        );
+      }
     }
 
     &:after {
@@ -119,10 +133,21 @@
       z-index: -2;
       background-image: linear-gradient(
         135deg,
-        transparent 2.5%,
-        var(--color-primary) 2.5% 25%,
-        transparent 30%
+        transparent 30px,
+        var(--color-primary) 0 25%,
+        transparent 33%
       );
+      height: min(50vh, 640px);
+      width: max(50vw, 300px);
+
+      @include media("<=m") {
+        background-image: linear-gradient(
+          135deg,
+          transparent 15px,
+          var(--color-primary) 0 25%,
+          transparent 33%
+        );
+      }
     }
 
     &--gallery {
