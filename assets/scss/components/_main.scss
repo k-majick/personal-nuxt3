@@ -193,9 +193,16 @@
       }
     }
 
-    > p {
+    > p, ul {
       @include text;
+    }
+
+    > p {
       text-align: center;
+    }
+
+    &--doc {
+      font-size: 0.9em;
     }
 
     &--justify {

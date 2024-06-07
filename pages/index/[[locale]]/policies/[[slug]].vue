@@ -1,6 +1,6 @@
 <template>
   <section v-if="page?.attributes" class="main__card">
-    <h2 class="main__title">{{ page?.attributes.title }}</h2>
+    <h1 class="main__title">{{ page?.attributes.title }}</h1>
 
     <div v-if="updatedAt" class="main__content">
       <p>
@@ -9,7 +9,7 @@
     </div>
 
     <div
-      class="main__content main__content--justify"
+      class="main__content main__content--justify main__content--doc"
       v-html="
         DOMPurify.sanitize((pageContent ? marked(pageContent) : '') as string)
       "
