@@ -157,7 +157,6 @@
 
     &:hover,
     &:focus {
-      // border-color: var(--color-secondary);
       box-shadow: inset 0 0 10px var(--color-secondary);
     }
   }
@@ -214,14 +213,12 @@
   justify-content: center;
   flex: 0;
   font-size: 0.85em;
-  // font-weight: bold;
   white-space: nowrap;
 }
 @mixin label-face {
   border: 2px solid;
   border-color: var(--color-quaternary);
   background-color: var(--color-secondary);
-  // box-shadow: inset 0 0 10px var(--color-quaternary);
   color: var(--color-quaternary);
 }
 @mixin label {
