@@ -2,15 +2,18 @@
   <div :class="`theme theme--${theme}`">
     <div class="theme__background"></div>
     <Loader v-if="isLoading" />
-    <Header ref="headerRef" />
     <Burger :nav-active="isNavActivated" @toggle-nav="toggleNav" />
+    <Header ref="headerRef" />
     <Nav
       :is-activated="isNavActivated"
       :is-active="uiStore.navActive"
       @close-nav="isNavActivated = false"
     />
-    <main ref="mainEl" class="main main--portfolio">
-      <div class="main__background"></div>
+    <main
+      ref="mainEl" 
+      class="main main--portfolio"
+      :class="[`main--${theme}`, { 'main--loading': isLoading, 'main--active': uiStore.navActive }]"
+    >
       <slot />
     </main>
     <CookieBanner :theme="theme" />

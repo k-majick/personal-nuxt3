@@ -8,9 +8,7 @@
         ${activeDialog ? 'main__container--hasactiveDialog' : ''}
       `"
     >
-      <transition name="fade" mode="out-in">
-        <component :is="Component" :key="route.name" />
-      </transition>
+      <component :is="Component" :key="route.name" />
     </div>
   </router-view>
 </template>
@@ -68,12 +66,4 @@ const enableGtag = () => {
 @import "@/assets/scss/components/burger";
 @import "@/assets/scss/components/tooltip";
 @import "@/assets/scss/components/dialog";
-
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  transition: opacity 0.5s ease-out;
-}
 </style>

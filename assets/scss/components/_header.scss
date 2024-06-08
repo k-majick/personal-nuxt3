@@ -3,7 +3,8 @@
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  z-index: 2;
+  z-index: 3;
+  transition: opacity 0.5s ease-in-out;
 
   &__control {
     display: flex;
@@ -164,9 +165,14 @@
     }
   }
 
+  &--loading {
+    opacity: 0;
+  }
+
   &--portfolio {
     position: relative;
     height: 100vh;
+    // height: 200vh;
 
     #{$self}__control {
       @include media("<=m") {

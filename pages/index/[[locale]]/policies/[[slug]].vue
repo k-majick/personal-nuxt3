@@ -9,7 +9,7 @@
     </div>
 
     <div
-      class="main__content main__content--justify main__content--doc"
+      class="main__content main__content--justify"
       v-html="
         DOMPurify.sanitize((pageContent ? marked(pageContent) : '') as string)
       "
@@ -53,7 +53,7 @@ watchEffect(async (): Promise<IResponse | void> => {
   dataStore.loading = false;
 
   useHead({
-    titleTemplate: `${config.public.appTitle} | ${page?.value?.attributes?.title}`,
+    titleTemplate: `${page?.value?.attributes?.title} | ${config.public.appTitle}`,
   });
 });
 </script>

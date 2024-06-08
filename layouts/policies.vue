@@ -2,11 +2,13 @@
   <div :class="`theme theme--${theme}`">
     <div class="theme__background"></div>
     <Loader v-if="isLoading" />
-    <PoliciesHeader :nav-active="navActive" @toggle-nav="toggleNav" />
     <Burger :nav-active="navActive" @toggle-nav="toggleNav" />
+    <PoliciesHeader :nav-active="navActive" @toggle-nav="toggleNav" />
     <PoliciesNav :is-active="navActive" @close-nav="navActive = false" />
-    <main class="main main--policies" :class="`main--${theme}`">
-      <div class="main__background"></div>
+    <main
+      class="main main--policies main--active" 
+      :class="[`main--${theme}`, { 'main--loading': isLoading }]"
+    >
       <slot />
     </main>
     <CookieBanner :theme="theme" />

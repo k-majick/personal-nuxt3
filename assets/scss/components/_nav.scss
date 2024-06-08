@@ -16,7 +16,7 @@
     #{$self}__link.active {
       &:after {
         width: 50vw;
-        transition: width 2s linear 1s;
+        transition: width 2s linear 2s;
         max-width: 60vh;
       }
     }
