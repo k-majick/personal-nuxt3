@@ -43,9 +43,7 @@ const choose = (choice: string) => {
   });
 };
 
-
 const privacyUrl = computed(() => `${config.public.appUrl}/${locale.value}/policies/privacy-policy`);
-console.dir(privacyUrl.value)
 </script>
 
 <style lang="scss">
