@@ -33,7 +33,6 @@ import CookieBanner from "@/components/CookieBanner.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const config = useRuntimeConfig();
 
 const theme = computed(() => uiStore.currentTheme);
 const isLoading = computed(() => dataStore.loading || dataStore.loadError);
