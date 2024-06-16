@@ -15,7 +15,9 @@
 
 <script lang="ts" setup>
 import { useUiStore } from "@/store/ui";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
 
@@ -57,6 +59,10 @@ const enableGtag = () => {
   gtag("js", new Date());
   gtag("config", config.public.appGtag);
 };
+
+useSeoMeta({
+  description: () => t('meta.description'),
+});
 </script>
 
 <style lang="scss">

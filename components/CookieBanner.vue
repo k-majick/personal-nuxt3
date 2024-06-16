@@ -1,8 +1,10 @@
 <template>
   <div v-if="!uiStore.consent" :class="`cookie cookie--${theme}`">
     <div class="cookie__container">
-      <div class="cookie__info">
-        {{ $t("messages.cookieBanner") }}
+      <div
+        class="cookie__info"
+        v-html="DOMPurify.sanitize($t('messages.cookieBanner', { privacyUrl }))"
+       >
       </div>
       <div class="cookie__actions">
         <button
@@ -21,6 +23,8 @@
 
 <script lang="ts" setup>
 import { useUiStore } from "@/store/ui";
+import { useI18n } from "vue-i18n";
+import DOMPurify from "dompurify";
 
 defineProps({
   theme: {
@@ -29,13 +33,19 @@ defineProps({
   },
 });
 
+const config = useRuntimeConfig();
 const uiStore = useUiStore();
+const { locale } = useI18n({ useScope: "global" });
 
 const choose = (choice: string) => {
   uiStore.doConsentAction("Save", choice).then(res => {
     uiStore.consent = res?.status === 200 ? choice : "essential";
   });
 };
+
+
+const privacyUrl = computed(() => `${config.public.appUrl}/${locale.value}/policies/privacy-policy`);
+console.dir(privacyUrl.value)
 </script>
 
 <style lang="scss">

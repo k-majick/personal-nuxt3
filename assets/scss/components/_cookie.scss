@@ -39,8 +39,17 @@
 
   &__info {
     font-size: small;
-    display: flex;
     align-items: center;
     font-family: $font-secondary;
+    display: flex;
+    justify-content: center;
+
+    a {
+      color: var(--color-primary);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }

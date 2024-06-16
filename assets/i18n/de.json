@@ -12,7 +12,7 @@
     "sentTitle": "Vielen Dank für Ihre Nachricht!",
     "sentMessage": "Ich werde so schnell wie möglich antworten.",
     "sendError": "Entschuldigung, etwas ist schief gelaufen... Bitte neu laden und erneut versuchen",
-    "cookieBanner": "Wir verwenden Cookies und ähnliche Technologien zur Bereitstellung, Wartung und Verbesserung unserer Dienste sowie für Sicherheitszwecke."
+    "cookieBanner": "<span>Wir verwenden Cookies und ähnliche Technologien zur Bereitstellung, Wartung und Verbesserung unserer Dienste sowie für Sicherheitszwecke. Hier geht's zur <a href='{privacyUrl}' target='_blank'>Datenschutzerklärung</a></span>"
   },
   "ui": {
     "and": "und",
@@ -34,7 +34,7 @@
     "featuredProjects": "Vorgestellte Projekte",
     "reserved": "Alle Rechte vorbehalten",
     "termsOfUse": "Nutzungsbedingungen",
-    "privacyPolicy": "Datenschutz-Bestimmungen",
+    "privacyPolicy": "Datenschutzerklärung",
     "about": "Über uns",
     "updatedAt": "Letzte Aktualisierung",
     "rejectNonEssential": "Nicht wesentliche ablehnen",
@@ -51,5 +51,8 @@
     "messageRequired": "Bitte geben Sie Ihre Nachricht ein",
     "messageMin": "Nachricht ist zu kurz",
     "messageMax": "Die Nachricht darf 1000 Zeichen nicht überschreiten"
+  },
+  "meta": {
+    "description": "Professioneller Full-Stack-JavaScript-Entwickler zu mieten"
   }
 }

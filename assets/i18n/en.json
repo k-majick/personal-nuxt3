@@ -12,7 +12,7 @@
     "sentTitle": "Thank you for your message!",
     "sentMessage": "I'll respond as soon as I can.",
     "sendError": "Sorry, something went wrong... Please reload and try again",
-    "cookieBanner": "We use cookies and similar technologies to deliver, maintain, improve our services and for security purposes."
+    "cookieBanner": "<span>We use cookies to deliver, maintain, improve our services and for security purposes as described in our <a href='{privacyUrl}' target='_blank'>Privacy policy</a></span>"
   },
   "ui": {
     "and": "and",
@@ -51,5 +51,8 @@
     "messageRequired": "Please enter your message",
     "messageMin": "Message is too short",
     "messageMax": "Message can't exceed 1000 characters"
+  },
+  "meta": {
+    "description": "Professional Full-Stack JavaScript Developer for hire"
   }
 }

@@ -12,7 +12,7 @@
     "sentTitle": "Dziękuję za wiadomość!",
     "sentMessage": "Odpowiem tak szybko, jak mogę.",
     "sendError": "Niestety coś poszło nie tak... Proszę przeładować stronę i spróbować ponownie",
-    "cookieBanner": "Używamy plików cookie i podobnych technologii do dostarczania, utrzymania, ulepszania naszych usług oraz w celach bezpieczeństwa."
+    "cookieBanner": "<span>Używamy plików cookie i podobnych technologii do dostarczania, utrzymania, ulepszania naszych usług oraz w celach bezpieczeństwa. <a href='{privacyUrl}' target='_blank'>Polityka prywatności</a></span>"
   },
   "ui": {
     "and": "i",
@@ -51,5 +51,8 @@
     "messageRequired": "Wpisz swoją wiadomość",
     "messageMin": "Wiadomość jest za krótka",
     "messageMax": "Wiadomość nie może przekraczać 1000 znaków"
+  },
+  "meta": {
+    "description": "Profesjonalny Full-stack JavaScript Developer do wynajęcia"
   }
 }
