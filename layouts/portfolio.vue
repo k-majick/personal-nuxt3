@@ -68,15 +68,6 @@ onMounted(() => {
   scrollListen();
 });
 
-useHead({
-  meta: [
-    {
-      name: 'google-adsense-account',
-      content: config.public.appGads as string,
-    },
-  ],
-});
-
 provide(MainElKey, mainEl as Ref<HTMLElement>);
 provide(HeaderElKey, headerEl as Ref<HTMLElement>);
 </script>
