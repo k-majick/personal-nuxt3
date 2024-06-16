@@ -25,6 +25,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const apolloClient = new ApolloClient({
     cache,
     link,
+    connectToDevTools: false,
     defaultOptions: {
       query: {
         fetchPolicy: "network-only",
