@@ -33,6 +33,7 @@ import CookieBanner from "@/components/CookieBanner.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
+const config = useRuntimeConfig();
 
 const theme = computed(() => uiStore.currentTheme);
 const isLoading = computed(() => dataStore.loading || dataStore.loadError);
@@ -65,6 +66,15 @@ onMounted(() => {
   globalRefs.tooltipEl = tooltipEl.value;
   headerEl.value = headerRef.value.headerEl;
   scrollListen();
+});
+
+useHead({
+  meta: [
+    {
+      name: 'google-adsense-account',
+      content: config.public.appGads as string,
+    },
+  ],
 });
 
 provide(MainElKey, mainEl as Ref<HTMLElement>);
