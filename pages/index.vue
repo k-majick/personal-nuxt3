@@ -63,15 +63,6 @@ const enableGtag = () => {
 useSeoMeta({
   description: () => t('meta.description'),
 });
-
-useHead({
-  meta: [
-    {
-      name: 'google-adsense-account',
-      content: config.public.appGads as string,
-    },
-  ],
-});
 </script>
 
 <style lang="scss">
