@@ -46,7 +46,7 @@ const technology = ref();
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
     uiStore.currentLocale as string,
-    getSlug(route.path as string),
+    route.name === "index-locale" ? "skills" : getSlug(route.path as string),
   );
 
   const skillsData = await dataStore.getSkills(uiStore.currentLocale);
@@ -66,11 +66,7 @@ watchEffect(async (): Promise<IResponse | void> => {
   });
 });
 
-definePageMeta({
-  layout: "portfolio",
-});
-
-definePageMeta({
-  layout: "portfolio",
-});
+// definePageMeta({
+//   layout: "portfolio",
+// });
 </script>

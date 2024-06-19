@@ -1,9 +1,5 @@
 [
   {
-    "from": "/",
-    "to": "/skills"
-  },
-  {
     "from": "/de/projects",
     "to": "/de/creations"
   },

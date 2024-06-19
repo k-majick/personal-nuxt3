@@ -6,6 +6,10 @@ import {
 } from "@apollo/client/core";
 
 export default defineNuxtPlugin(nuxtApp => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   const cache = new InMemoryCache({
     dataIdFromObject: object => {
       switch (object.__typename) {

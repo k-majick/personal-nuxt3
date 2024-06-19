@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
   },
-  ssr: false,
+  ssr: true,
   app: {
     head: {
       title: `${process.env.APP_NAME} | ${process.env.APP_TITLE}`,

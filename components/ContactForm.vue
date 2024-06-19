@@ -86,7 +86,7 @@
 
     <Transition name="fade">
       <Dialog
-        v-show="isDialogOpen(1)"
+        v-if="isDialogOpen(1)"
         :id="1"
         :dialog-type="'message'"
         @close="toggleDialog(1, false), resetForm()"

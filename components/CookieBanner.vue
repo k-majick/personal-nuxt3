@@ -2,9 +2,10 @@
   <div v-if="!uiStore.consent" :class="`cookie cookie--${theme}`">
     <div class="cookie__container">
       <div
+        v-if="isClient"
         class="cookie__info"
         v-html="DOMPurify.sanitize($t('messages.cookieBanner', { privacyUrl }))"
-       >
+      >
       </div>
       <div class="cookie__actions">
         <button
@@ -36,6 +37,7 @@ defineProps({
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
 const { locale } = useI18n({ useScope: "global" });
+const isClient = computed(() => process.client);
 
 const choose = (choice: string) => {
   uiStore.doConsentAction("Save", choice).then(res => {

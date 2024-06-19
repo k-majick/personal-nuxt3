@@ -2,6 +2,7 @@
   <div :class="`avatar avatar--${theme}`">
     <h2 class="avatar__title">{{ $t("messages.name") }}</h2>
     <h3
+      v-if="isClient"
       class="avatar__message"
       v-html="DOMPurify.sanitize($t('messages.hello'))"
     ></h3>
@@ -25,6 +26,8 @@ defineProps({
     required: true,
   },
 });
+
+const isClient = computed(() => process.client);
 </script>
 
 <style lang="scss" scoped>

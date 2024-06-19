@@ -14,8 +14,8 @@ type Next = {
 
 export default defineNuxtPlugin(({ vueApp, $router }) => {
   const i18n = createI18n({
-    warnHtmlMessage: false,
     legacy: false,
+    warnHtmlMessage: false,
     globalInjection: true,
     locale: "en",
     messages: {
@@ -30,26 +30,22 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
   ($router as Router).beforeEach(
     (
       to: RouteLocationNormalizedLoaded,
-      _from: RouteLocationNormalizedLoaded,
+      _from: unknown,
       next: (route?: Next) => void,
     ) => {
-      if (!to.params.locale?.length) {
-        const userLocale = localStorage.getItem("user-locale") as string;
-        const locale = userLocale ? userLocale : "en";
-
-        if (!to.name) {
+      if (typeof window !== "undefined") {
+        const userLocale = localStorage.getItem("user-locale") ? localStorage.getItem("user-locale") : "en";
+      
+        if (!to.params.locale && !to.redirectedFrom?.name) {
+          next({
+            path: `/${userLocale}`,
+            query: {}, // clear query param
+          });
+  
           return;
         }
-
-        next({
-          name: to.name as string,
-          params: {
-            locale: `${locale}`,
-          },
-        });
-        return;
       }
-
+      
       next();
     },
   );

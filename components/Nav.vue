@@ -9,12 +9,11 @@
         <a
           class="nav__link"
           @click.stop.prevent="killModal(), scrollTo($event, headerEl)"
-          >Start</a
-        >
+        >Start</a>
       </li>
-      <li v-for="page in pages" :key="page.id as string" class="nav__item">
+      <li v-for="page in pagesSorted" :key="(page.id as string)" class="nav__item">
         <nuxt-link
-          :to="page.attributes.slug"
+          :to="{ path: `${locale}/${page.attributes.slug}`}"
           class="nav__link"
           @click.stop="killModal(), scrollTo($event, mainEl)"
         >
@@ -30,7 +29,10 @@
           target="_blank"
           class="nav__socialLink"
         >
-          <span v-html="DOMPurify.sanitize(iconGit)"></span>
+          <span 
+            v-if="isClient"
+            v-html="DOMPurify.sanitize(iconGit)"
+          ></span>
         </a>
       </li>
       <li class="nav__socialItem">
@@ -40,13 +42,16 @@
           target="_blank"
           class="nav__socialLink"
         >
-          <span v-html="DOMPurify.sanitize(iconLinkedin)"></span>
+          <span 
+            v-if="isClient"
+            v-html="DOMPurify.sanitize(iconLinkedin)"
+          ></span>
         </a>
       </li>
     </ul>
     <div v-tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
-        :to="'inspiration'"
+        :to="{ path: `${locale}/inspiration`}"
         class="cat"
         :class="`cat--${theme}`"
         @click.stop="killModal()"
@@ -71,6 +76,7 @@ import iconGit from "@/assets/gfx/icon-git-min.svg?raw";
 import rawCat from "@/assets/gfx/cat_1.svg?raw";
 import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 import type { IResponse } from "@/types/common";
+import { useI18n } from "vue-i18n";
 
 defineProps({
   isActivated: {
@@ -85,30 +91,39 @@ defineProps({
 
 defineEmits(["closeNav"]);
 
+const { locale } = useI18n();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
-const theme = computed(() => uiStore.currentTheme);
 
+const theme = computed(() => uiStore.currentTheme);
 const headerEl = inject(HeaderElKey);
 const mainEl = inject(MainElKey);
-const exclude = "burger";
 
+const exclude = "burger";
 const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
 
-const sortItems = (pagesArr: IResponse[]) =>
-  pagesArr
-    .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-    .filter(item => !excludedPages.includes(item.attributes.slug));
+const sortItems = (arr: IResponse[]) => arr
+  .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
+  .filter(item => !excludedPages.includes(item.attributes.slug));
 
-const pages: Ref<IResponse[]> = ref(
-  sortItems([
-    ...((await dataStore.getPages(
-      uiStore.currentLocale as string,
-    )) as IResponse[]),
-  ]),
-);
+const isClient = computed(() => process.client);
+
+const pages: Ref<IResponse[]> = ref(  
+  ((await dataStore.getPages(uiStore.currentLocale as string)) as IResponse[]
+));
+
+const pagesSorted = computed(() => {
+  if (!pages.value?.length) {
+    return [];
+  }
+  return sortItems([...pages.value]);
+});
 
 const killModal = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   const body = document.body;
 
   if (body.classList.contains("locked")) {
@@ -118,12 +133,9 @@ const killModal = () => {
 
 watch(
   () => uiStore.currentLocale,
-  async () =>
-    (pages.value = sortItems([
-      ...((await dataStore.getPages(
-        uiStore.currentLocale as string,
-      )) as IResponse[]),
-    ])),
+  async () => {
+    pages.value = ((await dataStore.getPages(uiStore.currentLocale as string)) as IResponse[]);
+  },
 );
 </script>
 
