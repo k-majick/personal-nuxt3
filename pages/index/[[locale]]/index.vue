@@ -80,6 +80,13 @@ definePageMeta({
 
 dataStore.loadError = false;
 
+const scrollToPos = (pos: number) => {
+  if (window.scrollY !== pos) {
+    window.scrollTo(0, pos);
+    setTimeout(() => scrollToPos(pos), 0);
+  }
+}
+
 onBeforeRouteUpdate(() => {
   if (typeof window !== "undefined") {
     uiStore.scrollPos = window.scrollY;
@@ -88,7 +95,7 @@ onBeforeRouteUpdate(() => {
 
 onMounted(() => {
   if (isClient) {
-    setTimeout(() => window.scrollTo(0, uiStore.scrollPos), 0);
+    scrollToPos(uiStore.scrollPos);
   }
 });
 </script>
