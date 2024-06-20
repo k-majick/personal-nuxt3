@@ -1,5 +1,17 @@
 [
   {
+    "from": "/de",
+    "to": "/de/skills"
+  },
+  {
+    "from": "/en",
+    "to": "/en/skills"
+  },
+  {
+    "from": "/pl",
+    "to": "/pl/skills"
+  },
+  {
     "from": "/de/projects",
     "to": "/de/creations"
   },
