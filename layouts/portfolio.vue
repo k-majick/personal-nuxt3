@@ -48,10 +48,16 @@ const toggleNav = () =>
   (isNavActivated.value = isNavActivated.value === false ? true : false);
 
 const scrollListen = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   window.addEventListener("scroll", () => {
     const scrollTop = window.scrollY;
 
-    document.documentElement.style.setProperty("--scroll-y", `${scrollTop}px`);
+    if (typeof window !== "undefined") {
+      document?.documentElement?.style.setProperty("--scroll-y", `${scrollTop}px`);
+    }
 
     if (!mainEl || !mainEl.value) {
       return;
@@ -65,7 +71,10 @@ const scrollListen = () => {
 onMounted(() => {
   globalRefs.tooltipEl = tooltipEl.value;
   headerEl.value = headerRef.value.headerEl;
-  scrollListen();
+
+  if (typeof window !== "undefined") {
+    scrollListen();
+  }
 });
 
 useHead({

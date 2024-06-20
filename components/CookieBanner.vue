@@ -2,9 +2,10 @@
   <div v-if="!uiStore.consent" :class="`cookie cookie--${theme}`">
     <div class="cookie__container">
       <div
+        v-if="isClient"
         class="cookie__info"
         v-html="DOMPurify.sanitize($t('messages.cookieBanner', { privacyUrl }))"
-       >
+      >
       </div>
       <div class="cookie__actions">
         <button

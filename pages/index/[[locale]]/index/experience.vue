@@ -10,25 +10,16 @@
         )
       "
     ></div>
-    <Skills :theme="theme" :skills="skills" />
-    <div
-      v-if="technology?.content"
-      class="main__content"
-      v-html="
-        DOMPurify.sanitize(
-          marked.parse(technology?.content as string) as string,
-        )
-      "
-    ></div>
-    <Technologies v-if="technology?.items.length" :techs="technology?.items" />
+    <Jobs v-if="jobs?.length" :theme="theme" :jobs="jobs" />
+    <Counter />
   </section>
 </template>
 
 <script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import Skills from "@/components/Skills.vue";
-import Technologies from "@/components/Technologies.vue";
+import Jobs from "@/components/Jobs.vue";
+import Counter from "@/components/Counter.vue";
 import type { IResponse } from "@/types/common";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
@@ -40,37 +31,26 @@ const route = useRoute();
 
 const theme = computed(() => uiStore.currentTheme);
 const page: Ref<IResponse | undefined> = ref();
-const skills = ref();
-const technology = ref();
+const jobs = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
-    getSlug(route.path as string),
+    uiStore.currentLocale,
+    getSlug(route.path),
   );
 
-  const skillsData = await dataStore.getSkills(uiStore.currentLocale);
-  const techData = await dataStore.getTechnology(uiStore.currentLocale);
+  const jobsData = await dataStore.getExperience(uiStore.currentLocale);
 
-  if (!pageData || !skillsData || !techData) {
+  if (!pageData || !jobsData) {
     return;
   }
 
   page.value = pageData;
-  skills.value = skillsData.sets;
-  technology.value = techData;
+  jobs.value = jobsData.workplaces;
   dataStore.loading = false;
 
   useHead({
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
   });
-});
-
-definePageMeta({
-  layout: "portfolio",
-});
-
-definePageMeta({
-  layout: "portfolio",
 });
 </script>

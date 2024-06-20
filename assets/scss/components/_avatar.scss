@@ -69,12 +69,29 @@
   }
 
   &__title {
+    visibility: visible;
     font-size: 3em;
     font-weight: 300;
-    margin: 0 0 15px;
+    margin: 0;
     color: var(--color-quinary);
-    @include media("<=m") {
-      display: none;
+    @include media("<=l-s") {
+      text-indent: -9999;
+      font-size: 0.1em;
+      opacity: 0;
+    }
+  }
+
+  &__message {
+    text-align: center;
+    font-weight: lighter;
+    color: var(--color-quinary);
+    text-indent: -9999;
+    font-size: 0.1em;
+    opacity: 0;
+    @include media("<l-s") {
+      font-size: 1.15em;
+      opacity: 1;
+      text-indent: inherit;      
     }
   }
 
@@ -87,20 +104,6 @@
     height: 90px;
     @include media("<=m") {
       height: 60px;
-    }
-  }
-
-  &__message {
-    display: none;
-    text-align: center;
-    font-weight: lighter;
-    font-size: 1.15em;
-    color: var(--color-quinary);
-    @include media(">m", "<l-s") {
-      display: block;
-    }
-    @include media("<=m") {
-      display: block;
     }
   }
 

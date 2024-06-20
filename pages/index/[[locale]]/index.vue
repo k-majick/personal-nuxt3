@@ -8,33 +8,39 @@
         ${activeDialog ? 'main__container--hasactiveDialog' : ''}
       `"
     >
+      <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" />
       <component :is="Component" :key="route.name" />
     </div>
   </router-view>
 </template>
 
 <script lang="ts" setup>
+import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { useI18n } from "vue-i18n";
+import SkillsPage from "@/pages/index/[[locale]]/index/skills.vue";
 
 const { t } = useI18n();
 const config = useRuntimeConfig();
+const dataStore = useDataStore();
 const uiStore = useUiStore();
 
-uiStore.doConsentAction("Check").then(res => {
-  if (res?.status !== 200) {
-    return;
-  }
+if (typeof window !== "undefined") {
+  uiStore.doConsentAction("Check").then(res => {
+    if (res?.status !== 200) {
+      return;
+    }
 
-  res?.text().then(consent => {
-    uiStore.consent = consent;
+    res?.text().then(consent => {
+      uiStore.consent = consent;
+    });
   });
-});
+}
 
 watch(
   () => uiStore.consent,
   () => {
-    if (uiStore.consent === "all") {
+    if (uiStore.consent === "all" && typeof window !== "undefined") {
       enableGtag();
     }
   },
@@ -50,8 +56,12 @@ const enableGtag = () => {
     ],
   });
 
-  window.dataLayer = window.dataLayer || [];
+  if (!isClient) {
+    return;
+  }
 
+  window.dataLayer = window.dataLayer || [];
+  
   function gtag(_a: string, _b: string | Date) {
     window.dataLayer.push(arguments);
   }
@@ -62,6 +72,24 @@ const enableGtag = () => {
 
 useSeoMeta({
   description: () => t('meta.description'),
+});
+
+definePageMeta({
+  layout: "portfolio",
+});
+
+dataStore.loadError = false;
+
+onBeforeRouteUpdate(() => {
+  if (typeof window !== "undefined") {
+    uiStore.scrollPos = window.scrollY;
+  }
+});
+
+onMounted(() => {
+  if (isClient) {
+    setTimeout(() => window.scrollTo(0, uiStore.scrollPos), 0);
+  }
 });
 </script>
 

@@ -1,5 +1,20 @@
 @import "@/node_modules/modern-normalize/modern-normalize.css";
 
+// ssr FOUC hack
+html {
+  background: black;
+}
+
+body {
+  opacity: 0;
+}
+
+html[data-theme] {
+  body {
+    opacity: 1;
+  }
+}
+
 body,
 html {
   height: 100%;

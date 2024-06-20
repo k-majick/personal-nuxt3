@@ -5,6 +5,7 @@ interface IUiState {
   locale: string;
   navActive: boolean;
   consent: string;
+  scrollPos: number;
 }
 
 export const useUiStore = defineStore({
@@ -14,6 +15,7 @@ export const useUiStore = defineStore({
     locale: "en",
     navActive: false,
     consent: "",
+    scrollPos: 0,
   }),
   actions: {
     setTheme(theme: string) {

@@ -10,16 +10,25 @@
         )
       "
     ></div>
-    <Jobs v-if="jobs?.length" :theme="theme" :jobs="jobs" />
-    <Counter />
+    <Skills :theme="theme" :skills="skills" />
+    <div
+      v-if="technology?.content"
+      class="main__content"
+      v-html="
+        DOMPurify.sanitize(
+          marked.parse(technology?.content as string) as string,
+        )
+      "
+    ></div>
+    <Technologies v-if="technology?.items.length" :techs="technology?.items" />
   </section>
 </template>
 
 <script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import Jobs from "@/components/Jobs.vue";
-import Counter from "@/components/Counter.vue";
+import Skills from "@/components/Skills.vue";
+import Technologies from "@/components/Technologies.vue";
 import type { IResponse } from "@/types/common";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
@@ -31,34 +40,29 @@ const route = useRoute();
 
 const theme = computed(() => uiStore.currentTheme);
 const page: Ref<IResponse | undefined> = ref();
-const jobs = ref();
+const skills = ref();
+const technology = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale,
-    getSlug(route.path),
+    uiStore.currentLocale as string,
+    route.name === "index-locale" ? "skills" : getSlug(route.path as string),
   );
 
-  const jobsData = await dataStore.getExperience(uiStore.currentLocale);
+  const skillsData = await dataStore.getSkills(uiStore.currentLocale);
+  const techData = await dataStore.getTechnology(uiStore.currentLocale);
 
-  if (!pageData || !jobsData) {
+  if (!pageData || !skillsData || !techData) {
     return;
   }
 
   page.value = pageData;
-  jobs.value = jobsData.workplaces;
+  skills.value = skillsData.sets;
+  technology.value = techData;
   dataStore.loading = false;
 
   useHead({
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
   });
-});
-
-definePageMeta({
-  layout: "portfolio",
-});
-
-definePageMeta({
-  layout: "portfolio",
 });
 </script>

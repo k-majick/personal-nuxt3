@@ -28,8 +28,8 @@ export const toggleDialog = (id: number, useLock = true, type = "") => {
 export const isDialogOpen = (id: number) => activeDialog.value === id;
 
 export const scrollLock = () => {
-  const scrollY = document.documentElement.style.getPropertyValue("--scroll-y");
-  const body = document.body;
+  const scrollY = document?.documentElement.style.getPropertyValue("--scroll-y");
+  const body = document?.body;
 
   body.classList.add("locked");
   body.style.width = "100%";
@@ -38,8 +38,8 @@ export const scrollLock = () => {
 };
 
 export const scrollUnlock = () => {
-  const scrollY = document.body.style.top;
-  const body = document.body;
+  const scrollY = document?.body.style.top;
+  const body = document?.body;
 
   body.classList.remove("locked");
   body.style.width = "100%";

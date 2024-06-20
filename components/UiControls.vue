@@ -44,7 +44,7 @@ const route = useRoute();
 const router = useRouter();
 const uiStore = useUiStore();
 const { locale } = useI18n({ useScope: "global" });
-const rootEl = document.documentElement;
+const rootEl = typeof window !== "undefined" ? document.documentElement : null;
 
 const theme = computed(() => uiStore.currentTheme);
 const localesAvailable = computed(() =>
@@ -62,21 +62,38 @@ const setRouteParam = (locale: string) => {
 
 const switchLocale = (l: string) => {
   locale.value = l;
+  if (typeof window !== "undefined") {
+    localStorage.setItem("user-locale", l);
+  }
   uiStore.setLocale(l);
-  localStorage.setItem("user-locale", l);
   setRouteParam(l);
+
+  if (typeof window !== "undefined") {
+    localStorage.setItem("user-locale", l);
+  }
 };
 
 const toggleTheme = (theme: string) => {
-  rootEl.style.setProperty("--theme", theme);
-  rootEl.setAttribute("data-theme", theme);
+  rootEl?.style.setProperty("--theme", theme);
+  rootEl?.setAttribute("data-theme", theme);
   uiStore.setTheme(theme);
-  localStorage.setItem("user-theme", theme);
+
+  if (typeof window !== "undefined") {
+    localStorage.setItem("user-theme", theme);
+  }
 };
 
-localStorage.getItem("user-theme")
-  ? toggleTheme(localStorage.getItem("user-theme") as string)
-  : toggleTheme("lite");
+if (typeof window !== "undefined") {
+  localStorage.getItem("user-theme")
+    ? toggleTheme(localStorage.getItem("user-theme") as string)
+    : toggleTheme("lite");
+}
 
-switchLocale(route.params.locale as string);
+const getLocale = () => {
+  const saved = typeof window !== "undefined" ? localStorage.getItem("user-locale") : "en";
+  const routeParam = route.params.locale as string;
+  return routeParam.length === 2 ? routeParam : saved;
+}
+
+switchLocale(getLocale() as string);
 </script>

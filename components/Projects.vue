@@ -25,8 +25,7 @@
   </swiper>
 
   <Dialog
-    v-if="activeProject"
-    v-show="isDialogOpen(activeProjectId)"
+    v-if="isDialogOpen(activeProjectId)"
     :id="1"
     :dialog-type="'full'"
     @close="

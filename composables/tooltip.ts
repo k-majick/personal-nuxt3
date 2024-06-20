@@ -27,6 +27,10 @@ export const vTooltip = {
       });
 
       el.addEventListener("mousemove", (e: MouseEvent) => {
+        if (!isClient) {
+          return;
+        }
+
         const tooltipElRect = tooltipEl.getBoundingClientRect();
 
         if (e.pageX + tooltipElRect.width + 20 > window.innerWidth) {
