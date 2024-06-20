@@ -34,7 +34,10 @@ export default defineNuxtPlugin(({ vueApp, $router }) => {
       next: (route?: Next) => void,
     ) => {
       if (!isClient) {
-        const userLocale = localStorage.getItem("user-locale") !== null ? localStorage.getItem("user-locale") : "en";
+        const userLocale = localStorage.getItem("user-locale") === null ? "en" : localStorage.getItem("user-locale");
+
+        console.dir(to)
+        console.dir(userLocale)
 
         if (!to.params.locale && !to.redirectedFrom?.name) {
           next({
