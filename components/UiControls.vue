@@ -71,6 +71,12 @@ const switchLocale = (l: string) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("user-locale", l);
   }
+
+  useHead({
+    htmlAttrs: {
+      lang: locale.value,
+    },
+  });
 };
 
 const toggleTheme = (theme: string) => {

@@ -1,6 +1,9 @@
 <template>
   <section class="main__card">
-    <h2 class="main__title">{{ page?.attributes.title }}</h2>
+    <h2
+      v-if="page?.attributes"
+      class="main__title">{{ page?.attributes?.title }}
+    </h2>
     <div
       v-if="page?.attributes.content"
       class="main__content"
