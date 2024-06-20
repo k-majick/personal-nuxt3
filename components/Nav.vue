@@ -13,7 +13,7 @@
       </li>
       <li v-for="page in pagesSorted" :key="(page.id as string)" class="nav__item">
         <nuxt-link
-          :to="{ path: `${locale}/${page.attributes.slug}`}"
+          :to="{ path: `/${locale}/${page.attributes.slug}`}"
           class="nav__link"
           @click.stop="killModal(), scrollTo($event, mainEl)"
         >
@@ -51,7 +51,7 @@
     </ul>
     <div v-tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
-        :to="{ path: `${locale}/inspiration`}"
+        :to="{ path: `/${locale}/inspiration`}"
         class="cat"
         :class="`cat--${theme}`"
         @click.stop="killModal()"
@@ -105,8 +105,6 @@ const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
 const sortItems = (arr: IResponse[]) => arr
   .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
   .filter(item => !excludedPages.includes(item.attributes.slug));
-
-const isClient = computed(() => process.client);
 
 const pages: Ref<IResponse[]> = ref(  
   ((await dataStore.getPages(uiStore.currentLocale as string)) as IResponse[]

@@ -37,7 +37,6 @@ defineProps({
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
 const { locale } = useI18n({ useScope: "global" });
-const isClient = computed(() => process.client);
 
 const choose = (choice: string) => {
   uiStore.doConsentAction("Save", choice).then(res => {

@@ -26,8 +26,6 @@ defineProps({
     required: true,
   },
 });
-
-const isClient = computed(() => process.client);
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,7 @@
 {
   "messages": {
     "name": "K-Majick",
-    "hello": "Cześć! Mam na imię <strong>K-Majick</strong>. Pracuję jako profesjonalny <strong>JavaScript Developer</strong>.",
+    "hello": "Cześć! Mam na imię <strong>K-Majick</strong>. Pracuję jako <strong>Full-Stack JavaScript Developer</strong>.",
     "git": "Sprawdź moje <strong>repozytoria GitHub</strong>",
     "linked": "Sprawdź mój <strong>profil LinkedIn</strong>",
     "loading": "Ładuję...",
@@ -53,6 +53,6 @@
     "messageMax": "Wiadomość nie może przekraczać 1000 znaków"
   },
   "meta": {
-    "description": "Profesjonalny Full-stack JavaScript Developer do wynajęcia"
+    "description": "Profesjonalny Full-Stack JavaScript Developer do wynajęcia"
   }
 }

@@ -56,8 +56,12 @@ const enableGtag = () => {
     ],
   });
 
-  window.dataLayer = window.dataLayer || [];
+  if (!isClient) {
+    return;
+  }
 
+  window.dataLayer = window.dataLayer || [];
+  
   function gtag(_a: string, _b: string | Date) {
     window.dataLayer.push(arguments);
   }
@@ -77,11 +81,15 @@ definePageMeta({
 dataStore.loadError = false;
 
 onBeforeRouteUpdate(() => {
-  uiStore.scrollPos = window.scrollY;
+  if (typeof window !== "undefined") {
+    uiStore.scrollPos = window.scrollY;
+  }
 });
 
 onMounted(() => {
-  setTimeout(() => window.scrollTo(0, uiStore.scrollPos), 0);
+  if (isClient) {
+    setTimeout(() => window.scrollTo(0, uiStore.scrollPos), 0);
+  }
 });
 </script>
 

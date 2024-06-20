@@ -62,6 +62,9 @@ const setRouteParam = (locale: string) => {
 
 const switchLocale = (l: string) => {
   locale.value = l;
+  if (typeof window !== "undefined") {
+    localStorage.setItem("user-locale", l);
+  }
   uiStore.setLocale(l);
   setRouteParam(l);
 
@@ -85,4 +88,12 @@ if (typeof window !== "undefined") {
     ? toggleTheme(localStorage.getItem("user-theme") as string)
     : toggleTheme("lite");
 }
+
+const getLocale = () => {
+  const saved = typeof window !== "undefined" ? localStorage.getItem("user-locale") : "en";
+  const routeParam = route.params.locale as string;
+  return routeParam.length === 2 ? routeParam : saved;
+}
+
+switchLocale(getLocale() as string);
 </script>

@@ -28,7 +28,7 @@ export const toggleDialog = (id: number, useLock = true, type = "") => {
 export const isDialogOpen = (id: number) => activeDialog.value === id;
 
 export const scrollLock = () => {
-  const scrollY = document?.documentElement?.style.getPropertyValue("--scroll-y");
+  const scrollY = document?.documentElement.style.getPropertyValue("--scroll-y");
   const body = document?.body;
 
   body.classList.add("locked");

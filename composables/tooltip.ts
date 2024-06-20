@@ -27,7 +27,7 @@ export const vTooltip = {
       });
 
       el.addEventListener("mousemove", (e: MouseEvent) => {
-        if (typeof window === "undefined") {
+        if (!isClient) {
           return;
         }
 
