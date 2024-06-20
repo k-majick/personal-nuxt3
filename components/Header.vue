@@ -5,14 +5,12 @@
     :class="[`header--${theme}`, { 'header--loading': isLoading }]"
   >
     <section class="header__container header__container--logo">
-      <a class="main__anchor"></a>
-      <a class="header__logo">
+      <a class="header__logo" href="/">
         <h1 class="header__title">{{ config.public.appTitle }}</h1>
       </a>
 
       <UiControls />
     </section>
-
     <section class="header__container header__container--avatar">
       <Avatar v-if="theme" :theme="theme" />
       <div class="header__arrow" @click="scrollTo($event, mainEl)"></div>
