@@ -43,7 +43,6 @@ const uiStore = useUiStore();
 const route = useRoute();
 
 const theme = computed(() => uiStore.currentTheme);
-
 const page: Ref<IResponse | undefined> = ref();
 const pics: Ref<IResponse | undefined> = ref();
 
@@ -68,12 +67,9 @@ watchEffect(async (): Promise<IResponse | void> => {
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
   });
 });
-
-definePageMeta({
-  layout: "portfolio",
-});
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/gallery";
 </style>
+   

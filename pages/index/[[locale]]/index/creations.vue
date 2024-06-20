@@ -49,7 +49,7 @@
       <Projects
         v-if="portfolio?.projects && portfolio.projects.length"
         :theme="theme"
-        :projects="portfolio.projects as Array<IItem>"
+        :projects="(portfolio.projects as Array<IItem>)"
       />
     </section>
   </div>
@@ -96,14 +96,6 @@ watchEffect(async (): Promise<IResponse | void> => {
   useHead({
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
   });
-});
-
-definePageMeta({
-  layout: "portfolio",
-});
-
-definePageMeta({
-  layout: "portfolio",
 });
 </script>
 

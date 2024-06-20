@@ -65,8 +65,4 @@ watchEffect(async (): Promise<IResponse | void> => {
     titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
   });
 });
-
-// definePageMeta({
-//   layout: "portfolio",
-// });
 </script>
