@@ -132,5 +132,4 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/scss/_global.scss"],
-  plugins: ["@/plugins/apollo-client.js"],
 });
