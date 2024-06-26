@@ -8,7 +8,7 @@
         ${activeDialog ? 'main__container--hasactiveDialog' : ''}
       `"
     >
-      <!-- <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" /> -->
+      <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" />
       <component :is="Component" :key="route.name" />
     </div>
   </router-view>
@@ -18,13 +18,14 @@
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { useI18n } from "vue-i18n";
-// import SkillsPage from "@/pages/index/[[locale]]/index/skills.vue";
+import SkillsPage from "@/pages/index/[[locale]]/index/skills.vue";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
+const router = useRouter();
 
 if (typeof window !== "undefined") {
   uiStore.doConsentAction("Check").then(res => {
@@ -79,6 +80,13 @@ definePageMeta({
   layout: "portfolio",
 });
 
+useHead({
+  titleTemplate: `${config.public.appName} | ${config.public.appTitle}`,
+  htmlAttrs: {
+    lang: `${locale.value}`,
+  },
+});
+
 dataStore.loadError = false;
 
 const scrollToPos = (pos: number) => {
@@ -98,6 +106,11 @@ onMounted(() => {
   if (isClient) {
     scrollToPos(uiStore.scrollPos);
   }
+
+  if (route.name === 'index-locale') {
+    router.push(`/${locale.value}/skills`);
+  }
+
 });
 </script>
 

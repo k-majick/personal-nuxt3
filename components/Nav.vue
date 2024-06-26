@@ -99,7 +99,6 @@ const mainEl = inject(MainElKey);
 const exclude = "burger";
 const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
 
-// const pages = ref();
 const { data: pages } = useAsyncData("pages", async () => await dataStore.getPages(uiStore.locale));
 
 const pagesSorted = computed(() => {
@@ -123,6 +122,7 @@ watch(
   () => uiStore.locale,
   async () => {
     pages.value = ((await dataStore.getPages(uiStore.locale)) as IResponse[]);
+    dataStore.loading = false;
   },
 );
 </script>

@@ -1,30 +1,37 @@
 <template>
   <div class="main__content">
-    <table class="experience__table" :class="`experience__table--${theme}`">
-      <tbody>
-        <div class="experience__arrow">
-          <div class="experience__bar">
-            <div class="experience__tip"></div>
-          </div>
+    <div 
+      class="experience" 
+      :class="`experience--${theme}`"
+    >
+      <div class="experience__arrow">
+        <div class="experience__bar">
+          <div class="experience__tip"></div>
         </div>
-      </tbody>
-      <tbody v-if="jobsSorted?.length">
-        <tr
-          v-for="job in jobsSorted"
-          :key="job.name"
-          :class="{ hilite: !job.lessVisible }"
-        >
-          <th scope="col">
-            <span>{{ job.dateTo }}</span>
-            <br />
-            <span>{{ job.dateFrom }}</span>
-          </th>
-          <th scope="col">
-            {{ job.name }}<br /><i>{{ job.position }}</i>
-          </th>
-        </tr>
-      </tbody>
-    </table>
+      </div>
+      
+      <table 
+        v-if="jobsSorted?.length"
+        class="experience__table"
+      >
+        <tbody>
+          <tr
+            v-for="job in jobsSorted"
+            :key="job.name"
+            :class="{ hilite: !job.lessVisible }"
+          >
+            <th scope="col">
+              <span>{{ job.dateTo }}</span>
+              <br />
+              <span>{{ job.dateFrom }}</span>
+            </th>
+            <th scope="col">
+              {{ job.name }}<br /><i>{{ job.position }}</i>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 

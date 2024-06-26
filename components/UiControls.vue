@@ -99,7 +99,7 @@ onMounted(() => {
   localStorage.getItem("user-theme") ?
     toggleTheme(localStorage.getItem("user-theme") as string) :
     toggleTheme("lite");
-});
 
-switchLocale(getLocale() as string);
+  switchLocale(getLocale() as string);
+});
 </script>

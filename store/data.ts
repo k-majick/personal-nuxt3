@@ -1,29 +1,19 @@
 import { defineStore } from "pinia";
+import { createApolloClient } from '@/graphql/apollo-client';
 import {
   GET_PAGES,
   GET_PAGE,
-  // GET_POSTS,
+  GET_POSTS,
   GET_SKILLS,
   GET_TECHNOLOGY,
   GET_EXPERIENCE,
-  // GET_PORTFOLIO,
-  // GET_INSPIRATION,
+  GET_PORTFOLIO,
+  GET_INSPIRATION,
 } from "@/graphql/queries";
-import type { IResponse } from "@/types/common";
-import { createApolloClient } from '@/graphql/apollo-client';
 
 interface IDataState {
   loading: boolean;
   loadError: boolean;
-  page: null | IResponse;
-  pages: null | Array<IResponse>;
-  posts: null | Array<IResponse>;
-  skills: null | IResponse;
-  technology: null | IResponse;
-  experience: null | IResponse;
-  portfolio: null | IResponse;
-  contact: null | IResponse;
-  inspiration: null | IResponse;
 }
 
 const apolloClient = createApolloClient(typeof window === 'undefined');
@@ -31,17 +21,8 @@ const apolloClient = createApolloClient(typeof window === 'undefined');
 export const useDataStore = defineStore({
   id: "data-store",
   state: (): IDataState => ({
-    loading: true,
+    loading: typeof window === 'undefined' ? false : true,
     loadError: false,
-    page: null,
-    pages: null,
-    posts: null,
-    skills: null,
-    technology: null,
-    experience: null,
-    portfolio: null,
-    contact: null,
-    inspiration: null,
   }),
   actions: {
     async getPages(locale: string) {
@@ -76,22 +57,22 @@ export const useDataStore = defineStore({
       }
     },
 
-  //   async getPosts() {
-  //     this.loading = true;
+    async getPosts() {
+      this.loading = true;
 
-  //     try {
-  //       const { data } = await apolloClient.query({
-  //         query: GET_POSTS(),
-  //       });
+      try {
+        const { data } = await apolloClient.query({
+          query: GET_POSTS(),
+        });
 
-  //       this.posts = data.posts.data;
+        this.loading = false;
 
-  //       return this.posts;
-  //     } catch (error) {
-  //       console.error(error);
-  //       this.loadError = true;
-  //     }
-  //   },
+        return data.posts.data;
+      } catch (error) {
+        console.error(error);
+        this.loadError = true;
+      }
+    },
 
     async getSkills(locale: string) {
       this.loading = true;
@@ -103,7 +84,7 @@ export const useDataStore = defineStore({
 
         this.loading = false;
 
-        return data.skills.data.attributes;
+        return data.skills.data.attributes.sets;
       } catch (error) {
         console.error(error);
         this.loadError = true;
@@ -120,14 +101,14 @@ export const useDataStore = defineStore({
 
         this.loading = false;
 
-        return data.technology.data;
+        return data.technology.data.attributes;
       } catch (error) {
         console.error(error);
         this.loadError = true;
       }
     },
 
-    async getExperience(locale: string) {
+    async getJobs(locale: string) {
       this.loading = true;
 
       try {
@@ -135,47 +116,47 @@ export const useDataStore = defineStore({
           query: GET_EXPERIENCE(locale),
         });
 
-        return data.experience.data;
+        this.loading = false;
+
+        return data.experience.data.attributes.workplaces;
       } catch (error) {
         console.error(error);
         this.loadError = true;
       }
     },
 
-  //   async getPortfolio(locale: string) {
-  //     this.loading = true;
+    async getPortfolio(locale: string) {
+      this.loading = true;
 
-  //     try {
-  //       const { data } = await apolloClient?.query({
-  //         query: GET_PORTFOLIO(locale),
-  //       });
+      try {
+        const { data } = await apolloClient?.query({
+          query: GET_PORTFOLIO(locale),
+        });
 
-  //       this.portfolio = data.portfolio.data.attributes;
+        this.loading = false;
 
-  //       return this.portfolio;
-  //     } catch (error) {
-  //       console.error(error);
-  //       this.loadError = true;
-  //     }
-  //   },
+        return data.portfolio.data.attributes;
+      } catch (error) {
+        console.error(error);
+        this.loadError = true;
+      }
+    },
 
-  //   async getInspiration(locale: string) {
-  //     this.loading = true;
+    async getPics(locale: string) {
+      this.loading = true;
 
-  //     try {
-  //       const { data } = await apolloClient?.query({
-  //         query: GET_INSPIRATION(locale),
-  //       });
+      try {
+        const { data } = await apolloClient?.query({
+          query: GET_INSPIRATION(locale),
+        });
 
-  //       this.inspiration = data.inspiration.data.attributes;
+        this.loading = false;
 
-  //       return this.inspiration;
-  //     } catch (error) {
-  //       console.error(error);
-  //       this.loadError = true;
-  //     }
-  //   },
-  // },
-
+        return data.inspiration.data.attributes;
+      } catch (error) {
+        console.error(error);
+        this.loadError = true;
+      }
+    },
   },
 });

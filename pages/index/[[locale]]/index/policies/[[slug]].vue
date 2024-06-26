@@ -1,6 +1,6 @@
 <template>
-  <section v-if="page?.attributes" class="main__card">
-    <h1 class="main__title">{{ page?.attributes.title }}</h1>
+  <section v-if="page" class="main__card">
+    <h1 class="main__title">{{ page?.title }}</h1>
 
     <div v-if="updatedAt" class="main__content">
       <p>
@@ -23,7 +23,6 @@
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import PoliciesFooter from "@/components/PoliciesFooter.vue";
-import type { IResponse } from "@/types/common";
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 import { useRoute } from "vue-router";
@@ -33,27 +32,26 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const page: Ref<IResponse | undefined> = ref();
-const pageContent = computed(() => page.value?.attributes?.content);
+const slug = computed(() => getSlug(route.path as string));
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug.value));
+
+const pageContent = computed(() => page.value?.content);
 const updatedAt = computed(() =>
-  new Date(page.value?.attributes?.updatedAt).toLocaleDateString(),
+  new Date(page.value?.updatedAt).toLocaleDateString(),
 );
 
-watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(
-    uiStore.locale as string,
-    getSlug(route.path as string),
-  );
+watch(
+  () => [uiStore.locale, route.name],
+  async () => {
+    page.value = ((await dataStore.getPage(uiStore.locale, slug.value)));
 
-  if (!pageData) {
-    return;
-  }
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+    });
+  },
+);
 
-  page.value = pageData;
-  dataStore.loading = false;
-
-  useHead({
-    titleTemplate: `${page?.value?.attributes?.title} | ${config.public.appTitle}`,
-  });
+useHead({
+  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
 });
 </script>
