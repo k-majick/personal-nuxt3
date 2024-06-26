@@ -1,5 +1,5 @@
 <template>
-  <router-view v-slot="{ Component, route }">
+  <router-view v-slot="{ Component }">
     <div
       class="main__container"
       :class="`main__container--${
@@ -8,7 +8,7 @@
         ${activeDialog ? 'main__container--hasactiveDialog' : ''}
       `"
     >
-      <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" />
+      <!-- <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" /> -->
       <component :is="Component" :key="route.name" />
     </div>
   </router-view>
@@ -18,12 +18,13 @@
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { useI18n } from "vue-i18n";
-import SkillsPage from "@/pages/index/[[locale]]/index/skills.vue";
+// import SkillsPage from "@/pages/index/[[locale]]/index/skills.vue";
 
 const { t } = useI18n();
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
+const route = useRoute();
 
 if (typeof window !== "undefined") {
   uiStore.doConsentAction("Check").then(res => {

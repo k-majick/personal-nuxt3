@@ -1,12 +1,16 @@
+import { useNuxtApp } from "#app";
+
 import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
 } from "@apollo/client/core";
 
+const nuxtApp = typeof window === "undefined" ? null : useNuxtApp();
+
 export const createApolloClient = (ssr: boolean) => {
   const link = createHttpLink({
-    uri: process.env.API_URL,
+    uri: nuxtApp ? nuxtApp.$config.public.apiUrl : process.env.API_URL,
   });
 
   return new ApolloClient({

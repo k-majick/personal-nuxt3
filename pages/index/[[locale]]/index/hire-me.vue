@@ -17,7 +17,7 @@ import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
 import type { IResponse } from "@/types/common";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
 const config = useRuntimeConfig();
@@ -29,7 +29,7 @@ const page: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
+    uiStore.locale as string,
     getSlug(route.path as string),
   );
 

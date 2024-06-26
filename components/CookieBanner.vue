@@ -2,7 +2,6 @@
   <div v-if="!uiStore.consent" :class="`cookie cookie--${theme}`">
     <div class="cookie__container">
       <div
-        v-if="isClient"
         class="cookie__info"
         v-html="DOMPurify.sanitize($t('messages.cookieBanner', { privacyUrl }))"
       >
@@ -25,12 +24,13 @@
 <script lang="ts" setup>
 import { useUiStore } from "@/store/ui";
 import { useI18n } from "vue-i18n";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 defineProps({
   theme: {
     type: String,
-    required: true,
+    required: false,
+    default: "lite",
   },
 });
 

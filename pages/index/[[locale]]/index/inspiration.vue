@@ -34,7 +34,7 @@
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import type { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
@@ -42,17 +42,17 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 const page: Ref<IResponse | undefined> = ref();
 const pics: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
+    uiStore.locale as string,
     getSlug(route.path as string),
   );
   const picsData = (await dataStore.getInspiration(
-    uiStore.currentLocale as string,
+    uiStore.locale as string,
   )) as IResponse;
 
   if (!pageData) {

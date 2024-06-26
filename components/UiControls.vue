@@ -46,7 +46,7 @@ const uiStore = useUiStore();
 const { locale } = useI18n({ useScope: "global" });
 const rootEl = typeof window !== "undefined" ? document.documentElement : null;
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 const localesAvailable = computed(() =>
   locales.filter(l => l.code !== locale.value),
 );
@@ -89,17 +89,17 @@ const toggleTheme = (theme: string) => {
   }
 };
 
-if (typeof window !== "undefined") {
-  localStorage.getItem("user-theme")
-    ? toggleTheme(localStorage.getItem("user-theme") as string)
-    : toggleTheme("lite");
-}
-
 const getLocale = () => {
   const saved = typeof window !== "undefined" ? localStorage.getItem("user-locale") : "en";
   const routeParam = route.params.locale as string;
   return routeParam.length === 2 ? routeParam : saved;
 }
+
+onMounted(() => {
+  localStorage.getItem("user-theme") ?
+    toggleTheme(localStorage.getItem("user-theme") as string) :
+    toggleTheme("lite");
+});
 
 switchLocale(getLocale() as string);
 </script>

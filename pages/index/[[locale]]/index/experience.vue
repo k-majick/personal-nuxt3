@@ -21,7 +21,7 @@ import { useUiStore } from "@/store/ui";
 import Jobs from "@/components/Jobs.vue";
 import Counter from "@/components/Counter.vue";
 import type { IResponse } from "@/types/common";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
 const config = useRuntimeConfig();
@@ -29,17 +29,17 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 const page: Ref<IResponse | undefined> = ref();
 const jobs = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale,
+    uiStore.locale,
     getSlug(route.path),
   );
 
-  const jobsData = await dataStore.getExperience(uiStore.currentLocale);
+  const jobsData = await dataStore.getExperience(uiStore.locale);
 
   if (!pageData || !jobsData) {
     return;

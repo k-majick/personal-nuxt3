@@ -24,7 +24,7 @@ import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import PoliciesFooter from "@/components/PoliciesFooter.vue";
 import type { IResponse } from "@/types/common";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 import { useRoute } from "vue-router";
 
@@ -41,7 +41,7 @@ const updatedAt = computed(() =>
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
+    uiStore.locale as string,
     getSlug(route.path as string),
   );
 

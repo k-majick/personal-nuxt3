@@ -60,7 +60,7 @@ import Projects from "@/components/Projects.vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import type { IResponse, IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
@@ -68,7 +68,7 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 
 const page: Ref<IResponse | undefined> = ref();
 const posts: Ref<Array<IResponse> | undefined> = ref();
@@ -76,12 +76,12 @@ const portfolio: Ref<IResponse | undefined> = ref();
 
 watchEffect(async (): Promise<IResponse | void> => {
   const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
+    uiStore.locale as string,
     getSlug(route.path as string),
   );
   const postsData = (await dataStore.getPosts()) as Array<IResponse>;
   const portfolioData = (await dataStore.getPortfolio(
-    uiStore.currentLocale as string,
+    uiStore.locale as string,
   )) as IResponse;
 
   if (!pageData || !postsData || !portfolioData) {

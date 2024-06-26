@@ -2,14 +2,13 @@ import { defineStore } from "pinia";
 import {
   GET_PAGES,
   GET_PAGE,
-  GET_POSTS,
+  // GET_POSTS,
   GET_SKILLS,
   GET_TECHNOLOGY,
   GET_EXPERIENCE,
-  GET_PORTFOLIO,
-  GET_INSPIRATION,
+  // GET_PORTFOLIO,
+  // GET_INSPIRATION,
 } from "@/graphql/queries";
-
 import type { IResponse } from "@/types/common";
 import { createApolloClient } from '@/graphql/apollo-client';
 
@@ -45,22 +44,6 @@ export const useDataStore = defineStore({
     inspiration: null,
   }),
   actions: {
-    async getPage(locale: string, slug: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient.query({
-          query: GET_PAGE(locale, slug),
-        });
-
-        this.page = data.page.data;
-
-        return this.page;
-      } catch (error) {
-        this.loadError = true;
-      }
-    },
-
     async getPages(locale: string) {
       this.loading = true;
 
@@ -69,31 +52,46 @@ export const useDataStore = defineStore({
           query: GET_PAGES(locale),
         });
 
-        this.pages = data.pages.data;
+        this.loading = false;
 
-        return this.pages;
+        return data.pages.data;
       } catch (error) {
-        console.error(error);
         this.loadError = true;
       }
     },
 
-    async getPosts() {
+    async getPage(locale: string, slug: string) {
       this.loading = true;
 
       try {
         const { data } = await apolloClient.query({
-          query: GET_POSTS(),
+          query: GET_PAGE(locale, slug),
         });
 
-        this.posts = data.posts.data;
+        this.loading = false;
 
-        return this.posts;
+        return data.page.data.attributes;
       } catch (error) {
-        console.error(error);
         this.loadError = true;
       }
     },
+
+  //   async getPosts() {
+  //     this.loading = true;
+
+  //     try {
+  //       const { data } = await apolloClient.query({
+  //         query: GET_POSTS(),
+  //       });
+
+  //       this.posts = data.posts.data;
+
+  //       return this.posts;
+  //     } catch (error) {
+  //       console.error(error);
+  //       this.loadError = true;
+  //     }
+  //   },
 
     async getSkills(locale: string) {
       this.loading = true;
@@ -103,9 +101,9 @@ export const useDataStore = defineStore({
           query: GET_SKILLS(locale),
         });
 
-        this.skills = data.skills.data.attributes;
+        this.loading = false;
 
-        return this.skills;
+        return data.skills.data.attributes;
       } catch (error) {
         console.error(error);
         this.loadError = true;
@@ -120,9 +118,9 @@ export const useDataStore = defineStore({
           query: GET_TECHNOLOGY(locale),
         });
 
-        this.technology = data.technology.data.attributes;
+        this.loading = false;
 
-        return this.technology;
+        return data.technology.data;
       } catch (error) {
         console.error(error);
         this.loadError = true;
@@ -137,57 +135,47 @@ export const useDataStore = defineStore({
           query: GET_EXPERIENCE(locale),
         });
 
-        this.experience = data.experience.data.attributes;
-
-        return this.experience;
+        return data.experience.data;
       } catch (error) {
         console.error(error);
         this.loadError = true;
       }
     },
 
-    async getPortfolio(locale: string) {
-      this.loading = true;
+  //   async getPortfolio(locale: string) {
+  //     this.loading = true;
 
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_PORTFOLIO(locale),
-        });
+  //     try {
+  //       const { data } = await apolloClient?.query({
+  //         query: GET_PORTFOLIO(locale),
+  //       });
 
-        this.portfolio = data.portfolio.data.attributes;
+  //       this.portfolio = data.portfolio.data.attributes;
 
-        return this.portfolio;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
-    },
+  //       return this.portfolio;
+  //     } catch (error) {
+  //       console.error(error);
+  //       this.loadError = true;
+  //     }
+  //   },
 
-    async getInspiration(locale: string) {
-      this.loading = true;
+  //   async getInspiration(locale: string) {
+  //     this.loading = true;
 
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_INSPIRATION(locale),
-        });
+  //     try {
+  //       const { data } = await apolloClient?.query({
+  //         query: GET_INSPIRATION(locale),
+  //       });
 
-        this.inspiration = data.inspiration.data.attributes;
+  //       this.inspiration = data.inspiration.data.attributes;
 
-        return this.inspiration;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
-    },
-  },
-  getters: {
-    currentPage: state => state.page,
-    allPages: state => state.pages,
-    mySkills: state => state.skills,
-    myTechnology: state => state.technology,
-    myExperience: state => state.experience,
-    myPortfolio: state => state.portfolio,
-    myContact: state => state.contact,
-    myInspiration: state => state.inspiration,
+  //       return this.inspiration;
+  //     } catch (error) {
+  //       console.error(error);
+  //       this.loadError = true;
+  //     }
+  //   },
+  // },
+
   },
 });

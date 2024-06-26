@@ -38,6 +38,7 @@
     "eslint-plugin-risxss": "^2.1.0",
     "eslint-plugin-vue": "^9.3.0",
     "include-media": "^2.0.0",
+    "isomorphic-dompurify": "^2.12.0",
     "marked": "^12.0.1",
     "modern-normalize": "^2.0.0",
     "nuxt": "npm:nuxt3@latest",
