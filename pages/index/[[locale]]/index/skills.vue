@@ -43,6 +43,7 @@ const route = useRoute();
 
 const theme = computed(() => uiStore.theme);
 const slug = route.name === "index-locale" ? "skills" : getSlug(route.path as string);
+const title = route.name === "index-locale" ? `${config.public.appName} | ${config.public.appTitle}` : `${config.public.appName} | ${t('page.skills')}`;
 
 const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
 const { data: skills } = useAsyncData("skills", async () => await dataStore.getSkills(uiStore.locale));
@@ -63,6 +64,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${t('page.skills')}`,
+  titleTemplate: title,
 });
 </script>
