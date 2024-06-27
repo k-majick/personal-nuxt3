@@ -26,7 +26,9 @@ import Jobs from "@/components/Jobs.vue";
 import Counter from "@/components/Counter.vue";
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
@@ -51,6 +53,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+  titleTemplate: `${config.public.appName} | ${t('page.experience')}`,
 });
 </script>

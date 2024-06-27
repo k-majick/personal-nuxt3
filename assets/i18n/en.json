@@ -1,4 +1,13 @@
 {
+  "page": {
+    "skills": "Skills",
+    "experience": "Experience",
+    "creations": "Creations",
+    "hire-me": "Hire me",
+    "inspiration": "Inspiration",
+    "privacy-policy": "Privacy policy",
+    "terms-of-use": "Terms of use"
+  },
   "messages": {
     "name": "K-Majick",
     "hello": "Hello! My name is <strong>K-Majick</strong>. I work as a&nbsp;<strong>Full-Stack JavaScript Developer</strong>.",

@@ -18,7 +18,9 @@ import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
@@ -39,6 +41,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+  titleTemplate: `${config.public.appName} | ${t('page.hire-me')}`,
 });
 </script>

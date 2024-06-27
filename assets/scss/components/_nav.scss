@@ -16,7 +16,7 @@
     #{$self}__link.active {
       &:after {
         width: 50vw;
-        transition: width 2s linear 2s;
+        transition: width 2s linear 2.5s;
         max-width: 60vh;
       }
     }
@@ -193,8 +193,7 @@
     }
 
     &:not([href$="creations"]):after {
-      // &:after {
-      @include trans(2, max-width);
+      // @include trans(2, max-width);
       display: block;
       content: "";
       position: absolute;
