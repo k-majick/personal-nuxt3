@@ -1,4 +1,13 @@
 {
+  "page": {
+    "skills": "Fähigkeiten",
+    "experience": "Erfahrung",
+    "creations": "Kreationen",
+    "hire-me": "Stellt mich ein",
+    "inspiration": "Inspiration",
+    "privacy-policy": "Nutzungsbedingungen",
+    "terms-of-use": "Datenschutzerklärung"
+  },
   "messages": {
     "name": "K-Majick",
     "hello": "Hallo! Ich heiße <strong>K-Majick</strong>. Ich arbeite als <strong>Full-Stack JavaScript-Entwickler</strong>.",
