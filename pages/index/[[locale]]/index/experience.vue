@@ -1,16 +1,20 @@
 <template>
   <section class="main__card">
-    <h2 class="main__title">{{ page?.attributes.title }}</h2>
+    <h2 class="main__title">{{ page?.title }}</h2>
     <div
-      v-if="page?.attributes.content"
+      v-if="page?.content"
       class="main__content"
       v-html="
         DOMPurify.sanitize(
-          marked.parse(page?.attributes.content as string) as string,
+          marked.parse(page?.content as string) as string,
         )
       "
     ></div>
-    <Jobs v-if="jobs?.length" :theme="theme" :jobs="jobs" />
+    <Jobs 
+      v-if="jobs?.length"
+      :theme="theme"
+      :jobs="jobs"
+    />
     <Counter />
   </section>
 </template>
@@ -20,8 +24,7 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import Jobs from "@/components/Jobs.vue";
 import Counter from "@/components/Counter.vue";
-import type { IResponse } from "@/types/common";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
 const config = useRuntimeConfig();
@@ -29,28 +32,25 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
-const page: Ref<IResponse | undefined> = ref();
-const jobs = ref();
+const theme = computed(() => uiStore.theme);
+const slug = getSlug(route.path as string);
 
-watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(
-    uiStore.currentLocale,
-    getSlug(route.path),
-  );
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: jobs } = useAsyncData("jobs", async () => await dataStore.getJobs(uiStore.locale));
 
-  const jobsData = await dataStore.getExperience(uiStore.currentLocale);
+watch(
+  () => uiStore.locale,
+  async () => {
+    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
+    jobs.value = ((await dataStore.getJobs(uiStore.locale)));
 
-  if (!pageData || !jobsData) {
-    return;
-  }
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+    });
+  },
+);
 
-  page.value = pageData;
-  jobs.value = jobsData.workplaces;
-  dataStore.loading = false;
-
-  useHead({
-    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
-  });
+useHead({
+  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
 });
 </script>

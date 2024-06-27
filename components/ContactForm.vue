@@ -130,7 +130,7 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const uiStore = useUiStore();
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 
 const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
 const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);

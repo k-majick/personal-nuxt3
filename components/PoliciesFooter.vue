@@ -14,7 +14,7 @@ import { useUiStore } from "@/store/ui";
 
 const config = useRuntimeConfig();
 const uiStore = useUiStore();
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 
 const date = new Date();
 </script>

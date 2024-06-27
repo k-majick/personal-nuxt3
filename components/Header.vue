@@ -32,7 +32,7 @@ const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 const isLoading = computed(() => dataStore.loading || dataStore.loadError);
 
 const headerEl: Ref<HTMLElement | undefined> = ref();

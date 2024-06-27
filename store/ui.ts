@@ -56,8 +56,4 @@ export const useUiStore = defineStore({
       }
     },
   },
-  getters: {
-    currentTheme: state => state.theme,
-    currentLocale: state => state.locale,
-  },
 });

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { createApolloClient } from '@/graphql/apollo-client';
 import {
   GET_PAGES,
   GET_PAGE,
@@ -8,77 +9,23 @@ import {
   GET_EXPERIENCE,
   GET_PORTFOLIO,
   GET_INSPIRATION,
-} from "@/api/queries";
-
-import type { IResponse } from "@/types/common";
-import { useNuxtApp, type NuxtApp } from "#app";
-import type { ApolloClient, NormalizedCacheObject } from "@apollo/client/core";
-
-interface MyNuxtApp extends NuxtApp {
-  $apolloClient: ApolloClient<NormalizedCacheObject>;
-}
-
-const nuxtApp = typeof window === "undefined" ? null : useNuxtApp() as MyNuxtApp;
+} from "@/graphql/queries";
 
 interface IDataState {
   loading: boolean;
   loadError: boolean;
-  page: null | IResponse;
-  pages: null | Array<IResponse>;
-  posts: null | Array<IResponse>;
-  skills: null | IResponse;
-  technology: null | IResponse;
-  experience: null | IResponse;
-  portfolio: null | IResponse;
-  contact: null | IResponse;
-  inspiration: null | IResponse;
 }
+
+const apolloClient = createApolloClient(typeof window === 'undefined');
 
 export const useDataStore = defineStore({
   id: "data-store",
   state: (): IDataState => ({
-    loading: true,
+    loading: typeof window === 'undefined' ? false : true,
     loadError: false,
-    page: null,
-    pages: null,
-    posts: null,
-    skills: null,
-    technology: null,
-    experience: null,
-    portfolio: null,
-    contact: null,
-    inspiration: null,
   }),
   actions: {
-    async getPage(locale: string, slug: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient.query({
-          query: GET_PAGE(locale, slug),
-        });
-
-        this.page = data.page.data;
-
-        return this.page;
-      } catch (error) {
-        this.loadError = true;
-      }
-    },
-
     async getPages(locale: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
       this.loading = true;
 
       try {
@@ -86,22 +33,31 @@ export const useDataStore = defineStore({
           query: GET_PAGES(locale),
         });
 
-        this.pages = data.pages.data;
+        this.loading = false;
 
-        return this.pages;
+        return data.pages.data;
       } catch (error) {
-        console.error(error);
+        this.loadError = true;
+      }
+    },
+
+    async getPage(locale: string, slug: string) {
+      this.loading = true;
+
+      try {
+        const { data } = await apolloClient.query({
+          query: GET_PAGE(locale, slug),
+        });
+
+        this.loading = false;
+
+        return data.page.data.attributes;
+      } catch (error) {
         this.loadError = true;
       }
     },
 
     async getPosts() {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
       this.loading = true;
 
       try {
@@ -109,9 +65,9 @@ export const useDataStore = defineStore({
           query: GET_POSTS(),
         });
 
-        this.posts = data.posts.data;
+        this.loading = false;
 
-        return this.posts;
+        return data.posts.data;
       } catch (error) {
         console.error(error);
         this.loadError = true;
@@ -119,12 +75,6 @@ export const useDataStore = defineStore({
     },
 
     async getSkills(locale: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
       this.loading = true;
 
       try {
@@ -132,9 +82,9 @@ export const useDataStore = defineStore({
           query: GET_SKILLS(locale),
         });
 
-        this.skills = data.skills.data.attributes;
+        this.loading = false;
 
-        return this.skills;
+        return data.skills.data.attributes.sets;
       } catch (error) {
         console.error(error);
         this.loadError = true;
@@ -142,12 +92,6 @@ export const useDataStore = defineStore({
     },
 
     async getTechnology(locale: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
       this.loading = true;
 
       try {
@@ -155,22 +99,16 @@ export const useDataStore = defineStore({
           query: GET_TECHNOLOGY(locale),
         });
 
-        this.technology = data.technology.data.attributes;
+        this.loading = false;
 
-        return this.technology;
+        return data.technology.data.attributes;
       } catch (error) {
         console.error(error);
         this.loadError = true;
       }
     },
 
-    async getExperience(locale: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
+    async getJobs(locale: string) {
       this.loading = true;
 
       try {
@@ -178,9 +116,9 @@ export const useDataStore = defineStore({
           query: GET_EXPERIENCE(locale),
         });
 
-        this.experience = data.experience.data.attributes;
+        this.loading = false;
 
-        return this.experience;
+        return data.experience.data.attributes.workplaces;
       } catch (error) {
         console.error(error);
         this.loadError = true;
@@ -188,12 +126,6 @@ export const useDataStore = defineStore({
     },
 
     async getPortfolio(locale: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
       this.loading = true;
 
       try {
@@ -201,22 +133,16 @@ export const useDataStore = defineStore({
           query: GET_PORTFOLIO(locale),
         });
 
-        this.portfolio = data.portfolio.data.attributes;
+        this.loading = false;
 
-        return this.portfolio;
+        return data.portfolio.data.attributes;
       } catch (error) {
         console.error(error);
         this.loadError = true;
       }
     },
 
-    async getInspiration(locale: string) {
-      if (!nuxtApp) {
-        return;
-      }
-
-      const apolloClient = (nuxtApp as MyNuxtApp).$apolloClient;   
-
+    async getPics(locale: string) {
       this.loading = true;
 
       try {
@@ -224,23 +150,13 @@ export const useDataStore = defineStore({
           query: GET_INSPIRATION(locale),
         });
 
-        this.inspiration = data.inspiration.data.attributes;
+        this.loading = false;
 
-        return this.inspiration;
+        return data.inspiration.data.attributes;
       } catch (error) {
         console.error(error);
         this.loadError = true;
       }
     },
-  },
-  getters: {
-    currentPage: state => state.page,
-    allPages: state => state.pages,
-    mySkills: state => state.skills,
-    myTechnology: state => state.technology,
-    myExperience: state => state.experience,
-    myPortfolio: state => state.portfolio,
-    myContact: state => state.contact,
-    myInspiration: state => state.inspiration,
   },
 });

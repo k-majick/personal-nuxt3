@@ -2,7 +2,6 @@
   <div :class="`avatar avatar--${theme}`">
     <h2 class="avatar__title">{{ $t("messages.name") }}</h2>
     <h3
-      v-if="isClient"
       class="avatar__message"
       v-html="DOMPurify.sanitize($t('messages.hello'))"
     ></h3>
@@ -18,7 +17,7 @@
 
 <script lang="ts" setup>
 import { vTooltip } from "@/composables/tooltip";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 defineProps({
   theme: {

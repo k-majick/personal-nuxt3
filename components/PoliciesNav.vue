@@ -34,7 +34,7 @@ defineProps({
 defineEmits(["closeNav"]);
 
 const uiStore = useUiStore();
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 const exclude = "burger";
 </script>
 

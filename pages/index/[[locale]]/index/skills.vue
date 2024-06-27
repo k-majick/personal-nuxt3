@@ -1,15 +1,14 @@
 <template>
   <section class="main__card">
     <h2
-      v-if="page?.attributes"
-      class="main__title">{{ page?.attributes?.title }}
+      class="main__title">{{ page?.title }}
     </h2>
     <div
-      v-if="page?.attributes.content"
+      v-if="page?.content"
       class="main__content"
       v-html="
         DOMPurify.sanitize(
-          marked.parse(page?.attributes.content as string) as string,
+          marked.parse(page?.content as string) as string,
         )
       "
     ></div>
@@ -32,8 +31,7 @@ import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import Skills from "@/components/Skills.vue";
 import Technologies from "@/components/Technologies.vue";
-import type { IResponse } from "@/types/common";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
 const config = useRuntimeConfig();
@@ -41,31 +39,28 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
-const page: Ref<IResponse | undefined> = ref();
-const skills = ref();
-const technology = ref();
+const theme = computed(() => uiStore.theme);
+const slug = route.name === "index-locale" ? "skills" : getSlug(route.path as string);
 
-watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
-    route.name === "index-locale" ? "skills" : getSlug(route.path as string),
-  );
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: skills } = useAsyncData("skills", async () => await dataStore.getSkills(uiStore.locale));
+const { data: technology } = useAsyncData("technology", async () => await dataStore.getTechnology(uiStore.locale));
 
-  const skillsData = await dataStore.getSkills(uiStore.currentLocale);
-  const techData = await dataStore.getTechnology(uiStore.currentLocale);
+watch(
+  () => uiStore.locale,
+  async () => {
+    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
+    skills.value = ((await dataStore.getSkills(uiStore.locale)));
+    technology.value = ((await dataStore.getTechnology(uiStore.locale)));
+    dataStore.loading = false;
 
-  if (!pageData || !skillsData || !techData) {
-    return;
-  }
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+    });
+  },
+);
 
-  page.value = pageData;
-  skills.value = skillsData.sets;
-  technology.value = techData;
-  dataStore.loading = false;
-
-  useHead({
-    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
-  });
+useHead({
+  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
 });
 </script>

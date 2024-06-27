@@ -5,11 +5,11 @@ export default defineNuxtConfig({
     strict: true,
   },
   ssr: true,
-  routeRules: {
-    '/en/': { prerender: true },
-    '/de/': { prerender: true },
-    '/pl/': { prerender: true },
-  },
+  // routeRules: {
+  //   '/en/': { prerender: true },
+  //   '/de/': { prerender: true },
+  //   '/pl/': { prerender: true },
+  // },
   app: {
     head: {
       title: `${process.env.APP_NAME} | ${process.env.APP_TITLE}`,
@@ -132,5 +132,4 @@ export default defineNuxtConfig({
     },
   },
   css: ["@/assets/scss/_global.scss"],
-  plugins: ["@/plugins/apollo-client.js"],
 });

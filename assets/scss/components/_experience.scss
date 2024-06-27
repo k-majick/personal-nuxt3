@@ -1,10 +1,29 @@
 .experience {
   $self: &;
+  display: flex;
 
   &__arrow {
     height: 100%;
     width: 40px;
+    flex-shrink: 0;
     position: relative;
+    overflow: hidden;
+
+    @include media("<=m") {
+      width: 30px;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 120px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: scanVert 2.5s ease infinite;
+      z-index: 2;
+    }
 
     &:hover {
       #{$self}__bar,
@@ -80,27 +99,7 @@
       flex-direction: column;
       font-size: 0.85em;
 
-      &:first-of-type {
-        width: 40px;
-        overflow: hidden;
-        position: relative;
-
-        @include media("<=m") {
-          width: 30px;
-        }
-
-        &:after {
-          content: "";
-          display: block;
-          width: 40px;
-          height: 120px;
-          position: absolute;
-          top: 0;
-          left: 0;
-          animation: scanVert 2.5s ease infinite;
-          z-index: 2;
-        }
-      }
+      
     }
 
     tr.hilite {
@@ -135,87 +134,83 @@
       }
     }
 
-    &--lite {
-      #{$self}__bar {
-        &:before {
-          background: linear-gradient(
-            to bottom,
-            $color-silver 0%,
-            transparentize($color-silver, 1) 100%
-          );
-        }
-
-        &:after {
-          background: linear-gradient(
-            to bottom,
-            $color-red 0%,
-            transparentize($color-red, 1) 100%
-          );
-        }
+  }
+  &--lite {
+    #{$self}__bar {
+      &:before {
+        background: linear-gradient(
+          to bottom,
+          $color-silver 0%,
+          transparentize($color-silver, 1) 100%
+        );
       }
 
-      #{$self}__tip {
-        &:before {
-          border-bottom-color: $color-silver;
-        }
-
-        &:after {
-          border-bottom-color: $color-red;
-        }
-      }
-
-      tbody {
-        &:first-of-type {
-          &:after {
-            background: linear-gradient(
-              to bottom,
-              transparentize($color-white, 0.66),
-              transparentize($color-white, 1)
-            );
-          }
-        }
+      &:after {
+        background: linear-gradient(
+          to bottom,
+          $color-red 0%,
+          transparentize($color-red, 1) 100%
+        );
       }
     }
 
-    &--dark {
-      #{$self}__bar {
-        &:before {
-          background: linear-gradient(
-            to bottom,
-            $color-satan 0%,
-            transparentize($color-satan, 1) 100%
-          );
-        }
-
-        &:after {
-          background: linear-gradient(
-            to bottom,
-            $color-green 0%,
-            transparentize($color-green, 1) 100%
-          );
-        }
+    #{$self}__tip {
+      &:before {
+        border-bottom-color: $color-silver;
       }
 
-      #{$self}__tip {
-        &:before {
-          border-bottom-color: $color-satan;
-        }
+      &:after {
+        border-bottom-color: $color-red;
+      }
+    }
 
-        &:after {
-          border-bottom-color: $color-green;
-        }
+    #{$self}__arrow {
+      &:after {
+        background: linear-gradient(
+          to bottom,
+          transparentize($color-white, 0.66),
+          transparentize($color-white, 1)
+        );
+      }
+    }
+  }
+
+  &--dark {
+    #{$self}__bar {
+      &:before {
+        background: linear-gradient(
+          to bottom,
+          $color-satan 0%,
+          transparentize($color-satan, 1) 100%
+        );
       }
 
-      tbody {
-        &:first-of-type {
-          &:after {
-            background: linear-gradient(
-              to bottom,
-              transparentize($color-black, 0.66),
-              transparentize($color-black, 1)
-            );
-          }
-        }
+      &:after {
+        background: linear-gradient(
+          to bottom,
+          $color-green 0%,
+          transparentize($color-green, 1) 100%
+        );
+      }
+    }
+
+    #{$self}__tip {
+      &:before {
+        border-bottom-color: $color-satan;
+      }
+
+      &:after {
+        border-bottom-color: $color-green;
+      }
+    }
+
+    #{$self}__arrow {
+      &:after {
+        background: linear-gradient(
+          to bottom,
+          transparentize($color-black, 0.66),
+          transparentize($color-black, 1)
+        );
       }
     }
   }

@@ -36,7 +36,7 @@ import { vTooltip } from "@/composables/tooltip";
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
 </script>
 
 <style lang="scss">

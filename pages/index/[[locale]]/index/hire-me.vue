@@ -1,11 +1,11 @@
 <template>
   <section class="main__card">
-    <h2 class="main__title">{{ page?.attributes.title }}</h2>
+    <h2 class="main__title">{{ page?.title }}</h2>
     <div
-      v-if="page?.attributes.content"
+      v-if="page?.content"
       class="main__content"
       v-html="
-        DOMPurify.sanitize(marked.parse(page?.attributes.content) as string)
+        DOMPurify.sanitize(marked.parse(page?.content) as string)
       "
     ></div>
     <ContactForm />
@@ -16,8 +16,7 @@
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import ContactForm from "@/components/ContactForm.vue";
-import type { IResponse } from "@/types/common";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 
 const config = useRuntimeConfig();
@@ -25,23 +24,21 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const page: Ref<IResponse | undefined> = ref();
+const slug = getSlug(route.path as string);
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
 
-watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
-    getSlug(route.path as string),
-  );
+watch(
+  () => uiStore.locale,
+  async () => {
+    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
 
-  if (!pageData) {
-    return;
-  }
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+    });
+  },
+);
 
-  page.value = pageData;
-  dataStore.loading = false;
-
-  useHead({
-    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
-  });
+useHead({
+  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
 });
 </script>

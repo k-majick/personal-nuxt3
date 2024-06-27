@@ -1,19 +1,19 @@
 <template>
   <section class="main__card main__card--gallery">
     <div
-      v-if="page?.attributes.content"
+      v-if="page?.content"
       class="main__content"
       v-html="
-        DOMPurify.sanitize(marked.parse(page?.attributes.content as string) as string)
+        DOMPurify.sanitize(marked.parse(page?.content as string) as string)
       "
     ></div>
     <div
-      v-if="pics?.pictures.length"
+      v-if="pics?.pictures?.length"
       class="gallery gallery--inspiration"
       :class="`gallery--${theme}`"
     >
       <div
-        v-for="(picture, index) in pics.pictures as IItem[]"
+        v-for="(picture, index) in pics.pictures"
         :key="index"
         class="gallery__item"
       >
@@ -34,38 +34,33 @@
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
-import type { IResponse, IItem } from "@/types/common";
+import DOMPurify from "isomorphic-dompurify";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
-const page: Ref<IResponse | undefined> = ref();
-const pics: Ref<IResponse | undefined> = ref();
+const theme = computed(() => uiStore.theme);
+const slug = getSlug(route.path as string);
 
-watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
-    getSlug(route.path as string),
-  );
-  const picsData = (await dataStore.getInspiration(
-    uiStore.currentLocale as string,
-  )) as IResponse;
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: pics } = useAsyncData("pics", async () => await dataStore.getPics(uiStore.locale));
 
-  if (!pageData) {
-    return;
-  }
+watch(
+  () => uiStore.locale,
+  async () => {
+    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
+    // pics.value = ((await dataStore.getPics(uiStore.locale)));
 
-  page.value = pageData;
-  pics.value = picsData;
-  dataStore.loading = false;
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+    });
+  },
+);
 
-  useHead({
-    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
-  });
+useHead({
+  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
 });
 </script>
 

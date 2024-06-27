@@ -32,15 +32,16 @@
         </article>
       </div>
     </section>
+  
     <section class="blog blog--featured">
       <div class="blog__container">
         <h3 class="blog__title">{{ $t("ui.featuredProjects") }}</h3>
         <div
-          v-if="page?.attributes.content"
+          v-if="page?.content"
           class="post__content"
           v-html="
             DOMPurify.sanitize(
-              marked.parse(page?.attributes.content as string) as string,
+              marked.parse(page?.content as string) as string,
             )
           "
         ></div>
@@ -60,42 +61,37 @@ import Projects from "@/components/Projects.vue";
 import { useUiStore } from "@/store/ui";
 import { useDataStore } from "@/store/data";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
-import type { IResponse, IItem } from "@/types/common";
+import DOMPurify from "isomorphic-dompurify";
+import type { IItem } from "@/types/common";
 
 const config = useRuntimeConfig();
 const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.currentTheme);
+const theme = computed(() => uiStore.theme);
+const slug = getSlug(route.path as string);
 
-const page: Ref<IResponse | undefined> = ref();
-const posts: Ref<Array<IResponse> | undefined> = ref();
-const portfolio: Ref<IResponse | undefined> = ref();
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: posts } = useAsyncData("posts", async () => await dataStore.getPosts());
+const { data: portfolio } = useAsyncData("portfolio", async () => await dataStore.getPortfolio(uiStore.locale));
 
-watchEffect(async (): Promise<IResponse | void> => {
-  const pageData = await dataStore.getPage(
-    uiStore.currentLocale as string,
-    getSlug(route.path as string),
-  );
-  const postsData = (await dataStore.getPosts()) as Array<IResponse>;
-  const portfolioData = (await dataStore.getPortfolio(
-    uiStore.currentLocale as string,
-  )) as IResponse;
+watch(
+  () => uiStore.locale,
+  async () => {
+    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
+    // posts.value = ((await dataStore.getSkills(uiStore.locale)));
+    portfolio.value = ((await dataStore.getPortfolio(uiStore.locale)));
+    dataStore.loading = false;
 
-  if (!pageData || !postsData || !portfolioData) {
-    return;
-  }
+    useHead({
+      titleTemplate: `${config.public.appName} | ${page.value?.title}`,
+    });
+  },
+);
 
-  page.value = pageData;
-  posts.value = postsData;
-  portfolio.value = portfolioData;
-  dataStore.loading = false;
-
-  useHead({
-    titleTemplate: `${config.public.appName} | ${page.value?.attributes.title}`,
-  });
+useHead({
+  titleTemplate: `${config.public.appName} | ${page.value?.title}`,
 });
 </script>
 
