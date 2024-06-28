@@ -43,7 +43,7 @@ const updatedAt = computed(() =>
 );
 
 watch(
-  () => [uiStore.locale, route.name],
+  () => [route.path, uiStore.locale],
   async () => {
     page.value = ((await dataStore.getPage(uiStore.locale, slug.value)));
 
@@ -54,6 +54,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${t('page.' + getSlug(route.path as string))}`,
+  titleTemplate: `${config.public.appName} | ${t('page.' + slug.value)}`,
 });
 </script>

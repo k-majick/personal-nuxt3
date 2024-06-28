@@ -10,7 +10,7 @@
     <div
       v-if="pics?.pictures?.length"
       class="gallery gallery--inspiration"
-      :class="`gallery--${theme}`"
+      :class="`gallery--${uiStore.theme}`"
     >
       <div
         v-for="(picture, index) in pics.pictures"
@@ -43,17 +43,13 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const theme = computed(() => uiStore.theme);
-const slug = getSlug(route.path as string);
-
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "inspiration"));
 const { data: pics } = useAsyncData("pics", async () => await dataStore.getPics(uiStore.locale));
 
 watch(
-  () => uiStore.locale,
+  () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
-    // pics.value = ((await dataStore.getPics(uiStore.locale)));
+    page.value = ((await dataStore.getPage(uiStore.locale, "inspiration")));
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,

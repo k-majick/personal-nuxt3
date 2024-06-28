@@ -42,20 +42,16 @@ const uiStore = useUiStore();
 const route = useRoute();
 
 const theme = computed(() => uiStore.theme);
-const slug = route.name === "index-locale" ? "skills" : getSlug(route.path as string);
-const title = route.name === "index-locale" ? `${config.public.appName} | ${config.public.appTitle}` : `${config.public.appName} | ${t('page.skills')}`;
+const title = computed(() => route.name === "index-locale" ? `${config.public.appName} | ${config.public.appTitle}` : `${config.public.appName} | ${t('page.skills')}`);
 
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "skills"));
 const { data: skills } = useAsyncData("skills", async () => await dataStore.getSkills(uiStore.locale));
 const { data: technology } = useAsyncData("technology", async () => await dataStore.getTechnology(uiStore.locale));
 
 watch(
-  () => uiStore.locale,
+  () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
-    skills.value = ((await dataStore.getSkills(uiStore.locale)));
-    technology.value = ((await dataStore.getTechnology(uiStore.locale)));
-    dataStore.loading = false;
+    page.value = ((await dataStore.getPage(uiStore.locale, "skills")));
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,
@@ -64,6 +60,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: title,
+  titleTemplate: title.value,
 });
 </script>

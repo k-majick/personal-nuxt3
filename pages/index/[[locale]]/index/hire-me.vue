@@ -26,13 +26,12 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const slug = getSlug(route.path as string);
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug));
+const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "hire-me"));
 
 watch(
-  () => uiStore.locale,
+  () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, slug)));
+    page.value = ((await dataStore.getPage(uiStore.locale, "hire-me")));
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,
