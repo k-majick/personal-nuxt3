@@ -34,7 +34,7 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "experience"));
+const { data: page } = useAsyncData("page4", async () => await dataStore.getPage(uiStore.locale, "experience"));
 const { data: jobs } = useAsyncData("jobs", async () => await dataStore.getJobs(uiStore.locale));
 
 watch(

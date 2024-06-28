@@ -35,7 +35,7 @@ const uiStore = useUiStore();
 const route = useRoute();
 
 const slug = computed(() => getSlug(route.path as string));
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, slug.value));
+const { data: page } = useAsyncData("page0", async () => await dataStore.getPage(uiStore.locale, slug.value));
 
 const pageContent = computed(() => page.value?.content);
 const updatedAt = computed(() =>

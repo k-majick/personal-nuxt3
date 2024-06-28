@@ -44,7 +44,7 @@ const route = useRoute();
 const theme = computed(() => uiStore.theme);
 const title = computed(() => route.name === "index-locale" ? `${config.public.appName} | ${config.public.appTitle}` : `${config.public.appName} | ${t('page.skills')}`);
 
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "skills"));
+const { data: page } = useAsyncData("page1", async () => await dataStore.getPage(uiStore.locale, "skills"));
 const { data: skills } = useAsyncData("skills", async () => await dataStore.getSkills(uiStore.locale));
 const { data: technology } = useAsyncData("technology", async () => await dataStore.getTechnology(uiStore.locale));
 

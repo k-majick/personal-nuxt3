@@ -43,7 +43,7 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "inspiration"));
+const { data: page } = useAsyncData("page5", async () => await dataStore.getPage(uiStore.locale, "inspiration"));
 const { data: pics } = useAsyncData("pics", async () => await dataStore.getPics(uiStore.locale));
 
 watch(

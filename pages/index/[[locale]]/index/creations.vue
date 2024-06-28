@@ -73,7 +73,7 @@ const route = useRoute();
 
 const theme = computed(() => uiStore.theme);
 
-const { data: page } = useAsyncData("page", async () => await dataStore.getPage(uiStore.locale, "creations"));
+const { data: page } = useAsyncData("page3", async () => await dataStore.getPage(uiStore.locale, "creations"));
 const { data: posts } = useAsyncData("posts", async () => await dataStore.getPosts());
 const { data: portfolio } = useAsyncData("portfolio", async () => await dataStore.getPortfolio(uiStore.locale));
 
