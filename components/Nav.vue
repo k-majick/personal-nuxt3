@@ -4,7 +4,7 @@
     class="nav"
     :class="[`nav--${uiStore.theme}`, { active: isActive, activated: isActivated }]"
   >
-    <ul class="nav__items">
+    <menu class="nav__items">
       <li class="nav__item">
         <a
           class="nav__link"
@@ -20,8 +20,8 @@
           {{ page.attributes.title }}
         </nuxt-link>
       </li>
-    </ul>
-    <ul class="nav__social">
+    </menu>
+    <menu class="nav__social">
       <li class="nav__socialItem">
         <a
           v-tooltip="$t('messages.git')"
@@ -46,7 +46,7 @@
           ></span>
         </a>
       </li>
-    </ul>
+    </menu>
     <div v-tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
         :to="{ path: `/${locale}/inspiration`}"

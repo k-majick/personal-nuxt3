@@ -2,7 +2,7 @@
   <div class="header__control">
     <div class="header__selector header__selector--locale">
       <button class="header__button">{{ locale }}</button>
-      <ul class="header__options">
+      <menu class="header__options">
         <li
           v-for="(l, index) in localesAvailable"
           :key="index"
@@ -11,7 +11,7 @@
         >
           {{ l.code }}
         </li>
-      </ul>
+      </menu>
     </div>
     <div
       v-tooltip="
