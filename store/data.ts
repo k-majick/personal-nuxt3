@@ -44,7 +44,7 @@ export const useDataStore = defineStore({
 
         this.loading = false;
 
-        return returnPath.split('.').reduce((o, i) => o[i], data);
+        return returnPath.split(".").reduce((o, i) => o[i], data);
       } catch (error) {
         console.error(error);
         this.loadError = true;
