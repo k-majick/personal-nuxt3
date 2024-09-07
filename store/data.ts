@@ -11,6 +11,17 @@ import {
   GET_INSPIRATION,
 } from "@/graphql/queries";
 
+enum RETURN_PATHS {
+  PAGES = "pages.data",
+  PAGE = "page.data.attributes",
+  POSTS = "posts.data",
+  SKILLS = "skills.data.attributes.sets",
+  TECHNOLOGY = "technology.data.attributes",
+  EXPERIENCE = "experience.data.attributes.workplaces",
+  PORTFOLIO = "portfolio.data.attributes",
+  INSPIRATION = "inspiration.data.attributes",
+}
+
 interface IDataState {
   loading: boolean;
   loadError: boolean;
@@ -25,138 +36,51 @@ export const useDataStore = defineStore({
     loadError: false,
   }),
   actions: {
-    async getPages(locale: string) {
+    async fetchData(query: any, returnPath: RETURN_PATHS) {
       this.loading = true;
 
       try {
-        const { data } = await apolloClient.query({
-          query: GET_PAGES(locale),
-        });
+        const { data } = await apolloClient.query({ query });
 
         this.loading = false;
 
-        return data.pages.data;
+        return returnPath.split('.').reduce((o, i) => o[i], data);
       } catch (error) {
+        console.error(error);
         this.loadError = true;
       }
+    },
+
+    async getPages(locale: string) {
+      return this.fetchData(GET_PAGES(locale), RETURN_PATHS.PAGES);
     },
 
     async getPage(locale: string, slug: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient.query({
-          query: GET_PAGE(locale, slug),
-        });
-
-        this.loading = false;
-
-        return data.page.data.attributes;
-      } catch (error) {
-        this.loadError = true;
-      }
+      return this.fetchData(GET_PAGE(locale, slug), RETURN_PATHS.PAGE);
     },
 
     async getPosts() {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient.query({
-          query: GET_POSTS(),
-        });
-
-        this.loading = false;
-
-        return data.posts.data;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
+      return this.fetchData(GET_POSTS(), RETURN_PATHS.POSTS);
     },
 
     async getSkills(locale: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_SKILLS(locale),
-        });
-
-        this.loading = false;
-
-        return data.skills.data.attributes.sets;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
+      return this.fetchData(GET_SKILLS(locale), RETURN_PATHS.SKILLS);
     },
 
     async getTechnology(locale: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_TECHNOLOGY(locale),
-        });
-
-        this.loading = false;
-
-        return data.technology.data.attributes;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
+      return this.fetchData(GET_TECHNOLOGY(locale), RETURN_PATHS.TECHNOLOGY);
     },
 
     async getJobs(locale: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_EXPERIENCE(locale),
-        });
-
-        this.loading = false;
-
-        return data.experience.data.attributes.workplaces;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
+      return this.fetchData(GET_EXPERIENCE(locale), RETURN_PATHS.EXPERIENCE);
     },
 
     async getPortfolio(locale: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_PORTFOLIO(locale),
-        });
-
-        this.loading = false;
-
-        return data.portfolio.data.attributes;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
+      return this.fetchData(GET_PORTFOLIO(locale), RETURN_PATHS.PORTFOLIO);
     },
 
     async getPics(locale: string) {
-      this.loading = true;
-
-      try {
-        const { data } = await apolloClient?.query({
-          query: GET_INSPIRATION(locale),
-        });
-
-        this.loading = false;
-
-        return data.inspiration.data.attributes;
-      } catch (error) {
-        console.error(error);
-        this.loadError = true;
-      }
+      return this.fetchData(GET_INSPIRATION(locale), RETURN_PATHS.INSPIRATION);
     },
   },
 });
