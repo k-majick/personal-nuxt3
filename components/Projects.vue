@@ -10,7 +10,7 @@
           class="gallery__title"
           @click.self="
             setActiveProject(project, i + 1);
-            uiStore.toggleDialog((i + 1), true);
+            uiStore.toggleDialog(i + 1, true);
           "
         >
           {{ project.name }}

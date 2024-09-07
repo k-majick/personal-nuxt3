@@ -99,36 +99,37 @@ export const useUiStore = defineStore({
   },
 });
 
-const body = typeof window !== "undefined" ? document.body : null
+const body = typeof window !== "undefined" ? document.body : null;
 
 const scrollLock = () => {
   if (!body) {
-    return
+    return;
   }
-  const scrollY = document.documentElement?.style.getPropertyValue('--scroll-y')
-  if (body.classList.contains('locked')) {
-    return
+  const scrollY =
+    document.documentElement?.style.getPropertyValue("--scroll-y");
+  if (body.classList.contains("locked")) {
+    return;
   }
-  body.classList.add('locked')
-  body.style.overflowY = 'scroll'
-  body.style.position = 'fixed'
-  body.style.top = `-${scrollY}`
-  body.style.width = '100%'
-}
+  body.classList.add("locked");
+  body.style.overflowY = "scroll";
+  body.style.position = "fixed";
+  body.style.top = `-${scrollY}`;
+  body.style.width = "100%";
+};
 
 export const scrollUnlock = () => {
   if (!body) {
-    return
+    return;
   }
 
-  const posY = document.body.style.top
-  if (!posY && !body.classList.contains('locked')) {
-    return
+  const posY = document.body.style.top;
+  if (!posY && !body.classList.contains("locked")) {
+    return;
   }
-  body.classList.remove('locked')
-  body.style.overflowY = 'auto'
-  body.style.position = ''
-  body.style.top = ''
-  body.style.width = 'auto'
-  window.scrollTo(0, parseInt(posY) * -1)
-}
+  body.classList.remove("locked");
+  body.style.overflowY = "auto";
+  body.style.position = "";
+  body.style.top = "";
+  body.style.width = "auto";
+  window.scrollTo(0, parseInt(posY) * -1);
+};

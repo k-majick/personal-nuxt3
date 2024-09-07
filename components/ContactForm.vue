@@ -131,7 +131,7 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 const uiStore = useUiStore();
 
-const uid = Number(Math.random().toString().substring(2, 30))
+const uid = Number(Math.random().toString().substring(2, 30));
 const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
 
 const theme = computed(() => uiStore.theme);
