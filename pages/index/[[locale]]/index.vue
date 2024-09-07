@@ -5,13 +5,18 @@
       :class="`main__container--${
         route.path.includes('creations') ? 'full' : 'card'
       } ${uiStore.navActive ? 'main__container--active' : ''}
-        ${activeDialog ? 'main__container--hasactiveDialog' : ''}
+        ${uiStore.activeDialogs.length ? 'main__container--hasActiveDialogs' : ''}
       `"
     >
-      <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" />
+      <component
+        :is="SkillsPage"
+        v-if="route.name === 'index-locale'"
+        :key="route.name"
+      />
       <component :is="Component" :key="route.name" />
     </div>
   </router-view>
+  <div id="dialog"></div>
 </template>
 
 <script lang="ts" setup>
@@ -63,7 +68,7 @@ const enableGtag = () => {
   }
 
   window.dataLayer = window.dataLayer || [];
-  
+
   function gtag(_a: string, _b: string | Date) {
     window.dataLayer.push(arguments);
   }
@@ -73,7 +78,7 @@ const enableGtag = () => {
 };
 
 useSeoMeta({
-  description: () => t('meta.description'),
+  description: () => t("meta.description"),
 });
 
 definePageMeta({
@@ -94,7 +99,7 @@ const scrollToPos = (pos: number) => {
     window.scrollTo(0, pos);
     setTimeout(() => scrollToPos(pos), 0);
   }
-}
+};
 
 onBeforeRouteUpdate(() => {
   if (typeof window !== "undefined") {
@@ -107,10 +112,9 @@ onMounted(() => {
     scrollToPos(uiStore.scrollPos);
   }
 
-  if (route.name === 'index-locale') {
+  if (route.name === "index-locale") {
     router.push(`/${locale.value}/skills`);
   }
-
 });
 </script>
 

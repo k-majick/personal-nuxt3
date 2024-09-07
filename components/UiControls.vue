@@ -90,15 +90,16 @@ const toggleTheme = (theme: string) => {
 };
 
 const getLocale = () => {
-  const saved = typeof window !== "undefined" ? localStorage.getItem("user-locale") : "en";
+  const saved =
+    typeof window !== "undefined" ? localStorage.getItem("user-locale") : "en";
   const routeParam = route.params.locale as string;
   return routeParam.length === 2 ? routeParam : saved;
-}
+};
 
 onMounted(() => {
-  localStorage.getItem("user-theme") ?
-    toggleTheme(localStorage.getItem("user-theme") as string) :
-    toggleTheme("lite");
+  localStorage.getItem("user-theme")
+    ? toggleTheme(localStorage.getItem("user-theme") as string)
+    : toggleTheme("lite");
 
   switchLocale(getLocale() as string);
 });

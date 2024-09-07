@@ -176,7 +176,7 @@
 
   &--lite {
     filter: drop-shadow(0 0 15px $color-white);
-    
+
     #{$self}__wrapper {
       &:after {
         background-image: radial-gradient($color-white 5%, transparent 66%);
@@ -203,7 +203,7 @@
   &--dark {
     #{$self}__wrapper {
       &:after {
-        background-image: radial-gradient($color-black 5%, transparent 66%); 
+        background-image: radial-gradient($color-black 5%, transparent 66%);
       }
     }
 

@@ -1,1 +1,3 @@
-export const isClient = computed(() => process.client && typeof window !== "undefined");
+export const isClient = computed(
+  () => process.client && typeof window !== "undefined",
+);

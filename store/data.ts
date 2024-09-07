@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { createApolloClient } from '@/graphql/apollo-client';
+import { createApolloClient } from "@/graphql/apollo-client";
 import {
   GET_PAGES,
   GET_PAGE,
@@ -16,12 +16,12 @@ interface IDataState {
   loadError: boolean;
 }
 
-const apolloClient = createApolloClient(typeof window === 'undefined');
+const apolloClient = createApolloClient(typeof window === "undefined");
 
 export const useDataStore = defineStore({
   id: "data-store",
   state: (): IDataState => ({
-    loading: typeof window === 'undefined' ? false : true,
+    loading: typeof window === "undefined" ? false : true,
     loadError: false,
   }),
   actions: {

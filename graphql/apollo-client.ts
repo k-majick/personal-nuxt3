@@ -20,9 +20,9 @@ export const createApolloClient = (ssr: boolean) => {
     connectToDevTools: false,
     defaultOptions: {
       query: {
-        fetchPolicy: 'no-cache',
-        errorPolicy: 'all',
+        fetchPolicy: "no-cache",
+        errorPolicy: "all",
       },
     },
   });
-}
+};

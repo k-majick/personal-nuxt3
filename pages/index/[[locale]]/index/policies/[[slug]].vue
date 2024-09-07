@@ -35,7 +35,10 @@ const uiStore = useUiStore();
 const route = useRoute();
 
 const slug = computed(() => getSlug(route.path as string));
-const { data: page } = useAsyncData("page0", async () => await dataStore.getPage(uiStore.locale, slug.value));
+const { data: page } = useAsyncData(
+  "page0",
+  async () => await dataStore.getPage(uiStore.locale, slug.value),
+);
 
 const pageContent = computed(() => page.value?.content);
 const updatedAt = computed(() =>
@@ -45,7 +48,7 @@ const updatedAt = computed(() =>
 watch(
   () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, slug.value)));
+    page.value = await dataStore.getPage(uiStore.locale, slug.value);
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,
@@ -54,6 +57,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${t('page.' + slug.value)}`,
+  titleTemplate: `${config.public.appName} | ${t("page." + slug.value)}`,
 });
 </script>

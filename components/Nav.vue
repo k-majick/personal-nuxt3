@@ -2,18 +2,26 @@
   <nav
     v-click-outside:[exclude]="() => $emit('closeNav')"
     class="nav"
-    :class="[`nav--${uiStore.theme}`, { active: isActive, activated: isActivated }]"
+    :class="[
+      `nav--${uiStore.theme}`,
+      { active: isActive, activated: isActivated },
+    ]"
   >
     <menu class="nav__items">
       <li class="nav__item">
         <a
           class="nav__link"
           @click.stop.prevent="killModal(), scrollTo($event, headerEl)"
-        >Start</a>
+          >Start</a
+        >
       </li>
-      <li v-for="page in pagesSorted" :key="(page.id as string)" class="nav__item">
+      <li
+        v-for="page in pagesSorted"
+        :key="page.id as string"
+        class="nav__item"
+      >
         <nuxt-link
-          :to="{ path: `/${locale}/${page.attributes.slug}`}"
+          :to="{ path: `/${locale}/${page.attributes.slug}` }"
           class="nav__link"
           @click.stop="killModal(), scrollTo($event, mainEl)"
         >
@@ -29,9 +37,7 @@
           target="_blank"
           class="nav__socialLink"
         >
-          <span 
-            v-html="DOMPurify.sanitize(iconGit)"
-          ></span>
+          <span v-html="DOMPurify.sanitize(iconGit)"></span>
         </a>
       </li>
       <li class="nav__socialItem">
@@ -41,15 +47,13 @@
           target="_blank"
           class="nav__socialLink"
         >
-          <span
-            v-html="DOMPurify.sanitize(iconLinkedin)"
-          ></span>
+          <span v-html="DOMPurify.sanitize(iconLinkedin)"></span>
         </a>
       </li>
     </menu>
     <div v-tooltip="$t('messages.meow')" class="cat__wrapper">
       <nuxt-link
-        :to="{ path: `/${locale}/inspiration`}"
+        :to="{ path: `/${locale}/inspiration` }"
         class="cat"
         :class="`cat--${uiStore.theme}`"
         @click.stop="killModal()"
@@ -99,7 +103,10 @@ const mainEl = inject(MainElKey);
 const exclude = "burger";
 const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
 
-const { data: pages } = useAsyncData("pages", async () => await dataStore.getPages(uiStore.locale));
+const { data: pages } = useAsyncData(
+  "pages",
+  async () => await dataStore.getPages(uiStore.locale),
+);
 
 const pagesSorted = computed(() => {
   if (!pages.value?.length) {
@@ -108,20 +115,21 @@ const pagesSorted = computed(() => {
   return sortItems([...pages.value]);
 });
 
-const sortItems = (arr: IResponse[]) => arr
-  .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
-  .filter(item => !excludedPages.includes(item.attributes.slug));
+const sortItems = (arr: IResponse[]) =>
+  arr
+    .sort((a, b) => (a.attributes.order < b.attributes.order ? -1 : 1))
+    .filter(item => !excludedPages.includes(item.attributes.slug));
 
 const killModal = () => {
   if (document?.body.classList.contains("locked")) {
-    toggleDialog(0);
+    uiStore.toggleDialog(0);
   }
 };
 
 watch(
   () => uiStore.locale,
   async () => {
-    pages.value = ((await dataStore.getPages(uiStore.locale)) as IResponse[]);
+    pages.value = (await dataStore.getPages(uiStore.locale)) as IResponse[];
     dataStore.loading = false;
   },
 );

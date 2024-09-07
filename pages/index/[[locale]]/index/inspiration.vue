@@ -43,13 +43,19 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const { data: page } = useAsyncData("page5", async () => await dataStore.getPage(uiStore.locale, "inspiration"));
-const { data: pics } = useAsyncData("pics", async () => await dataStore.getPics(uiStore.locale));
+const { data: page } = useAsyncData(
+  "page5",
+  async () => await dataStore.getPage(uiStore.locale, "inspiration"),
+);
+const { data: pics } = useAsyncData(
+  "pics",
+  async () => await dataStore.getPics(uiStore.locale),
+);
 
 watch(
   () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, "inspiration")));
+    page.value = await dataStore.getPage(uiStore.locale, "inspiration");
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,
@@ -58,11 +64,10 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${t('page.inspiration')}`,
+  titleTemplate: `${config.public.appName} | ${t("page.inspiration")}`,
 });
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/gallery";
 </style>
-   
