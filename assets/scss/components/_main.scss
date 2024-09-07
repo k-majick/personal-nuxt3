@@ -3,14 +3,14 @@
   display: flex;
   position: relative;
 
-  &--loading {    
+  &--loading {
     #{$self}__container {
       opacity: 0 !important;
       transition: none;
     }
   }
 
-  &--active {    
+  &--active {
     #{$self}__container {
       opacity: 1;
     }
@@ -81,7 +81,7 @@
       opacity: 1;
     }
 
-    &--hasactiveDialog {
+    &--hasActiveDialogs {
       backdrop-filter: none;
     }
   }
@@ -121,7 +121,7 @@
         135deg,
         transparent 30px,
         var(--color-secondary) 30px 25%,
-        var(--color-secondary-trans) 75% 100%,
+        var(--color-secondary-trans) 75% 100%
       );
       backdrop-filter: blur(3px);
 
@@ -136,7 +136,7 @@
           135deg,
           transparent 15px,
           var(--color-secondary) 15px 25%,
-          var(--color-secondary-trans) 75% 100%,
+          var(--color-secondary-trans) 75% 100%
         );
       }
     }
@@ -209,7 +209,8 @@
       }
     }
 
-    > p, ul {
+    > p,
+    ul {
       @include text;
     }
 

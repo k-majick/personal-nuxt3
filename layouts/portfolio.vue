@@ -10,9 +10,12 @@
       @close-nav="isNavActivated = false"
     />
     <main
-      ref="mainEl" 
+      ref="mainEl"
       class="main main--portfolio"
-      :class="[`main--${theme}`, { 'main--loading': isLoading, 'main--active': uiStore.navActive }]"
+      :class="[
+        `main--${theme}`,
+        { 'main--loading': isLoading, 'main--active': uiStore.navActive },
+      ]"
     >
       <slot />
     </main>
@@ -56,7 +59,10 @@ const scrollListen = () => {
     const scrollTop = window.scrollY;
 
     if (typeof window !== "undefined") {
-      document?.documentElement?.style.setProperty("--scroll-y", `${scrollTop}px`);
+      document?.documentElement?.style.setProperty(
+        "--scroll-y",
+        `${scrollTop}px`,
+      );
     }
 
     if (!mainEl || !mainEl.value) {
@@ -80,7 +86,7 @@ onMounted(() => {
 useHead({
   meta: [
     {
-      name: 'google-adsense-account',
+      name: "google-adsense-account",
       content: config.public.appGads as string,
     },
   ],

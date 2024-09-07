@@ -4,9 +4,7 @@
     <div
       v-if="page?.content"
       class="main__content"
-      v-html="
-        DOMPurify.sanitize(marked.parse(page?.content) as string)
-      "
+      v-html="DOMPurify.sanitize(marked.parse(page?.content) as string)"
     ></div>
     <ContactForm />
   </section>
@@ -26,12 +24,15 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
-const { data: page } = useAsyncData("page2", async () => await dataStore.getPage(uiStore.locale, "hire-me"));
+const { data: page } = useAsyncData(
+  "page2",
+  async () => await dataStore.getPage(uiStore.locale, "hire-me"),
+);
 
 watch(
   () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, "hire-me")));
+    page.value = await dataStore.getPage(uiStore.locale, "hire-me");
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,
@@ -40,6 +41,6 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${t('page.hire-me')}`,
+  titleTemplate: `${config.public.appName} | ${t("page.hire-me")}`,
 });
 </script>

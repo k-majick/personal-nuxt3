@@ -6,7 +6,7 @@
     <PoliciesHeader :nav-active="navActive" @toggle-nav="toggleNav" />
     <PoliciesNav :is-active="navActive" @close-nav="navActive = false" />
     <main
-      class="main main--policies main--active" 
+      class="main main--policies main--active"
       :class="[`main--${theme}`, { 'main--loading': isLoading }]"
     >
       <slot />

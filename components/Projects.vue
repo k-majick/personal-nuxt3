@@ -10,7 +10,7 @@
           class="gallery__title"
           @click.self="
             setActiveProject(project, i + 1);
-            toggleDialog(i + 1);
+            uiStore.toggleDialog(i + 1, true);
           "
         >
           {{ project.name }}
@@ -25,11 +25,11 @@
   </swiper>
 
   <Dialog
-    v-if="isDialogOpen(activeProjectId)"
+    v-if="uiStore.isDialogOpen(activeProjectId)"
     :id="1"
     :dialog-type="'full'"
     @close="
-      toggleDialog(activeProjectId);
+      uiStore.toggleDialog(activeProjectId);
       activeProject = null;
     "
   >
@@ -66,6 +66,7 @@
 
 <script lang="ts" setup>
 import type { IItem } from "@/types/common";
+import { useUiStore } from "@/store/ui";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -73,6 +74,7 @@ import "swiper/css";
 
 SwiperCore.use([Navigation]);
 
+const uiStore = useUiStore();
 const activeProject = ref();
 const activeProjectId = ref();
 

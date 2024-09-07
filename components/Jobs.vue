@@ -1,19 +1,13 @@
 <template>
   <div class="main__content">
-    <div 
-      class="experience" 
-      :class="`experience--${theme}`"
-    >
+    <div class="experience" :class="`experience--${theme}`">
       <div class="experience__arrow">
         <div class="experience__bar">
           <div class="experience__tip"></div>
         </div>
       </div>
-      
-      <table 
-        v-if="jobsSorted?.length"
-        class="experience__table"
-      >
+
+      <table v-if="jobsSorted?.length" class="experience__table">
         <tbody>
           <tr
             v-for="job in jobsSorted"

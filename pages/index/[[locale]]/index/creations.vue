@@ -32,7 +32,7 @@
         </article>
       </div>
     </section>
-  
+
     <section class="blog blog--featured">
       <div class="blog__container">
         <h3 class="blog__title">{{ $t("ui.featuredProjects") }}</h3>
@@ -40,9 +40,7 @@
           v-if="page?.content"
           class="post__content"
           v-html="
-            DOMPurify.sanitize(
-              marked.parse(page?.content as string) as string,
-            )
+            DOMPurify.sanitize(marked.parse(page?.content as string) as string)
           "
         ></div>
       </div>
@@ -50,7 +48,7 @@
       <Projects
         v-if="portfolio?.projects && portfolio.projects.length"
         :theme="theme"
-        :projects="(portfolio.projects as Array<IItem>)"
+        :projects="portfolio.projects as Array<IItem>"
       />
     </section>
   </div>
@@ -73,14 +71,23 @@ const route = useRoute();
 
 const theme = computed(() => uiStore.theme);
 
-const { data: page } = useAsyncData("page3", async () => await dataStore.getPage(uiStore.locale, "creations"));
-const { data: posts } = useAsyncData("posts", async () => await dataStore.getPosts());
-const { data: portfolio } = useAsyncData("portfolio", async () => await dataStore.getPortfolio(uiStore.locale));
+const { data: page } = useAsyncData(
+  "page3",
+  async () => await dataStore.getPage(uiStore.locale, "creations"),
+);
+const { data: posts } = useAsyncData(
+  "posts",
+  async () => await dataStore.getPosts(),
+);
+const { data: portfolio } = useAsyncData(
+  "portfolio",
+  async () => await dataStore.getPortfolio(uiStore.locale),
+);
 
 watch(
   () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, "creations")));
+    page.value = await dataStore.getPage(uiStore.locale, "creations");
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,
@@ -89,7 +96,7 @@ watch(
 );
 
 useHead({
-  titleTemplate: `${config.public.appName} | ${t('page.creations')}`,
+  titleTemplate: `${config.public.appName} | ${t("page.creations")}`,
 });
 </script>
 

@@ -86,10 +86,10 @@
 
     <Transition name="fade">
       <Dialog
-        v-if="isDialogOpen(1)"
+        v-if="uiStore.isDialogOpen(uid)"
         :id="1"
         :dialog-type="'message'"
-        @close="toggleDialog(1, false), resetForm()"
+        @close="uiStore.toggleDialog(uid, false), resetForm()"
       >
         <template #header>
           <h3 class="dialog__title">
@@ -105,7 +105,7 @@
           <div class="dialog__actions">
             <button
               class="main__button"
-              @click="toggleDialog(1, false), resetForm()"
+              @click="uiStore.toggleDialog(uid, false), resetForm()"
             >
               Ok
             </button>
@@ -130,10 +130,12 @@ import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 const uiStore = useUiStore();
-const theme = computed(() => uiStore.theme);
 
-const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
+const uid = Number(Math.random().toString().substring(2, 30));
 const alphaDiacritic = helpers.regex(/^[a-zA-ZÀ-ž\s]*$/);
+
+const theme = computed(() => uiStore.theme);
+const submitBtn: Ref<any> = ref<HTMLElement | undefined>();
 const sendError = ref<string>("");
 
 const state = ref({
@@ -210,7 +212,7 @@ const sendForm = async () => {
   const res = await uiStore.sendEmail(fd);
 
   if (res) {
-    toggleDialog(1, false);
+    uiStore.toggleDialog(1, false);
   }
 };
 

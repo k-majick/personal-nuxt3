@@ -98,8 +98,6 @@
       display: flex;
       flex-direction: column;
       font-size: 0.85em;
-
-      
     }
 
     tr.hilite {
@@ -133,7 +131,6 @@
         }
       }
     }
-
   }
   &--lite {
     #{$self}__bar {

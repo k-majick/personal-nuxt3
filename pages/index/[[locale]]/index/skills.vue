@@ -1,15 +1,11 @@
 <template>
   <section class="main__card">
-    <h2
-      class="main__title">{{ page?.title }}
-    </h2>
+    <h2 class="main__title">{{ page?.title }}</h2>
     <div
       v-if="page?.content"
       class="main__content"
       v-html="
-        DOMPurify.sanitize(
-          marked.parse(page?.content as string) as string,
-        )
+        DOMPurify.sanitize(marked.parse(page?.content as string) as string)
       "
     ></div>
     <Skills :theme="theme" :skills="skills" />
@@ -42,16 +38,29 @@ const uiStore = useUiStore();
 const route = useRoute();
 
 const theme = computed(() => uiStore.theme);
-const title = computed(() => route.name === "index-locale" ? `${config.public.appName} | ${config.public.appTitle}` : `${config.public.appName} | ${t('page.skills')}`);
+const title = computed(() =>
+  route.name === "index-locale"
+    ? `${config.public.appName} | ${config.public.appTitle}`
+    : `${config.public.appName} | ${t("page.skills")}`,
+);
 
-const { data: page } = useAsyncData("page1", async () => await dataStore.getPage(uiStore.locale, "skills"));
-const { data: skills } = useAsyncData("skills", async () => await dataStore.getSkills(uiStore.locale));
-const { data: technology } = useAsyncData("technology", async () => await dataStore.getTechnology(uiStore.locale));
+const { data: page } = useAsyncData(
+  "page1",
+  async () => await dataStore.getPage(uiStore.locale, "skills"),
+);
+const { data: skills } = useAsyncData(
+  "skills",
+  async () => await dataStore.getSkills(uiStore.locale),
+);
+const { data: technology } = useAsyncData(
+  "technology",
+  async () => await dataStore.getTechnology(uiStore.locale),
+);
 
 watch(
   () => [route.path, uiStore.locale],
   async () => {
-    page.value = ((await dataStore.getPage(uiStore.locale, "skills")));
+    page.value = await dataStore.getPage(uiStore.locale, "skills");
 
     useHead({
       titleTemplate: `${config.public.appName} | ${page.value?.title}`,

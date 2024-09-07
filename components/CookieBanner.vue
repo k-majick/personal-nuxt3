@@ -4,8 +4,7 @@
       <div
         class="cookie__info"
         v-html="DOMPurify.sanitize($t('messages.cookieBanner', { privacyUrl }))"
-      >
-      </div>
+      ></div>
       <div class="cookie__actions">
         <button
           class="main__button main__button--secondary main__button--small"
@@ -44,7 +43,9 @@ const choose = (choice: string) => {
   });
 };
 
-const privacyUrl = computed(() => `${config.public.appUrl}/${locale.value}/policies/privacy-policy`);
+const privacyUrl = computed(
+  () => `${config.public.appUrl}/${locale.value}/policies/privacy-policy`,
+);
 </script>
 
 <style lang="scss">
