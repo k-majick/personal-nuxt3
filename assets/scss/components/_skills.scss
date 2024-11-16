@@ -2,25 +2,27 @@
   @include trans(0.5);
   $self: &;
   overflow: hidden;
-  margin: 0 auto 5px;
   position: relative;
-  display: block;
-  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 45px;
-  padding-bottom: 5px;
+  padding: 7.5px 15px 10px 7.5px;
   border-radius: 3px;
   transition: 0.4s linear;
   transition-property: width, background-color;
-  max-width: 720px;
   font-weight: bolder;
   font-size: 0.85em;
+  max-width: 720px;
 
   &:after,
   &:before {
     content: "";
     display: block;
     position: absolute;
+  }
+
+  & + & {
+    margin-top: 5px;
   }
 
   &:before {
@@ -45,17 +47,28 @@
     margin: 15px 0;
   }
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    gap: 5px;
+  }
+
   &__bar {
     @include trans(1);
-    height: 40px;
+    height: 100%;
     width: 0;
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
     animation: skillBar 3s ease-in-out;
 
     &:after {
       content: "";
       display: block;
-      top: 100%;
+      bottom: 0;
       height: 5px;
       width: 100%;
       position: absolute;
@@ -65,23 +78,28 @@
   &__title,
   &__percent {
     @include trans(0.25);
-    position: absolute;
     top: 0;
     height: inherit;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
 
   &__title {
     left: 0;
-    padding: 0 15px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
   }
 
-  &__percent {
-    right: 10px;
+  &__techs {
+    display: flex;
+  }
+
+  &__tech {
+    @include label-base;
+    @include label-face;
+    @include button-actions(label);
+    padding: 5px 7.5px;
   }
 
   &--lite {

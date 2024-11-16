@@ -5,7 +5,6 @@ import {
   GET_PAGE,
   GET_POSTS,
   GET_SKILLS,
-  GET_TECHNOLOGY,
   GET_EXPERIENCE,
   GET_PORTFOLIO,
   GET_INSPIRATION,
@@ -16,7 +15,6 @@ enum RETURN_PATHS {
   PAGE = "page.data.attributes",
   POSTS = "posts.data",
   SKILLS = "skills.data.attributes.sets",
-  TECHNOLOGY = "technology.data.attributes",
   EXPERIENCE = "experience.data.attributes.workplaces",
   PORTFOLIO = "portfolio.data.attributes",
   INSPIRATION = "inspiration.data.attributes",
@@ -50,35 +48,24 @@ export const useDataStore = defineStore({
         this.loadError = true;
       }
     },
-
     async getPages(locale: string) {
       return this.fetchData(GET_PAGES(locale), RETURN_PATHS.PAGES);
     },
-
     async getPage(locale: string, slug: string) {
       return this.fetchData(GET_PAGE(locale, slug), RETURN_PATHS.PAGE);
     },
-
     async getPosts() {
       return this.fetchData(GET_POSTS(), RETURN_PATHS.POSTS);
     },
-
-    async getSkills(locale: string) {
-      return this.fetchData(GET_SKILLS(locale), RETURN_PATHS.SKILLS);
+    async getSkills() {
+      return this.fetchData(GET_SKILLS(), RETURN_PATHS.SKILLS);
     },
-
-    async getTechnology(locale: string) {
-      return this.fetchData(GET_TECHNOLOGY(locale), RETURN_PATHS.TECHNOLOGY);
-    },
-
     async getJobs(locale: string) {
       return this.fetchData(GET_EXPERIENCE(locale), RETURN_PATHS.EXPERIENCE);
     },
-
     async getPortfolio(locale: string) {
       return this.fetchData(GET_PORTFOLIO(locale), RETURN_PATHS.PORTFOLIO);
     },
-
     async getPics(locale: string) {
       return this.fetchData(GET_INSPIRATION(locale), RETURN_PATHS.INSPIRATION);
     },

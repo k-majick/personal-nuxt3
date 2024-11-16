@@ -1,18 +1,11 @@
 <template>
   <router-view v-slot="{ Component }">
     <div
-      class="main__container"
-      :class="`main__container--${
-        route.path.includes('creations') ? 'full' : 'card'
+class="main__container" :class="`main__container--${route.path.includes('creations') ? 'full' : 'card'
       } ${uiStore.navActive ? 'main__container--active' : ''}
         ${uiStore.activeDialogs.length ? 'main__container--hasActiveDialogs' : ''}
-      `"
-    >
-      <component
-        :is="SkillsPage"
-        v-if="route.name === 'index-locale'"
-        :key="route.name"
-      />
+      `">
+      <component :is="SkillsPage" v-if="route.name === 'index-locale'" :key="route.name" />
       <component :is="Component" :key="route.name" />
     </div>
   </router-view>

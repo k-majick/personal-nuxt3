@@ -49,31 +49,18 @@ export const GET_POSTS = () => gql`
   }
 `;
 
-export const GET_SKILLS = (locale: string) => gql`
+export const GET_SKILLS = () => gql`
   query Skills {
-    skills(locale: "${locale}") {
+    skills {
       data {
         id
         attributes {
           sets {
             name
             value
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const GET_TECHNOLOGY = (locale: string) => gql`
-  query Technologies {
-    technology(locale: "${locale}") {
-      data {
-        id
-        attributes {
-          content
-          items {
-            name
+            techs {
+              name
+            }
           }
         }
       }
