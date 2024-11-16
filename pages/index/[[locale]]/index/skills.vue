@@ -9,24 +9,13 @@
       "
     ></div>
     <Skills :theme="theme" :skills="skills" />
-    <div
-      v-if="technology?.content"
-      class="main__content"
-      v-html="
-        DOMPurify.sanitize(
-          marked.parse(technology?.content as string) as string,
-        )
-      "
-    ></div>
-    <Technologies v-if="technology?.items.length" :techs="technology?.items" />
   </section>
 </template>
 
 <script lang="ts" setup>
 import { useDataStore } from "@/store/data";
 import { useUiStore } from "@/store/ui";
-import Skills from "@/components/Skills.vue";
-import Technologies from "@/components/Technologies.vue";
+import Skills from "@/components/Skills.vue"; 
 import DOMPurify from "isomorphic-dompurify";
 import { marked } from "marked";
 import { useI18n } from "vue-i18n";
@@ -48,13 +37,10 @@ const { data: page } = useAsyncData(
   "page1",
   async () => await dataStore.getPage(uiStore.locale, "skills"),
 );
+
 const { data: skills } = useAsyncData(
   "skills",
-  async () => await dataStore.getSkills(uiStore.locale),
-);
-const { data: technology } = useAsyncData(
-  "technology",
-  async () => await dataStore.getTechnology(uiStore.locale),
+  async () => await dataStore.getSkills(),
 );
 
 watch(
