@@ -6,13 +6,14 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 7.5px 15px 10px 7.5px;
+  padding: 7.5px 10px 7.5px 7.5px;
   border-radius: 3px;
   transition: 0.4s linear;
   transition-property: width, background-color;
   font-weight: bolder;
   font-size: 0.85em;
   max-width: 720px;
+  gap: 7.5px;
 
   &:after,
   &:before {
@@ -93,6 +94,7 @@
 
   &__techs {
     display: flex;
+    flex-flow: wrap;
   }
 
   &__tech {
