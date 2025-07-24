@@ -16,9 +16,11 @@
         v-for="(picture, index) in pics.pictures"
         :key="index"
         class="gallery__item"
+        @click="openImage(picture.imageUrl)"
       >
         <div class="gallery__title">
           {{ picture.title }}
+          <span class="material-icons">touch_app</span>
         </div>
         <img
           class="gallery__image"
@@ -28,6 +30,25 @@
       </div>
     </div>
   </section>
+  <Dialog
+    v-if="uiStore.isDialogOpen(999)"
+    :id="999"
+    :dialog-type="'image'"
+    @close="
+      uiStore.toggleDialog(999);
+      imageOpenUrl = null;
+    "
+  >
+    <template #content>
+      <div class="dialog__content">
+        <img
+          class="project__logo"
+          :src="imageOpenUrl"
+          alt="Kitty"
+        />
+      </div>
+    </template>
+  </Dialog>
 </template>
 
 <script lang="ts" setup>
@@ -43,10 +64,18 @@ const dataStore = useDataStore();
 const uiStore = useUiStore();
 const route = useRoute();
 
+const imageOpenUrl = ref();
+
+const openImage = (url: string) => {
+  imageOpenUrl.value = url
+  uiStore.toggleDialog(999, false);
+}
+
 const { data: page } = useAsyncData(
   "page5",
   async () => await dataStore.getPage(uiStore.locale, "inspiration"),
 );
+
 const { data: pics } = useAsyncData(
   "pics",
   async () => await dataStore.getPics(uiStore.locale),

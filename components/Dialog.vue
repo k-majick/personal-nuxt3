@@ -1,6 +1,6 @@
 <template>
   <Teleport to="#dialog">
-    <div class="dialog__mask" :class="`dialog__mask--${dialogType}`">
+    <div class="dialog__mask" :class="`dialog__mask--${dialogType}`" @click="uiStore.closeDialog(id)">
       <div class="dialog__table">
         <div class="dialog__cell">
           <div class="dialog" :class="`dialog--${uiStore.theme}`">
