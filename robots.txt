@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /en/our-story
+Disallow: /pl/our-story
+Disallow: /de/our-story
+Disallow: /en/inspiration
+Disallow: /pl/inspiration
+Disallow: /de/inspiration

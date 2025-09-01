@@ -6,7 +6,7 @@
       v-html="
         DOMPurify.sanitize(marked.parse(page?.content as string) as string)
       "
-    ></div>
+    />
     <div
       v-if="pics?.pictures?.length"
       class="gallery gallery--inspiration"
@@ -42,7 +42,7 @@
     <template #content>
       <div class="dialog__content">
         <img
-          class="project__logo"
+          class="blog__img "
           :src="imageOpenUrl"
           alt="Kitty"
         />
@@ -95,8 +95,18 @@ watch(
 useHead({
   titleTemplate: `${config.public.appName} | ${t("page.inspiration")}`,
 });
+
+definePageMeta({
+  meta: [
+    {
+      name: 'robots',
+      content: 'noindex, nofollow',
+    },
+  ],
+})
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/gallery";
+@import "@/assets/scss/components/blog";
 </style>

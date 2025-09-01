@@ -17,7 +17,7 @@
       </li>
       <li
         v-for="page in pagesSorted"
-        :key="page.id as string"
+        :key="(page.id as string)"
         class="nav__item"
       >
         <nuxt-link
@@ -101,7 +101,7 @@ const headerEl = inject(HeaderElKey);
 const mainEl = inject(MainElKey);
 
 const exclude = "burger";
-const excludedPages = ["inspiration", "privacy-policy", "terms-of-use"];
+const excludedPages = ["inspiration", "privacy-policy", "terms-of-use", "our-story"];
 
 const { data: pages } = useAsyncData(
   "pages",

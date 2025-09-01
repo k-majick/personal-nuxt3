@@ -216,12 +216,21 @@
 
     > p {
       text-align: center;
+      margin: 0;
+      + p {
+        margin-top: 7.5px;
+      }
     }
 
     &--justify {
       align-items: flex-start;
+      margin-bottom: 60px;
       > p {
         text-align: justify;
+      }
+
+      > div {
+        margin: 15px auto;
       }
 
       h2 {

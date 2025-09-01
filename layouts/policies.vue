@@ -11,7 +11,7 @@
     >
       <slot />
     </main>
-    <CookieBanner :theme="theme" />
+    <!-- <CookieBanner :theme="theme" /> -->
     <span ref="tooltipEl" class="tooltip tooltip--policies"></span>
   </div>
 </template>
@@ -24,7 +24,7 @@ import Loader from "@/components/Loader.vue";
 import Burger from "@/components/Burger.vue";
 import PoliciesHeader from "@/components/PoliciesHeader.vue";
 import PoliciesNav from "@/components/PoliciesNav.vue";
-import CookieBanner from "@/components/CookieBanner.vue";
+// import CookieBanner from "@/components/CookieBanner.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();

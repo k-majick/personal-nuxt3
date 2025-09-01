@@ -19,7 +19,7 @@
     >
       <slot />
     </main>
-    <CookieBanner :theme="theme" />
+    <!-- <CookieBanner :theme="theme" /> -->
     <span ref="tooltipEl" class="tooltip tooltip--portfolio"></span>
   </div>
 </template>
@@ -32,7 +32,7 @@ import { MainElKey, HeaderElKey } from "@/symbols/symbols";
 import Loader from "@/components/Loader.vue";
 import Header from "@/components/Header.vue";
 import Nav from "@/components/Nav.vue";
-import CookieBanner from "@/components/CookieBanner.vue";
+// import CookieBanner from "@/components/CookieBanner.vue";
 
 const dataStore = useDataStore();
 const uiStore = useUiStore();
