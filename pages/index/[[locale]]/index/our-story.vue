@@ -56,12 +56,8 @@ definePageMeta({
 onMounted(() => {
   const el = document.getElementById('content')
   if (el) {
-    const yOffset = -15
-    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
-    window.scrollTo({ top: y, behavior: 'smooth' })
-
     setTimeout(() => {
-      window.scrollTo({ top: y, behavior: 'smooth' })
+      el.scrollIntoView({ behavior: 'smooth' })
     }, 1000)
   }
 })
