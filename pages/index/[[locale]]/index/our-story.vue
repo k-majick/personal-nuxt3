@@ -64,5 +64,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/components/blog";
 @import "@/assets/scss/components/gallery";
 </style>
